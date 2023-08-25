@@ -14,11 +14,10 @@ return new class extends Migration
             $table->string('email_sender', 30);
             $table->text('text_message');
             $table->string('sent_date');
-            $table->foreignId('apartment_id')->constrained()->onDelete('cascade');
-
-            $table->timestamps();
             $table->unsignedBigInteger('apartment_id');
             $table->foreign('apartment_id')->references('id')->on('apartments')->default('');
+
+            $table->timestamps();
         });
     }
 
