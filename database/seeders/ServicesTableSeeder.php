@@ -16,8 +16,8 @@ class ServicesTableSeeder extends Seeder
      */
     public function run()
     {
-        foreach(config('services') as $objService) {
-            Service::create([$objService]);
+        foreach(config('services') as $service) {
+            Service::create($service);
         }
     }
 }
