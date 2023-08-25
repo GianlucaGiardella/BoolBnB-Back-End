@@ -18,8 +18,8 @@ return new class extends Migration
             $table->text("img_url");
             $table->unsignedBigInteger('apartment_id');
 
-            $table->foreign('apartment_id')->references('id')->on('apartment');
-       
+            $table->foreign('apartment_id')->references('id')->on('apartments');
+
             $table->timestamps();
         });
     }

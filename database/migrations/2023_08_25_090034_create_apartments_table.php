@@ -24,7 +24,7 @@ return new class extends Migration
             $table->smallInteger('size');
             $table->tinyInteger('rooms');
             $table->tinyInteger('beds');
-            $table->tinyInteger('beds');
+            $table->tinyInteger('bathrooms');
             $table->boolean('visibility');
             $table->string('cover', 255);
 
