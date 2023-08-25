@@ -13,7 +13,7 @@ return new class extends Migration
             $table->smallInteger("visit_date")->nullable();
             $table->string("visitor_ip", 50)->nullable();
 
-            $table->unsignedBigInteger('apartment_id');
+            $table->unsignedBigInteger('apartment_id')->default(null);
             $table->foreign('apartment_id')->references('id')->on('apartments');
 
             $table->timestamps();
@@ -23,7 +23,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('views', function (Blueprint $table) {
-            $table->dropForeign('apartment_view_id_foreign');
+            $table->dropForeign('apartment_id');
 
             $table->dropColumn('apartment_id');
         });

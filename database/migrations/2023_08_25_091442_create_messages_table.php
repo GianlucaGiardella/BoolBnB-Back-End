@@ -15,8 +15,8 @@ return new class extends Migration
             $table->text('text_message');
             $table->string('sent_date');
             $table->timestamps();
-            $table->foreignId('apartment_id');
-            $table->foreign('apartment_id')->references('id')->on('apartments');
+            $table->unsignedBigInteger('apartment_id');
+            $table->foreign('apartment_id')->references('id')->on('apartments')->default('');
         });
     }
 

@@ -9,11 +9,11 @@ return new class extends Migration
     public function up()
     {
         Schema::table('apartments', function (Blueprint $table) {
-            $table->unsignedBigInteger('image_id');
-            $table->unsignedBigInteger('view_id');
+            $table->unsignedBigInteger('image_id')->nullable();
+            $table->unsignedBigInteger('view_id')->nullable();
 
+            $table->foreign('image_id')->references('id')->on('images')->dafault(null);
             $table->foreign('view_id')->references('id')->on('views');
-            $table->foreign('image_id')->references('id')->on('images');
         });
     }
 
