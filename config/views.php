@@ -1,0 +1,130 @@
+<?php
+
+return [
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],
+    [
+        "id" => [],
+        "apartment_id" => [],
+        "visit_date" => [],
+        "visitor_ip" => [],
+    ],    
+];

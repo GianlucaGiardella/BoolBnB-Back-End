@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('views', function (Blueprint $table) {
             $table->id();
-            $table->date("visit_date");
-            $table->string("visitor_ip", 50);
+            $table->date("visit_date")->nullable();
+            $table->string("visitor_ip", 50)->nullable();
 
             $table->unsignedBigInteger('apartment_id');
             $table->foreign('apartment_id')->references('id')->on('apartments');
