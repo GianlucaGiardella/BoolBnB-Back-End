@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('messages', function (Blueprint $table) {
@@ -18,20 +13,19 @@ return new class extends Migration
 
             $table->string('email_sender', 30);
             $table->text('text_message');
-            $table->datetime('sent_date');
+            $table->string('sent_date');
             $table->timestamps();
             $table->foreignId('apartment_id');
             $table->foreign('apartment_id')->references('id')->on('apartments');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::table('messages', function (Blueprint $table) {
+            $table->dropForeign('apartment_id_foreign');
+
+            $table->dropColumn('apartment_id');
+        });
     }
 };

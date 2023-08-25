@@ -12,7 +12,7 @@ return [
         "id" => "2",
         "name" => "Silver",
         "price" => 599,
-        "duration" => 71,
+        "duration" => 72,
         "description" => "Spponsorizzazione Silver",
     ],
     [

@@ -13,7 +13,7 @@ return new class extends Migration
 
             $table->string('name', 255);
             $table->string('price', 30);
-            $table->time('duration');
+            $table->smallInteger('duration');
             $table->text('description');
 
             $table->timestamps();

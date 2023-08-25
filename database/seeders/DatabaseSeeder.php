@@ -19,11 +19,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             SponsorsTableSeeder::class,
-            ImagesTableSeeder::class,
-            MessagesTableSeeder::class,
             ServicesTableSeeder::class,
-            ViewsTableSeeder::class,
             ApartmentsTableSeeder::class,
+            MessagesTableSeeder::class,
+            ImagesTableSeeder::class,
+            ViewsTableSeeder::class,
         ]);
     }
 }
