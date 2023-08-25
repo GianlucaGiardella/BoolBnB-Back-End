@@ -14,18 +14,14 @@ return new class extends Migration
             $table->string('email_sender', 30);
             $table->text('text_message');
             $table->string('sent_date');
+            $table->foreignId('apartment_id')->constrained()->onDelete('cascade');
+
             $table->timestamps();
-            $table->foreignId('apartment_id');
-            $table->foreign('apartment_id')->references('id')->on('apartments');
         });
     }
 
     public function down()
     {
-        Schema::table('messages', function (Blueprint $table) {
-            $table->dropForeign('apartment_id_foreign');
-
-            $table->dropColumn('apartment_id');
-        });
+        Schema::dropIfExists('messages');
     }
 };

@@ -31,16 +31,16 @@ class Apartment extends Model
 
     public function images()
     {
-        return $this->belongsTo(Image::class);
+        return $this->hasMany(Image::class);
     }
 
     public function views()
     {
-        return $this->belongsTo(View::class);
+        return $this->hasMany(View::class);
     }
 
     public function messages()
     {
-        return $this->belongsTo(Message::class);
+        return $this->hasMany(Message::class);
     }
 }
