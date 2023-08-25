@@ -9,11 +9,6 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UsersTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $users = [
@@ -37,6 +32,5 @@ class UsersTableSeeder extends Seeder
         foreach ($users as $user_data) {
             User::create($user_data);
         }
-
     }
 }

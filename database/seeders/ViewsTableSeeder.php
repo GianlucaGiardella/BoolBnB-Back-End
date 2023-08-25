@@ -8,15 +8,9 @@ use Illuminate\Database\Seeder;
 
 class ViewsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        $views = config('views');
-        foreach ($views as $view) {
+        foreach (config('views') as $view) {
             View::create($view);
         }
     }

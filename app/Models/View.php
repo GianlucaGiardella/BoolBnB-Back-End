@@ -12,6 +12,6 @@ class View extends Model
 
     public function apartments()
     {
-        return $this->hasMany(Apartment::class);
+        return $this->belongsTo(Apartment::class);
     }
 }

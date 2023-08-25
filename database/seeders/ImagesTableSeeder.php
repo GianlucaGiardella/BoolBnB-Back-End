@@ -10,15 +10,10 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ImagesTableSeeder extends Seeder
 {
-    public function run(Faker $faker)
+    public function run()
     {
-        $apartments = Apartment::All();
-
         foreach (config('images') as $image) {
-            $newImage = new Image();
-            $newImage->apartment_id = $image['apartment_id'];
-            $newImage->img_url = $image['img_url'];
-            $newImage->save();
+            Image::create($image);
         }
     }
 }

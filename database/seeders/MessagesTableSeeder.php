@@ -10,12 +10,8 @@ class MessagesTableSeeder extends Seeder
 {
     public function run()
     {
-        foreach (config('messages') as $objMessage) {
-            Message::create([
-                'email_sender' => $objMessage['email_sender'],
-                'text_message' => $objMessage['text_message'],
-                'sent_date' => $objMessage['sent_date']
-            ]);
+        foreach (config('messages') as $message) {
+            Message::create($message);
         }
     }
 }
