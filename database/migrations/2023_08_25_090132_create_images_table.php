@@ -10,10 +10,9 @@ return new class extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->text("img_url")->nullable();
 
-            $table->unsignedBigInteger('apartment_id');
-            $table->foreign('apartment_id')->references('id')->on('apartments');
+            $table->text("img_url")->nullable();
+            $table->foreignId('apartment_id')->constrained()->onDelete('cascade');
 
             $table->timestamps();
         });
