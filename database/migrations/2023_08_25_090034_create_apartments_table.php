@@ -18,15 +18,15 @@ return new class extends Migration
 
             $table->string('title', 255);
             $table->text('description');
-            $table->smallInteger('price');
-            $table->string('latitude', 50);
-            $table->string('longitude', 50);
+            $table->string('price')->nullable();
+            $table->string('latitude', 50)->nullable();
+            $table->string('longitude', 50)->nullable();
             $table->smallInteger('size');
             $table->tinyInteger('rooms');
             $table->tinyInteger('beds');
             $table->tinyInteger('bathrooms');
             $table->boolean('visibility');
-            $table->string('cover', 255);
+            $table->string('cover', 255)->nullable();
 
             // creo la colonna della chiave esterna
             $table->unsignedBigInteger('user_id');

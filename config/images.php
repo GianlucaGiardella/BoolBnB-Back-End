@@ -2,108 +2,53 @@
 
 return [
     [
-        "id" => [],
+        "id" => "1",
         "apartment_id" => [],
         "img_url" => [],
     ],
     [
-        "id" => [],
+        "id" => "2",
         "apartment_id" => [],
         "img_url" => [],
     ],
     [
-        "id" => [],
+        "id" => "3",
         "apartment_id" => [],
         "img_url" => [],
     ],
     [
-        "id" => [],
+        "id" => "4",
         "apartment_id" => [],
         "img_url" => [],
     ],
     [
-        "id" => [],
+        "id" => "5",
         "apartment_id" => [],
         "img_url" => [],
     ],
     [
-        "id" => [],
+        "id" => "6",
         "apartment_id" => [],
         "img_url" => [],
     ],
     [
-        "id" => [],
+        "id" => "7",
         "apartment_id" => [],
         "img_url" => [],
     ],
     [
-        "id" => [],
+        "id" => "8",
         "apartment_id" => [],
         "img_url" => [],
     ],
     [
-        "id" => [],
+        "id" => "9",
         "apartment_id" => [],
         "img_url" => [],
     ],
     [
-        "id" => [],
+        "id" => "10",
         "apartment_id" => [],
         "img_url" => [],
     ],
-    [
-        "id" => [],
-        "apartment_id" => [],
-        "img_url" => [],
-    ],
-    [
-        "id" => [],
-        "apartment_id" => [],
-        "img_url" => [],
-    ],
-    [
-        "id" => [],
-        "apartment_id" => [],
-        "img_url" => [],
-    ],
-    [
-        "id" => [],
-        "apartment_id" => [],
-        "img_url" => [],
-    ],
-    [
-        "id" => [],
-        "apartment_id" => [],
-        "img_url" => [],
-    ],
-    [
-        "id" => [],
-        "apartment_id" => [],
-        "img_url" => [],
-    ],
-    [
-        "id" => [],
-        "apartment_id" => [],
-        "img_url" => [],
-    ],
-    [
-        "id" => [],
-        "apartment_id" => [],
-        "img_url" => [],
-    ],
-    [
-        "id" => [],
-        "apartment_id" => [],
-        "img_url" => [],
-    ],
-    [
-        "id" => [],
-        "apartment_id" => [],
-        "img_url" => [],
-    ],
-    [
-        "id" => [],
-        "apartment_id" => [],
-        "img_url" => [],
-    ],    
 ];

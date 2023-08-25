@@ -8,15 +8,14 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class MessagesTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        foreach(config('message') as $message){
-             Message::create($message);
-        }   
+        foreach (config('messages') as $objMessage) {
+            Message::create([
+                'email_sender' => $objMessage['email_sender'],
+                'text_message' => $objMessage['text_message'],
+                'sent_date' => $objMessage['sent_date']
+            ]);
+        }
     }
 }

@@ -16,8 +16,8 @@ class ViewsTableSeeder extends Seeder
     public function run()
     {
         $views = config('views');
-            foreach ($views as $view) { 
-                View::create($views);
-            }
+        foreach ($views as $view) {
+            View::create($view);
+        }
     }
 }

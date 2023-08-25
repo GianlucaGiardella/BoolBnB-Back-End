@@ -10,7 +10,7 @@ class SponsorsTableSeeder extends Seeder
 {
     public function run()
     {
-        foreach (config('bnb-array/sponsors') as $sponsor) {
+        foreach (config('sponsors') as $sponsor) {
             Sponsor::create($sponsor);
         }
     }
