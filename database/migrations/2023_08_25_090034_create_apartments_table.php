@@ -30,13 +30,9 @@ return new class extends Migration
 
             // creo la colonna della chiave esterna
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('image_id');
-            $table->unsignedBigInteger('view_id');
 
             // definire la colonna come chiave esterna
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('view_id')->references('id')->on('views');
-
 
             $table->timestamps();
         });
@@ -49,6 +45,14 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('apartments');
+        Schema::table('apartments', function (Blueprint $table) {
+            // elimino la chiave esterna
+
+            $table->dropForeign('apartments_user_id_foreign');
+
+            // elimino la colonna
+
+            $table->dropColumn('user_id');
+        });
     }
 };
