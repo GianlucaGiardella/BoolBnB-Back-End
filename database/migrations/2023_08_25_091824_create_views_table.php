@@ -13,7 +13,9 @@ return new class extends Migration
 
             $table->smallInteger("visit_date")->nullable();
             $table->string("visitor_ip", 50)->nullable();
-            $table->foreignId('apartment_id')->constrained()->onDelete('cascade');
+
+            $table->unsignedBigInteger('apartment_id')->default(null);
+            $table->foreign('apartment_id')->references('id')->on('apartments');
 
             $table->timestamps();
         });

@@ -14,9 +14,9 @@ return [
         "bathrooms" => "1",
         "size" => "60",
         "visibility" => "1",
-        "image_id" => "1",
+        "image_id" => null,
         "cover" => "",
-        "view_id" => "1",
+        "view_id" => null,
     ],
     // [
     //     "id" => 2,

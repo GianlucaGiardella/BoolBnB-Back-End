@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('apartment_id')->constrained()->onDelete('cascade');
 
             $table->timestamps();
+            $table->unsignedBigInteger('apartment_id');
+            $table->foreign('apartment_id')->references('id')->on('apartments')->default('');
         });
     }
 
