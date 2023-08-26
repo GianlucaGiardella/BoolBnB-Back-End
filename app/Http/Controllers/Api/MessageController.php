@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Apartment;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
-class ApartmentController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartment = Apartment::all();
-        return $apartment;
+        $message = Message::all();
+        return $message;
     }
 
     /**
@@ -43,10 +43,10 @@ class ApartmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Apartment  $apartment
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment)
+    public function show(Message $message)
     {
         //
     }
@@ -54,10 +54,10 @@ class ApartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Apartment  $apartment
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function edit(Apartment $apartment)
+    public function edit(Message $message)
     {
         //
     }
@@ -66,10 +66,10 @@ class ApartmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Apartment  $apartment
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Apartment $apartment)
+    public function update(Request $request, Message $message)
     {
         //
     }
@@ -77,10 +77,10 @@ class ApartmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Apartment  $apartment
+     * @param  \App\Models\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Apartment $apartment)
+    public function destroy(Message $message)
     {
         //
     }
