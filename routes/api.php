@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\Api\ApartmentController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ViewController;
 use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\SponsorController;
-use App\Http\Controllers\Api\ViewController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ApartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,4 +29,4 @@ Route::get('images', [ImageController::class, 'index'])->name('api.images.index'
 Route::get('messages', [MessageController::class, 'index'])->name('api.messages.index');
 Route::get('services', [ServiceController::class, 'index'])->name('api.services.index');
 Route::get('sponsors', [SponsorController::class, 'index'])->name('api.sponsors.index');
-Route::get('views', [ViewController::class, 'index'])->name('api.views.index');
+Route::get('views', [ApiApartmentController::class, 'index'])->name('api.views.index');
