@@ -26,7 +26,7 @@ return new class extends Migration
             $table->tinyInteger('rooms');
             $table->tinyInteger('beds');
             $table->tinyInteger('bathrooms');
-            $table->boolean('visibility');
+            $table->boolean('visibility')->nullable();
             $table->string('cover', 255)->nullable();
 
             $table->timestamps();
