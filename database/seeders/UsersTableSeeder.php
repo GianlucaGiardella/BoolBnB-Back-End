@@ -13,19 +13,23 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             [
-                'name'      => 'asdf',
-                'email'     => 'asdf@asdf.asdf',
-                'password'  => Hash::make('asdf'),
+                'name'         => 'asdf',
+                'surname'      => 'asdf',
+                'birth_date'   => '1980/10/25',
+                'email'        => 'asdf@asdf.asdf',
+                'password'     => Hash::make('asdf'),
             ],
             [
-                'name'      => 'qwer',
-                'email'     => 'qwer@qwer.qwer',
-                'password'  => Hash::make('qwer'),
+                'name'         => 'qwer',
+                'birth_date'   => '2000/01/26',
+                'email'        => 'qwer@qwer.qwer',
+                'password'     => Hash::make('qwer'),
             ],
             [
-                'name'      => 'zxcv',
-                'email'     => 'zxcv@zxcv.zxcv',
-                'password'  => Hash::make('zxcv'),
+                'name'         => 'zxcv',
+                'surname'      => 'zxcv',
+                'email'        => 'zxcv@zxcv.zxcv',
+                'password'     => Hash::make('zxcv'),
             ],
         ];
 
