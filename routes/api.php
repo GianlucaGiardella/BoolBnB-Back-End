@@ -25,8 +25,12 @@ use App\Http\Controllers\Api\ApartmentController;
 // });
 
 Route::get('apartments', [ApartmentController::class, 'index'])->name('api.apartments.index');
+Route::get('apartments/{id}', [ApartmentController::class, 'show'])->name('api.apartments.show');
+
+
 Route::get('images', [ImageController::class, 'index'])->name('api.images.index');
 Route::get('messages', [MessageController::class, 'index'])->name('api.messages.index');
 Route::get('services', [ServiceController::class, 'index'])->name('api.services.index');
 Route::get('sponsors', [SponsorController::class, 'index'])->name('api.sponsors.index');
-Route::get('views', [ApiApartmentController::class, 'index'])->name('api.views.index');
+Route::get('views', [ViewController::class, 'index'])->name('api.views.index');
+

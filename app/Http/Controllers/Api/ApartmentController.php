@@ -16,7 +16,7 @@ class ApartmentController extends Controller
     public function index()
     {
         $apartment = Apartment::all();
-        return $apartment;
+        return response()->json($apartment);
     }
 
     /**
@@ -24,7 +24,7 @@ class ApartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
     }
@@ -46,9 +46,10 @@ class ApartmentController extends Controller
      * @param  \App\Models\Apartment  $apartment
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment)
+    public function show($id)
     {
-        //
+        $apartment = Apartment::where('id', $id)->first();
+        return response()->json($apartment);
     }
 
     /**
