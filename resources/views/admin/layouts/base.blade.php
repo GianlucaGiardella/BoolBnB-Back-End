@@ -13,9 +13,7 @@
     @include('admin.includes.header')
 
     <div class="container">
-        <main>
-            @yield('contents')
-        </main>
+        @yield('contents')
     </div>
 
     @include('admin.includes.footer')

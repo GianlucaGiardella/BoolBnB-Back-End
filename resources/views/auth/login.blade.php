@@ -4,10 +4,8 @@
     <div class="container">
         <form method="post" action="{{ route('login') }}" class="form_container">
             @csrf
-            <div class="logo_container"></div>
             <div class="title_container">
                 <p class="title">Accedi al tuo Account</p>
-                <span class="subtitle">Accedi con le tue credenziali ed inizia ad esplorare il nostro sito!</span>
             </div>
             <br>
             <div class="input_container">
@@ -21,8 +19,8 @@
                     </path>
                 </svg>
                 <input type="email" class="input_field @error('email') is-invalid @enderror" id="email"
-                    aria-describedby="emailHelp" name="email" placeholder="name@mail.com" required autofocus
-                    autocomplete="username" value="{{ old('email') }}">
+                    aria-describedby="emailHelp" name="email" placeholder="name@mail.com" autocomplete="username"
+                    value="{{ old('email') }}">
                 @error('email')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -43,7 +41,7 @@
                     </path>
                 </svg>
                 <input type="password" class="input_field  @error('password') is-invalid @enderror" id="password"
-                    name="password" placeholder="Password" required autocomplete="current-password">
+                    name="password" placeholder="Password" autocomplete="current-password">
                 @error('password')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -71,7 +69,7 @@
     }
 
     .form_container {
-        width: fit-content;
+        width: 500px;
         height: fit-content;
         display: flex;
         flex-direction: column;
@@ -87,16 +85,6 @@
         font-family: "Inter", sans-serif;
     }
 
-    .logo_container {
-        box-sizing: border-box;
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(180deg, rgba(248, 248, 248, 0) 50%, #F8F8F888 100%);
-        border: 1px solid #F7F7F8;
-        filter: drop-shadow(0px 0.5px 0.5px #EFEFEF) drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
-        border-radius: 11px;
-    }
-
     .title_container {
         display: flex;
         flex-direction: column;
@@ -107,7 +95,7 @@
 
     .title {
         margin: 0;
-        font-size: 1.25rem;
+        font-size: 2rem;
         font-weight: 700;
         color: #212121;
     }
@@ -134,7 +122,7 @@
         position: absolute;
         z-index: 99;
         left: 12px;
-        bottom: 9px;
+        top: 30px;
     }
 
     .input_label {

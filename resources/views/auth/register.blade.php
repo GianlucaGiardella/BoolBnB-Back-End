@@ -4,43 +4,41 @@
     <div class="container">
         <form method="post" action="{{ route('register') }}" class="form_container">
             @csrf
-            <div class="logo_container"></div>
             <div class="title_container">
                 <p class="title">Crea un Account</p>
-                <span class="subtitle">Per iniziare con la nostra app, basta creare un account e godersi l'esperienza.</span>
             </div>
             <br>
             <div class="input_container">
-                <div class="mb-3">
-                    <label for="name" class="input_label">Nome *</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                        name="name" autofocus autocomplete="name" value="{{ old('name') }}">
-                    @error('name')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="name" class="input_label">Cognome</label>
-                    <input type="text" class="form-control @error('surname') is-invalid @enderror" id="surname"
-                        name="surname" autofocus autocomplete="surname" value="{{ old('surname') }}">
-                    @error('surname')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="name" class="input_label">Data di Nascita</label>
-                    <input type="date" class="form-control @error('birth_date') is-invalid @enderror" id="birth_date"
-                        name="birth_date" autofocus autocomplete="birth_date" value="{{ old('birth_date') }}">
-                    @error('surname')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+                <label for="name" class="input_label">Nome *</label>
+                <input type="text" class="input_field @error('name') is-invalid @enderror" id="name" name="name"
+                    autocomplete="name" value="{{ old('name') }}">
+                @error('name')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="input_container">
+                <label for="name" class="input_label">Cognome</label>
+                <input type="text" class="input_field @error('surname') is-invalid @enderror" id="surname"
+                    name="surname" autocomplete="surname" value="{{ old('surname') }}">
+                @error('surname')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="input_container">
+                <label for="name" class="input_label">Data di Nascita</label>
+                <input type="date" class="input_field @error('birth_date') is-invalid @enderror" id="birth_date"
+                    name="birth_date" autocomplete="birth_date" value="{{ old('birth_date') }}">
+                @error('surname')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="input_container">
                 <label class="input_label" for="email">Email *</label>
                 <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
                     class="icon">
@@ -51,8 +49,8 @@
                     </path>
                 </svg>
                 <input type="email" class="input_field @error('email') is-invalid @enderror" id="email"
-                    aria-describedby="emailHelp" name="email" placeholder="name@mail.com" autofocus
-                    autocomplete="username" value="{{ old('email') }}">
+                    aria-describedby="emailHelp" name="email" placeholder="name@mail.com" autocomplete="username"
+                    value="{{ old('email') }}">
                 @error('email')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -117,14 +115,13 @@
     }
 
     .form_container {
-        width: fit-content;
-        height: fit-content;
+        width: 500px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         gap: 15px;
-        padding: 50px 40px 20px 40px;
+        padding: 40px 40px 20px 40px;
         background-color: #ffffff;
         box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
             0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
@@ -133,27 +130,17 @@
         font-family: "Inter", sans-serif;
     }
 
-    .logo_container {
-        box-sizing: border-box;
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(180deg, rgba(248, 248, 248, 0) 50%, #F8F8F888 100%);
-        border: 1px solid #F7F7F8;
-        filter: drop-shadow(0px 0.5px 0.5px #EFEFEF) drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
-        border-radius: 11px;
-    }
-
     .title_container {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 5px;
     }
 
     .title {
         margin: 0;
-        font-size: 1.25rem;
+        font-size: 2rem;
         font-weight: 700;
         color: #212121;
     }
@@ -180,7 +167,7 @@
         position: absolute;
         z-index: 99;
         left: 12px;
-        bottom: 9px;
+        top: 30px;
     }
 
     .input_label {
