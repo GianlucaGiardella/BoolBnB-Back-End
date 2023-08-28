@@ -15,35 +15,37 @@ use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
+    private $validations = [
+        'name'              => 'required|string|min:3|max:255',
+        'surname'           => 'string|max:255|nullable',
+        'birth_date'        => 'date|nullable',
+        'email'             => 'required|string|email|max:255|unique:users',
+        'password'          => 'required|confirmed|min:8',
+    ];
+
+    private $validationMessages = [
+        'required'              => 'Field required.',
+        'min'                   => 'The :attribute must be at least :min characters.',
+        'max'                   => 'The :attribute can have a maximum of :max characters.',
+    ];
+
     public function create(): View
     {
         return view('auth.register');
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['string', 'max:255', 'nullable'],
-            'birth_date' => ['date', 'nullable'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        $request->validate($this->validations, $this->validationMessages);
+
+        $data = $request->all();
 
         $user = User::create([
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'birth_date' => $request->birth_date,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $data['name'],
+            'surname' => $data['surname'],
+            'birth_date' => $data['birth_date'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
         ]);
 
         event(new Registered($user));
