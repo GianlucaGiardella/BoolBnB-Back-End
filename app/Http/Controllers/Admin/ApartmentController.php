@@ -56,7 +56,7 @@ class ApartmentController extends Controller
         // $newApartment->user_id      = $data['user_id'];
         $newApartment->save();
 
-        return to_route('apartments.index');
+        return to_route('admin.apartments.show' , ['apartment' => $newApartment]);
         //FIXME:
     }
 
@@ -68,7 +68,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        //
+        return view('admin.apartments.show', compact('apartment'));
     }
 
     /**
@@ -79,7 +79,8 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        //
+        $apartment = Apartment::all();
+        return view('admin.apartments.edit', compact('apartment'));
     }
 
     /**
@@ -102,6 +103,8 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        //
+        $apartment->delete();
+
+        return to_route('admin.apartments.index')->with('success', 'apartment deleted successfully');
     }
 }
