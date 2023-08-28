@@ -37,15 +37,13 @@ Route::middleware('auth')
     });
 
     
-// Route::get('apartments/', [ApartmentController::class, 'index'])->name('index');
+Route::get('apartments/', [ApartmentController::class, 'index'])->name('index');
 
-// Route::get('/create', [ApartmentController::class, 'create'])->name('create');
+Route::get('/apartments/create' , [ApartmentController::class, 'create'])->name('apartments.create');
 
-// Route::get('/apartments/create' , [ApartmentController::class, 'create'])->name('apartments.create');
+Route::delete('/apartments/{apartment}' , [ApartmentController::class, 'destroy'])->name('apartments.destroy');
 
-// Route::delete('/apartments/{apartment}' , [ApartmentController::class, 'destroy'])->name('apartments.destroy');
-
-// Route::get('/apartments' , [ApartmentController::class, 'store'])->name('apartments.store');
+Route::get('/apartments' , [ApartmentController::class, 'store'])->name('apartments.store');
 
 
 require __DIR__ . '/auth.php';
