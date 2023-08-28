@@ -10,7 +10,8 @@
 }
 
 .text-gradient {
-    background: -webkit-linear-gradient(#da7120, #972cda);
+    background: #424172;
+    background: repeating-radial-gradient(circle farthest-corner at top left, #424172 0%, #FF7210 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
