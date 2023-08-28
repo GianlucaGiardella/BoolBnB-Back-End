@@ -1,14 +1,14 @@
 <header>
     <div class="prenav">
         <nav class="navbar navbar-expand-lg w-100 bg-body-tertiary">
-            <div class="d-flex justify-content-between align-items-center w-100 m-4">
+            <div class="d-flex justify-content-between align-items-center w-100 h-100">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-brand" href="#"><img src="" alt=""></a>
-            <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarTogglerDemo03">
+            <a class="navbar-brand" href="/"><img src="" alt=""></a>
+            <div class="collapse navbar-collapse d-flex justify-content-between h-100" id="navbarTogglerDemo03">
                 
-                <form class="d-flex m-6" role="search">
+                <form class="d-flex m-auto" role="search">
                     <input class="form-control m-6" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn" type="submit"><span style="color: #ff7210">Search</span></button>
                 </form>
