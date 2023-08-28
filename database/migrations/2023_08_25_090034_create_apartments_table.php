@@ -11,23 +11,23 @@ return new class extends Migration
         Schema::create('apartments', function (Blueprint $table) {
             $table->id();
 
-            $table->string('title', 255);
-            $table->text('description');
-            $table->string('price')->nullable();
-            $table->string('latitude', 50)->nullable();
-            $table->string('longitude', 50)->nullable();
-            $table->smallInteger('size');
-            $table->tinyInteger('rooms');
-            $table->tinyInteger('beds');
-            $table->tinyInteger('bathrooms');
-            $table->boolean('visibility');
-            $table->string('cover', 255)->nullable();
-
             // creo la colonna della chiave esterna
             $table->unsignedBigInteger('user_id');
 
             // definire la colonna come chiave esterna
             $table->foreign('user_id')->references('id')->on('users');
+
+            $table->string('title', 255);
+            $table->text('description');
+            $table->bigInteger('price')->nullable();
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 10, 8)->nullable();
+            $table->integer('size');
+            $table->tinyInteger('rooms');
+            $table->tinyInteger('beds');
+            $table->tinyInteger('bathrooms');
+            $table->boolean('visibility');
+            $table->string('cover', 255)->nullable();
 
             $table->timestamps();
         });
@@ -36,7 +36,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('apartments', function (Blueprint $table) {
-            
+
             // elimino la chiave esterna
             $table->dropForeign('apartments_user_id_foreign');
 

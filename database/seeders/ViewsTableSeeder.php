@@ -10,7 +10,7 @@ class ViewsTableSeeder extends Seeder
 {
     public function run()
     {
-        foreach (config('views') as $view) {
+        foreach (config('bnb.views') as $view) {
             View::create($view);
         }
     }

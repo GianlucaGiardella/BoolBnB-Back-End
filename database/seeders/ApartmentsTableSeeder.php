@@ -14,7 +14,7 @@ class ApartmentsTableSeeder extends Seeder
 {
     public function run()
     {
-        foreach (config('apartments') as $apartment) {
+        foreach (config('bnb.apartments') as $apartment) {
             Apartment::create($apartment);
         }
     }
