@@ -16,7 +16,7 @@ class ServiceController extends Controller
     public function index()
     {
         $service = Service::all();
-        return $service;
+        return response()->json($service);
     }
 
     /**
