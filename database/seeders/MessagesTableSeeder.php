@@ -10,7 +10,7 @@ class MessagesTableSeeder extends Seeder
 {
     public function run()
     {
-        foreach (config('messages') as $message) {
+        foreach (config('bnb.messages') as $message) {
             Message::create($message);
         }
     }

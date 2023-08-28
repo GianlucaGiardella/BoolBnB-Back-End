@@ -17,19 +17,19 @@ class UsersTableSeeder extends Seeder
                 'surname'      => 'asdf',
                 'birth_date'   => '1980/10/25',
                 'email'        => 'asdf@asdf.asdf',
-                'password'     => Hash::make('gianluca'),
+                'password'     => Hash::make('password'),
             ],
             [
                 'name'         => 'qwer',
-                'birth_date'   => '2000/01/26',
+                'birth_date'   => '2023/01/26',
                 'email'        => 'qwer@qwer.qwer',
-                'password'     => Hash::make('gianluca'),
+                'password'     => Hash::make('password'),
             ],
             [
                 'name'         => 'zxcv',
                 'surname'      => 'zxcv',
                 'email'        => 'zxcv@zxcv.zxcv',
-                'password'     => Hash::make('gianluca'),
+                'password'     => Hash::make('password'),
             ],
         ];
 

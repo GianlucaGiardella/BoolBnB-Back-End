@@ -12,7 +12,7 @@ class ImagesTableSeeder extends Seeder
 {
     public function run()
     {
-        foreach (config('images') as $image) {
+        foreach (config('bnb.images') as $image) {
             Image::create($image);
         }
     }
