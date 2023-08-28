@@ -1,1 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
+
+
+.log-btn a{
+    color: #FF7210;
+    text-decoration: none;
+    &:hover{
+        text-decoration: underline;
+    }
+}   
