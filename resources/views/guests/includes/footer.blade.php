@@ -20,6 +20,8 @@
         bottom: 0;
         left: 0;
         height: 40px;
+        width: 100%;
+        background-color: #424172c1;
     }
     ul{
         list-style: none;
