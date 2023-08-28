@@ -36,4 +36,6 @@ Route::middleware('auth')
     });
 
 
+Route::get('/apartments/{apartment}' , [ApartmentController::class, 'create'])->name('apartments.create');
+
 require __DIR__ . '/auth.php';
