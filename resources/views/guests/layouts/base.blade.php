@@ -12,7 +12,7 @@
 <body>
     @include('guests.includes.header')
 
-    <div class="container">
+    <div class="container" style="margin-top: 80px; margin-bottom:80px">
         <main>
             @yield('contents')
         </main>
