@@ -24,9 +24,9 @@ class RegisteredUserController extends Controller
     ];
 
     private $validationMessages = [
-        'required'              => 'Field required.',
-        'min'                   => 'The :attribute must be at least :min characters.',
-        'max'                   => 'The :attribute can have a maximum of :max characters.',
+        'required'              => 'Campo obbligatorio.',
+        'min'                   => 'Il campo :attribute deve avere almeno :min caratteri.',
+        'max'                   => 'Il campo :attribute non deve superare i :max caratteri.',
     ];
 
     public function create(): View
