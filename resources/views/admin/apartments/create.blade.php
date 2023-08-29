@@ -34,6 +34,11 @@
         </div>
 
         <div class="mb-3">
+            <label for="address" class="form-label">Indirizzo</label>
+            <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}">
+        </div>
+
+        {{-- <div class="mb-3">
             <label for="latitude" class="form-label">Latitudine</label>
             <input type="text" class="form-control" id="latitude" name="latitude" value="{{ old('latitude') }}">
         </div>
@@ -41,7 +46,7 @@
         <div class="mb-3">
             <label for="longitude" class="form-label">Longitudine</label>
             <input type="text" class="form-control" id="longitude" name="longitude" value="{{ old('longitude') }}">
-        </div>
+        </div> --}}
 
         <div class="mb-3">
             <label for="size" class="form-label">Metri Quadri</label>

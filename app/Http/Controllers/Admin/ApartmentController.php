@@ -26,25 +26,41 @@ class ApartmentController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+           
+        //geocoding 
+        $address = $data['address'];
+        $address = urlencode($address);
+        $url = "https://api.tomtom.com/search/2/geocode/{$address}.json?key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
+        $response_json = file_get_contents($url);
+        $responseData = json_decode($response_json, true);
+        error_log(print_r($responseData,true));
 
-        $newApartment               = new Apartment();
+        if (isset($responseData['results'][0]['position']['lat']) && isset($responseData['results'][0]['position']['lon'])) {
 
-        $newApartment->user_id      = Auth::id();
-        $newApartment->title        = $data['title'];
-        $newApartment->description  = $data['description'];
-        $newApartment->price        = $data['price'];
-        $newApartment->latitude     = $data['latitude'];
-        $newApartment->longitude    = $data['longitude'];
-        $newApartment->size         = $data['size'];
-        $newApartment->rooms        = $data['rooms'];
-        $newApartment->beds         = $data['beds'];
-        $newApartment->bathrooms    = $data['bathrooms'];
-        $newApartment->visibility   = $data['visibility'];
-        $newApartment->cover        = $data['cover'];
+            $latitude = $responseData['results'][0]['position']['lat'];
+            $longitude = $responseData['results'][0]['position']['lon'];
 
-        $newApartment->save();
+            $newApartment               = new Apartment();        
+            $newApartment->user_id      = Auth::id();
+            $newApartment->title        = $data['title'];
+            $newApartment->description  = $data['description'];
+            $newApartment->price        = $data['price'];
+            $newApartment->latitude     = $latitude;
+            $newApartment->longitude    = $longitude;
+            $newApartment->size         = $data['size'];
+            $newApartment->rooms        = $data['rooms'];
+            $newApartment->beds         = $data['beds'];
+            $newApartment->bathrooms    = $data['bathrooms'];
+            $newApartment->visibility   = $data['visibility'];
+            $newApartment->cover        = $data['cover'];
+            
+            $newApartment->save();
 
-        return view('admin.apartments.index');
+        } else {
+            return back()->withInput()->withErrors(['api_error' => 'Errore nella risposta API']);
+        }
+
+        return view('admin.apartments.index' , compact('latitude', 'longitude'));
     }
 
     public function show(Apartment $apartment)

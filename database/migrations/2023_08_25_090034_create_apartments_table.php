@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('title', 255);
             $table->text('description');
             $table->bigInteger('price')->nullable();
+            $table->string('address')->nullable();
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 10, 8)->nullable();
             $table->integer('size');
