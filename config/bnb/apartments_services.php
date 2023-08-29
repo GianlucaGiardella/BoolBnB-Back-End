@@ -238,7 +238,7 @@ return [
     ],
     [
         "apartment_id" => 6,
-        "service_id" => 
+        "service_id" => 8,
     ],
     [
         "apartment_id" => 6,

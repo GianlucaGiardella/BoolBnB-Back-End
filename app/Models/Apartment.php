@@ -18,12 +18,12 @@ class Apartment extends Model
 
     public function sponsors()
     {
-        return $this->belongsToMany(Sponsor::class);
+        return $this->belongsToMany(Sponsor::class, 'apartment_sponsor');
     }
 
     public function services()
     {
-        return $this->belongsToMany(Service::class);
+        return $this->belongsToMany(Service::class, 'apartment_service');
     }
 
     public function user()
