@@ -129,15 +129,33 @@ class ApartmentController extends Controller
             $data['visibility'] = false;
         };
 
-        $apartment->title        = $data['title'];
-        $apartment->description  = $data['description'];
-        $apartment->latitude     = $data['latitude'];
-        $apartment->longitude    = $data['longitude'];
-        $apartment->size         = $data['size'];
-        $apartment->rooms        = $data['rooms'];
-        $apartment->beds         = $data['beds'];
-        $apartment->bathrooms    = $data['bathrooms'];
-        $apartment->visibility   = $data['visibility'];
+
+        $address = $data['address'];
+        $address = urlencode($address);
+        $url = "https://api.tomtom.com/search/2/geocode/{$address}.json?key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
+        $response_json = file_get_contents($url);
+        $responseData = json_decode($response_json, true);
+        error_log(print_r($responseData, true));
+
+        if (isset($responseData['results'][0]['position']['lat']) && isset($responseData['results'][0]['position']['lon'])) {
+
+            $latitude = $responseData['results'][0]['position']['lat'];
+            $longitude = $responseData['results'][0]['position']['lon'];
+
+            $apartment->title        = $data['title'];
+            $apartment->description  = $data['description'];
+            $apartment->address      = $data['address'];
+            $apartment->latitude     = $latitude;
+            $apartment->longitude    = $longitude;
+            $apartment->size         = $data['size'];
+            $apartment->rooms        = $data['rooms'];
+            $apartment->beds         = $data['beds'];
+            $apartment->bathrooms    = $data['bathrooms'];
+            $apartment->visibility   = $data['visibility'];
+
+        } else {
+            return back()->withInput()->withErrors(['api_error' => 'Indirizzo non trovato']);
+        }
 
         if ($data['cover']) {
             $coverPath = Storage::put('uploads', $data['cover']);

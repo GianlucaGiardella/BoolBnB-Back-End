@@ -39,6 +39,14 @@
                 </div>
 
                 <div class="mb-4">
+                    <label for="address" class="form-label">
+                        <h4 class="my-0">Indirizzo</h4>
+                    </label>
+                    <input type="text" class="form-control" id="address" name="address"
+                        value="{{ old('address', $apartment->address) }}">
+                </div>
+
+                <div class="mb-4">
                     <label for="size" class="form-label">
                         <h4 class="my-0">Metri Quadri</h4>
                     </label>
