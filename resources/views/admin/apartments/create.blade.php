@@ -64,14 +64,14 @@
         </div>
 
         <div class="mb-3">
-            <label for="visibility" class="form-label">Visibilità</label>
-            <input type="checkbox" class="form-check-input" name="visibility" id="visibility"
-                value="{{ old('visibility') }}">
+            <label for="cover" class="form-label">Immagine di copertina</label>
+            <input type="text" class="form-control" id="cover" name="cover" value="{{ old('cover') }}">
         </div>
 
         <div class="mb-3">
-            <label for="cover" class="form-label">Immagine di copertina</label>
-            <input type="text" class="form-control" id="cover" name="cover" value="{{ old('cover') }}">
+            <label for="visibility" class="form-label">Visibilità</label>
+            <input type="checkbox" class="form-check-input" name="visibility" id="visibility"
+                value="{{ old('visibility') }}">
         </div>
 
         <button type="submit" class="btn btn-primary">Aggiungi</button>
