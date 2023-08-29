@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Service;
+use App\Models\Sponsor;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,7 +15,6 @@ class ApartmentController extends Controller
     private $validations = [
         'title'                 => 'required|string|min:5|max:80',
         'description'           => 'required|string',
-        'price'                 => 'required|integer',
         'rooms'                 => 'required|integer|min:1|max:99',
         'beds'                  => 'required|integer|min:1|max:99',
         'bathrooms'             => 'required|integer|min:1|max:99',
@@ -75,7 +76,6 @@ class ApartmentController extends Controller
             $newApartment->title        = $data['title'];
             $newApartment->slug         = Apartment::slugger($data['title']);
             $newApartment->description  = $data['description'];
-            $newApartment->price        = $data['price'];
             $newApartment->latitude     = $latitude;
             $newApartment->longitude    = $longitude;
             $newApartment->size         = $data['size'];
@@ -107,10 +107,12 @@ class ApartmentController extends Controller
     public function edit($slug)
     {
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
+        $services = Service::all();
+        $sponsors = Sponsor::all();
 
         if (Auth::id() !== $apartment->user_id) abort(403);
 
-        return view('admin.apartments.edit', compact('apartment'));
+        return view('admin.apartments.edit', compact('apartment', 'services'));
     }
 
     public function update(Request $request, $slug)
@@ -129,7 +131,6 @@ class ApartmentController extends Controller
 
         $apartment->title        = $data['title'];
         $apartment->description  = $data['description'];
-        $apartment->price        = $data['price'];
         $apartment->latitude     = $data['latitude'];
         $apartment->longitude    = $data['longitude'];
         $apartment->size         = $data['size'];
