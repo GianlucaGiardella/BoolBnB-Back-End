@@ -51,6 +51,12 @@ class ApartmentController extends Controller
 
         $data = $request->all();
 
+        if (isset($request->visibility)) {
+            $data['visibility'] = true;
+        } else {
+            $data['visibility'] = false;
+        };
+
         //geocoding 
         $address = $data['address'];
         $address = urlencode($address);
@@ -115,6 +121,12 @@ class ApartmentController extends Controller
 
         $data = $request->all();
 
+        if (isset($request->visibility)) {
+            $data['visibility'] = true;
+        } else {
+            $data['visibility'] = false;
+        };
+
         $apartment->title        = $data['title'];
         $apartment->description  = $data['description'];
         $apartment->price        = $data['price'];
@@ -137,6 +149,8 @@ class ApartmentController extends Controller
         }
 
         $apartment->update();
+
+        // $apartment->services()->sync(isset($form_data['services']) ? $form_data['services'] : [] );
 
         return to_route('admin.apartments.index');
     }

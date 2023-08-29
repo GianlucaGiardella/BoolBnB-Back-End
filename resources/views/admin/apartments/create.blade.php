@@ -74,8 +74,8 @@
 
         <div class="mb-3">
             <label for="visibility" class="form-label">Visibilità</label>
-            <input type="checkbox" class="form-check-input" name="visibility" id="visibility"
-                value="{{ old('visibility') ? 'checked' : 0 }}">
+            <input type="checkbox" class="form-check-input" id="visibility" name="visibility" value="1"
+                {{ old('visibility') ? 'checked' : '' }}>
         </div>
 
         <button type="submit" class="btn btn-primary">Aggiungi</button>
