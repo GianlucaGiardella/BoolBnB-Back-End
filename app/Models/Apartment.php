@@ -7,6 +7,7 @@ use App\Models\Image;
 use App\Models\Message;
 use App\Models\Service;
 use App\Models\Sponsor;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -42,5 +43,26 @@ class Apartment extends Model
     public function messages()
     {
         return $this->hasMany(Message::class);
+    }
+
+    public static function slugger($string)
+    {
+        $baseSlug = Str::slug($string);
+
+        $i = 1;
+
+        $slug = $baseSlug;
+
+        while (self::where('slug', $slug)->first()) {
+            $slug = $baseSlug . '-' . $i;
+            $i++;
+        }
+
+        return $slug;
+    }
+
+    public function getRouteKey()
+    {
+        return $this->slug;
     }
 }
