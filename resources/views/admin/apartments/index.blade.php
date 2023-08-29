@@ -4,7 +4,7 @@
     @if (session('delete_success'))
         @php $apartment = session('delete_success') @endphp
         <div class="alert alert-danger mt-3">
-            Apartmento "{{ $apartment->title }}" eliminato
+            Appartmento "{{ $apartment->title }}" eliminato
         </div>
     @endif
 
