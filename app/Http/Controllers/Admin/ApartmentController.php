@@ -17,7 +17,7 @@ class ApartmentController extends Controller
         'rooms'                 => 'required|integer|min:1|max:99',
         'beds'                  => 'required|integer|min:1|max:99',
         'bathrooms'             => 'required|integer|min:1|max:99',
-        'cover'                 => 'nullable|image|max:1024',
+        'cover'                 => 'nullable|string|max:1024',
         'services'              => 'nullable|array',
         'services.*'            => 'integer|exists:services,id',
         'sponsors'              => 'nullable|array',
@@ -65,7 +65,7 @@ class ApartmentController extends Controller
             $longitude = $responseData['results'][0]['position']['lon'];
 
             $newApartment               = new Apartment();
-
+            $newApartment->user_id      = Auth::id();
             $newApartment->title        = $data['title'];
             $newApartment->slug         = Apartment::slugger($data['title']);
             $newApartment->description  = $data['description'];
@@ -81,10 +81,13 @@ class ApartmentController extends Controller
 
             $newApartment->save();
         } else {
-            return back()->withInput()->withErrors(['api_error' => 'Errore nella risposta API']);
+            return back()->withInput()->withErrors(['api_error' => 'Indirizzo non trovato']);
         }
 
-        return view('admin.apartments.index', compact('latitude', 'longitude'));
+        $apartments = Apartment::with('user')->where('user_id', Auth::id())->paginate(5);
+
+        return view('admin.apartments.index', compact('apartments'));
+
         // return view('admin.apartments.show', ['apartment' => $newApartment]);
     }
 

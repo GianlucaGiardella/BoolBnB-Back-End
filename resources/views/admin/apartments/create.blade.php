@@ -24,8 +24,7 @@
 
         <div class="mb-3">
             <label for="description" class="form-label">Descrizione</label>
-            <textarea type="text" class="form-control" id="description" name="description" rows="3"
-                value="{{ old('description') }}"></textarea>
+            <textarea type="text" class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
         </div>
 
         <div class="mb-3">
@@ -76,7 +75,7 @@
         <div class="mb-3">
             <label for="visibility" class="form-label">Visibilità</label>
             <input type="checkbox" class="form-check-input" name="visibility" id="visibility"
-                value="{{ old('visibility') }}">
+                value="{{ old('visibility') ? 'checked' : 0 }}">
         </div>
 
         <button type="submit" class="btn btn-primary">Aggiungi</button>
