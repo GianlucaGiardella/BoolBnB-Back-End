@@ -10,13 +10,13 @@
 </head>
 
 <body>
-    @include('admin.includes.header')
+    @include('guests.includes.header')
 
-    <div class="container">
+    <div class="container" style="margin-top: 100px;">
         @yield('contents')
     </div>
 
-    @include('admin.includes.footer')
+    {{-- @include('guests.includes.footer') --}}
 </body>
 
 </html>

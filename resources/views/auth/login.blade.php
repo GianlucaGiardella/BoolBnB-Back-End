@@ -7,7 +7,6 @@
             <div class="title_container">
                 <p class="title text-gradient">Accedi al tuo Account</p>
             </div>
-            <br>
             <div class="input_container">
                 <label class="input_label" for="email">Email</label>
                 <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +56,7 @@
                 Hai dimenticato la password?
             </a>
 
-            <button type="submit" class="btn btn-primary">Accedi</button>
+            <button type="submit" class="styled-btn">Accedi</button>
         </form>
     </div>
 @endsection

@@ -7,7 +7,6 @@
             <div class="title_container">
                 <p class="title text-gradient">Crea un Account</p>
             </div>
-            <br>
             <div class="input_container">
                 <label for="name" class="input_label">Nome *</label>
                 <input type="text" class="input_field @error('name') is-invalid @enderror" id="name" name="name"
@@ -103,7 +102,7 @@
                 Sono già registrato
             </a>
 
-            <button type="submit" class="btn btn-primary">Registrati</button>
+            <button type="submit" class="styled-btn">Registrati</button>
         </form>
     </div>
 @endsection

@@ -1,1 +1,1 @@
-@include('admin.includes.nav')
+
