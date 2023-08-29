@@ -76,7 +76,6 @@
 
         <button type="submit" class="btn btn-primary">Aggiungi</button>
     </form>
-
 @endsection
 
 {{-- @extends('admin.layouts.base')

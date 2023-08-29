@@ -44,7 +44,7 @@ class ApartmentController extends Controller
 
         $newApartment->save();
 
-        return view('admin.apartments.index');
+        return view('admin.apartments.show', ['apartment' => $newApartment]);
     }
 
     public function show(Apartment $apartment)
