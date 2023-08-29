@@ -19,7 +19,7 @@
                 </svg>
                 <input type="email" class="input_field @error('email') is-invalid @enderror" id="email"
                     aria-describedby="emailHelp" name="email" placeholder="name@mail.com" autocomplete="username"
-                    value="{{ old('email') }}">
+                    value="{{ old('email') }}" required>
                 @error('email')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -40,7 +40,7 @@
                     </path>
                 </svg>
                 <input type="password" class="input_field  @error('password') is-invalid @enderror" id="password"
-                    name="password" placeholder="Password" autocomplete="current-password">
+                    name="password" placeholder="Password" autocomplete="current-password" required minlength="8">
                 @error('password')
                     <div class="invalid-feedback">
                         {{ $message }}
