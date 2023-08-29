@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('slug', 100)->unique();
             $table->text('description');
             $table->string('address')->nullable();
-            $table->decimal('latitude', 10, 8)->nullable();
-            $table->decimal('longitude', 10, 8)->nullable();
+            $table->decimal('latitude', 15, 8)->nullable();
+            $table->decimal('longitude', 15, 8)->nullable();
             $table->integer('size');
             $table->tinyInteger('rooms');
             $table->tinyInteger('beds');
