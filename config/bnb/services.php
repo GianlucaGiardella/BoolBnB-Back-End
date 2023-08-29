@@ -19,78 +19,74 @@ return  [
     ],
     [
         "id" => 5,
-        "name" => "Washer",
-    ],
-    [
-        "id" => 6,
         "name" => "Air Conditioning",
     ],
     [
-        "id" => 7,
+        "id" => 6,
         "name" => "Heating",
     ],
     [
-        "id" => 8,
+        "id" => 7,
         "name" => "Dedicated Workspace",
     ],
     [
-        "id" => 9,
+        "id" => 8,
         "name" => "TV",
     ],
     [
-        "id" => 10,
+        "id" => 9,
         "name" => "Hair Dryer",
     ],
     [
-        "id" => 11,
+        "id" => 10,
         "name" => "Iron",
     ],
     [
-        "id" => 12,
+        "id" => 11,
         "name" => "Pool",
     ],
     [
-        "id" => 13,
+        "id" => 12,
         "name" => "Hot Tub",
     ],
     [
-        "id" => 14,
+        "id" => 13,
         "name" => "Free Parking",
     ],
     [
-        "id" => 15,
+        "id" => 14,
         "name" => "EV Charger",
     ],
     [
-        "id" => 16,
+        "id" => 15,
         "name" => "Crib",
     ],
     [
-        "id" => 17,
+        "id" => 16,
         "name" => "Gym",
     ],
     [
-        "id" => 18,
+        "id" => 17,
         "name" => "BBQ Grill",
     ],
     [
-        "id" => 19,
+        "id" => 18,
         "name" => "Breakfast",
     ],
     [
-        "id" => 20,
+        "id" => 19,
         "name" => "Indoor Fireplace",
     ],
     [
-        "id" => 21,
+        "id" => 20,
         "name" => "Smoking Allowed",
     ],
     [
-        "id" => 22,
+        "id" => 21,
         "name" => "Smoke Alarm",
     ],
     [
-        "id" => 23,
+        "id" => 22,
         "name" => "Carbon Monoxide Alarm",
     ],
 ];
