@@ -14,7 +14,7 @@ return [
         "bathrooms" => 1,
         "size" => 60,
         "visibility" => true,
-        "cover" => "https://images.squarespace-cdn.com/content/v1/60c2d7b34353426a7c4a1765/1628225540652-0DGDOHV8S158M0L8P3MI/dc09ee21-27e9-4dcd-9b59-7ba7ade0563f.jpg?format=1500w",
+        "cover" => "../storage/img/a6.webp",
     ],
     [
         "id" => 2,
@@ -29,7 +29,7 @@ return [
         "bathrooms" => 1,
         "size" => 45,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/b1.webp",
     ],
     [
         "id" => 3,
@@ -44,7 +44,7 @@ return [
         "bathrooms" => 1,
         "size" => 30,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/c1.webp",
     ],
     [
         "id" => 4,
@@ -59,7 +59,7 @@ return [
         "bathrooms" => 3,
         "size" => 400,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/d1.webp",
     ],
     [
         "id" => 5,
@@ -74,7 +74,7 @@ return [
         "bathrooms" => 1,
         "size" => 65,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/e1.webp",
     ],
     [
         "id" => 6,
@@ -89,7 +89,7 @@ return [
         "bathrooms" => 1,
         "size" => 70,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/f1.webp",
     ],
     [
         "id" => 7,
@@ -104,7 +104,7 @@ return [
         "bathrooms" => 1,
         "size" => 67,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/g1.webp",
     ],
     [
         "id" => 8,
@@ -119,7 +119,7 @@ return [
         "bathrooms" => 1,
         "size" => 67,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/h1.webp",
     ],
     [
         "id" => 9,
@@ -134,7 +134,7 @@ return [
         "bathrooms" => 5,
         "size" => 400,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/i1.webp",
     ],
     [
         "id" => 10,
@@ -149,7 +149,7 @@ return [
         "bathrooms" => 1,
         "size" => 30,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/l1.webp",
     ],
     [
         "id" => 11,
@@ -164,7 +164,7 @@ return [
         "bathrooms" => 5,
         "size" => 395,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/m1.webp",
     ],
     [
         "id" => 12,
@@ -179,7 +179,7 @@ return [
         "bathrooms" => 2,
         "size" => 178,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/n1.webp",
     ],
     [
         "id" => 13,
@@ -194,7 +194,7 @@ return [
         "bathrooms" => 4,
         "size" => 238,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/o1.webp",
     ],
     [
         "id" => 14,
@@ -209,7 +209,7 @@ return [
         "bathrooms" => 1,
         "size" => 42,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/p1.webp",
     ],
     [
         "id" => 15,
@@ -224,7 +224,7 @@ return [
         "bathrooms" => 2,
         "size" => 165,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/q1.webp",
     ],
     [
         "id" => 16,
@@ -239,7 +239,7 @@ return [
         "bathrooms" => 1,
         "size" => 68,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/r1.webp",
     ],
     [
         "id" => 17,
@@ -254,7 +254,7 @@ return [
         "bathrooms" => 1,
         "size" => 39,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/s1.webp",
     ],
     [
         "id" => 18,
@@ -269,7 +269,7 @@ return [
         "bathrooms" => 2,
         "size" => 120,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/t1.webp",
     ],
     [
         "id" => 19,
@@ -284,7 +284,7 @@ return [
         "bathrooms" => 1,
         "size" => 53,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/u1.webp",
     ],
     [
         "id" => 20,
@@ -299,7 +299,7 @@ return [
         "bathrooms" => 4,
         "size" => 215,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/v1.webp",
     ],
     [
         "id" => 21,
@@ -314,6 +314,6 @@ return [
         "bathrooms" => 1,
         "size" => 71,
         "visibility" => true,
-        "cover" => "",
+        "cover" => "../storage/img/z1.webp",
     ],
 ];
