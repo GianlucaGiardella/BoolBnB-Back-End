@@ -17,7 +17,8 @@ return new class extends Migration
             // definire la colonna come chiave esterna
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->string('title', 255);
+            $table->string('title', 100);
+            $table->string('slug', 100)->unique();
             $table->text('description');
             $table->bigInteger('price')->nullable();
             $table->decimal('latitude', 10, 8)->nullable();

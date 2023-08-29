@@ -36,14 +36,4 @@ Route::middleware('auth')
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 
-
-// Route::get('apartments/', [ApartmentController::class, 'index'])->name('index');
-
-// Route::get('/apartments/create' , [ApartmentController::class, 'create'])->name('apartments.create');
-
-// Route::delete('/apartments/{apartment}' , [ApartmentController::class, 'destroy'])->name('apartments.destroy');
-
-// Route::get('/apartments' , [ApartmentController::class, 'store'])->name('apartments.store');
-
-
 require __DIR__ . '/auth.php';
