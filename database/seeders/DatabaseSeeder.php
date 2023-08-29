@@ -12,10 +12,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // L'ORDINE E' IMPORTANTE
             UsersTableSeeder::class,
-            SponsorsTableSeeder::class,
-            ServicesTableSeeder::class,
             //Le altre necessitano dell'id di apartment, deve essere creato prima
             ApartmentsTableSeeder::class,
+            SponsorsTableSeeder::class,
+            // ApartmentSponsorTableSeeder::class,
+            ServicesTableSeeder::class,
             ImagesTableSeeder::class,
             MessagesTableSeeder::class,
             ViewsTableSeeder::class,
