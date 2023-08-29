@@ -10,6 +10,7 @@ use App\Models\Sponsor;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use GuzzleHttp\Client;
 
 class Apartment extends Model
 {
