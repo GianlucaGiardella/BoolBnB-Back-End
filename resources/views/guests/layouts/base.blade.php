@@ -12,11 +12,11 @@
 <body>
     @include('guests.includes.header')
 
-    <div class="container" style="margin-top: 80px">
+    <div class="container" style="margin-top: 100px;">
         @yield('contents')
     </div>
 
-    @include('guests.includes.footer')
+    {{-- @include('guests.includes.footer') --}}
 </body>
 
 </html>

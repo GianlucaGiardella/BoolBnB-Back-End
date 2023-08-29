@@ -15,25 +15,25 @@
 </footer>
 
 <style>
-    footer{
-        position: fixed;
-        bottom: 0;
-        left: 0;
+    footer {
         height: 40px;
         width: 100%;
         background-color: #424172c1;
     }
-    ul{
+
+    ul {
         list-style: none;
         display: flex;
         gap: .5em;
     }
-    ul a{
-        color: black; 
+
+    ul a {
+        color: black;
         text-decoration: none;
         font-size: small;
     }
-    ul a:hover{
+
+    ul a:hover {
         text-decoration: underline;
     }
 </style>

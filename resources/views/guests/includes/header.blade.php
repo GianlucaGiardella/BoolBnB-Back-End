@@ -1,51 +1,174 @@
-<header>
-    <div class="prenav">
-        <nav class="navbar navbar-expand-lg w-100 bg-body-tertiary">
-            <div class="d-flex justify-content-between align-items-center w-100 h-100">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="/"><img src="" alt=""></a>
-            <div class="collapse navbar-collapse d-flex justify-content-between h-100" id="navbarTogglerDemo03">
-                
-                <form class="d-flex m-auto" role="search">
-                    <input class="form-control m-6" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn" type="submit"><span style="color: #ff7210">Search</span></button>
-                </form>
-                <div>
-                    @if (Route::has('login'))
-                <div class="hidden px-4 py-4 sm:block log-btn">
-                    @auth
-                        <a href="{{ route('admin.dashboard') }}" class="text-sm">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm">Log in</a>
+@php $user = Auth::user(); @endphp
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm">Register</a>
-                        @endif
+<nav class="navbar navbar-expand-lg w-100 bg-white">
+    <div class="container">
+        <a class="navbar-brand" href="{{ route('guests.home') }}">
+            <img src="{{ url('/logos/multicolor-horizontal-logo.png') }}" alt="">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse bg-white p-2 rounded" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 log-btn">
+                <li class="nav-item">
+                    <a class="nav-link" href="">In Evidenza</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Cerca Appartamenti</a>
+                </li>
+            </ul>
+
+            @if (Route::has('login'))
+                @auth
+                    <ul class="navbar-nav mb-2 mb-lg-0 log-btn">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.apartments.index') }}">I Miei Appartamenti</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Messaggi Ricevuti</a>
+                        </li>
+                    </ul>
+                @endauth
+            @endif
+
+            @if (Route::has('login'))
+                <div class="log-btn ms-3">
+                    @auth
+                        <div class="navbar-nav mb-2 mb-lg-0">
+                            <div class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle fs-5" href="#" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ $user->name }}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <div class="nav-item">
+                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                    </div>
+
+                                    {{-- <div>
+                                        <a class="dropdown-item" href="{{ route('admin.profile.edit') }}">Edit
+                                            Profile</a>
+                                    </div> --}}
+
+                                    <div>
+                                        <form action="{{ route('logout') }}" method="post" class="dropdown-item exit">
+                                            @csrf
+                                            <button class="btn p-0 text-danger pe-auto">Esci</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="d-flex gap-2">
+                            <button class="login-link">
+                                <a href="{{ route('login') }}">Accedi</a>
+                            </button>
+                            <div class="border border-1 border-dark"></div>
+                            @if (Route::has('register'))
+                                <button class="register-link">
+                                    <a href="{{ route('register') }}">Registrati</a>
+                                </button>
+                            @endif
+                        </div>
                     @endauth
                 </div>
             @endif
-                </div>
-            </div>
-            </div>
-        </nav>
+        </div>
     </div>
-</header>
+</nav>
 
 <style>
-  
-  .navbar{
-        background-color: rgb(42, 41, 72) !important;
-        height: 60px;
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
+    .navbar {
+        height: 70px;
         position: fixed;
         left: 0;
         top: 0;
+        z-index: 99;
+        border-bottom: 1px solid #FF7210;
     }
-    a img{
-        width: 100px;
+
+    .log-btn a {
+        text-decoration: none;
+    }
+
+    .log-btn a:hover {
+        color: #424172;
+    }
+
+    .log-btn a:hover,
+    .exit:hover button {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    .auth {
+        color: #FF7210;
+    }
+
+    a img {
+        width: 120px;
+    }
+
+    .login-link,
+    .register-link {
+        padding: 0;
+        margin: 0;
+        border: none;
+        background: none;
+    }
+
+    .login-link,
+    .register-link {
+        --primary-color: #424172;
+        --hovered-color: #FF7210;
+        position: relative;
+        display: flex;
+        font-weight: 600;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .login-link a,
+    .register-link a {
+        margin: 0;
+        position: relative;
+        color: var(--primary-color)
+    }
+
+    .login-link a::before,
+    .register-link a::before {
+        position: absolute;
+        width: 0%;
+        inset: 0;
+        color: var(--hovered-color);
+        overflow: hidden;
+        transition: 0.3s ease-out;
+    }
+
+    .login-link a::before {
+        content: "Accedi";
+    }
+
+    .register-link a::before {
+        content: "Registrati";
+    }
+
+    .login-link a:hover,
+    .register-link a:hover {
+        text-decoration: none;
+    }
+
+    .login-link:hover::after,
+    .register-link::after {
+        width: 100%;
+    }
+
+    .login-link:hover a::before,
+    .register-link:hover a::before {
+        width: 100%;
     }
 </style>
