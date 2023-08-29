@@ -20,7 +20,6 @@
                     <tr>
                         <th scope="col" class="text-dark">Titolo</th>
                         <th scope="col" class="text-dark">Descrizione</th>
-                        <th scope="col" class="text-dark">Prezzo</th>
                         <th scope="col" class="text-dark">Metri Quadri</th>
                         <th scope="col" class="text-dark">Camere</th>
                         <th scope="col" class="text-dark">Letti</th>
@@ -32,7 +31,6 @@
                         <tr>
                             <td>{{ $apartment->title }}</td>
                             <td>{{ $apartment->description }}</td>
-                            <td>{{ $apartment->price }}</td>
                             <td>{{ $apartment->size }}</td>
                             <td>{{ $apartment->rooms }}</td>
                             <td>{{ $apartment->beds }}</td>

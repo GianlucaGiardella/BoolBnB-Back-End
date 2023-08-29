@@ -6,7 +6,6 @@
             <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Description</th>
-                <th scope="col">price</th>
                 <th scope="col">size</th>
                 <th scope="col">rooms</th>
                 <th scope="col">beds</th>
@@ -19,7 +18,6 @@
             <tr>
                 <th scope="row">{{ $apartment->title }}</th>
                 <td>{{ $apartment->description }}</td>
-                <td>{{ $apartment->price }}</td>
                 <td>{{ $apartment->size }}</td>
                 <td>{{ $apartment->rooms }}</td>
                 <td>{{ $apartment->beds }}</td>
