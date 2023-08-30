@@ -91,7 +91,6 @@ class ApartmentController extends Controller
             $newApartment->cover        = $data['cover'];
 
             $newApartment->save();
-
         } else {
             return back()->withInput()->withErrors(['api_error' => 'Indirizzo non trovato']);
         }
@@ -182,9 +181,13 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
 
-        if ($apartment->cover) {
-            Storage::delete($apartment->cover);
-        }
+        // if ($apartment->cover) {
+        //     Storage::delete($apartment->cover);
+        // }
+
+        $apartment->services()->detach();
+        $apartment->sponsors()->detach();
+        // $apartment->messages()->detach();
 
         $apartment->delete();
 
