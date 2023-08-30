@@ -7,27 +7,27 @@ return  [
     ],
     [
         "id" => 2,
-        "name" => "Kitchen",
+        "name" => "Cucina",
     ],
     [
         "id" => 3,
-        "name" => "Washer",
+        "name" => "Lavastoviglie",
     ],
     [
         "id" => 4,
-        "name" => "Dryer",
+        "name" => "Asciugatrice",
     ],
     [
         "id" => 5,
-        "name" => "Air Conditioning",
+        "name" => "Aria Condizionata",
     ],
     [
         "id" => 6,
-        "name" => "Heating",
+        "name" => "Riscaldamento",
     ],
     [
         "id" => 7,
-        "name" => "Dedicated Workspace",
+        "name" => "Studio",
     ],
     [
         "id" => 8,
@@ -35,58 +35,58 @@ return  [
     ],
     [
         "id" => 9,
-        "name" => "Hair Dryer",
+        "name" => "Asciuga capelli",
     ],
     [
         "id" => 10,
-        "name" => "Iron",
+        "name" => "Ferro da Stiro",
     ],
     [
         "id" => 11,
-        "name" => "Pool",
+        "name" => "Piscina",
     ],
     [
         "id" => 12,
-        "name" => "Hot Tub",
+        "name" => "Idromassaggio",
     ],
     [
         "id" => 13,
-        "name" => "Free Parking",
+        "name" => "Parcheggio Gratuito",
     ],
     [
         "id" => 14,
-        "name" => "EV Charger",
+        "name" => "Torretta di Ricarica Veicoli",
     ],
     [
         "id" => 15,
-        "name" => "Crib",
+        "name" => "Culla",
     ],
     [
         "id" => 16,
-        "name" => "Gym",
+        "name" => "Palestra",
     ],
     [
         "id" => 17,
-        "name" => "BBQ Grill",
+        "name" => "Barbeque",
     ],
     [
         "id" => 18,
-        "name" => "Breakfast",
+        "name" => "Colazione",
     ],
     [
         "id" => 19,
-        "name" => "Indoor Fireplace",
+        "name" => "Camino",
     ],
     [
         "id" => 20,
-        "name" => "Smoking Allowed",
+        "name" => "Fumatori",
     ],
     [
         "id" => 21,
-        "name" => "Smoke Alarm",
+        "name" => "Allarme Anticendio",
     ],
     [
         "id" => 22,
-        "name" => "Carbon Monoxide Alarm",
+        "name" => "Rilevatore Monossido Di Carbonio",
     ],
 ];
