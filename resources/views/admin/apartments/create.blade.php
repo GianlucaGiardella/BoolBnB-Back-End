@@ -1,5 +1,5 @@
+@vite('resources/js/suggestion.js')
 @extends('admin.layouts.base')
-
 @section('contents')
     <div class="card mt-3 p-2">
         <div class="card-body">
@@ -56,81 +56,72 @@
 
                     <div>
                         <div class="mb-3">
-                            <label for="country" class="form-label fs-4 fw-4">Nazione</label>
+                            <label for="country" class="form-label">Nazione</label>
                             <input type="text" class="form-control" id="country" name="country"
                                 value="{{ old('country') }}">
                         </div>
 
                         <div class="mb-3">
-                            <label for="city" class="form-label fs-4 fw-4">Città</label>
-                            <input type="text" class="form-control" id="city" name="city"
-                                value="{{ old('city') }}">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="street" class="form-label fs-4 fw-4">Via</label>
+                            <label for="street" class="form-label">Via</label>
                             <input type="text" class="form-control" id="street" name="street"
                                 value="{{ old('street') }}">
                         </div>
 
+                        <ul id="suggestions" class="list-group list-group-flush">
+                            <!-- Suggestions will be dynamically added here -->
+                        </ul>
+
                         <div class="mb-3">
-                            <label for="address" class="form-label fs-4 fw-4">Civico</label>
+                            <label for="address" class="form-label">Civico</label>
                             <input type="number" class="form-control" id="address" name="address"
                                 value="{{ old('address') }}">
                         </div>
+                    </div>
 
-                        <div class="mb-3">
-                            <label for="postalcode" class="form-label fs-4 fw-4">CAP</label>
-                            <input type="text" class="form-control" id="postalcode" name="postalcode"
-                                value="{{ old('postalcode') }}">
+                    <div class="mb-4">
+                        <label for="description" class="form-label fs-4 fw-4">Descrizione</label>
+                        <textarea type="text" class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
+                    </div>
+
+                    <div class="row row-cols-1 row-cols-md-2 mb-3 align-items-center">
+                        <div class="d-flex align-items-center">
+                            <h4 class="my-2">Visibile</h4>
+                            <label class="rocker rocker-small">
+                                <input type="checkbox" name="visibility" value="1"
+                                    {{ old('visibility') ? 'checked' : '' }}>
+                                <span class="switch-left">Si</span>
+                                <span class="switch-right">No</span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <div class="upload-img-container">
+                                <input type="file" class="upload-img" id="cover" name="cover" accept="cover/*"
+                                    required>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="mb-4">
-                    <label for="description" class="form-label fs-4 fw-4">Descrizione</label>
-                    <textarea type="text" class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
-                </div>
-
-                <div class="row row-cols-1 row-cols-md-2 mb-3 align-items-center">
-                    <div class="d-flex align-items-center">
-                        <h4 class="my-2">Visibile</h4>
-                        <label class="rocker rocker-small">
-                            <input type="checkbox" name="visibility" value="1"
-                                {{ old('visibility') ? 'checked' : '' }}>
-                            <span class="switch-left">Si</span>
-                            <span class="switch-right">No</span>
-                        </label>
-                    </div>
-
-                    <div>
-                        <div class="upload-img-container">
-                            <input type="file" class="upload-img" id="cover" name="cover" accept="cover/*"
-                                required>
+                    <div class="mb-4">
+                        <h4 class="my-2">Servizi</h4>
+                        <div class="container">
+                            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
+                                @foreach ($services as $service)
+                                    <div class="mb-2 form-check">
+                                        <input type="checkbox" class="form-check-input" id="service{{ $service->id }}"
+                                            name="services[]" value="{{ $service->id }}"
+                                            @if (in_array($service->id, old('services', []))) checked @endif>
+                                        <label class="form-check-label"
+                                            for="service{{ $service->id }}">{{ $service->name }}</label>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="mb-4">
-                    <h4 class="my-2">Servizi</h4>
-                    <div class="container">
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
-                            @foreach ($services as $service)
-                                <div class="mb-2 form-check">
-                                    <input type="checkbox" class="form-check-input" id="service{{ $service->id }}"
-                                        name="services[]" value="{{ $service->id }}"
-                                        @if (in_array($service->id, old('services', []))) checked @endif>
-                                    <label class="form-check-label"
-                                        for="service{{ $service->id }}">{{ $service->name }}</label>
-                                </div>
-                            @endforeach
-                        </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="styled-btn">Aggiungi Appartamento</button>
                     </div>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <button type="submit" class="styled-btn">Aggiungi Appartamento</button>
-                </div>
             </form>
         </div>
     </div>
