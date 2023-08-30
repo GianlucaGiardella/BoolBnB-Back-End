@@ -6,6 +6,6 @@ return [
 		"apartment_id" => 1,
 		"email_sender" => "",
 		"text_message" => "",
-		"sent_date" => "",
+		"sent_date" => "2023-08-29 08:25:55",
 	],
 ];

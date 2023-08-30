@@ -12,18 +12,17 @@
         </button>
 
         <div class="collapse navbar-collapse bg-white p-2 rounded" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 log-btn">
+            <ul class="navbar-nav flex-grow-1 mb-lg-0 log-btn">
                 <li class="nav-item">
-                    <a class="nav-link" href="">In Evidenza</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">Cerca Appartamenti</a>
+                    <a class="nav-link" href="{{ route('guests.home') }}">Home</a>
                 </li>
             </ul>
-
             @if (Route::has('login'))
                 @auth
-                    <ul class="navbar-nav mb-2 mb-lg-0 log-btn">
+                    <ul class="navbar-nav mb-lg-0 log-btn">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.apartments.index') }}">I Miei Appartamenti</a>
                         </li>
@@ -35,19 +34,15 @@
             @endif
 
             @if (Route::has('login'))
-                <div class="log-btn ms-3">
+                <div class="log-btn">
                     @auth
                         <div class="navbar-nav mb-2 mb-lg-0">
                             <div class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle fs-5" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ $user->name }}
+                                    {{ $user->email }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    <div class="nav-item">
-                                        <a class="dropdown-item" href="{{ route('admin.dashboard') }}">Dashboard</a>
-                                    </div>
-
                                     {{-- <div>
                                         <a class="dropdown-item" href="{{ route('admin.profile.edit') }}">Edit
                                             Profile</a>

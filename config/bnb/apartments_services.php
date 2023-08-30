@@ -166,10 +166,6 @@ return [
     ],
     [
         "apartment_id" => 4,
-        "service_id" => 17
-    ],
-    [
-        "apartment_id" => 4,
         "service_id" => 21
     ],
     [

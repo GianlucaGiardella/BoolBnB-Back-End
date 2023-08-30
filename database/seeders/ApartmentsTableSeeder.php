@@ -9,23 +9,18 @@ use App\Models\Apartment;
 use App\Models\Service;
 use App\Models\Sponsor;
 use Illuminate\Support\Str;
-use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ApartmentsTableSeeder extends Seeder
 {
-    public function run(Faker $faker)
+    public function run()
     {
-        $apartments = Apartment::all();
-        $services = Service::all();
-        $sponsors = Sponsor::all()->pluck('id');
-
         foreach (config('bnb.apartments') as $config_apartment) {
             $title = $config_apartment['title'];
             $slug = Apartment::slugger($title);
 
-            $apartment = Apartment::create([
+            Apartment::create([
                 'user_id'       => $config_apartment['user_id'],
                 'title'         => Str::ucfirst($title),
                 'slug'          => $slug,
@@ -40,11 +35,6 @@ class ApartmentsTableSeeder extends Seeder
                 'visibility'    => $config_apartment['visibility'],
                 'cover'         => $config_apartment['cover'],
             ]);
-
-            //Usa Faker per creare una tabella ponte casuale con services e sponsors
-
-            // $apartment->services()->sync($faker->randomElements($services, null));
-            // $apartment->sponsors()->sync($faker->randomElements($sponsors, null));
         }
     }
 }

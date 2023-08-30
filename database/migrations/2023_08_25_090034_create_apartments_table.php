@@ -42,7 +42,7 @@ return new class extends Migration
             $table->dropForeign('apartments_user_id_foreign');
 
             // elimino la colonna
-            $table->dropColumn('user_id');
+            $table->dropIfExists('apartments');
         });
     }
 };

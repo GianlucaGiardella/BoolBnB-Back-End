@@ -16,8 +16,8 @@ use Illuminate\View\View;
 class RegisteredUserController extends Controller
 {
     private $validations = [
-        'name'              => 'required|string|min:3|max:255',
-        'surname'           => 'string|max:255|nullable',
+        'name'              => 'string|max:50|nullable',
+        'surname'           => 'string|max:50|nullable',
         'birth_date'        => 'date|nullable',
         'email'             => 'required|string|email|max:255|unique:users',
         'password'          => 'required|confirmed|min:8',

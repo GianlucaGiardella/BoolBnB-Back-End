@@ -90,11 +90,11 @@ class ApartmentController extends Controller
             return back()->withInput()->withErrors(['api_error' => 'Indirizzo non trovato']);
         }
 
-        $apartments = Apartment::with('user')->where('user_id', Auth::id())->paginate(5);
+        // Porta all'index 
+        // $apartments = Apartment::with('user')->where('user_id', Auth::id())->paginate(5);
+        // return view('admin.apartments.index', compact('apartments'));
 
-        return view('admin.apartments.index', compact('apartments'));
-
-        // return view('admin.apartments.show', ['apartment' => $newApartment]);
+        return view('admin.apartments.show', ['apartment' => $newApartment]);
     }
 
     public function show($slug)
@@ -152,7 +152,6 @@ class ApartmentController extends Controller
             $apartment->beds         = $data['beds'];
             $apartment->bathrooms    = $data['bathrooms'];
             $apartment->visibility   = $data['visibility'];
-
         } else {
             return back()->withInput()->withErrors(['api_error' => 'Indirizzo non trovato']);
         }
