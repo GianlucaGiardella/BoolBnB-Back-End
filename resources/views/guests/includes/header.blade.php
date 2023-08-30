@@ -49,7 +49,7 @@
                                     </div> --}}
 
                                     <div>
-                                        <form action="{{ route('logout') }}" method="post" class="dropdown-item exit">
+                                        <form action="{{ route('logout') }}" method="post" class="dropdown-item exit mb-0">
                                             @csrf
                                             <button class="btn p-0 text-danger pe-auto">Esci</button>
                                         </form>

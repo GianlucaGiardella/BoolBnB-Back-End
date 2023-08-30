@@ -22,7 +22,7 @@
             {{-- Name --}}
             <div class="input_container">
                 <label for="name" class="input_label">Nome</label>
-                <input type="text" class="input_field" id="name" name="name" autocomplete="name" maxlength="50"
+                <input type="text" class="input_field" id="name" name="name" autocomplete="name" maxlength="255"
                     value="{{ old('name') }}">
                 <div class="error"></div>
             </div>
@@ -31,7 +31,7 @@
             <div class="input_container">
                 <label for="name" class="input_label">Cognome</label>
                 <input type="text" class="input_field" id="surname" name="surname" autocomplete="surname"
-                    maxlength="50" value="{{ old('surname') }}">
+                    maxlength="255" value="{{ old('surname') }}">
                 <div class="error"></div>
             </div>
 
@@ -39,7 +39,7 @@
             <div class="input_container">
                 <label for="name" class="input_label">Data di Nascita</label>
                 <input type="date" class="input_field" id="birth_date" name="birth_date" autocomplete="birth_date"
-                    max="<?= date('Y-m-d', strtotime('-18 year')) ?>">
+                    min="1920-01-01" max="<?= date('Y-m-d', strtotime('-18 year')) ?>">
                 <div class="error">
                 </div>
             </div>
@@ -56,7 +56,7 @@
                     </path>
                 </svg>
                 <input type="email" class="input_field" id="email" aria-describedby="emailHelp" name="email"
-                    placeholder="name@mail.com" autocomplete="username" value="{{ old('email') }}" required>
+                    placeholder="name@mail.com" value="{{ old('email') }}" autocomplete="username" required>
                 <div class="error"></div>
             </div>
 
@@ -75,15 +75,15 @@
                     </path>
                 </svg>
                 <input type="password" class="input_field" id="password" name="password" placeholder="Password"
-                    autocomplete="current-password" required minlength="8">
+                    autocomplete="current-password" required minlength="8" maxlength="255">
                 <div class="error"></div>
             </div>
 
             {{-- ConfirmPassword --}}
             <div class="input_container">
                 <label class="input_label" for="password">Conferma Password *</label>
-                <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-                    class="icon">
+                <svg fill="none" viewBox="0 0 24 24" height="24" width="24"
+                    xmlns="http://www.w3.org/2000/svg" class="icon">
                     <path stroke-linecap="round" stroke-width="1.5" stroke="#141B34"
                         d="M18 11.0041C17.4166 9.91704 16.273 9.15775 14.9519 9.0993C13.477 9.03404 11.9788 9 10.329 9C8.67911 9 7.18091 9.03404 5.70604 9.0993C3.95328 9.17685 2.51295 10.4881 2.27882 12.1618C2.12602 13.2541 2 14.3734 2 15.5134C2 16.6534 2.12602 17.7727 2.27882 18.865C2.51295 20.5387 3.95328 21.8499 5.70604 21.9275C6.42013 21.9591 7.26041 21.9834 8 22">
                     </path>
@@ -94,7 +94,7 @@
                     </path>
                 </svg>
                 <input type="password" class="input_field" id="confirmPassword" name="password_confirmation"
-                    placeholder="Password" autocomplete="new-password" required minlength="8">
+                    placeholder="Password" autocomplete="new-password" required minlength="8" maxlength="255">
                 <div class="error"></div>
             </div>
 

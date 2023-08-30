@@ -26,31 +26,31 @@
                         <div class="mb-3">
                             <label for="title" class="form-label fs-4 fw-4">Titolo</label>
                             <input type="text" class="form-control" id="title" name="title"
-                                value="{{ old('title') }}">
+                                value="{{ old('title') }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="size" class="form-label fs-4 fw-4">Metri Quadri</label>
                             <input type="number" class="form-control" id="size" name="size"
-                                value="{{ old('size') }}">
+                                value="{{ old('size') }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="rooms" class="form-label fs-4 fw-4">Camere</label>
                             <input type="number" class="form-control" id="rooms" name="rooms"
-                                value="{{ old('rooms') }}">
+                                value="{{ old('rooms') }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="beds" class="form-label fs-4 fw-4">Letti</label>
                             <input type="number" class="form-control" id="beds" name="beds"
-                                value="{{ old('beds') }}">
+                                value="{{ old('beds') }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="bathrooms" class="form-label fs-4 fw-4">Bagni</label>
                             <input type="number" class="form-control" id="bathrooms" name="bathrooms"
-                                value="{{ old('bathrooms') }}">
+                                value="{{ old('bathrooms') }}" required>
                         </div>
                     </div>
 
@@ -105,7 +105,8 @@
 
                     <div>
                         <div class="upload-img-container">
-                            <input type="file" class="upload-img" id="cover" name="cover" accept="cover/*">
+                            <input type="file" class="upload-img" id="cover" name="cover" accept="cover/*"
+                                required>
                         </div>
                     </div>
                 </div>
@@ -113,7 +114,7 @@
                 <div class="mb-4">
                     <h4 class="my-2">Servizi</h4>
                     <div class="container">
-                        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
                             @foreach ($services as $service)
                                 <div class="mb-2 form-check">
                                     <input type="checkbox" class="form-check-input" id="service{{ $service->id }}"
@@ -141,7 +142,6 @@
     .input-group>.form-floating {
         flex: 0 1 500px;
     }
-
 
     /* Switch starts here */
     .rocker {
@@ -287,13 +287,13 @@
     }
 
     .upload-img-container {
-        border: 1px solid rgba(0, 0, 0, 0.175);
+        border: 1px solid #dee2e6;
         padding: 8px;
         border-radius: 7px;
     }
 
     .upload-img::file-selector-button {
-        margin-right: 20px;
+        margin-right: 16px;
         border: none;
         background: #424172;
         padding: 10px 20px;

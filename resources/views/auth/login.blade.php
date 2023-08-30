@@ -30,7 +30,8 @@
                     </path>
                 </svg>
                 <input type="email" class="input_field" id="email" aria-describedby="emailHelp" name="email"
-                    placeholder="name@mail.com" autocomplete="username" value="{{ old('email') }}" required>
+                    placeholder="name@mail.com" value="{{ old('email') }}" autocomplete="username" required
+                    maxlength="255">
                 <div class="error"></div>
             </div>
 
@@ -49,7 +50,7 @@
                     </path>
                 </svg>
                 <input type="password" class="input_field" id="password" name="password" placeholder="Password"
-                    autocomplete="current-password" required minlength="8">
+                    autocomplete="current-password" required minlength="8" maxlength="255">
                 <div class="error"></div>
             </div>
 
