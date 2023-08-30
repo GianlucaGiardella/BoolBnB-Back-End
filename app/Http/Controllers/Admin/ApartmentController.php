@@ -42,8 +42,10 @@ class ApartmentController extends Controller
     public function create()
     {
         $apartments = Apartment::all();
+        $services = Service::all();
+        $sponsors = Sponsor::all();
 
-        return view('admin.apartments.create', compact('apartments'));
+        return view('admin.apartments.create', compact('apartments', 'services', 'sponsors'));
     }
 
     public function store(Request $request)
@@ -91,7 +93,6 @@ class ApartmentController extends Controller
             $newApartment->cover        = $data['cover'];
 
             $newApartment->save();
-
         } else {
             return back()->withInput()->withErrors(['api_error' => 'Indirizzo non trovato']);
         }

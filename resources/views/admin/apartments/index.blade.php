@@ -11,7 +11,7 @@
     <div class="card mt-3 p-2">
         <div class="card-body">
             <div class="d-inline-block">
-                <h1 class="text-dark">I tuoi appartamenti</h1>
+                <h1 class="text-gradient">I tuoi appartamenti</h1>
                 <hr class="rounded">
             </div>
 
