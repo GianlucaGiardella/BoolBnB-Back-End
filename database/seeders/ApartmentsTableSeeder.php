@@ -18,8 +18,8 @@ class ApartmentsTableSeeder extends Seeder
     public function run(Faker $faker)
     {
         $apartments = Apartment::all();
-        $services = Service::all();
-        $sponsors = Sponsor::all()->pluck('id');
+        $services   = Service::all();
+        $sponsors   = Sponsor::all()->pluck('id');
 
         foreach (config('bnb.apartments') as $config_apartment) {
             $title = $config_apartment['title'];
@@ -30,7 +30,7 @@ class ApartmentsTableSeeder extends Seeder
                 'title'         => Str::ucfirst($title),
                 'slug'          => $slug,
                 'description'   => $config_apartment['description'],
-                'address'       => $config_apartment['address'],
+                'street'        => $config_apartment['street'],
                 'longitude'     => $config_apartment['longitude'],
                 'latitude'      => $config_apartment['latitude'],
                 'rooms'         => $config_apartment['rooms'],
