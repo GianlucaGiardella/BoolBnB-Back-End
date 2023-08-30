@@ -10,13 +10,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // L'ORDINE E' IMPORTANTE
             UsersTableSeeder::class,
-            //Le altre necessitano dell'id di apartment, deve essere creato prima
+            //Apartment deve essere creato prima 
             ApartmentsTableSeeder::class,
-            SponsorsTableSeeder::class,
-            // ApartmentSponsorTableSeeder::class,
             ServicesTableSeeder::class,
+            SponsorsTableSeeder::class,
             ImagesTableSeeder::class,
             MessagesTableSeeder::class,
             ViewsTableSeeder::class,
