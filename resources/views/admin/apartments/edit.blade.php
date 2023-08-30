@@ -39,11 +39,11 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="address" class="form-label">
+                    <label for="street" class="form-label">
                         <h4 class="my-0">Indirizzo</h4>
                     </label>
-                    <input type="text" class="form-control" id="address" name="address"
-                        value="{{ old('address', $apartment->address) }}">
+                    <input type="text" class="form-control" id="street" name="street"
+                        value="{{ old('street', $apartment->street) }}">
                 </div>
 
                 <div class="mb-4">

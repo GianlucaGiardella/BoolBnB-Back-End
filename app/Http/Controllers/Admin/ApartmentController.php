@@ -136,10 +136,12 @@ class ApartmentController extends Controller
         };
 
 
-        $street  =     urlencode($data['street']);
-        $url = "https://api.tomtom.com/search/2/geocode/{$street}.json?key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
-        $response_json = file_get_contents($url);
-        $responseData = json_decode($response_json, true);
+        
+        $street         =   urlencode($data['street']);
+        $url            =   "https://api.tomtom.com/search/2/geocode/{$street}.json?key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
+        $response_json  =   file_get_contents($url);
+        $responseData   =   json_decode($response_json, true);
+        
         error_log(print_r($responseData, true));
 
         if (isset($responseData['results'][0]['position']['lat']) && isset($responseData['results'][0]['position']['lon'])) {
