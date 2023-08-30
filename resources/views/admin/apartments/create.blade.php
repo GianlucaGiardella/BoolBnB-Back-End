@@ -1,5 +1,5 @@
+@vite('resources/js/suggestion.js')
 @extends('admin.layouts.base')
-
 @section('contents')
 
     <h1>Aggiungi appartamento</h1>
@@ -33,23 +33,17 @@
         </div>
 
         <div class="mb-3">
-            <label for="city" class="form-label">Citta'</label>
-            <input type="text" class="form-control" id="city" name="city" value="{{ old('city') }}">
-        </div>
-
-        <div class="mb-3">
             <label for="street" class="form-label">Via</label>
             <input type="text" class="form-control" id="street" name="street" value="{{ old('street') }}">
         </div>
+         
+        <ul id="suggestions" class="list-group list-group-flush">
+            <!-- Suggestions will be dynamically added here -->
+        </ul>
 
         <div class="mb-3">
             <label for="address" class="form-label">Civico</label>
             <input type="number" class="form-control" id="address" name="address" value="{{ old('address') }}">
-        </div>
-
-        <div class="mb-3">
-            <label for="postalcode" class="form-label">CAP</label>
-            <input type="text" class="form-control" id="postalcode" name="postalcode" value="{{ old('postalcode') }}">
         </div>
 
         <div class="mb-3">

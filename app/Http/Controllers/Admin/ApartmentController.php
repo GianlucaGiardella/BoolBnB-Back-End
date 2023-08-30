@@ -60,12 +60,10 @@ class ApartmentController extends Controller
 
         //geocoding 
         $country    =   urlencode($data['country']);
-        $city       =   urlencode($data['city']);
         $street     =   urlencode($data['street']);  // via
         $address    =   $data['address']; // civico
-        $postalcode =   urlencode($data['postalcode']);
 
-        $url = "https://api.tomtom.com/search/2/structuredGeocode.json?countryCode={$country}&limit=1&streetNumber={$address}&streetName={$street}&municipality={$city}&postalCode={$postalcode}&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
+        $url = "https://api.tomtom.com/search/2/structuredGeocode.json?countryCode={$country}&limit=1&streetNumber={$address}&streetName={$street}&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
         $response_json = file_get_contents($url);
         $responseData = json_decode($response_json, true);
         error_log(print_r($responseData, true));
