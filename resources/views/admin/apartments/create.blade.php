@@ -28,19 +28,29 @@
         </div>
 
         <div class="mb-3">
-            <label for="address" class="form-label">Indirizzo</label>
-            <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}">
-        </div>
-
-        {{-- <div class="mb-3">
-            <label for="latitude" class="form-label">Latitudine</label>
-            <input type="text" class="form-control" id="latitude" name="latitude" value="{{ old('latitude') }}">
+            <label for="country" class="form-label">Nazione</label>
+            <input type="text" class="form-control" id="country" name="country" value="{{ old('country') }}">
         </div>
 
         <div class="mb-3">
-            <label for="longitude" class="form-label">Longitudine</label>
-            <input type="text" class="form-control" id="longitude" name="longitude" value="{{ old('longitude') }}">
-        </div> --}}
+            <label for="city" class="form-label">Citta'</label>
+            <input type="text" class="form-control" id="city" name="city" value="{{ old('city') }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="street" class="form-label">Via</label>
+            <input type="text" class="form-control" id="street" name="street" value="{{ old('street') }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="address" class="form-label">Civico</label>
+            <input type="number" class="form-control" id="address" name="address" value="{{ old('address') }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="postalcode" class="form-label">CAP</label>
+            <input type="text" class="form-control" id="postalcode" name="postalcode" value="{{ old('postalcode') }}">
+        </div>
 
         <div class="mb-3">
             <label for="size" class="form-label">Metri Quadri</label>

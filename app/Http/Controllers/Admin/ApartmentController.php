@@ -59,9 +59,13 @@ class ApartmentController extends Controller
         };
 
         //geocoding 
-        $address = $data['address'];
-        $address = urlencode($address);
-        $url = "https://api.tomtom.com/search/2/geocode/{$address}.json?key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
+        $country    =   urlencode($data['country']);
+        $city       =   urlencode($data['city']);
+        $street     =   urlencode($data['street']);  // via
+        $address    =   $data['address']; // civico
+        $postalcode =   urlencode($data['postalcode']);
+
+        $url = "https://api.tomtom.com/search/2/structuredGeocode.json?countryCode={$country}&limit=1&streetNumber={$address}&streetName={$street}&municipality={$city}&postalCode={$postalcode}&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
         $response_json = file_get_contents($url);
         $responseData = json_decode($response_json, true);
         error_log(print_r($responseData, true));
@@ -76,6 +80,7 @@ class ApartmentController extends Controller
             $newApartment->title        = $data['title'];
             $newApartment->slug         = Apartment::slugger($data['title']);
             $newApartment->description  = $data['description'];
+            $newApartment->street       = $data['street'];
             $newApartment->latitude     = $latitude;
             $newApartment->longitude    = $longitude;
             $newApartment->size         = $data['size'];
@@ -86,6 +91,7 @@ class ApartmentController extends Controller
             $newApartment->cover        = $data['cover'];
 
             $newApartment->save();
+
         } else {
             return back()->withInput()->withErrors(['api_error' => 'Indirizzo non trovato']);
         }
@@ -130,9 +136,8 @@ class ApartmentController extends Controller
         };
 
 
-        $address = $data['address'];
-        $address = urlencode($address);
-        $url = "https://api.tomtom.com/search/2/geocode/{$address}.json?key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
+        $street  =     urlencode($data['street']);
+        $url = "https://api.tomtom.com/search/2/geocode/{$street}.json?key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
         $response_json = file_get_contents($url);
         $responseData = json_decode($response_json, true);
         error_log(print_r($responseData, true));
@@ -144,7 +149,7 @@ class ApartmentController extends Controller
 
             $apartment->title        = $data['title'];
             $apartment->description  = $data['description'];
-            $apartment->address      = $data['address'];
+            $apartment->street       = $data['street'];
             $apartment->latitude     = $latitude;
             $apartment->longitude    = $longitude;
             $apartment->size         = $data['size'];
