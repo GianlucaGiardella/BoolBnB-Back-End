@@ -55,7 +55,7 @@ function createSuggestions(inputElement, suggestionsElement, urlTemplate) {
                             suggestionsElement.removeChild(suggestionsElement.firstChild);
                         }
                     });
-                    suggestionsElement.appendChild(userListItem); // Aggiungi l'elemento direttamente
+                    suggestionsElement.appendChild(userListItem);
                 }
             })
             .catch((error) => {
@@ -69,19 +69,22 @@ let suggestionsElementCountry = document.getElementById("suggestions-country");
 let urlCountry = `https://restcountries.com/v3.1/name/{query}`;
 
 if (inputElementCountry && suggestionsElementCountry) {
-    createSuggestions(
-        inputElementCountry,
-        suggestionsElementCountry,
-        urlCountry
-    );
+    createSuggestions(inputElementCountry, suggestionsElementCountry, urlCountry);
 }
+
+
 
 let inputElementStreet = document.getElementById("street");
 let suggestionsElementStreet = document.getElementById("suggestions-street");
-let countrySliced = inputElementCountry.value.slice(0, 2);
-let urlStreet = `https://api.tomtom.com/search/2/search/{query}.json?country=${countrySliced}&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R`;
 
-
-if (inputElementStreet && suggestionsElementStreet) {
-    createSuggestions(inputElementStreet, suggestionsElementStreet, urlStreet);
-}
+inputElementCountry.addEventListener("input", function (event) {
+    let countrySliced = event.target.value.slice(0, 2).toUpperCase();
+    console.log(countrySliced);
+    let urlStreet = `https://api.tomtom.com/search/2/search/{query}.json?countryCode=${countrySliced}&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R`;
+    console.log(urlStreet);
+    
+    // Update the suggestions for street input
+    if (inputElementStreet && suggestionsElementStreet) {
+        createSuggestions(inputElementStreet, suggestionsElementStreet, urlStreet);
+    }
+});
