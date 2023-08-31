@@ -77,6 +77,12 @@ class ApartmentController extends Controller
             $longitude = $responseData['results'][0]['position']['lon'];
 
             $newApartment               = new Apartment();
+
+            if (isset($coverPath)) {
+                $coverPath = Storage::put('uploads', $data['img']);
+                $newApartment->cover = $coverPath;
+            }
+
             $newApartment->user_id      = Auth::id();
             $newApartment->title        = $data['title'];
             $newApartment->slug         = Apartment::slugger($data['title']);
@@ -89,7 +95,6 @@ class ApartmentController extends Controller
             $newApartment->longitude    = $longitude;
             $newApartment->description  = $data['description'];
             $newApartment->visibility   = $data['visibility'];
-            $newApartment->cover        = $data['cover'];
 
             $newApartment->save();
         } else {

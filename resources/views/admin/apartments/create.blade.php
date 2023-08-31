@@ -55,7 +55,7 @@
                         <div class="">
                             <label for="size" class="form-label fs-4 fw-4">Metri Quadrati</label>
                             <input type="number" class="form-control" id="size" name="size"
-                                value="{{ old('size') }}" required min="1" max="99">
+                                value="{{ old('size') }}" required min="1" max="9999">
                         </div>
 
                         <div class="">
@@ -95,8 +95,8 @@
                     <div cla>
                         <label for="address" class="form-label fs-4 fw-4">Altre Immagini | max: 5</label>
                         <div class="upload-img-container">
-                            <input type="file" class="upload-img" id="cover" name="images[]" accept="cover/*"
-                                required multiple>
+                            <input type="file" class="upload-img" onchange="countImages()" id="cover"
+                                name="images[]" accept="cover/*" multiple>
                         </div>
                     </div>
                 </div>
