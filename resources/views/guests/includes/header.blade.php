@@ -14,7 +14,9 @@
         <div class="collapse navbar-collapse bg-white p-2 rounded" id="navbarSupportedContent">
             <ul class="navbar-nav flex-grow-1 mb-lg-0 log-btn">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('guests.home') }}">Home</a>
+                    <button class="home-link">
+                        <a href="{{ route('guests.home') }}">Home</a>
+                    </button>
                 </li>
             </ul>
             @if (Route::has('login'))
@@ -114,6 +116,7 @@
         width: 120px;
     }
 
+    .home-link,
     .login-link,
     .register-link {
         padding: 0;
@@ -122,6 +125,7 @@
         background: none;
     }
 
+    .home-link,
     .login-link,
     .register-link {
         --primary-color: #424172;
@@ -133,6 +137,7 @@
         align-items: center;
     }
 
+    .home-link a,
     .login-link a,
     .register-link a {
         margin: 0;
@@ -140,6 +145,7 @@
         color: var(--primary-color)
     }
 
+    .home-link a::before,
     .login-link a::before,
     .register-link a::before {
         position: absolute;
@@ -150,6 +156,10 @@
         transition: 0.3s ease-out;
     }
 
+    .home-link a::before {
+        content: "Home";
+    }
+
     .login-link a::before {
         content: "Accedi";
     }
@@ -158,16 +168,19 @@
         content: "Registrati";
     }
 
+    .home-link a:hover,
     .login-link a:hover,
     .register-link a:hover {
         text-decoration: none;
     }
 
+    .home-link:hover::after,
     .login-link:hover::after,
     .register-link::after {
         width: 100%;
     }
 
+    .home-link:hover a::before,
     .login-link:hover a::before,
     .register-link:hover a::before {
         width: 100%;

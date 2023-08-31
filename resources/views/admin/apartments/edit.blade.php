@@ -1,4 +1,5 @@
 @vite('resources/js/suggestion.js')
+@vite('resources/js/client-validations/apartment-validations.js')
 @extends('admin.layouts.base')
 {{-- @section('contents')
     <div class="card mt-3 p-2">
@@ -122,7 +123,7 @@
                 <hr class="rounded">
             </div>
 
-            @if ($errors->any())
+            {{-- @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -130,7 +131,7 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+            @endif --}}
 
             <form method="POST" class="d-flex flex-column gap-4 mb-0"
                 action="{{ route('admin.apartments.update', ['apartment' => $apartment]) }}" enctype="multipart/form-data"
@@ -150,9 +151,9 @@
                             <label for="country" class="form-label fs-4 fw-4">Nazione</label>
                             <input type="text" class="form-control" id="country" name="country"
                                 value="{{ old('country') }}" maxlength="255">
-                                <ul id="suggestions-country" class="list-group list-group-flush position-absolute z-3">
-                                    <!-- Suggestions will be dynamically added here -->
-                                </ul>
+                            <ul id="suggestions-country" class="list-group list-group-flush position-absolute z-3">
+                                <!-- Suggestions will be dynamically added here -->
+                            </ul>
                         </div>
 
                         <div class="position-relative">
