@@ -1,6 +1,6 @@
 @extends('admin.layouts.base')
 
-@section('contents')
+{{-- @section('contents')
     <div class="card mt-3 p-2">
         <div class="card-body">
             <div class="d-inline-block">
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="mb-4 d-flex align-items-center">
-                    <h4 class="my-2">Visibile</h4>
+                    <h4 class="my-2">Visibilità Appartamento</h4>
                     <label class="rocker rocker-small">
                         <input type="checkbox" name="visibility" value="1"
                             {{ old('visibility', $apartment->visibility) ? 'checked' : '' }}>
@@ -112,9 +112,155 @@
 
         </div>
     </div>
+@endsection --}}
+
+@section('contents')
+    <div class="card mt-3 p-2">
+        <div class="card-body">
+            <div class="d-inline-block text-gradient">
+                <h1>Modifica Appartamento</h1>
+                <hr class="rounded">
+            </div>
+
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form method="POST" class="d-flex flex-column gap-4 mb-0"
+                action="{{ route('admin.apartments.update', ['apartment' => $apartment]) }}" enctype="multipart/form-data"
+                novalidate>
+                @csrf
+                @method('put')
+
+                <div class="row row-cols-1 row-cols-md-2">
+                    <div class="d-flex flex-column gap-3 mt-0">
+                        <div class="">
+                            <label for="title" class="form-label fs-4 fw-4">Titolo</label>
+                            <input type="text" class="form-control" id="title" name="title"
+                                value="{{ old('title', $apartment->title) }}" required minlength="3" maxlength="255">
+                        </div>
+
+                        <div class="">
+                            <label for="country" class="form-label fs-4 fw-4">Nazione</label>
+                            <input type="text" class="form-control" id="country" name="country"
+                                value="{{ old('country', $apartment->country) }}" maxlength="255">
+                        </div>
+
+                        <div class="position-relative">
+                            <label for="street" class="form-label fs-4 fw-4">Via</label>
+                            <input type="text" class="form-control" id="street" name="street"
+                                value="{{ old('street', $apartment->street) }}" required minlength="3" maxlength="255">
+                            <ul id="suggestions" class="list-group list-group-flush position-absolute z-3">
+                                <!-- Suggestions will be dynamically added here -->
+                            </ul>
+                        </div>
+
+                        <div class="">
+                            <label for="address" class="form-label fs-4 fw-4">Civico</label>
+                            <input type="number" class="form-control" id="address" name="address"
+                                value="{{ old('address', $apartment->address) }}" required>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column gap-3 mt-0">
+                        <div class="">
+                            <label for="size" class="form-label fs-4 fw-4">Metri Quadrati</label>
+                            <input type="number" class="form-control" id="size" name="size"
+                                value="{{ old('size', $apartment->size) }}" required min="1" max="99">
+                        </div>
+
+                        <div class="">
+                            <label for="rooms" class="form-label fs-4 fw-4">Camere</label>
+                            <input type="number" class="form-control" id="rooms" name="rooms"
+                                value="{{ old('rooms', $apartment->rooms) }}" required min="1" max="99">
+                        </div>
+
+                        <div class="">
+                            <label for="beds" class="form-label fs-4 fw-4">Letti</label>
+                            <input type="number" class="form-control" id="beds" name="beds"
+                                value="{{ old('beds', $apartment->beds) }}" required min="1" max="99">
+                        </div>
+
+                        <div class="">
+                            <label for="bathrooms" class="form-label fs-4 fw-4">Bagni</label>
+                            <input type="number" class="form-control" id="bathrooms" name="bathrooms"
+                                value="{{ old('bathrooms', $apartment->bathrooms) }}" required min="1"
+                                max="99">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <label for="description" class="form-label fs-4 fw-4">Descrizione</label>
+                    <textarea type="text" class="form-control" id="description" name="description" rows="5" required>{{ old('description', $apartment->description) }}</textarea>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 align-items-center g-3">
+                    <div class="">
+                        <label for="address" class="form-label fs-4 fw-4">Immagine Principale</label>
+                        <div class="upload-img-container">
+                            <input type="file" class="upload-img" id="cover" name="images[]" accept="cover/*"
+                                required multiple>
+                        </div>
+                    </div>
+
+                    <div cla>
+                        <label for="address" class="form-label fs-4 fw-4">Altre Immagini | max: 5</label>
+                        <div class="upload-img-container">
+                            <input type="file" class="upload-img" id="cover" name="images[]"
+                                onchange="countImages()" accept="cover/*" required multiple>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <h4 class="my-2">Servizi</h4>
+                    <div class="container">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
+                            @foreach ($services as $service)
+                                <div class="mb-2 form-check">
+                                    <input type="checkbox" class="form-check-input" id="service{{ $service->id }}"
+                                        name="services[]" value="{{ $service->id }}"
+                                        @if (in_array($service->id, old('services', $apartment->services->pluck('id')->all()))) checked @endif>
+                                    <label class="form-check-label"
+                                        for="service{{ $service->id }}">{{ $service->name }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h4 class="my-2">Visibilità Appartamento</h4>
+                    <label class="rocker rocker-small">
+                        <input type="checkbox" name="visibility" value="1"
+                            {{ old('visibility', $apartment->visibility) ? 'checked' : '' }}>
+                        <span class="switch-left">Si</span>
+                        <span class="switch-right">No</span>
+                    </label>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="styled-btn">Aggiungi Appartamento</button>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 <style>
+    .list-group-item:hover {
+        cursor: pointer !important;
+        text-decoration: underline;
+        background-color: #f8f9fa;
+    }
+
     /* Switch starts here */
     .rocker {
         display: inline-block;
@@ -141,7 +287,6 @@
     .rocker-small {
         font-size: 0.75em;
         /* Sizes the switch */
-        margin: 1em;
     }
 
     .rocker::before {
@@ -187,7 +332,7 @@
     .switch-right {
         right: 0.5em;
         bottom: 0;
-        background-color: #bd5757;
+        background-color: #dc3545;
         color: #fff;
     }
 
@@ -213,7 +358,7 @@
     }
 
     input:checked+.switch-left {
-        background-color: #0084d0;
+        background-color: #198754;
         color: #fff;
         bottom: 0px;
         left: 0.5em;
@@ -257,4 +402,39 @@
     input:checked:focus+.switch-left+.switch-right {
         color: #333;
     }
+
+    .upload-img-container {
+        border: 1px solid #dee2e6;
+        padding: 8px;
+        border-radius: 7px;
+        overflow: hidden;
+    }
+
+    .upload-img::file-selector-button {
+        margin-right: 8px;
+        border: none;
+        background: #424172;
+        padding: 10px 20px;
+        border-radius: 7px;
+        color: #fff;
+        cursor: pointer;
+        transition: background .2s ease-in-out;
+    }
+
+    .upload-img::file-selector-button:hover {
+        background: #FF7210;
+    }
 </style>
+
+<script>
+    function countImages() {
+        const fileInput = document.getElementById('images');
+        const imageCount = fileInput.files.length;
+
+        if (imageCount > 5) {
+            alert('Puoi caricare al massimo 5 immagini.');
+            // Resettare il campo di input per rimuovere le immagini aggiuntive
+            fileInput.value = '';
+        }
+    }
+</script>

@@ -1,7 +1,7 @@
 @extends('admin.layouts.base')
 
 @section('contents')
-    <table class="table table-striped">
+    {{-- <table class="table table-striped">
         <thead>
             <tr>
                 <th scope="col">Title</th>
@@ -32,15 +32,45 @@
 
             </tr>
         </tbody>
-    </table>
-@endsection
+    </table> --}}
+    <div class="card mt-3 p-2">
+        <div class="card-body d-flex flex-column gap-3 align-items-start">
+            <div class="text-gradient">
+                <h1 class="">{{ $apartment->title }}</h1>
+                <hr class="m-0">
+            </div>
 
-Titolo
-descrizione
-Prezzo
-Camere
-bagni
-metriquadri
-Letti
-visibilità
-img di copertina
+            <button class="styled-btn">
+                <a class="nav-link" href="{{ route('admin.apartments.edit', ['apartment' => $apartment]) }}">Modifica
+                    Appartamento</a>
+            </button>
+
+            <div>
+
+            </div>
+
+            <div class="">
+                <h4 class="">Description</h4>
+                <p>{{ $apartment->description }}</p>
+            </div>
+
+            <div class="mt-4">
+                <h4 class="">Servizi</h4>
+                <p>
+                    @foreach ($apartment->services as $service)
+                        {{ $service->name }}
+                        {{ !$loop->last ? '|' : '' }}
+                    @endforeach
+                </p>
+            </div>
+
+            <div>
+                <h5>Via: {{ $apartment->street }}</h5>
+                <h5>Metri Quadrati: {{ $apartment->size }}</h5>
+                <h5>Camere: {{ $apartment->rooms }}</h5>
+                <h5>Letti: {{ $apartment->beds }}</h5>
+                <h5>Bagni: {{ $apartment->bathrooms }}</h5>
+            </div>
+        </div>
+    </div>
+@endsection

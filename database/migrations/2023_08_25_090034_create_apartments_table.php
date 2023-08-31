@@ -17,10 +17,10 @@ return new class extends Migration
             // definire la colonna come chiave esterna
             $table->foreign('user_id')->references('id')->on('users');
 
-            $table->string('title', 100);
-            $table->string('slug', 100)->unique();
+            $table->string('title');
+            $table->string('slug')->unique();
             $table->text('description');
-            $table->string('street')->nullable();
+            $table->string('street');
             $table->decimal('latitude', 15, 8)->nullable();
             $table->decimal('longitude', 15, 8)->nullable();
             $table->integer('size');
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->tinyInteger('beds');
             $table->tinyInteger('bathrooms');
             $table->boolean('visibility')->nullable();
-            $table->string('cover', 255)->nullable();
+            $table->string('cover');
 
             $table->timestamps();
         });
