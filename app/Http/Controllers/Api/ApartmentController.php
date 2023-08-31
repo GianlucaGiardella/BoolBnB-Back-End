@@ -11,7 +11,11 @@ class ApartmentController extends Controller
     public function index()
     {
         $apartment = Apartment::all();
-        return response()->json($apartment);
+
+        return response()->json([
+            'success'   => true,
+            'results'   => $apartment,
+        ]);
     }
 
     public function create($id)
@@ -24,10 +28,14 @@ class ApartmentController extends Controller
         //
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $apartment = Apartment::where('id', $id)->first();
-        return response()->json($apartment);
+        $apartment = Apartment::where('slug', $slug)->firstOrFail();
+
+        return response()->json([
+            'success'   => $apartment ? true : false,
+            'results'   => $apartment,
+        ]);
     }
 
     public function edit(Apartment $apartment)
