@@ -1,12 +1,13 @@
+@vite('resources/js/client-validations/register-validations.js');
 @extends('guests.layouts.base')
 
 @section('contents')
     <div class="form_background">
-        <form method="post" action="{{ route('register') }}" class="form_container">
+        <form method="post" action="{{ route('register') }}" id="register" class="form_container">
             @csrf
 
             <div class="title_container">
-                <p class="title text-gradient">Crea un Account</p>
+                <h1 class="title text-gradient">Crea un Account</h1>
             </div>
 
             @if ($errors->any())
@@ -22,16 +23,16 @@
             {{-- Name --}}
             <div class="input_container">
                 <label for="name" class="input_label">Nome</label>
-                <input type="text" class="input_field" id="name" name="name" autocomplete="name" maxlength="255"
-                    value="{{ old('name') }}">
+                <input type="text" class="input_field" id="name" name="name" value="{{ old('name') }}"
+                    autocomplete="name">
                 <div class="error"></div>
             </div>
 
             {{-- Surname --}}
             <div class="input_container">
                 <label for="name" class="input_label">Cognome</label>
-                <input type="text" class="input_field" id="surname" name="surname" autocomplete="surname"
-                    maxlength="255" value="{{ old('surname') }}">
+                <input type="text" class="input_field" id="surname" name="surname" value="{{ old('surname') }}"
+                    autocomplete="surname">
                 <div class="error"></div>
             </div>
 
@@ -56,7 +57,7 @@
                     </path>
                 </svg>
                 <input type="email" class="input_field" id="email" aria-describedby="emailHelp" name="email"
-                    placeholder="name@mail.com" value="{{ old('email') }}" autocomplete="username" required>
+                    placeholder="nome@mail.com" value="{{ old('email') }}" autocomplete="email">
                 <div class="error"></div>
             </div>
 
@@ -64,7 +65,7 @@
             <div class="input_container">
                 <label class="input_label" for="password">Password *</label>
                 <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-                    class="icon" required minlength="8">
+                    class="icon">
                     <path stroke-linecap="round" stroke-width="1.5" stroke="#141B34"
                         d="M18 11.0041C17.4166 9.91704 16.273 9.15775 14.9519 9.0993C13.477 9.03404 11.9788 9 10.329 9C8.67911 9 7.18091 9.03404 5.70604 9.0993C3.95328 9.17685 2.51295 10.4881 2.27882 12.1618C2.12602 13.2541 2 14.3734 2 15.5134C2 16.6534 2.12602 17.7727 2.27882 18.865C2.51295 20.5387 3.95328 21.8499 5.70604 21.9275C6.42013 21.9591 7.26041 21.9834 8 22">
                     </path>
@@ -75,15 +76,15 @@
                     </path>
                 </svg>
                 <input type="password" class="input_field" id="password" name="password" placeholder="Password"
-                    autocomplete="current-password" required minlength="8" maxlength="255">
+                    autocomplete="current-password">
                 <div class="error"></div>
             </div>
 
             {{-- ConfirmPassword --}}
             <div class="input_container">
                 <label class="input_label" for="password">Conferma Password *</label>
-                <svg fill="none" viewBox="0 0 24 24" height="24" width="24"
-                    xmlns="http://www.w3.org/2000/svg" class="icon">
+                <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
+                    class="icon">
                     <path stroke-linecap="round" stroke-width="1.5" stroke="#141B34"
                         d="M18 11.0041C17.4166 9.91704 16.273 9.15775 14.9519 9.0993C13.477 9.03404 11.9788 9 10.329 9C8.67911 9 7.18091 9.03404 5.70604 9.0993C3.95328 9.17685 2.51295 10.4881 2.27882 12.1618C2.12602 13.2541 2 14.3734 2 15.5134C2 16.6534 2.12602 17.7727 2.27882 18.865C2.51295 20.5387 3.95328 21.8499 5.70604 21.9275C6.42013 21.9591 7.26041 21.9834 8 22">
                     </path>
@@ -94,12 +95,12 @@
                     </path>
                 </svg>
                 <input type="password" class="input_field" id="confirmPassword" name="password_confirmation"
-                    placeholder="Password" autocomplete="new-password" required minlength="8" maxlength="255">
+                    placeholder="Password" autocomplete="new-password">
                 <div class="error"></div>
             </div>
 
             {{-- ToLogIn --}}
-            <a class="mb-1" href="{{ route('login') }}">
+            <a class="mb-3 registered" href="{{ route('login') }}">
                 Sono già registrato
             </a>
 
@@ -107,97 +108,3 @@
         </form>
     </div>
 @endsection
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        //Elementi HTML
-        const form = document.querySelector('form');
-        const name = document.querySelector('#name');
-        const surname = document.querySelector('#surname');
-        const birth_date = document.querySelector('#birth_date');
-        const email = document.querySelector('#email');
-        const password = document.querySelector('#password');
-        const confirmPassword = document.querySelector('#confirmPassword');
-
-        //Al submit attiva le validazioni
-        form.addEventListener('submit', e => {
-            if (!validateForm()) {
-                e.preventDefault();
-            }
-            // e.preventDefault();
-            // clientValidation();
-        });
-
-        //Stile e messaggio di errore sotto l'imput
-        const setError = (element, message) => {
-            const inputControl = element.parentElement;
-            const errorDisplay = inputControl.querySelector('.error');
-
-            errorDisplay.innerText = message;
-            inputControl.classList.add('error');
-            inputControl.classList.remove('success');
-        }
-
-        //Stile e messaggio di successo sotto l'imput
-        const setSuccess = element => {
-            const inputControl = element.parentElement;
-            const errorDisplay = inputControl.querySelector('.error');
-
-            errorDisplay.innerText = '';
-            inputControl.classList.add('success');
-            inputControl.classList.remove('error');
-        };
-
-        //Verifica email con regex
-        const isValidEmail = email => {
-            const re =
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
-        }
-
-        //Validazione completa dei campi
-        const validateForm = () => {
-            let isValid = true;
-
-            const emailValue = email.value.trim();
-            const passwordValue = password.value.trim();
-            const confirmPasswordValue = confirmPassword.value.trim();
-
-            setSuccess(name);
-            setSuccess(surname);
-            setSuccess(birth_date);
-
-            if (emailValue === '') {
-                setError(email, 'Email richiesta');
-                isValid = false;
-            } else if (!isValidEmail(emailValue)) {
-                setError(email, 'Email non valida');
-                isValid = false;
-            } else {
-                setSuccess(email);
-            }
-
-            if (passwordValue === '') {
-                setError(password, 'Password richiesta');
-                isValid = false;
-            } else if (passwordValue.length < 8) {
-                setError(password, 'La password deve contenere almeno 8 caratteri');
-                isValid = false;
-            } else {
-                setSuccess(password);
-            }
-
-            if (confirmPasswordValue === '') {
-                setError(confirmPassword, 'Conferma la password');
-                isValid = false;
-            } else if (confirmPasswordValue !== passwordValue) {
-                setError(confirmPassword, "Le password non corrispondono");
-                isValid = false;
-            } else {
-                setSuccess(confirmPassword);
-            }
-
-            return isValid;
-        }
-    });
-</script>

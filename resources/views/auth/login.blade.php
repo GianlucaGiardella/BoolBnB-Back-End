@@ -1,24 +1,15 @@
+@vite('resources/js/client-validations/login-validations.js')
 @extends('guests.layouts.base')
 
 @section('contents')
     <div class="form_background">
-        <form method="post" action="{{ route('login') }}" class="form_container">
+        <form method="post" action="{{ route('login') }}" id="login" class="form_container mb-0">
             @csrf
             <div class="title_container">
                 <p class="title text-gradient">Accedi al tuo Account</p>
+                <hr>
             </div>
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            {{-- Email --}}
             <div class="input_container">
                 <label class="input_label" for="email">Email</label>
                 <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
@@ -30,12 +21,10 @@
                     </path>
                 </svg>
                 <input type="email" class="input_field" id="email" aria-describedby="emailHelp" name="email"
-                    placeholder="name@mail.com" value="{{ old('email') }}" autocomplete="username" required
-                    maxlength="255">
+                    placeholder="nome@mail.com" value="{{ old('email') }}" autocomplete="email">
                 <div class="error"></div>
             </div>
 
-            {{-- Password --}}
             <div class="input_container">
                 <label class="input_label" for="password">Password</label>
                 <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
@@ -50,95 +39,20 @@
                     </path>
                 </svg>
                 <input type="password" class="input_field" id="password" name="password" placeholder="Password"
-                    autocomplete="current-password" required minlength="8" maxlength="255">
+                    autocomplete="current-password">
                 <div class="error"></div>
             </div>
 
-            {{-- Ricordami --}}
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="remember" name="remember">
                 <label class="form-check-label" for="remember">Ricordami</label>
             </div>
 
-            {{-- PasswordDimenticata --}}
-            {{-- <a class="mb-1" href="{{ route('password.request') }}">
+            <a class="mb-1" href="{{ route('password.request') }}">
                 Hai dimenticato la password?
-            </a> --}}
+            </a>
 
             <button type="submit" class="styled-btn">Accedi</button>
         </form>
     </div>
 @endsection
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        //Elementi HTML
-        const form = document.querySelector('form');
-        const email = document.querySelector('#email');
-        const password = document.querySelector('#password');
-
-        //Al submit attiva le validazioni
-        form.addEventListener('submit', e => {
-            if (!validateForm()) {
-                e.preventDefault();
-            }
-        });
-
-        //Stile e messaggio di errore sotto l'imput
-        const setError = (element, message) => {
-            const inputControl = element.parentElement;
-            const errorDisplay = inputControl.querySelector('.error');
-
-            errorDisplay.innerText = message;
-            inputControl.classList.add('error');
-            inputControl.classList.remove('success');
-        }
-
-        //Stile e messaggio di successo sotto l'imput
-        const setSuccess = element => {
-            const inputControl = element.parentElement;
-            const errorDisplay = inputControl.querySelector('.error');
-
-            errorDisplay.innerText = '';
-            inputControl.classList.add('success');
-            inputControl.classList.remove('error');
-        };
-
-        //Verifica email con regex
-        const isValidEmail = email => {
-            const re =
-                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(String(email).toLowerCase());
-        }
-
-        //Validazione completa dei campi
-        const validateForm = () => {
-            let isValid = true;
-
-            const emailValue = email.value.trim();
-            const passwordValue = password.value.trim();
-
-            if (emailValue === '') {
-                setError(email, 'Email richiesta');
-                isValid = false;
-            } else if (!isValidEmail(emailValue)) {
-                setError(email, 'Email non valida');
-                isValid = false;
-            } else {
-                setSuccess(email);
-            }
-
-            if (passwordValue === '') {
-                setError(password, 'Password richiesta');
-                isValid = false;
-            } else if (passwordValue.length < 8) {
-                setError(password, 'La password deve contenere almeno 8 caratteri');
-                isValid = false;
-            } else {
-                setSuccess(password);
-            }
-
-            return isValid;
-        }
-    });
-</script>

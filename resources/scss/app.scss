@@ -66,11 +66,13 @@ body {
     gap: 4px;
 }
 
-.input_container.success input {
+.input_container.success input,
+.input_container.success textarea {
     border-color: #09c372;
 }
 
-.input_container.error input {
+.input_container.error input,
+.input_container.error textarea {
     border-color: #ff3860;
 }
 
@@ -110,6 +112,16 @@ body {
     background: linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 2px) calc(100% - 2px) no-repeat,
         linear-gradient(35deg, #ff7210 0%, #424172 100%);
     border-radius: 3px;
+}
+
+.registered {
+    text-decoration: none;
+    color: #424172;
+}
+
+.registered:hover {
+    text-decoration: underline;
+    color: #FF7210;
 }
 
 .styled-btn {
@@ -158,10 +170,4 @@ body {
 .styled-btn:hover::after {
     width: 50%;
     right: 50%;
-}
-
-.add-apartment {
-    position: absolute;
-    top: 30px;
-    right: 20px;
 }

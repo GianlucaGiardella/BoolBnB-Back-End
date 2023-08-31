@@ -1,3 +1,5 @@
+@vite('resources/js/suggestion.js')
+@vite('resources/js/client-validations/apartment-validations.js')
 @extends('admin.layouts.base')
 
 {{-- @section('contents')
@@ -122,7 +124,7 @@
                 <hr class="rounded">
             </div>
 
-            @if ($errors->any())
+            {{-- @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -130,7 +132,7 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+            @endif --}}
 
             <form method="POST" class="d-flex flex-column gap-4 mb-0"
                 action="{{ route('admin.apartments.update', ['apartment' => $apartment]) }}" enctype="multipart/form-data"

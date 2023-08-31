@@ -1,102 +1,105 @@
 @vite('resources/js/suggestion.js')
+@vite('resources/js/client-validations/apartment-validations.js')
+
 @extends('admin.layouts.base')
+
 @section('contents')
     <div class="card mt-3 p-2">
         <div class="card-body">
             <div class="d-inline-block text-gradient">
                 <h1>Aggiungi Appartamento</h1>
-                <hr class="rounded">
+                <hr>
             </div>
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <form method="POST" class="d-flex flex-column gap-4 mb-0" action="{{ route('admin.apartments.store') }}">
+            <form method="post" action="{{ route('admin.apartments.store') }}" id="create-apartment"
+                class="d-flex flex-column gap-3 mb-0" enctype="multipart/form-data" novalidate>
                 @csrf
 
                 <div class="row row-cols-1 row-cols-md-2">
-                    <div class="d-flex flex-column gap-3 mt-0">
-                        <div class="">
+                    <div class="d-flex flex-column gap-2 mt-0">
+                        <div class="input_container">
                             <label for="title" class="form-label fs-4 fw-4">Titolo</label>
-                            <input type="text" class="form-control" id="title" name="title"
-                                value="{{ old('title') }}" required minlength="3" maxlength="255">
+                            <input type="text" class="form-control shadow-none" id="title" name="title"
+                                value="{{ old('title') }}">
+                            <div class="error"></div>
                         </div>
 
-                        <div class="">
+                        <div class="input_container">
                             <label for="country" class="form-label fs-4 fw-4">Nazione</label>
-                            <input type="text" class="form-control" id="country" name="country"
-                                value="{{ old('country') }}" maxlength="255">
+                            <input type="text" class="form-control shadow-none" id="country" name="country"
+                                value="{{ old('country') }}">
+                            <div class="error"></div>
                         </div>
 
-                        <div class="position-relative">
+                        <div class="input_container">
                             <label for="street" class="form-label fs-4 fw-4">Via</label>
-                            <input type="text" class="form-control" id="street" name="street"
-                                value="{{ old('street') }}" required minlength="3" maxlength="255">
+                            <input type="text" class="form-control shadow-none" id="street" name="street"
+                                value="{{ old('street') }}">
+                            <div class="error"></div>
                             <ul id="suggestions" class="list-group list-group-flush position-absolute z-3">
                                 <!-- Suggestions will be dynamically added here -->
                             </ul>
                         </div>
 
-                        <div class="">
+                        <div class="input_container">
                             <label for="address" class="form-label fs-4 fw-4">Civico</label>
-                            <input type="number" class="form-control" id="address" name="address"
-                                value="{{ old('address') }}" required>
+                            <input type="number" class="form-control shadow-none" id="address" name="address"
+                                value="{{ old('address') }}">
+                            <div class="error"></div>
                         </div>
                     </div>
 
-                    <div class="d-flex flex-column gap-3 mt-0">
-                        <div class="">
+                    <div class="d-flex flex-column gap-2 mt-0">
+                        <div class="input_container">
                             <label for="size" class="form-label fs-4 fw-4">Metri Quadrati</label>
-                            <input type="number" class="form-control" id="size" name="size"
-                                value="{{ old('size') }}" required min="1" max="9999">
+                            <input type="number" class="form-control shadow-none" id="size" name="size"
+                                value="{{ old('size') }}">
+                            <div class="error"></div>
                         </div>
 
-                        <div class="">
+                        <div class="input_container">
                             <label for="rooms" class="form-label fs-4 fw-4">Camere</label>
-                            <input type="number" class="form-control" id="rooms" name="rooms"
-                                value="{{ old('rooms') }}" required min="1" max="99">
+                            <input type="number" class="form-control shadow-none" id="rooms" name="rooms"
+                                value="{{ old('rooms') }}">
+                            <div class="error"></div>
                         </div>
 
-                        <div class="">
+                        <div class="input_container">
                             <label for="beds" class="form-label fs-4 fw-4">Letti</label>
-                            <input type="number" class="form-control" id="beds" name="beds"
-                                value="{{ old('beds') }}" required min="1" max="99">
+                            <input type="number" class="form-control shadow-none" id="beds" name="beds"
+                                value="{{ old('beds') }}">
+                            <div class="error"></div>
                         </div>
 
-                        <div class="">
+                        <div class="input_container">
                             <label for="bathrooms" class="form-label fs-4 fw-4">Bagni</label>
-                            <input type="number" class="form-control" id="bathrooms" name="bathrooms"
-                                value="{{ old('bathrooms') }}" required min="1" max="99">
+                            <input type="number" class="form-control shadow-none" id="bathrooms" name="bathrooms"
+                                value="{{ old('bathrooms') }}">
+                            <div class="error"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="">
+                <div class="input_container h-100">
                     <label for="description" class="form-label fs-4 fw-4">Descrizione</label>
-                    <textarea type="text" class="form-control" id="description" name="description" rows="5" required>{{ old('description') }}</textarea>
+                    <textarea type="text" class="form-control shadow-none" id="description" name="description" rows="5">{{ old('description') }}</textarea>
+                    <div class="error"></div>
                 </div>
 
-                <div class="row row-cols-1 row-cols-md-2 align-items-center g-3">
-                    <div class="">
-                        <label for="address" class="form-label fs-4 fw-4">Immagine Principale</label>
+                <div class="row row-cols-1 row-cols-md-2 align-items-center g-2">
+                    <div class="input_container w-50">
+                        <h4 class="my-2">Immagine Principale</h4>
                         <div class="upload-img-container">
-                            <input type="file" class="upload-img" id="cover" name="images[]" accept="cover/*"
-                                required multiple>
+                            <input type="file" class="upload-img" id="cover" name="cover"
+                                accept="image/png, image/jpg, image/jpeg">
                         </div>
                     </div>
 
-                    <div cla>
-                        <label for="address" class="form-label fs-4 fw-4">Altre Immagini | max: 5</label>
+                    <div class="input_container w-50">
+                        <h4 class="my-2">Altre Immagini | max: 5</h4>
                         <div class="upload-img-container">
-                            <input type="file" class="upload-img" onchange="countImages()" id="cover"
-                                name="images[]" accept="cover/*" multiple>
+                            <input type="file" class="upload-img" onchange="countImages()" id="images"
+                                name="images[]" multiple accept="image/png, image/jpg, image/jpeg">
                         </div>
                     </div>
                 </div>
@@ -307,16 +310,3 @@
         background: #FF7210;
     }
 </style>
-
-<script>
-    function countImages() {
-        var fileInput = document.getElementById('imageUpload');
-        var imageCount = fileInput.files.length;
-
-        if (imageCount > 5) {
-            alert('Puoi caricare al massimo 5 immagini.');
-            // Resettare il campo di input per rimuovere le immagini aggiuntive
-            fileInput.value = '';
-        }
-    }
-</script>
