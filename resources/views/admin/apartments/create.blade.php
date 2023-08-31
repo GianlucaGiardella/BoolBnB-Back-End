@@ -31,6 +31,7 @@
                             <ul id="suggestions-country" class="list-group list-group-flush position-absolute z-3">
                                 <!-- Suggestions will be dynamically added here -->
                             </ul>
+                            <div class="error"></div>
                         </div>
 
                         <div class="input_container">
@@ -40,6 +41,7 @@
                             <ul id="suggestions-street" class="list-group list-group-flush position-absolute z-3">
                                 <!-- Suggestions will be dynamically added here -->
                             </ul>
+                            <div class="error"></div>
                         </div>
 
                         <div class="input_container">
@@ -93,6 +95,7 @@
                         <div class="upload-img-container">
                             <input type="file" class="upload-img" id="cover" name="cover"
                                 accept="image/png, image/jpg, image/jpeg">
+                            <div class="error"></div>
                         </div>
                     </div>
 
@@ -101,6 +104,7 @@
                         <div class="upload-img-container">
                             <input type="file" class="upload-img" onchange="countImages()" id="images"
                                 name="images[]" multiple accept="image/png, image/jpg, image/jpeg">
+                            <div class="error"></div>
                         </div>
                     </div>
                 </div>
