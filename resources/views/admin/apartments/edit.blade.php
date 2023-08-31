@@ -1,5 +1,5 @@
+@vite('resources/js/suggestion.js')
 @extends('admin.layouts.base')
-
 {{-- @section('contents')
     <div class="card mt-3 p-2">
         <div class="card-body">
@@ -149,14 +149,17 @@
                         <div class="">
                             <label for="country" class="form-label fs-4 fw-4">Nazione</label>
                             <input type="text" class="form-control" id="country" name="country"
-                                value="{{ old('country', $apartment->country) }}" maxlength="255">
+                                value="{{ old('country') }}" maxlength="255">
+                                <ul id="suggestions-country" class="list-group list-group-flush position-absolute z-3">
+                                    <!-- Suggestions will be dynamically added here -->
+                                </ul>
                         </div>
 
                         <div class="position-relative">
                             <label for="street" class="form-label fs-4 fw-4">Via</label>
                             <input type="text" class="form-control" id="street" name="street"
-                                value="{{ old('street', $apartment->street) }}" required minlength="3" maxlength="255">
-                            <ul id="suggestions" class="list-group list-group-flush position-absolute z-3">
+                                value="{{ old('street') }}" required minlength="3" maxlength="255">
+                            <ul id="suggestions-street" class="list-group list-group-flush position-absolute z-3">
                                 <!-- Suggestions will be dynamically added here -->
                             </ul>
                         </div>
