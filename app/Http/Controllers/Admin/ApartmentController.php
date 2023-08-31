@@ -13,12 +13,13 @@ use Illuminate\Support\Facades\Storage;
 class ApartmentController extends Controller
 {
     private $validations = [
-        'title'                 => 'required|string|min:5|max:80',
-        'description'           => 'required|string',
+        'title'                 => 'required|string|min:3|max:255',
+        'size'                  => 'required|integer|min:1|max:9999',
         'rooms'                 => 'required|integer|min:1|max:99',
         'beds'                  => 'required|integer|min:1|max:99',
         'bathrooms'             => 'required|integer|min:1|max:99',
-        'cover'                 => 'nullable|string|max:1024',
+        'street'                => 'required|string|min:3|max:255',
+        'description'           => 'required|string',
         'services'              => 'nullable|array',
         'services.*'            => 'integer|exists:services,id',
         'sponsors'              => 'nullable|array',
@@ -79,14 +80,14 @@ class ApartmentController extends Controller
             $newApartment->user_id      = Auth::id();
             $newApartment->title        = $data['title'];
             $newApartment->slug         = Apartment::slugger($data['title']);
-            $newApartment->description  = $data['description'];
-            $newApartment->street       = $data['street'];
-            $newApartment->latitude     = $latitude;
-            $newApartment->longitude    = $longitude;
             $newApartment->size         = $data['size'];
             $newApartment->rooms        = $data['rooms'];
             $newApartment->beds         = $data['beds'];
             $newApartment->bathrooms    = $data['bathrooms'];
+            $newApartment->street       = $data['street'];
+            $newApartment->latitude     = $latitude;
+            $newApartment->longitude    = $longitude;
+            $newApartment->description  = $data['description'];
             $newApartment->visibility   = $data['visibility'];
             $newApartment->cover        = $data['cover'];
 
@@ -134,13 +135,23 @@ class ApartmentController extends Controller
             $data['visibility'] = false;
         };
 
+        // if ($data['cover']) {
+        //     $coverPath = Storage::put('uploads', $data['cover']);
 
-        
+        //     if ($apartment->cover) {
+        //         Storage::delete($apartment->cover);
+        //     }
+
+        //     $apartment->cover = $coverPath;
+        // }
+
+
+
         $street         =   urlencode($data['street']);
         $url            =   "https://api.tomtom.com/search/2/geocode/{$street}.json?key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
         $response_json  =   file_get_contents($url);
         $responseData   =   json_decode($response_json, true);
-        
+
         error_log(print_r($responseData, true));
 
         if (isset($responseData['results'][0]['position']['lat']) && isset($responseData['results'][0]['position']['lon'])) {
@@ -158,23 +169,13 @@ class ApartmentController extends Controller
             $apartment->beds         = $data['beds'];
             $apartment->bathrooms    = $data['bathrooms'];
             $apartment->visibility   = $data['visibility'];
+
+            $apartment->update();
+
+            $apartment->services()->sync(isset($data['services']) ? $data['services'] : []);
         } else {
             return back()->withInput()->withErrors(['api_error' => 'Indirizzo non trovato']);
         }
-
-        if ($data['cover']) {
-            $coverPath = Storage::put('uploads', $data['cover']);
-
-            if ($apartment->cover) {
-                Storage::delete($apartment->cover);
-            }
-
-            $apartment->cover = $coverPath;
-        }
-
-        $apartment->update();
-
-        // $apartment->services()->sync(isset($form_data['services']) ? $form_data['services'] : [] );
 
         return to_route('admin.apartments.index');
     }

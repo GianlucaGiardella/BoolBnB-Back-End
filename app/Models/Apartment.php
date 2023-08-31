@@ -23,7 +23,7 @@ class Apartment extends Model
 
     public function services()
     {
-        return $this->belongsToMany(Service::class, 'apartment_service');
+        return $this->belongsToMany(Service::class);
     }
 
     public function user()

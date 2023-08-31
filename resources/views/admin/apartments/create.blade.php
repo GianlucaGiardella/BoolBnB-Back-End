@@ -18,120 +18,129 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('admin.apartments.store') }}">
+            <form method="POST" class="d-flex flex-column gap-4 mb-0" action="{{ route('admin.apartments.store') }}">
                 @csrf
 
-                <div class="row row-cols-1 row-cols-md-2 mb-4">
-                    <div>
-                        <div class="mb-3">
+                <div class="row row-cols-1 row-cols-md-2">
+                    <div class="d-flex flex-column gap-3 mt-0">
+                        <div class="">
                             <label for="title" class="form-label fs-4 fw-4">Titolo</label>
                             <input type="text" class="form-control" id="title" name="title"
-                                value="{{ old('title') }}" required>
+                                value="{{ old('title') }}" required minlength="3" maxlength="255">
                         </div>
 
-                        <div class="mb-3">
-                            <label for="size" class="form-label fs-4 fw-4">Metri Quadri</label>
+                        <div class="">
+                            <label for="country" class="form-label fs-4 fw-4">Nazione</label>
+                            <input type="text" class="form-control" id="country" name="country"
+                                value="{{ old('country') }}" maxlength="255">
+                        </div>
+
+                        <div class="position-relative">
+                            <label for="street" class="form-label fs-4 fw-4">Via</label>
+                            <input type="text" class="form-control" id="street" name="street"
+                                value="{{ old('street') }}" required minlength="3" maxlength="255">
+                            <ul id="suggestions" class="list-group list-group-flush position-absolute z-3">
+                                <!-- Suggestions will be dynamically added here -->
+                            </ul>
+                        </div>
+
+                        <div class="">
+                            <label for="address" class="form-label fs-4 fw-4">Civico</label>
+                            <input type="number" class="form-control" id="address" name="address"
+                                value="{{ old('address') }}" required>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-column gap-3 mt-0">
+                        <div class="">
+                            <label for="size" class="form-label fs-4 fw-4">Metri Quadrati</label>
                             <input type="number" class="form-control" id="size" name="size"
-                                value="{{ old('size') }}" required>
+                                value="{{ old('size') }}" required min="1" max="99">
                         </div>
 
-                        <div class="mb-3">
+                        <div class="">
                             <label for="rooms" class="form-label fs-4 fw-4">Camere</label>
                             <input type="number" class="form-control" id="rooms" name="rooms"
-                                value="{{ old('rooms') }}" required>
+                                value="{{ old('rooms') }}" required min="1" max="99">
                         </div>
 
-                        <div class="mb-3">
+                        <div class="">
                             <label for="beds" class="form-label fs-4 fw-4">Letti</label>
                             <input type="number" class="form-control" id="beds" name="beds"
-                                value="{{ old('beds') }}" required>
+                                value="{{ old('beds') }}" required min="1" max="99">
                         </div>
 
-                        <div class="mb-3">
+                        <div class="">
                             <label for="bathrooms" class="form-label fs-4 fw-4">Bagni</label>
                             <input type="number" class="form-control" id="bathrooms" name="bathrooms"
-                                value="{{ old('bathrooms') }}" required>
+                                value="{{ old('bathrooms') }}" required min="1" max="99">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <label for="description" class="form-label fs-4 fw-4">Descrizione</label>
+                    <textarea type="text" class="form-control" id="description" name="description" rows="5" required>{{ old('description') }}</textarea>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 align-items-center g-3">
+                    <div class="">
+                        <label for="address" class="form-label fs-4 fw-4">Immagine Principale</label>
+                        <div class="upload-img-container">
+                            <input type="file" class="upload-img" id="cover" name="images[]" accept="cover/*"
+                                required multiple>
                         </div>
                     </div>
 
-                    <div>
-                        <div class="mb-3">
-                            <label for="country" class="form-label">Nazione</label>
-                            <input type="text" class="form-control" id="country" name="country"
-                                value="{{ old('country') }}">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="street" class="form-label">Via</label>
-                            <input type="text" class="form-control" id="street" name="street"
-                                value="{{ old('street') }}">
-                        </div>
-
-                        <ul id="suggestions" class="list-group list-group-flush">
-                            <!-- Suggestions will be dynamically added here -->
-                        </ul>
-
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Civico</label>
-                            <input type="number" class="form-control" id="address" name="address"
-                                value="{{ old('address') }}">
+                    <div cla>
+                        <label for="address" class="form-label fs-4 fw-4">Altre Immagini | max: 5</label>
+                        <div class="upload-img-container">
+                            <input type="file" class="upload-img" id="cover" name="images[]" accept="cover/*"
+                                required multiple>
                         </div>
                     </div>
+                </div>
 
-                    <div class="mb-4">
-                        <label for="description" class="form-label fs-4 fw-4">Descrizione</label>
-                        <textarea type="text" class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
-                    </div>
-
-                    <div class="row row-cols-1 row-cols-md-2 mb-3 align-items-center">
-                        <div class="d-flex align-items-center">
-                            <h4 class="my-2">Visibile</h4>
-                            <label class="rocker rocker-small">
-                                <input type="checkbox" name="visibility" value="1"
-                                    {{ old('visibility') ? 'checked' : '' }}>
-                                <span class="switch-left">Si</span>
-                                <span class="switch-right">No</span>
-                            </label>
-                        </div>
-
-                        <div>
-                            <div class="upload-img-container">
-                                <input type="file" class="upload-img" id="cover" name="cover" accept="cover/*"
-                                    required>
-                            </div>
+                <div class="">
+                    <h4 class="my-2">Servizi</h4>
+                    <div class="container">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
+                            @foreach ($services as $service)
+                                <div class="mb-2 form-check">
+                                    <input type="checkbox" class="form-check-input" id="service{{ $service->id }}"
+                                        name="services[]" value="{{ $service->id }}"
+                                        @if (in_array($service->id, old('services', []))) checked @endif>
+                                    <label class="form-check-label"
+                                        for="service{{ $service->id }}">{{ $service->name }}</label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
+                </div>
 
-                    <div class="mb-4">
-                        <h4 class="my-2">Servizi</h4>
-                        <div class="container">
-                            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
-                                @foreach ($services as $service)
-                                    <div class="mb-2 form-check">
-                                        <input type="checkbox" class="form-check-input" id="service{{ $service->id }}"
-                                            name="services[]" value="{{ $service->id }}"
-                                            @if (in_array($service->id, old('services', []))) checked @endif>
-                                        <label class="form-check-label"
-                                            for="service{{ $service->id }}">{{ $service->name }}</label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h4 class="my-2">Visibilità Appartamento</h4>
+                    <label class="rocker rocker-small">
+                        <input type="checkbox" name="visibility" value="1"
+                            {{ old('visibility') ? 'checked' : '' }}>
+                        <span class="switch-left">Si</span>
+                        <span class="switch-right">No</span>
+                    </label>
+                </div>
 
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="styled-btn">Aggiungi Appartamento</button>
-                    </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="styled-btn">Aggiungi Appartamento</button>
+                </div>
             </form>
         </div>
     </div>
 @endsection
 
 <style>
-    .input-group>.form-control,
-    .input-group>.form-select,
-    .input-group>.form-floating {
-        flex: 0 1 500px;
+    .list-group-item:hover {
+        cursor: pointer !important;
+        text-decoration: underline;
+        background-color: #f8f9fa;
     }
 
     /* Switch starts here */
@@ -160,7 +169,6 @@
     .rocker-small {
         font-size: 0.75em;
         /* Sizes the switch */
-        margin: 1em;
     }
 
     .rocker::before {
@@ -206,7 +214,7 @@
     .switch-right {
         right: 0.5em;
         bottom: 0;
-        background-color: #bd5757;
+        background-color: #dc3545;
         color: #fff;
     }
 
@@ -232,7 +240,7 @@
     }
 
     input:checked+.switch-left {
-        background-color: #0084d0;
+        background-color: #198754;
         color: #fff;
         bottom: 0px;
         left: 0.5em;
@@ -281,10 +289,11 @@
         border: 1px solid #dee2e6;
         padding: 8px;
         border-radius: 7px;
+        overflow: hidden;
     }
 
     .upload-img::file-selector-button {
-        margin-right: 16px;
+        margin-right: 8px;
         border: none;
         background: #424172;
         padding: 10px 20px;
@@ -298,3 +307,16 @@
         background: #FF7210;
     }
 </style>
+
+<script>
+    function countImages() {
+        var fileInput = document.getElementById('imageUpload');
+        var imageCount = fileInput.files.length;
+
+        if (imageCount > 5) {
+            alert('Puoi caricare al massimo 5 immagini.');
+            // Resettare il campo di input per rimuovere le immagini aggiuntive
+            fileInput.value = '';
+        }
+    }
+</script>

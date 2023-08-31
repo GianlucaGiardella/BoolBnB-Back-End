@@ -23,11 +23,17 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.apartments.index') }}">I Miei Appartamenti</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Messaggi Ricevuti</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                I Miei Appartamenti
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('admin.apartments.index') }}">Lista
+                                        Appartamenti</a></li>
+                                <li><a class="dropdown-item" href="{{ route('admin.apartments.create') }}">Aggiungi
+                                        Appartamento</a></li>
+                            </ul>
                         </li>
                     </ul>
                 @endauth
