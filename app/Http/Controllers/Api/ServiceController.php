@@ -10,8 +10,8 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $service = Service::all();
-        return response()->json($service);
+        $services = Service::all('id', 'name');
+        return response()->json($services);
     }
 
     public function create()
