@@ -42,7 +42,8 @@
                             {{-- <ul id="suggestions-country" class="list-group list-group-flush position-absolute z-3">
                             </ul> --}}
                             <select id="country" class="form-select" name="country">
-                                <option dafult>Seleziona Nazione</option>
+                                <option value="">
+                                    Seleziona Nazione</option>
                             </select>
                             <div class="error"></div>
                         </div>
@@ -51,7 +52,8 @@
                             <label for="street" class="form-label fs-4 fw-4">Via</label>
                             <input type="text" class="form-control" id="street" name="street"
                                 value="{{ old('street') }}">
-                            <ul id="suggestions-street" class="list-group list-group-flush position-absolute z-3">
+                            <ul data-bs-spy="scroll" id="suggestions-street"
+                                class="list-group list-group-flush position-absolute z-3" style="top: calc(100% - 15px)">
                                 <!-- Suggestions will be dynamically added here -->
                             </ul>
                             <div class="error"></div>
