@@ -1,5 +1,5 @@
 function createSuggestions(inputElement, suggestionsElement, urlTemplate) {
-    inputElement.addEventListener("input", function (event) {
+    inputElement.addEventListener("input", event => {
         let query = event.target.value;
         let url = `${urlTemplate.replace(
             "{query}",
@@ -7,8 +7,8 @@ function createSuggestions(inputElement, suggestionsElement, urlTemplate) {
         )}`;
 
         fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
+            .then(response => response.json())
+            .then(data => {
                 let suggestions = "";
 
                 if (inputElement === inputElementStreet) {
@@ -82,7 +82,7 @@ inputElementCountry.addEventListener("input", function (event) {
     console.log(countrySliced);
     let urlStreet = `https://api.tomtom.com/search/2/search/{query}.json?countryCode=${countrySliced}&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R`;
     console.log(urlStreet);
-    
+
     // Update the suggestions for street input
     if (inputElementStreet && suggestionsElementStreet) {
         createSuggestions(inputElementStreet, suggestionsElementStreet, urlStreet);

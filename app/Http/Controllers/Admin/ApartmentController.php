@@ -63,7 +63,7 @@ class ApartmentController extends Controller
 
         //geocoding 
         $country    = $data['country']; // return  "IT+-+Italian+Republic&amp;"
-        $country    = substr($country, 0, 2);// return  "IT"
+        $country    = substr($country, 0, 2); // return  "IT"
         $country    = urlencode($country);
         $street     =   urlencode($data['street']);  // via
         $address    =   $data['address']; // civico
@@ -153,10 +153,8 @@ class ApartmentController extends Controller
         //     $apartment->cover = $coverPath;
         // }
 
-
-
         $country    =   $data['country']; // return  "IT+-+Italian+Republic&amp;"
-        $country    =   substr($country, 0, 2);// return  "IT"
+        $country    =   substr($country, 0, 2); // return  "IT"
         $country    =   urlencode($country);
         $street     =   urlencode($data['street']);  // via
         $address    =   $data['address']; // civico

@@ -1,4 +1,5 @@
-@vite('resources/js/suggestion.js')
+{{-- @vite('resources/js/suggestion.js') --}}
+@vite('resources/js/suggestion-prova.js')
 @vite('resources/js/client-validations/apartment-validations.js')
 
 @extends('admin.layouts.base')
@@ -36,11 +37,13 @@
 
                         <div class="input_container">
                             <label for="country" class="form-label fs-4 fw-4">Nazione</label>
-                            <input type="text" class="form-control" id="country" name="country"
-                                value="{{ old('country') }}">
-                            <ul id="suggestions-country" class="list-group list-group-flush position-absolute z-3">
-                                <!-- Suggestions will be dynamically added here -->
-                            </ul>
+                            {{-- <input type="text" class="form-control" id="country" name="country"
+                                value="{{ old('country') }}"> --}}
+                            {{-- <ul id="suggestions-country" class="list-group list-group-flush position-absolute z-3">
+                            </ul> --}}
+                            <select id="country" class="form-select" name="country">
+                                <option dafult>Seleziona Nazione</option>
+                            </select>
                             <div class="error"></div>
                         </div>
 

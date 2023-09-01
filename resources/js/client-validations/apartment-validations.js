@@ -129,11 +129,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case cover:
-                if (!x.files[0]) {
-                    setError(x, 'Campo richiesto');
-                } else {
-                    setSuccess(x);
-                }
+                // if (!x.files[0]) {
+                //     setError(x, 'Campo richiesto');
+                // } else {
+                //     setSuccess(x);
+                // }
+
+                setSuccess(x);
+
                 break;
 
             case images:
@@ -307,12 +310,14 @@ document.addEventListener('DOMContentLoaded', () => {
             setSuccess(bathrooms);
         }
 
-        if (!coverValue) {
-            setError(cover, 'Campo richiesto');
-            isValid = false;
-        } else {
-            setSuccess(cover);
-        }
+        // if (!coverValue) {
+        //     setError(cover, 'Campo richiesto');
+        //     isValid = false;
+        // } else {
+        //     setSuccess(cover);
+        // }
+
+        setSuccess(cover);
 
         if (imagesValue.length > maxImages) {
             setError(images, `Numero massimo di Immagini: ${maxImages}`);
