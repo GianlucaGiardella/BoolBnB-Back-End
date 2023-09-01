@@ -4,10 +4,75 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('#register');
     const name = document.querySelector('#name');
     const surname = document.querySelector('#surname');
-    const birth_date = document.querySelector('#birth_date');
+    const birthDate = document.querySelector('#birth_date');
     const email = document.querySelector('#email');
     const password = document.querySelector('#password');
     const confirmPassword = document.querySelector('#confirmPassword');
+
+    const inputs = [name, surname, birthDate, email, password, confirmPassword];
+
+    inputs.forEach(x => x.addEventListener('input', () => {
+        switch (x) {
+            case name:
+                if (x.value.trim().length > 255) {
+                    setError(x, 'Massimo 255 caratteri');
+                } else {
+                    setSuccess(x);
+                }
+                break;
+
+            case surname:
+                if (x.value.trim().length > 255) {
+                    setError(x, 'Massimo 255 caratteri');
+                } else {
+                    setSuccess(x);
+                }
+                break;
+
+            case birthDate:
+                if (x.value) {
+                    setSuccess(x);
+                }
+                break;
+
+            case email:
+                if (x.value.trim() === '') {
+                    setError(x, 'Email richiesta');
+                } else if (x.value.trim().length < 3) {
+                    setError(x, 'Minino 8 caratteri');
+                } else if (x.value.trim().length > 255) {
+                    setError(x, 'Massimo 255 caratteri');
+                } else if (!validateEmail(x.value.trim())) {
+                    setError(x, 'Email non valida');
+                } else {
+                    setSuccess(x);
+                }
+                break;
+
+            case password:
+                if (x.value.trim() === '') {
+                    setError(x, 'Password richiesta');
+                } else if (x.value.trim().length < 8) {
+                    setError(x, 'Minino 8 caratteri');
+                } else if (x.value.trim().length > 255) {
+                    setError(x, 'Massimo 255 caratteri');
+                } else {
+                    setSuccess(x);
+                }
+                break;
+
+            case confirmPassword:
+                const passwordValue = password.value.trim();
+                if (x.value.trim() === '') {
+                    setError(x, 'Conferma la password');
+                } else if (x.value.trim() !== passwordValue) {
+                    setError(x, "Le password non corrispondono");
+                } else {
+                    setSuccess(x);
+                }
+                break;
+        }
+    }));
 
     //Al submit attiva le validazioni
     form.addEventListener('submit', e => {
@@ -54,13 +119,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const nameValue = name.value.trim();
         const surnameValue = surname.value.trim();
+        const birthDateValue = birthDate.value;
         const emailValue = email.value.trim();
         const passwordValue = password.value.trim();
         const confirmPasswordValue = confirmPassword.value.trim();
 
-        setSuccess(name);
-        setSuccess(surname);
-        setSuccess(birth_date);
+
+
+        if (nameValue.length > 255) {
+            setError(name, 'Massimo 255 caratteri');
+            isValid = false;
+        } else {
+            setSuccess(name);
+        }
+
+        if (surnameValue.length > 255) {
+            setError(surname, 'Massimo 255 caratteri');
+            isValid = false;
+        } else {
+            setSuccess(surname);
+        }
+
+        if (birthDateValue) {
+            setSuccess(birthDate);
+        }
 
         if (emailValue === '') {
             setError(email, 'Email richiesta');

@@ -5,6 +5,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = document.querySelector('#email');
     const password = document.querySelector('#password');
 
+    const inputs = [email, password];
+
+    inputs.forEach(x => x.addEventListener('input', () => {
+        switch (x) {
+            case email:
+                if (x.value.trim() === '') {
+                    setError(x, 'Email richiesta');
+                } else if (x.value.trim().length < 3) {
+                    setError(x, 'Minino 8 caratteri');
+                } else if (x.value.trim().length > 255) {
+                    setError(x, 'Massimo 255 caratteri');
+                } else if (!validateEmail(x.value.trim())) {
+                    setError(x, 'Email non valida');
+                } else {
+                    setSuccess(x);
+                }
+                break;
+
+            case password:
+                if (x.value.trim() === '') {
+                    setError(x, 'Password richiesta');
+                } else if (x.value.trim().length < 8) {
+                    setError(x, 'Minino 8 caratteri');
+                } else if (x.value.trim().length > 255) {
+                    setError(x, 'Massimo 255 caratteri');
+                } else {
+                    setSuccess(x);
+                }
+                break;
+        }
+    }));
+
     //Al submit attiva le validazioni
     form.addEventListener('submit', e => {
         if (!validateForm()) {

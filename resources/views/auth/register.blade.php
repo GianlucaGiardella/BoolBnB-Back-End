@@ -95,7 +95,7 @@
                     </path>
                 </svg>
                 <input type="password" class="input_field" id="confirmPassword" name="password_confirmation"
-                    placeholder="Password" autocomplete="new-password">
+                    placeholder="Conferma password" autocomplete="new-password">
                 <div class="error"></div>
             </div>
 
