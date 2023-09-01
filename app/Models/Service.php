@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Service extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'name', 'slug'
+    ];
 
     public function apartments()
     {
-        return $this->belongsToMany(Apartment::class, 'apartment_service');
+        return $this->belongsToMany('App/Apartment');
     }
 }
