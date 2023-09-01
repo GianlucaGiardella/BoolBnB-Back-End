@@ -11,7 +11,17 @@
                 <hr>
             </div>
 
-            <form method="post" action="{{ route('admin.apartments.store') }}" id="create-apartment"
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form method="post" action="{{ route('admin.apartments.store') }}" id="form"
                 class="d-flex flex-column gap-3 mb-0" enctype="multipart/form-data" novalidate>
                 @csrf
 
@@ -90,20 +100,22 @@
                 </div>
 
                 <div class="row row-cols-1 row-cols-md-2 align-items-center g-2">
-                    <div class="input_container w-50">
+                    <div class="">
                         <h4 class="my-2">Immagine Principale</h4>
-                        <div class="upload-img-container">
+                        <div class="upload-img-container input_container g-0">
                             <input type="file" class="upload-img" id="cover" name="cover"
-                                accept="image/png, image/jpg, image/jpeg">
+                                accept="image/png, image/jpg, image/jpeg" value="{{ old('cover') }}">
+                            <span id="remove-cover" class="remove-image btn">&#128465;</span>
                             <div class="error"></div>
                         </div>
                     </div>
 
-                    <div class="input_container w-50">
+                    <div class="">
                         <h4 class="my-2">Altre Immagini | max: 5</h4>
-                        <div class="upload-img-container">
-                            <input type="file" class="upload-img" onchange="countImages()" id="images"
-                                name="images[]" multiple accept="image/png, image/jpg, image/jpeg">
+                        <div class="upload-img-container input_container g-0">
+                            <input type="file" class="upload-img" id="images" name="images[]"
+                                accept="image/png, image/jpg, image/jpeg" value="{{ old('images') }}" multiple>
+                            <span id="remove-images" class="remove-image btn">&#128465;</span>
                             <div class="error"></div>
                         </div>
                     </div>
@@ -143,175 +155,3 @@
         </div>
     </div>
 @endsection
-
-<style>
-    .list-group-item:hover {
-        cursor: pointer !important;
-        text-decoration: underline;
-        background-color: #f8f9fa;
-    }
-
-    /* Switch starts here */
-    .rocker {
-        display: inline-block;
-        position: relative;
-        /*
-  SIZE OF SWITCH
-  ==============
-  All sizes are in em - therefore
-  changing the font-size here
-  will change the size of the switch.
-  See .rocker-small below as example.
-  */
-        font-size: 2em;
-        font-weight: bold;
-        text-align: center;
-        text-transform: uppercase;
-        color: #888;
-        width: 7em;
-        height: 4em;
-        overflow: hidden;
-        border-bottom: 0.5em solid #eee;
-    }
-
-    .rocker-small {
-        font-size: 0.75em;
-        /* Sizes the switch */
-    }
-
-    .rocker::before {
-        content: "";
-        position: absolute;
-        top: 0.5em;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #999;
-        border: 0.5em solid #eee;
-        border-bottom: 0;
-    }
-
-    .rocker input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-
-    .switch-left,
-    .switch-right {
-        cursor: pointer;
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 2.5em;
-        width: 3em;
-        transition: 0.2s;
-        user-select: none;
-    }
-
-    .switch-left {
-        height: 2.4em;
-        width: 2.75em;
-        left: 0.85em;
-        bottom: 0.4em;
-        background-color: #ddd;
-        transform: rotate(15deg) skewX(15deg);
-    }
-
-    .switch-right {
-        right: 0.5em;
-        bottom: 0;
-        background-color: #dc3545;
-        color: #fff;
-    }
-
-    .switch-left::before,
-    .switch-right::before {
-        content: "";
-        position: absolute;
-        width: 0.4em;
-        height: 2.45em;
-        bottom: -0.45em;
-        background-color: #ccc;
-        transform: skewY(-65deg);
-    }
-
-    .switch-left::before {
-        left: -0.4em;
-    }
-
-    .switch-right::before {
-        right: -0.375em;
-        background-color: transparent;
-        transform: skewY(65deg);
-    }
-
-    input:checked+.switch-left {
-        background-color: #198754;
-        color: #fff;
-        bottom: 0px;
-        left: 0.5em;
-        height: 2.5em;
-        width: 3em;
-        transform: rotate(0deg) skewX(0deg);
-    }
-
-    input:checked+.switch-left::before {
-        background-color: transparent;
-        width: 3.0833em;
-    }
-
-    input:checked+.switch-left+.switch-right {
-        background-color: #ddd;
-        color: #888;
-        bottom: 0.4em;
-        right: 0.8em;
-        height: 2.4em;
-        width: 2.75em;
-        transform: rotate(-15deg) skewX(-15deg);
-    }
-
-    input:checked+.switch-left+.switch-right::before {
-        background-color: #ccc;
-    }
-
-    /* Keyboard Users */
-    input:focus+.switch-left {
-        color: #333;
-    }
-
-    input:checked:focus+.switch-left {
-        color: #fff;
-    }
-
-    input:focus+.switch-left+.switch-right {
-        color: #fff;
-    }
-
-    input:checked:focus+.switch-left+.switch-right {
-        color: #333;
-    }
-
-    .upload-img-container {
-        border: 1px solid #dee2e6;
-        padding: 8px;
-        border-radius: 7px;
-        overflow: hidden;
-    }
-
-    .upload-img::file-selector-button {
-        margin-right: 8px;
-        border: none;
-        background: #424172;
-        padding: 10px 20px;
-        border-radius: 7px;
-        color: #fff;
-        cursor: pointer;
-        transition: background .2s ease-in-out;
-    }
-
-    .upload-img::file-selector-button:hover {
-        background: #FF7210;
-    }
-</style>

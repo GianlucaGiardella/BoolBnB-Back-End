@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', e => {
         if (!validateForm()) {
             e.preventDefault();
+            window.scrollTo(0, 0);
+
+            form.addEventListener('input', () => {
+                validateForm();
+            });
         }
     });
 
