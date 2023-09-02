@@ -3,9 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //Elementi HTML
     const form = document.querySelector('#form');
     const title = document.querySelector('#title');
-    const country = document.querySelector('#country');
     const street = document.querySelector('#street');
-    const address = document.querySelector('#address');
     const size = document.querySelector('#size');
     const rooms = document.querySelector('#rooms');
     const beds = document.querySelector('#beds');
@@ -16,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const images = document.querySelector('#images');
     const removeImages = document.querySelector('#remove-images');
 
-    const inputs = [title, country, street, address, size, rooms, beds, bathrooms, description, cover, images];
+    const inputs = [title, street, size, rooms, beds, bathrooms, description, cover, images];
 
     const minText = 3;
     const maxText = 255;
@@ -27,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     inputs.forEach(x => x.addEventListener('input', () => {
         switch (x) {
-
             case title:
                 if (x.value.trim() === '') {
                     setError(x, 'Campo richiesto');
@@ -40,16 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 break;
 
-            case country:
-                if (x.value.trim() === '') {
-                    setError(x, 'Campo richiesto');
-                } else if (x.value.trim().length > maxText) {
-                    setError(x, `La Nazione non può superare i ${maxText} caratteri`);
-                } else {
-                    setSuccess(x);
-                }
-                break;
-
             case street:
                 if (x.value.trim() === '') {
                     setError(street, 'Campo richiesto');
@@ -57,16 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     setError(street, `La Via non può superare i ${maxText} caratteri`);
                 } else {
                     setSuccess(street);
-                }
-                break;
-
-            case address:
-                if (x.value === '') {
-                    setError(x, 'Numero richiesto');
-                } else if (x.value < minNumber) {
-                    setError(x, `Numero minimo per il Civico: ${minNumber}`);
-                } else {
-                    setSuccess(x);
                 }
                 break;
 
@@ -136,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 // }
 
                 setSuccess(x);
-
                 break;
 
             case images:
@@ -191,11 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let isValid = true;
 
         const titleValue = title.value.trim();
-        const countryValue = country.value.trim();
         const streetValue = street.value.trim();
         const descriptionValue = description.value.trim();
         const sizeValue = size.value;
-        const addressValue = address.value;
         const roomsValue = rooms.value;
         const bedsValue = beds.value;
         const bathroomsValue = bathrooms.value;
@@ -213,16 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
             isValid = false;
         } else {
             setSuccess(title);
-        }
-
-        if (countryValue === '') {
-            setError(country, 'Campo richiesto');
-            isValid = false;
-        } else if (countryValue.length > maxText) {
-            setError(country, `La Nazione non può superare i ${maxText} caratteri`);
-            isValid = false;
-        } else {
-            setSuccess(country);
         }
 
         if (streetValue === '') {
@@ -246,16 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
             isValid = false;
         } else {
             setSuccess(description);
-        }
-
-        if (addressValue === '') {
-            setError(address, 'Numero richiesto');
-            isValid = false;
-        } else if (addressValue < minNumber) {
-            setError(address, `Numero minimo per il Civico: ${minNumber}`);
-            isValid = false;
-        } else {
-            setSuccess(address);
         }
 
         if (sizeValue === '') {
