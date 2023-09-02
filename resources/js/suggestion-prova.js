@@ -4,26 +4,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const streetList = document.querySelector("#suggestions-street");
 
     const urlAllCountries = `https://restcountries.com/v3.1/all`;
-    let countryID;
     let arrCountries = [];
 
     fetch(urlAllCountries)
         .then(response => response.json())
         .then(data => {
             arrCountries = data;
+
+            arrCountries.sort((a, b) => {
+                const nameA = a.name.common.toLowerCase();
+                const nameB = b.name.common.toLowerCase();
+                if (nameA < nameB)
+                    return -1;
+                if (nameA > nameB)
+                    return 1;
+                return 0;
+            });
+
             arrCountries.forEach(e => {
                 const option = document.createElement("option");
 
                 option.value = e.cca2;
-                option.innerHTML = e.cca2 + " - " + e.name.common;
-
-                // option.addEventListener('click', () => {
-                //     countryID = option.value;
-                // })
+                option.innerHTML = e.name.common;
 
                 country.addEventListener('change', () => {
                     street.value = "";
-                    console.log(country.value)
                 });
 
                 country.appendChild(option);
@@ -32,27 +37,23 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => {
             console.error(error);
         });
-    console.log(country.value)
 
     street.addEventListener('input', () => {
         if (country.value !== "") {
 
             const query = street.value.trim().replace(" ", "%20");
-            const urlStreet = `https://api.tomtom.com/search/2/search/${query}.json?limit=10&countrySet=${country.value}&minFuzzyLevel=1&maxFuzzyLevel=2&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R`;
-
+            const urlStreet = `https://api.tomtom.com/search/2/search/${query}.json?limit=5&countrySet=${country.value}&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R`;
+            let arrStreets = [];
 
             fetch(urlStreet)
                 .then(response => response.json())
                 .then(data => {
-                    let arrStreets = [];
                     arrStreets = data.results;
 
                     if (arrStreets.length) {
                         streetList.style.display = 'flex';
 
                         arrStreets.forEach(x => {
-                            console.log(x.address.countryCode.toLocaleLowerCase());
-
                             const li = document.createElement("li");
                             li.className = "list-group-item";
 

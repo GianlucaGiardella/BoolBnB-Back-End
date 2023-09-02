@@ -66,17 +66,28 @@ body {
     gap: 4px;
 }
 
+.input_container_split {
+    height: fit-content;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
 .input_container.success input,
+.input_container_split.success input,
 .input_container.success textarea {
     border-color: #09c372;
 }
 
 .input_container.error input,
+.input_container_split.error input,
 .input_container.error textarea {
     border-color: #ff3860;
 }
 
-.input_container .error {
+.input_container .error,
+.input_container_split .error {
     color: #ff3860;
     text-align: end;
     font-size: 12px;
@@ -107,12 +118,6 @@ body {
     filter: drop-shadow(0px 1px 0px #efefef) drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
     transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
 }
-
-// .input_field:focus {
-//     background: linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 2px) calc(100% - 2px) no-repeat,
-//         linear-gradient(35deg, #ff7210 0%, #424172 100%);
-//     border-radius: 3px;
-// }
 
 .registered {
     text-decoration: none;
@@ -321,7 +326,7 @@ input:checked:focus+.switch-left+.switch-right {
 }
 
 .upload-img-container {
-    padding: 8px;
+    padding: 8px 0px;
     border-radius: 7px;
     overflow: hidden;
 }
@@ -351,7 +356,8 @@ input:checked:focus+.switch-left+.switch-right {
 .remove-image {
     position: absolute;
     top: 12px;
-    right: 12px;
+    right: 4px;
+    background-color: #fff !important;
 }
 
 .remove-image:hover {
