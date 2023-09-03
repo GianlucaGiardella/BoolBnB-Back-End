@@ -42,13 +42,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (country.value !== "") {
 
             const query = street.value.trim().replace(" ", "%20");
-            const urlStreet = `https://api.tomtom.com/search/2/search/${query}.json?limit=5&countrySet=${country.value}&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R`;
-            let arrStreets = [];
+            const urlStreet = `https://api.tomtom.com/search/2/search/${query}.json?limit=5&countrySet=${country.value}&language=it-IT&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R`;
 
             fetch(urlStreet)
                 .then(response => response.json())
                 .then(data => {
-                    arrStreets = data.results;
+                    let arrStreets = data.results;
 
                     if (arrStreets.length) {
                         streetList.style.display = 'flex';
@@ -62,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             window.addEventListener('click', e => {
                                 if (li.contains(e.target)) {
                                     street.value = li.textContent;
-
+                                    arrStreets = [];
                                 } else {
                                     streetList.style.display = 'none';
                                 }
@@ -72,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
                     }
 
-                    console.log(arrStreets)
+                    console.log(arrStreets);
                 })
                 .catch(error => {
                     console.error(error);

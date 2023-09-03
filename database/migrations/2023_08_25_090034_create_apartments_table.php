@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('description');
+            $table->string('country');
             $table->string('street');
             $table->decimal('latitude', 15, 8)->nullable();
             $table->decimal('longitude', 15, 8)->nullable();

@@ -15,9 +15,9 @@
                 <hr class="m-0">
             </div>
 
-            <button class="d-block styled-btn">
-                <a class="nav-link" href="{{ route('admin.apartments.create') }}">Aggiungi Appartamento</a>
-            </button>
+            <a class="nav-link" href="{{ route('admin.apartments.create') }}">
+                <button class="d-block styled-btn">Aggiungi Appartamento</button>
+            </a>
 
             <table class="table table-striped">
                 <thead>

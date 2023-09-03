@@ -14,7 +14,9 @@ class ApartmentController extends Controller
 {
     private $validations = [
         'title'                 => 'required|string|min:3|max:255',
+        'country'               => 'required|string',
         'street'                => 'required|string|max:255',
+        'civic'                 => 'required|integer',
         'size'                  => 'required|integer|min:1|max:9999',
         'rooms'                 => 'required|integer|min:1|max:99',
         'beds'                  => 'required|integer|min:1|max:99',
@@ -63,17 +65,12 @@ class ApartmentController extends Controller
         };
 
         //geocoding 
-        $street             = $data['street'];
-        $arr_street         = explode(", ", $street);
-        $first_el           = array_slice($arr_street, 0, 1);
-        $second_el          = array_slice($arr_street, 1, 1);
-        $streetValue        = array_shift($first_el);
 
-        $street_endcode     = urlencode($streetValue);
-        $address            = array_shift($second_el);
-        $country            = end($arr_street);
+        $country            = $data['country'];
+        $street_endcode     = urlencode($data['street']);
+        $civic              = $data['civic'];
 
-        $url = "https://api.tomtom.com/search/2/structuredGeocode.json?countryCode={$country}&limit=1&streetNumber={$address}&streetName={$street_endcode}&language=it-IT&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
+        $url = "https://api.tomtom.com/search/2/structuredGeocode.json?countrySet={$country}&limit=1&streetNumber={$civic}&streetName={$street_endcode}&language=it-IT&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
 
         $response_json = file_get_contents($url);
         $responseData = json_decode($response_json, true);
@@ -98,6 +95,7 @@ class ApartmentController extends Controller
             $newApartment->rooms        = $data['rooms'];
             $newApartment->beds         = $data['beds'];
             $newApartment->bathrooms    = $data['bathrooms'];
+            $newApartment->country      = $data['country'];
             $newApartment->street       = $data['street'];
             $newApartment->latitude     = $latitude;
             $newApartment->longitude    = $longitude;
@@ -156,17 +154,11 @@ class ApartmentController extends Controller
         //     $apartment->cover = $coverPath;
         // }
 
-        $street             = $data['street'];
-        $arr_street         = explode(", ", $street);
-        $first_el           = array_slice($arr_street, 0, 1);
-        $second_el          = array_slice($arr_street, 1, 1);
-        $streetValue        = array_shift($first_el);
+        $country            = $data['country'];
+        $street_endcode     = urlencode($data['street']);
+        $civic              = $data['civic'];
 
-        $street_endcode     = urlencode($streetValue);
-        $address            = array_shift($second_el);
-        $country            = end($arr_street);
-
-        $url = "https://api.tomtom.com/search/2/structuredGeocode.json?countryCode={$country}&limit=1&streetNumber={$address}&streetName={$street_endcode}&language=it-IT&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
+        $url = "https://api.tomtom.com/search/2/structuredGeocode.json?countryCode={$country}&limit=1&streetNumber={$civic}&streetName={$street_endcode}&language=it-IT&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
 
         $response_json  =   file_get_contents($url);
         $responseData   =   json_decode($response_json, true);
@@ -180,6 +172,7 @@ class ApartmentController extends Controller
 
             $apartment->title        = $data['title'];
             $apartment->description  = $data['description'];
+            $apartment->country      = $country;
             $apartment->street       = $data['street'];
             $apartment->latitude     = $latitude;
             $apartment->longitude    = $longitude;
