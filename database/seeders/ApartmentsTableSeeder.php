@@ -25,6 +25,7 @@ class ApartmentsTableSeeder extends Seeder
                 'title'         => Str::ucfirst($title),
                 'slug'          => $slug,
                 'description'   => $config_apartment['description'],
+                'country'       => $config_apartment['country'],
                 'street'        => $config_apartment['street'],
                 'longitude'     => $config_apartment['longitude'],
                 'latitude'      => $config_apartment['latitude'],

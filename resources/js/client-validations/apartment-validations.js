@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     //Elementi HTML
     const form = document.querySelector('#form');
     const title = document.querySelector('#title');
+    const country = document.querySelector('#country');
     const street = document.querySelector('#street');
+    const civic = document.querySelector('#civic');
     const size = document.querySelector('#size');
     const rooms = document.querySelector('#rooms');
     const beds = document.querySelector('#beds');
@@ -14,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const images = document.querySelector('#images');
     const removeImages = document.querySelector('#remove-images');
 
-    const inputs = [title, street, size, rooms, beds, bathrooms, description, cover, images];
+    const inputs = [title, country, street, civic, size, rooms, beds, bathrooms, description, cover, images];
 
     const minText = 3;
     const maxText = 255;
@@ -37,13 +39,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 break;
 
+            case country:
+                if (x.value.trim() === '') {
+                    setError(x, 'Campo richiesto');
+                } else {
+                    setSuccess(x);
+                }
+                break;
+
             case street:
                 if (x.value.trim() === '') {
-                    setError(street, 'Campo richiesto');
+                    setError(x, 'Campo richiesto');
                 } else if (x.value.trim().length > maxText) {
-                    setError(street, `La Via non può superare i ${maxText} caratteri`);
+                    setError(x, `La Via non può superare i ${maxText} caratteri`);
                 } else {
-                    setSuccess(street);
+                    setSuccess(x);
+                }
+                break;
+
+            case civic:
+                if (x.value === '') {
+                    setError(x, 'Numero richiesto');
+                } else {
+                    setSuccess(x);
                 }
                 break;
 
@@ -167,7 +185,9 @@ document.addEventListener('DOMContentLoaded', () => {
         let isValid = true;
 
         const titleValue = title.value.trim();
+        const countryValue = country.value.trim();
         const streetValue = street.value.trim();
+        const civicValue = civic.value;
         const descriptionValue = description.value.trim();
         const sizeValue = size.value;
         const roomsValue = rooms.value;
@@ -180,13 +200,20 @@ document.addEventListener('DOMContentLoaded', () => {
             setError(title, 'Campo richiesto');
             isValid = false;
         } else if (titleValue.length < minText) {
-            setError(title, `Il Titolo deve contenere almeno ${minText} caratteri`);
+            setError(title, `Richiesti almeno ${minText} caratteri`);
             isValid = false;
         } else if (titleValue.length > maxText) {
-            setError(title, `Il Titolo non può superare i ${maxText} caratteri`);
+            setError(title, `Massimo ${maxText} caratteri`);
             isValid = false;
         } else {
             setSuccess(title);
+        }
+
+        if (countryValue === '') {
+            setError(country, 'Campo richiesto');
+            isValid = false;
+        } else {
+            setSuccess(country);
         }
 
         if (streetValue === '') {
@@ -196,17 +223,27 @@ document.addEventListener('DOMContentLoaded', () => {
             setError(street, `La Via deve contenere almeno ${minText} caratteri`);
             isValid = false;
         } else if (streetValue.length > maxText) {
-            setError(street, `La Via non può superare i ${maxText} caratteri`);
+            setError(street, `Massimo ${maxText} caratteri`);
             isValid = false;
         } else {
             setSuccess(street);
+        }
+
+        if (roomsValue === '') {
+            setError(rooms, 'Numero richiesto');
+            isValid = false;
+        } else if (roomsValue < minNumber) {
+            setError(rooms, `Numero minimo: ${minNumber}`);
+            isValid = false;
+        } else {
+            setSuccess(rooms);
         }
 
         if (descriptionValue === '') {
             setError(description, 'Campo richiesto');
             isValid = false;
         } else if (descriptionValue.length < minText) {
-            setError(description, `La Descrizione deve contenere almeno ${minText} caratteri`);
+            setError(description, `Richiesti almeno ${minText} caratteri`);
             isValid = false;
         } else {
             setSuccess(description);
@@ -216,10 +253,10 @@ document.addEventListener('DOMContentLoaded', () => {
             setError(size, 'Numero richiesto');
             isValid = false;
         } else if (sizeValue < minNumber) {
-            setError(size, `Numero minimo di Metri quadrati: ${minNumber}`);
+            setError(size, `Numero minimo: ${minNumber}`);
             isValid = false;
         } else if (sizeValue > maxSize) {
-            setError(size, `Numero massimo di Metri quadrati: ${maxSize}`);
+            setError(size, `Numero massimo: ${maxSize}`);
             isValid = false;
         } else {
             setSuccess(size);
@@ -229,10 +266,10 @@ document.addEventListener('DOMContentLoaded', () => {
             setError(rooms, 'Numero richiesto');
             isValid = false;
         } else if (roomsValue < minNumber) {
-            setError(rooms, `Numero minimo di Camere: ${minNumber}`);
+            setError(rooms, `Numero minimo: ${minNumber}`);
             isValid = false;
         } else if (roomsValue > maxNumber) {
-            setError(rooms, `Numero massimo di Camere: ${maxNumber}`);
+            setError(rooms, `Numero massimo: ${maxNumber}`);
             isValid = false;
         } else {
             setSuccess(rooms);
@@ -242,10 +279,10 @@ document.addEventListener('DOMContentLoaded', () => {
             setError(beds, 'Numero richiesto');
             isValid = false;
         } else if (bedsValue < minNumber) {
-            setError(beds, `Numero minimo di Letti: ${minNumber}`);
+            setError(beds, `Numero minimo: ${minNumber}`);
             isValid = false;
         } else if (bedsValue > maxNumber) {
-            setError(beds, `Numero massimo di Letti: ${maxNumber}`);
+            setError(beds, `Numero massimo: ${maxNumber}`);
             isValid = false;
         } else {
             setSuccess(beds);
@@ -255,10 +292,10 @@ document.addEventListener('DOMContentLoaded', () => {
             setError(bathrooms, 'Numero richiesto');
             isValid = false;
         } else if (bathroomsValue < minNumber) {
-            setError(bathrooms, `Numero minimo di Bagni: ${minNumber}`);
+            setError(bathrooms, `Numero minimo: ${minNumber}`);
             isValid = false;
         } else if (bathroomsValue > maxNumber) {
-            setError(bathrooms, `Numero massimo di Bagni: ${maxNumber}`);
+            setError(bathrooms, `Numero massimo: ${maxNumber}`);
             isValid = false;
         } else {
             setSuccess(bathrooms);
@@ -274,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setSuccess(cover);
 
         if (imagesValue.length > maxImages) {
-            setError(images, `Numero massimo di Immagini: ${maxImages}`);
+            setError(images, `Numero massimo: ${maxImages}`);
             isValid = false;
         } else {
             setSuccess(images);
