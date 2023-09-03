@@ -200,7 +200,7 @@
 
                 <div class="container">
                     <div class="d-flex flex-column justify-content-center align-items-center">
-                        <h4 class="my-2">Visibilitàƒ Appartamento</h4>
+                        <h4 class="my-2">Visibilità Appartamento</h4>
                         <label class="rocker rocker-small">
                             <input type="checkbox" name="visibility" value="1"
                                 {{ old('visibility') ? 'checked' : '' }}>
