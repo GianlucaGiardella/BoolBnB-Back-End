@@ -72,5 +72,17 @@
                 <h5>Bagni: {{ $apartment->bathrooms }}</h5>
             </div>
         </div>
+        @forelse ($apartment->messages as $message)
+        <div class="pb-4">
+            <a class="d-inline-block" href="{{ route('admin.apartments.show', $message->apartment->id) }}"></a>
+                <p>
+                    email: {{$message->email_sender}} >
+                </p>
+                <p class="ms_messageText">{{ $message->text_message }}</p>
+            <hr>
+        </div>
+            @empty
+                Non ci sono messaggi!
+            @endforelse    
     </div>
 @endsection
