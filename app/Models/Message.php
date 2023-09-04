@@ -8,7 +8,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Message extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'text_message', 'email_sender', 'sent_date', 'apartment_id'
+    ];
+    
+    protected $dates = ['sent_date'];
 
     public function apartment()
     {
