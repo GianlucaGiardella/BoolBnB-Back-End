@@ -25,7 +25,7 @@
                             <div class="input_container">
                                 <label for="title" class="form-label fs-4 fw-4">Titolo</label>
                                 <input type="text" class="form-control shadow-none" id="title" name="title"
-                                    value="{{ old('country', $apartment->title) }}">
+                                    value="{{ old('title', $apartment->title) }}">
                                 <div class="error"></div>
                                 @error('title')
                                     <div class="invalid-feedback">

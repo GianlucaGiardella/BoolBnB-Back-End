@@ -229,14 +229,14 @@ document.addEventListener('DOMContentLoaded', () => {
             setSuccess(street);
         }
 
-        if (roomsValue === '') {
-            setError(rooms, 'Numero richiesto');
+        if (civicValue === '') {
+            setError(civic, 'Numero richiesto');
             isValid = false;
-        } else if (roomsValue < minNumber) {
-            setError(rooms, `Numero minimo: ${minNumber}`);
+        } else if (civicValue < minNumber) {
+            setError(civic, `Numero minimo: ${minNumber}`);
             isValid = false;
         } else {
-            setSuccess(rooms);
+            setSuccess(civic);
         }
 
         if (descriptionValue === '') {

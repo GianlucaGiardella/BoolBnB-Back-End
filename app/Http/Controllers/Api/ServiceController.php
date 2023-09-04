@@ -11,7 +11,11 @@ class ServiceController extends Controller
     public function index()
     {
         $services = Service::all('id', 'name');
-        return response()->json($services);
+
+        return response()->json([
+            'success'   => $services ? true : false,
+            'results'   => $services
+        ]);
     }
 
     public function create()

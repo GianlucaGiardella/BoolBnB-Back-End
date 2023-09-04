@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg w-100 bg-white">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('guests.home') }}">
+        <a class="navbar-brand" href="http://localhost:5174">
             <img src="{{ url('/logos/multicolor-horizontal-logo.png') }}" alt="">
         </a>
 
@@ -15,7 +15,7 @@
             <ul class="navbar-nav flex-grow-1 mb-lg-0 log-btn">
                 <li class="nav-item">
                     <button class="home-link">
-                        <a href="{{ route('guests.home') }}">Home</a>
+                        <a href="http://localhost:5174">Home</a>
                     </button>
                 </li>
             </ul>
