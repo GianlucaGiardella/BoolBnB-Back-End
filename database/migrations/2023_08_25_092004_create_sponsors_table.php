@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name', 50);
-            $table->integer('price');
+            $table->string('price');
             $table->integer('duration');
             $table->text('description');
 
