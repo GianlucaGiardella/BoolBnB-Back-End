@@ -1,33 +1,34 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Message;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
 class MessageController extends Controller
 {
     public function index(Request $request)
     {
-        $user = Auth::user();
+        $user_id=Auth::user()->id;
+ 
+        $messages = [];
+        
+        $apartments = Apartment::all()->where('user_id', $user_id);
 
-        $apartment_id = $request->input('apartment_id');
+        $messagesList = Message::all();
 
-        $query = Message::query();
-
-        if ($apartment_id) {
-            $query->where('apartment_id', $apartment_id);
+        foreach ($apartments as $apartment) {
+            foreach ($messagesList as $message) {
+                if($message['apartment_id'] == $apartment['id']){
+                    array_push($messages, $message);
+                }
+            }
         }
-
-        // Order the messages by sent_at in descending order
-        $messages = $query->orderByDesc('sent_date')->get();
-
-        // Fetch apartments owned by the authenticated user
-        $apartments = Apartment::where('user_id', $user->id)->get();
-
-        return view('admin.messages.index', compact('messages', 'user', 'apartment_id', 'apartments'));
+        $messages = collect($messages)->sortBy('date')->reverse();
+        return view('admin.messages.index', compact('messages'));
     }
 
     public function create()
@@ -40,9 +41,9 @@ class MessageController extends Controller
         //
     }
 
-    public function show(Message $message)
+    public function show(Apartment $apartment)
     {
-        //
+        // 
     }
 
     public function edit(Message $message)

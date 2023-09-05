@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Message;
 use App\Models\Service;
 use App\Models\Sponsor;
 use App\Models\Apartment;
@@ -40,7 +41,10 @@ class ApartmentController extends Controller
     {
         $apartments = Apartment::with('user')->where('user_id', Auth::id())->paginate(5);
 
-        return view('admin.apartments.index', compact('apartments'));
+        // return view('admin.apartments.index', compact('apartments'));
+
+        $messages= Message::orderBy('created_at','desc')->get();
+        return view('admin.apartments.index',compact('apartments','messages'));
     }
 
     public function create()
@@ -126,10 +130,11 @@ class ApartmentController extends Controller
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         $services = Service::all();
         $sponsors = Sponsor::all();
+        $messages = Message::all();
 
         if (Auth::id() !== $apartment->user_id) abort(403);
 
-        return view('admin.apartments.edit', compact('apartment', 'services'));
+        return view('admin.apartments.edit', compact('apartment', 'services', 'messages'));
     }
 
     public function update(Request $request, $slug)
@@ -207,5 +212,11 @@ class ApartmentController extends Controller
         $apartment->delete();
 
         return to_route('admin.apartments.index')->with('delete_success', $apartment);
+    }
+
+    public function message($id)
+    {
+        $messages = Message::where('apartment_id', $id)->get();
+        return view('admin.apartments.message', compact('messages'));
     }
 }
