@@ -13,7 +13,7 @@ return new class extends Migration
 
             $table->string('email_sender', 50);
             $table->text('text_message');
-            $table->date('sent_date');
+            // $table->date('sent_date');
 
             $table->unsignedBigInteger('apartment_id');
             $table->foreign('apartment_id')->references('id')->on('apartments')->default('');
