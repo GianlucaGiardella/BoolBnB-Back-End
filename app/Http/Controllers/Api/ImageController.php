@@ -13,34 +13,4 @@ class ImageController extends Controller
         $image = Image::all();
         return response()->json($image);
     }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Image $image)
-    {
-        //
-    }
-
-    public function edit(Image $image)
-    {
-        //
-    }
-
-    public function update(Request $request, Image $image)
-    {
-        //
-    }
-
-    public function destroy(Image $image)
-    {
-        //
-    }
 }
