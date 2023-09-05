@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Sponsor;
+
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SponsorController extends Controller
 {
     public function index()
     {
-        //
+        return view('admin.sponsor.index');
     }
 
     public function create()
