@@ -22,7 +22,7 @@ class MessageController extends Controller
         }
 
         // Order the messages by sent_at in descending order
-        $messages = $query->orderByDesc('sent_at')->get();
+        $messages = $query->orderByDesc('sent_date')->get();
 
         // Fetch apartments owned by the authenticated user
         $apartments = Apartment::where('user_id', $user->id)->get();

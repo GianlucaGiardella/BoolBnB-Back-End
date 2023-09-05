@@ -15,8 +15,8 @@ class MessagesTableSeeder extends Seeder
 
             $newMessage->apartment_id = $message["apartment_id"];
             $newMessage->email_sender = $message["email_sender"];
-            $newMessage->message_text = $message["text_message"];
-            $newMessage->sent_at = $message["sent_at"];
+            $newMessage->text_message = $message["text_message"];
+            $newMessage->sent_date = $message["sent_date"];
 
             $newMessage->save();
         }

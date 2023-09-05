@@ -61,8 +61,6 @@ class ApartmentController extends Controller
             $services
         );
 
-        dd($apartments);
-
         if (count($apartments) == 0) {
             return response()->json(['apartments' => null], 200);
         }
@@ -84,21 +82,20 @@ class ApartmentController extends Controller
             ->selectRaw(
                 "( $earthRadius * acos(
             cos( radians($latitude) )
-            * cos( radians( latitude ) )
-            * cos( radians( longitude ) - radians($longitude) )
+            * cos( radians( apartments.latitude ) )
+            * cos( radians( apartments.longitude ) - radians($longitude) )
             + sin( radians($latitude) )
-            * sin( radians( latitude ) )
+            * sin( radians( apartments.latitude ) )
         )) AS distance"
-            )
-            ->whereRaw("( $earthRadius * acos(
+            )->whereRaw("( $earthRadius * acos(
             cos( radians($latitude) )
-            * cos( radians( latitude ) )
-            * cos( radians( longitude ) - radians($longitude) )
+            * cos( radians( apartments.latitude ) )
+            * cos( radians( apartments.longitude ) - radians($longitude) )
             + sin( radians($latitude) )
-            * sin( radians( latitude ) )
+            * sin( radians( apartments.latitude ) )
         )) <= ?", [$distance])
             ->orderBy('distance')
-            ->with(['user', 'services', 'images', 'messages', 'sponsors', 'views']);
+            ->with(['services', 'images', 'messages']);
 
         $apartments->where('size', '>=', $size);
         $apartments->where('rooms', '>=', $rooms);
@@ -112,4 +109,31 @@ class ApartmentController extends Controller
         }
         return $apartments->get();
     }
+
+    // public function search(Request $request)
+    // {
+    //     $apartments = Apartment::with('services')
+    //         ->when($request->input('services'), function ($query, $services) {
+    //             $query->whereHas('services', function ($query) use ($services) {
+    //                 $query->whereIn('id', $services);
+    //             }, '=', count($services));
+    //         })
+    //         ->when($request->input('size'), function ($query, $size) {
+    //             $query->where('size', '>=', $size);
+    //         })
+    //         ->when($request->input('rooms'), function ($query, $rooms) {
+    //             $query->where('rooms', '>=', $rooms);
+    //         })
+    //         ->when($request->input('beds'), function ($query, $beds) {
+    //             $query->where('beds', '>=', $beds);
+    //         })
+    //         ->when($request->input('bathroom'), function ($query, $bathrooms) {
+    //             $query->where('bathroom', '>=', $bathrooms);
+    //         })->get();
+
+    //     return response()->json([
+    //         'success'   => true,
+    //         'results'   => $apartments,
+    //     ]);
+    // }
 }
