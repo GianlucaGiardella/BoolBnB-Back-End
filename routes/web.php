@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\SponsorController;
@@ -27,6 +28,7 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/', [AdminPageController::class, 'dashboard'])->name('dashboard');
         Route::resource('apartments', ApartmentController::class);
+        Route::delete('/apartments/{apartmentId}/images/{imageId}', [ImageController::class, 'destroy'])->name('images.destroy');
     });
 
 Route::middleware('auth')

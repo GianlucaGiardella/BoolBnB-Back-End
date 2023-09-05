@@ -369,12 +369,29 @@ input:checked:focus+.switch-left+.switch-right {
 
 .remove-image {
     position: absolute;
-    top: 12px;
-    right: 4px;
-    background-color: #fff !important;
+    top: 8px;
+    right: 12px;
+    background-color: #fff;
+    opacity: 0.5;
 }
 
 .remove-image:hover {
     cursor: pointer;
-    background-color: #dee2e6 !important;
+    // background-color: #dee2e6 !important;
+    background-color: #fff;
+    opacity: 1;
+}
+
+//Image Container
+
+.container-img {
+    border-radius: 20px;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        object-position: center;
+    }
 }

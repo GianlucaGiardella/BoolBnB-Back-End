@@ -145,7 +145,7 @@
                     </div>
                 </div>
 
-                <div class="container">
+                {{-- <div class="container">
                     <div class="row row-cols-1 row-cols-md-2 align-items-center g-3">
                         <div class="">
                             <h4 class="my-2">Immagine Principale</h4>
@@ -178,6 +178,24 @@
                                 @enderror
                             </div>
                         </div>
+                    </div>
+                </div> --}}
+
+                <div class="container">
+                    <h4 class="my-2">Immagini</h4>
+                    <div class="container container-img px-0">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
+                            <div class="img-apartment position-relative">
+                                <img src="" id="images" alt="cover" class="d-block" />
+                            </div>
+                            {{-- @foreach (6 as 1) --}}
+                                <div class="img-apartment position-relative">
+                                    <img src="" id="images" alt="image" />
+                                    <button id="remove-images" class="remove-image btn">&#128465;</button>
+                                </div>
+                            {{-- @endforeach --}}
+                        </div>
+                        <div class="error"></div>
                     </div>
                 </div>
 

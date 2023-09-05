@@ -134,11 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
 
             case images:
-                if (x.files.length > maxImages) {
-                    setError(x, `Numero massimo di Immagini: ${maxImages}`);
-                } else {
-                    setSuccess(x);
-                }
+                // if (x.files.length > maxImages) {
+                //     setError(x, `Numero massimo di Immagini: ${maxImages}`);
+                // } else {
+                //     setSuccess(x);
+                // }
+                setSuccess(x);
                 break;
 
         }
