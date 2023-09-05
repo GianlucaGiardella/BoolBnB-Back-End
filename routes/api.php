@@ -31,9 +31,11 @@ Route::get('/search', [ApartmentController::class, 'search']);
 Route::get('images', [ImageController::class, 'index'])->name('api.images.index');
 
 Route::get('messages', [MessageController::class, 'index'])->name('api.messages.index');
-Route::post('/messages/store', [MessageController::class, 'store'])->name('api.messages.index');
+Route::post("/messages/store", [MessageController::class, "store"]);
 
 Route::get('services', [ServiceController::class, 'index'])->name('api.services.index');
 Route::get('sponsors', [SponsorController::class, 'index'])->name('api.sponsors.index');
-
 Route::get('views', [ViewController::class, 'index'])->name('api.views.index');
+=========
+
+>>>>>>>>> Temporary merge branch 2
