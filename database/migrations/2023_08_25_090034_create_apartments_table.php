@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('description');
-            $table->string('country');
+            $table->string('country', 3);
             $table->string('street');
-            $table->decimal('latitude', 15, 8)->nullable();
-            $table->decimal('longitude', 15, 8)->nullable();
+            $table->string('latitude', 15);
+            $table->string('longitude', 15);
             $table->integer('size');
             $table->tinyInteger('rooms');
             $table->tinyInteger('beds');
