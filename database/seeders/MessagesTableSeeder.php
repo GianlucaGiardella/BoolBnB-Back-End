@@ -11,7 +11,14 @@ class MessagesTableSeeder extends Seeder
     public function run()
     {
         foreach (config('bnb.messages') as $message) {
-            Message::create($message);
+            $newMessage = new Message();
+
+            $newMessage->apartment_id = $message["apartment_id"];
+            $newMessage->email_sender = $message["email_sender"];
+            $newMessage->message_text = $message["text_message"];
+            $newMessage->sent_at = $message["sent_at"];
+
+            $newMessage->save();
         }
     }
 }
