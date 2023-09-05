@@ -50,8 +50,8 @@
                 {{-- bottone sponsorizzazione --}}
                 <div>
                     <button class="styled-btn">
-                        <a class="nav-link" href="{{ route('admin.sponsor.index') }}">
-                            Sponsorizza</a>
+                        <a class="nav-link" href="{{ route('admin.sponsors.index') }}">
+                            Sponsorizza </a>
                     </button>
                 </div>
                 {{-- <div>
