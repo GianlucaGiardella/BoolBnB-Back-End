@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Message;
+use App\Mail\NewContact;
+use App\Models\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
@@ -46,10 +48,22 @@ class MessageController extends Controller
 
         // salvare i dati del lead nel database
         $newMessage = new Message();
-        $newMessage->email_sender         = $data["email_sender"];
-        $newMessage->text_message       = $data["text_message"];
-        $newMessage->apartment_id       = $data["apartment_id"];
+        $newMessage->email_sender       = $request->input("email_sender");
+        $newMessage->text_message       = $request->input("text_message");
+        $newMessage->apartment_id       = $request->input("apartment_id");
         $newMessage->save();
+
+
+        $apartment = Apartment::find($request->input('apartment_id'));
+        $hostEmail = $apartment->user->email;
+        $contactEmail = $request->input('email_sender');
+        $messageContent = $request->input('text_message');
+        $email = [
+            'contactEmail' => $contactEmail,
+            'messageContent' => $messageContent,
+        ];
+
+        Mail::to($hostEmail)->send(new NewContact($email));
 
         // ritornare un valore di successo al frontend
         return response()->json([

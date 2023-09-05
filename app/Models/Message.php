@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Message extends Model
 {
     protected $fillable = [
-        'text_message', 'email_sender', 'sent_date', 'apartment_id'
+        'text_message', 'email_sender', 'apartment_id'
     ];
     
     protected $dates = ['sent_date'];
