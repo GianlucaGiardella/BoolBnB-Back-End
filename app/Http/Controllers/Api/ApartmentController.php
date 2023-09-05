@@ -4,48 +4,27 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Apartment;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 
 class ApartmentController extends Controller
 {
     public function index(Request $request)
     {
-        // $apartment = Apartment::all();
-        // return response()->json([
-        //     'success'   => true,
-        //     'results'   => $apartment,
-        // ]);
+        $services = $request->input('services');
 
-        // $apartments = Apartment::with(["images", "services"])->get();
-        // return response()->json([
-        //     'success'   => true,
-        //     'results'   => $apartments,
-        // ]);
-
-        $selectedServices = $request->input('services');
-
-        if ($selectedServices) {
-            $apartments = Apartment::whereHas('services', function ($query) use ($selectedServices) {
-                $query->whereIn('id', $selectedServices);
+        if ($services) {
+            $apartments = Apartment::whereHas('services', function ($query) use ($services) {
+                $query->whereIn('id', $services);
             })->get();
         } else {
-            $apartments = Apartment::with(['user', 'services', 'images', 'sponsors'])->get();
+            $apartments = Apartment::with(['user', 'services', 'images', 'messages', 'sponsors', 'views'])->get();
         }
 
         return response()->json([
             'success'   => true,
             'results'   => $apartments,
         ]);
-    }
-
-    public function create($id)
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
     }
 
     public function show($slug)
@@ -60,18 +39,77 @@ class ApartmentController extends Controller
         ]);
     }
 
-    public function edit(Apartment $apartment)
+    public function search(Request $request): JsonResponse
     {
-        //
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
+        $distance = $request->input('distance');
+        $size = $request->input('size');
+        $rooms = $request->input('rooms');
+        $beds = $request->input('beds');
+        $bathrooms = $request->input('bathrooms');
+        $services = $request->input('services');
+
+        $apartments = $this->getApartmentsFiltered(
+            $latitude,
+            $longitude,
+            $distance,
+            $size,
+            $rooms,
+            $beds,
+            $bathrooms,
+            $services
+        );
+
+        dd($apartments);
+
+        if (count($apartments) == 0) {
+            return response()->json(['apartments' => null], 200);
+        }
+        return response()->json(['apartments' => $apartments]);
     }
 
-    public function update(Request $request, Apartment $apartment)
-    {
-        //
-    }
+    public function getApartmentsFiltered(
+        $latitude,
+        $longitude,
+        $distance,
+        $size,
+        $rooms,
+        $beds,
+        $bathrooms,
+        $services
+    ) {
+        $earthRadius = 6371;
+        $apartments = Apartment::select('apartments.*')
+            ->selectRaw(
+                "( $earthRadius * acos(
+            cos( radians($latitude) )
+            * cos( radians( latitude ) )
+            * cos( radians( longitude ) - radians($longitude) )
+            + sin( radians($latitude) )
+            * sin( radians( latitude ) )
+        )) AS distance"
+            )
+            ->whereRaw("( $earthRadius * acos(
+            cos( radians($latitude) )
+            * cos( radians( latitude ) )
+            * cos( radians( longitude ) - radians($longitude) )
+            + sin( radians($latitude) )
+            * sin( radians( latitude ) )
+        )) <= ?", [$distance])
+            ->orderBy('distance')
+            ->with(['user', 'services', 'images', 'messages', 'sponsors', 'views']);
 
-    public function destroy(Apartment $apartment)
-    {
-        //
+        $apartments->where('size', '>=', $size);
+        $apartments->where('rooms', '>=', $rooms);
+        $apartments->where('beds', '>=', $beds);
+        $apartments->where('bathrooms', '>=', $bathrooms);
+
+        if ($services) {
+            $apartments->whereHas('services', function ($query) use ($services) {
+                $query->whereIn('id', $services);
+            }, '=', count($services));
+        }
+        return $apartments->get();
     }
 }
