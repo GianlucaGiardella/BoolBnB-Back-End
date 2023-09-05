@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Guests\PageController as GuestsPageController;
@@ -26,6 +27,7 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/', [AdminPageController::class, 'dashboard'])->name('dashboard');
         Route::resource('apartments', ApartmentController::class);
+        Route::get('/sponsor', [SponsorController::class, 'index'])->name('sponsor.index');
     });
 
 Route::middleware('auth')
@@ -37,6 +39,7 @@ Route::middleware('auth')
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
         Route::get('/messages/{apartment_id?}', [MessageController::class, 'index'])->name('messages.index');
-    });
-
+       
+        
+});
 require __DIR__ . '/auth.php';
