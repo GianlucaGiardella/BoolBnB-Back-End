@@ -54,17 +54,6 @@ class MessageController extends Controller
         $newMessage->save();
 
 
-        $apartment = Apartment::find($request->input('apartment_id'));
-        $hostEmail = $apartment->user->email;
-        $contactEmail = $request->input('email_sender');
-        $messageContent = $request->input('text_message');
-        $email = [
-            'contactEmail' => $contactEmail,
-            'messageContent' => $messageContent,
-        ];
-
-        Mail::to($hostEmail)->send(new NewContact($email));
-
         // ritornare un valore di successo al frontend
         return response()->json([
             "success" => true

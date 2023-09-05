@@ -79,6 +79,7 @@
                     email: {{$message->email_sender}} >
                 </p>
                 <p class="ms_messageText">{{ $message->text_message }}</p>
+                <div>{{ $message->created_at }}</div>
             <hr>
         </div>
             @empty
