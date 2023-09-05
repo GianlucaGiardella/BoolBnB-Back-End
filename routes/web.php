@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MessageController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\ApartmentController;
@@ -28,6 +28,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [AdminPageController::class, 'dashboard'])->name('dashboard');
         Route::resource('apartments', ApartmentController::class);
         Route::get('/sponsor', [SponsorController::class, 'index'])->name('sponsor.index');
+        Route::get('/apartments/{id}/message', [ApartmentController::class, 'message'])->name('apartments.message');
     });
 
 Route::middleware('auth')
