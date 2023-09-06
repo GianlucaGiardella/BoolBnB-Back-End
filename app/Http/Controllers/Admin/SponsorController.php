@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Sponsor;
+use Braintree\Gateway;
 
+use App\Models\Sponsor;
+use App\Models\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,7 +14,19 @@ class SponsorController extends Controller
     public function index()
     {
         $sponsors = Sponsor::all();
-        return view('admin.sponsors.index', compact('sponsors'));
+        $userApartments = auth()->user()->apartments;
+        $userSponsor = auth()->user()->sponsor;
+
+        $gateway = new Gateway([
+            'environment' => config('services.braintree.environment'),
+            'merchantId' => config('services.braintree.merchant_id'),
+            'publicKey' => config('services.braintree.public_key'),
+            'privateKey' => config('services.braintree.private_key'),
+        ]);
+
+        $token = $gateway->clientToken()->generate();
+
+        return view('admin.sponsors.index', compact('sponsors', 'userApartments', 'gateway', 'token', 'userSponsor'));
     }
 
     public function create()
