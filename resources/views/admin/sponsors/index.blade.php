@@ -11,6 +11,7 @@
                     <h5 class="card-title">{{ $sponsor->name }}</h5>
                     <p class="card-text">Durata {{ $sponsor->duration }}h</p>
                     <p class="card-text">Prezzo {{ $sponsor->price }}€</p>
+
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         Compra
                     </button>
@@ -26,24 +27,37 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
+                                    
                                     <script src="https://js.braintreegateway.com/web/dropin/1.40.2/js/dropin.js"></script>
-
-                                    <div id="dropin-container"></div>
+                                    <div id="dropin-container" name="payment_method_nonce" class="payment-method-nonce"></div>
                                     <button id="submit-button" class="button button--small button--green">Purchase</button>
+                                    
                                     <script>
                                         var button = document.querySelector('#submit-button');
+
+                                        // Trova l'elemento del campo nascosto per il nonce
+                                        var nonceInput = document.querySelector('.payment-method-nonce');
 
                                         braintree.dropin.create({
                                             authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
                                             selector: '#dropin-container'
                                         }, function(err, instance) {
-                                            button.addEventListener('click', function() {
-                                                instance.requestPaymentMethod(function(err, payload) {
-                                                    // Submit payload.nonce to your server
-                                                });
-                                            })
+                                            // button.addEventListener('click', function() {
+                                            //     instance.requestPaymentMethod(function(err, payload) {
+                                            //         if (!err) {
+                                            //             // Imposta il nonce del pagamento nel campo nascosto
+                                            //             nonceInput.value = payload.nonce;
+                                            //             // Invia il form al controller
+                                            //             document.querySelector('form').submit();
+                                            //         } else {
+                                            //             // Gestisci l'errore, ad esempio mostrando un messaggio all'utente
+                                            //             console.error(err);
+                                            //         }
+                                            //     });
+                                            // });
                                         });
                                     </script>
+                                    
                                 </div>
                             </div>
                         </div>
