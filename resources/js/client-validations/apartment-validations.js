@@ -88,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const minNumber = 1;
     const maxNumber = 99;
     const maxSize = 9999;
-    const maxImages = 5;
 
     inputs.forEach(x => x.addEventListener('input', () => {
         switch (x) {
