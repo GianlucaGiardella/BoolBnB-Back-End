@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
@@ -40,8 +41,8 @@ Route::middleware('auth')
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
         Route::get('/messages/{apartment_id?}', [MessageController::class, 'index'])->name('messages.index');
-        Route::get('/sponsors', [SponsorController::class, 'index'])->name('sponsors.index');
 
-        Route::post('/checkout', [SponsorController::class, 'processPayment'])->name('sponsors.index');
+        Route::get('/sponsors', [SponsorController::class, 'index'])->name('sponsors.index');
+        Route::post('/checkout', [PaymentController::class, 'processPayment'])->name('payment.checkout');
     });
 require __DIR__ . '/auth.php';
