@@ -1,5 +1,5 @@
 @vite('resources/js/client-validations/register-validations.js');
-@extends('guests.layouts.base')
+@extends('layouts.base')
 
 @section('contents')
     <div class="form_background">
@@ -23,6 +23,14 @@
             {{-- Name --}}
             <div class="input_container">
                 <label for="name" class="input_label">Nome</label>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-user-plus icon">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                </svg>
                 <input type="text" class="input_field" id="name" name="name" value="{{ old('name') }}"
                     autocomplete="name">
                 <div class="error"></div>
@@ -31,6 +39,14 @@
             {{-- Surname --}}
             <div class="input_container">
                 <label for="name" class="input_label">Cognome</label>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-user-plus icon">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="8.5" cy="7" r="4"></circle>
+                    <line x1="20" y1="8" x2="20" y2="14"></line>
+                    <line x1="23" y1="11" x2="17" y2="11"></line>
+                </svg>
                 <input type="text" class="input_field" id="surname" name="surname" value="{{ old('surname') }}"
                     autocomplete="surname">
                 <div class="error"></div>
@@ -39,6 +55,21 @@
             {{-- DateOfBirth --}}
             <div class="input_container">
                 <label for="name" class="input_label">Data di Nascita</label>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="icon">
+                    <rect width="256" height="256" fill="none" />
+                    <line x1="128" y1="88" x2="128" y2="64" fill="none" stroke="#000"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="12" />
+                    <path d="M128,64c46.2-16,0-56,0-56S80,48,128,64Z" fill="none" stroke="#000" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="12" />
+                    <path d="M162,126a34,34,0,0,1-68,0" fill="none" stroke="#000" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="12" />
+                    <path
+                        d="M94,126a34,34,0,0,1-33.3,34c-19.1.4-34.7-15.6-34.7-34.7V112A23.9,23.9,0,0,1,50,88H206a23.9,23.9,0,0,1,24,24v13.3c0,19.1-15.6,35.1-34.7,34.7A34,34,0,0,1,162,126"
+                        fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="12" />
+                    <path d="M216,153.3V208a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V153.3" fill="none" stroke="#000"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="12" />
+                </svg>
                 <input type="date" class="input_field" id="birth_date" name="birth_date" autocomplete="birth_date"
                     min="1920-01-01" max="<?= date('Y-m-d', strtotime('-18 year')) ?>">
                 <div class="error">
@@ -48,8 +79,8 @@
             {{-- Email --}}
             <div class="input_container">
                 <label class="input_label" for="email">Email *</label>
-                <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-                    class="icon" required>
+                <svg fill="none" viewBox="0 0 24 24" height="24" width="24"
+                    xmlns="http://www.w3.org/2000/svg" class="icon" required>
                     <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" stroke="#141B34"
                         d="M7 8.5L9.94202 10.2394C11.6572 11.2535 12.3428 11.2535 14.058 10.2394L17 8.5"></path>
                     <path stroke-linejoin="round" stroke-width="1.5" stroke="#141B34"
@@ -64,8 +95,8 @@
             {{-- Password --}}
             <div class="input_container">
                 <label class="input_label" for="password">Password *</label>
-                <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-                    class="icon">
+                <svg fill="none" viewBox="0 0 24 24" height="24" width="24"
+                    xmlns="http://www.w3.org/2000/svg" class="icon">
                     <path stroke-linecap="round" stroke-width="1.5" stroke="#141B34"
                         d="M18 11.0041C17.4166 9.91704 16.273 9.15775 14.9519 9.0993C13.477 9.03404 11.9788 9 10.329 9C8.67911 9 7.18091 9.03404 5.70604 9.0993C3.95328 9.17685 2.51295 10.4881 2.27882 12.1618C2.12602 13.2541 2 14.3734 2 15.5134C2 16.6534 2.12602 17.7727 2.27882 18.865C2.51295 20.5387 3.95328 21.8499 5.70604 21.9275C6.42013 21.9591 7.26041 21.9834 8 22">
                     </path>
@@ -83,8 +114,8 @@
             {{-- ConfirmPassword --}}
             <div class="input_container">
                 <label class="input_label" for="password">Conferma Password *</label>
-                <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"
-                    class="icon">
+                <svg fill="none" viewBox="0 0 24 24" height="24" width="24"
+                    xmlns="http://www.w3.org/2000/svg" class="icon">
                     <path stroke-linecap="round" stroke-width="1.5" stroke="#141B34"
                         d="M18 11.0041C17.4166 9.91704 16.273 9.15775 14.9519 9.0993C13.477 9.03404 11.9788 9 10.329 9C8.67911 9 7.18091 9.03404 5.70604 9.0993C3.95328 9.17685 2.51295 10.4881 2.27882 12.1618C2.12602 13.2541 2 14.3734 2 15.5134C2 16.6534 2.12602 17.7727 2.27882 18.865C2.51295 20.5387 3.95328 21.8499 5.70604 21.9275C6.42013 21.9591 7.26041 21.9834 8 22">
                     </path>

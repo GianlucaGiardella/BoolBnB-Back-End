@@ -51,11 +51,6 @@
                                     {{ $user->email }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
-                                    {{-- <div>
-                                        <a class="dropdown-item" href="{{ route('admin.profile.edit') }}">Edit
-                                            Profile</a>
-                                    </div> --}}
-
                                     <div>
                                         <form action="{{ route('logout') }}" method="post" class="dropdown-item exit mb-0">
                                             @csrf

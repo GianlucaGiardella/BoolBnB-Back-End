@@ -1,9 +1,7 @@
-{{-- @vite('resources/js/suggestion.js') --}}
-{{-- @vite('resources/js/suggestion-prova.js') --}}
 @vite('resources/js/autocomplete.js')
 @vite('resources/js/client-validations/apartment-validations.js')
 
-@extends('admin.layouts.base')
+@extends('layouts.base')
 
 @section('contents')
     <div class="card mt-0">

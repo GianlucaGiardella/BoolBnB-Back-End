@@ -1,4 +1,4 @@
-@extends('admin.layouts.base')
+@extends('layouts.base')
 
 @section('contents')
     {{-- <table class="table table-striped">
