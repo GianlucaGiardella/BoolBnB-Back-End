@@ -28,7 +28,7 @@ class MessageController extends Controller
             }
         }
         $messages = collect($messages)->sortBy('date')->reverse();
-        return view('admin.messages.index', compact('messages'));
+        return view('admin.messages.index', compact('messages', 'apartments'));
     }
 
     public function create()
