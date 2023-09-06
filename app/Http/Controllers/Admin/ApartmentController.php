@@ -114,7 +114,14 @@ class ApartmentController extends Controller
                 $newApartment->cover = $coverPath;
             }
 
+            // Create apartment
             $newApartment->save();
+
+            // Services
+            if ($data['services']) {
+                $services = array_values($data['services']);
+                $newApartment->services()->sync($services);
+            }
 
             // Images
             for ($i = 0; $i < 5; $i++) {
@@ -157,8 +164,6 @@ class ApartmentController extends Controller
         $sponsors = Sponsor::all();
         $messages = Message::all();
 
-        if (Auth::id() !== $apartment->user_id) abort(403);
-
         return view('admin.apartments.edit', compact('apartment', 'services', 'messages'));
     }
 
@@ -173,6 +178,13 @@ class ApartmentController extends Controller
 
         // Get all requests
         $data = $request->all();
+
+        // Services
+        if ($data['services']) {
+            $services = array_values($data['services']);
+
+            $apartment->services()->sync($services);
+        }
 
         // Set visibility
         if (isset($request->visibility)) {

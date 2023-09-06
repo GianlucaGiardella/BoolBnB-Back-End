@@ -2,19 +2,19 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // HTML Elements
-    const country = document.getElementById("country");
-    let oldCountry = document.getElementById('old_country').value;
-    const street = document.getElementById('street');
-    const streetList = document.getElementById('suggestions-street');
-    const civic = document.getElementById('civic');
+    const country = document.querySelector("#country");
+    let oldCountry = document.querySelector('#old_country').value;
+    const street = document.querySelector('#street');
+    const streetList = document.querySelector('#suggestions-street');
+    const zip = document.querySelector('#zip');
 
-    // Countrie API
+    // Countries API
     const urlAllCountries = `https://restcountries.com/v3.1/all`;
 
-    // Array of countries
+    // Countries Array
     let arrCountries = [];
 
-    // Array of suggestions
+    // Suggestions Array
     let arrSuggestions = [];
 
     country.addEventListener('input', () => {
@@ -27,13 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     street.addEventListener('input', () => {
         if (street.value !== '') {
-            civic.removeAttribute('disabled');
+            zip.removeAttribute('disabled');
         } else {
-            civic.setAttribute('disabled', 'disabled');
+            zip.setAttribute('disabled', 'disabled');
         }
     });
 
-    // Make a request to get the list of all countries
+    // Fetch request for country
     fetch(urlAllCountries)
         .then(response => {
             if (!response.ok) {
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             arrCountries.forEach(e => {
                 const option = document.createElement("option");
 
-                // Set the value and text of the option as the country code and country name
+                // Set country name & value
                 option.value = e.cca2;
                 option.text = `${e.name.common}`;
 
@@ -65,14 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     option.selected = true;
                 }
 
-                // Add the option to the country dropdown menu
+                // Dropdown option
                 country.appendChild(option);
             });
 
-            // Reset Street input field at country change
+            // Reset street & zip if country change
             country.addEventListener('change', () => {
                 street.value = "";
-                civic.value = "";
+                zip.value = "";
             });
 
         })
@@ -80,9 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Request failed:', error);
         });
 
-    // Function to create street suggestions based on user input
+    // Create suggestion on input
     if (street && streetList) {
-        // Load the result every time the user types something
+        // Responsive input
         street.addEventListener('input', () => {
 
             const query = encodeURIComponent(street.value); // Encode the query for the URL
@@ -125,23 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             streetList.appendChild(li);
                             arrSuggestions.push(li);
                         });
-
-
-                        // Add the user's input as a suggestion
-                        // if (street.value.trim() !== '') {
-                        //     let li = document.createElement('li');
-                        //     li.className = 'list-group-item';
-                        //     li.textContent = street.value;
-                        //     li.addEventListener('click', () => {
-                        //         street.value = li.textContent;
-
-                        //         // Clear all suggestions
-                        //         clearSuggestions();
-                        //     });
-                        //     streetList.appendChild(li);
-                        //     arrSuggestions.push(li);
-
-                        // }
                     })
                     .catch(error => {
                         console.error('Request failed:', error);
@@ -152,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to remove all suggestion
+    // Function clear suggestions
     function clearSuggestions() {
         while (streetList.firstChild) {
             streetList.removeChild(streetList.firstChild);

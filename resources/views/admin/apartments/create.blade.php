@@ -24,7 +24,7 @@
                             <div class="input_container">
                                 <label for="title" class="form-label fs-4 fw-4">Titolo</label>
                                 <input type="text" class="form-control shadow-none" id="title" name="title"
-                                    value="{{ old('country') }}">
+                                    value="{{ old('title') }}">
                                 <div class="error"></div>
                                 @error('title')
                                     <div class="invalid-feedback">
@@ -39,7 +39,6 @@
                                 <select id="country" class="form-select @error('country') is-invalid @enderror"
                                     name="country">
                                     <option value="">Seleziona Nazione</option>
-                                    {{-- <option value="">Seleziona Nazione</option> --}}
                                 </select>
                                 <input type="hidden" id="old_country" name="old_country" value="{{ old('country') }}">
                                 <div class="error"></div>
@@ -58,7 +57,6 @@
                                     id="street" name="street" value="{{ old('street') }}" autocomplete="off" disabled>
                                 <ul id="suggestions-street" class="list-group list-group-flush position-absolute z-3"
                                     style="top: calc(100% - 15px); left: 12px">
-                                    <!-- Suggestions will be dynamically added here -->
                                 </ul>
                                 <div class="error"></div>
                                 @error('street')
@@ -70,11 +68,11 @@
 
                             {{-- Zip --}}
                             <div class="input_container">
-                                <label for="civic" class="form-label fs-4 fw-4">Civico</label>
-                                <input type="number" class="form-control shadow-none @error('civic') is-invalid @enderror"
-                                    id="civic" name="civic" value="{{ old('civic') }}" disabled>
+                                <label for="zip" class="form-label fs-4 fw-4">Numero Civico</label>
+                                <input type="number" class="form-control shadow-none @error('zip') is-invalid @enderror"
+                                    id="zip" name="zip" value="{{ old('zip') }}" disabled>
                                 <div class="error"></div>
-                                @error('civic')
+                                @error('zip')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
