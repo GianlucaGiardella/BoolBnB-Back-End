@@ -1,5 +1,5 @@
 @vite('resources/js/client-validations/login-validations.js')
-@extends('guests.layouts.base')
+@extends('layouts.base')
 
 @section('contents')
     <div class="form_background">

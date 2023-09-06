@@ -1,7 +1,7 @@
 @vite('resources/js/suggestion.js')
 @vite('resources/js/client-validations/apartment-validations.js')
 
-@extends('admin.layouts.base')
+@extends('layouts.base')
 
 @section('contents')
     <div class="card mt-0">
@@ -149,7 +149,7 @@
                     </div>
                 </div>
 
-                <div class="container">
+                {{-- <div class="container">
                     <div class="row row-cols-1 row-cols-md-2 align-items-center g-3">
                         <div class="">
                             <h4 class="my-2">Immagine Principale</h4>
@@ -183,6 +183,64 @@
                             </div>
                         </div>
                     </div>
+                </div> --}}
+
+                <div class="container">
+                    <h4 class="my-2">Immagini</h4>
+                    <div class="container container-img px-0">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
+
+                            {{-- Cover --}}
+                            <div class="img-apartment position-relative">
+                                <label for="add-cover" class="d-block">
+                                    <img src="{{ asset('storage/' . $apartment->cover) }}" id="cover" />
+                                </label>
+                                <span id="remove-cover" class="btn remove-image">&#128465;</span>
+                                <input type="file" id="add-cover" name="cover"
+                                    accept="image/png, image/jpg, image/jpeg" class="d-none">
+                                <input type="hidden" id="old-cover" class="d-none" name="old_cover"
+                                    value="{{ $apartment->cover }}">
+                            </div>
+
+                            {{-- Images --}}
+                            @for ($i = 0; $i < 5; $i++)
+                                @if ($i < count($apartment->images))
+                                    @php
+                                        $image = $apartment->images[$i];
+                                    @endphp
+                                    <div class="img-apartment position-relative images">
+                                        <label for="add-image{{ $i }}" class="d-block">
+                                            <img src="{{ asset('storage/' . $image->img_url) }}" class="image" />
+                                        </label>
+
+                                        <input type="file" class="d-none" id="add-image{{ $i }}"
+                                            name="image{{ $i }}" accept="image/png, image/jpg, image/jpeg">
+
+                                        <input type="hidden" class="d-none old-image"
+                                            name="old_image{{ $i }}" value="{{ $image->img_url }}">
+
+                                        <span id="remove-images" class="btn remove-image">&#128465;</span>
+                                    </div>
+                                @else
+                                    <div class="img-apartment position-relative images">
+                                        <label for="add-image{{ $i }}" class="d-block">
+                                            <img src="{{ asset('storage/') }}" class="image" />
+                                        </label>
+
+                                        <input type="file" class="d-none" id="add-image{{ $i }}"
+                                            name="image{{ $i }}" accept="image/png, image/jpg, image/jpeg">
+
+                                        <input type="hidden" class="d-none old-image"
+                                            name="old_image{{ $i }}" value="">
+
+                                        <span id="remove-images" class="btn remove-image">&#128465;</span>
+                                    </div>
+                                @endif
+                            @endfor
+
+                        </div>
+                    </div>
+                    <div class="error"></div>
                 </div>
 
                 <div class="container">

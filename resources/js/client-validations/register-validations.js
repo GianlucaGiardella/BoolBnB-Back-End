@@ -124,8 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const passwordValue = password.value.trim();
         const confirmPasswordValue = confirmPassword.value.trim();
 
-
-
         if (nameValue.length > 255) {
             setError(name, 'Massimo 255 caratteri');
             isValid = false;
@@ -140,9 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setSuccess(surname);
         }
 
-        if (birthDateValue) {
-            setSuccess(birthDate);
-        }
+        setSuccess(birthDate);
 
         if (emailValue === '') {
             setError(email, 'Email richiesta');

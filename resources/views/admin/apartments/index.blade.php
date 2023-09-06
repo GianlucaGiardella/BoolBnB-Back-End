@@ -1,4 +1,4 @@
-@extends('admin.layouts.base')
+@extends('layouts.base')
 
 @section('contents')
     @if (session('delete_success'))
@@ -59,8 +59,7 @@
                                     </h1>
                                 </div>
                                 <div class="modal-footer">
-                                    <form action=""
-                                        data-template="{{ route('admin.apartments.destroy', ['apartment' => '*****']) }}"
+                                    <form data-template="{{ route('admin.apartments.destroy', ['apartment' => '*****']) }}"
                                         method="post" class="d-inline-block" id="confirm-delete">
                                         @csrf
                                         @method('delete')

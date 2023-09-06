@@ -6,6 +6,7 @@ use App\Models\Message;
 use App\Models\Service;
 use App\Models\Sponsor;
 use App\Models\Apartment;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -43,8 +44,8 @@ class ApartmentController extends Controller
 
         // return view('admin.apartments.index', compact('apartments'));
 
-        $messages= Message::orderBy('created_at','desc')->get();
-        return view('admin.apartments.index',compact('apartments','messages'));
+        $messages = Message::orderBy('created_at', 'desc')->get();
+        return view('admin.apartments.index', compact('apartments', 'messages'));
     }
 
     public function create()
@@ -69,7 +70,6 @@ class ApartmentController extends Controller
         };
 
         //geocoding 
-
         $country            = $data['country'];
         $street_endcode     = urlencode($data['street']);
         $civic              = $data['civic'];
@@ -127,7 +127,10 @@ class ApartmentController extends Controller
 
     public function edit($slug)
     {
+        //User Control
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
+        if (Auth::id() !== $apartment->user_id) abort(403);
+
         $services = Service::all();
         $sponsors = Sponsor::all();
         $messages = Message::all();
@@ -140,6 +143,7 @@ class ApartmentController extends Controller
     public function update(Request $request, $slug)
     {
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
+        if (Auth::id() !== $apartment->user_id) abort(403);
 
         $request->validate($this->validations, $this->validationMessages);
 
@@ -151,13 +155,66 @@ class ApartmentController extends Controller
             $data['visibility'] = false;
         };
 
-        // if ($data['cover']) {
-        //     $coverPath = Storage::put('img', $data['cover']);
-        //     if ($apartment->cover) {
-        //         Storage::delete($apartment->cover);
-        //     }
-        //     $apartment->cover = $coverPath;
-        // }
+        // Cover
+        if ($request->hasFile('cover')) {
+
+            $coverFile = $request->file('cover');
+            $extension = $coverFile->getClientOriginalExtension();
+            $coverName = uniqid() . ".{$extension}";
+            $coverPath = $coverFile->storeAs('img', $coverName, 'public');
+
+            if ($apartment->cover) {
+                Storage::delete($apartment->cover);
+            }
+
+            $apartment->cover = $coverPath;
+        } else if (!$request->filled('old_cover')) {
+
+            if ($apartment->cover) {
+                Storage::delete($apartment->cover);
+            }
+
+            $apartment->cover = null;
+        }
+
+        // Images
+        for ($i = 0; $i < 5; $i++) {
+            if ($request->hasFile('image' . $i)) {
+                $imageFile = $request->file('image' . $i);
+                $extension = $imageFile->getClientOriginalExtension();
+                $imageName = uniqid() . ".{$extension}";
+                $imagePath = $imageFile->storeAs('img', $imageName, 'public');
+
+                // Verifica se esiste un'immagine all'indice $i
+                $imageAtIndex = $apartment->images->get($i);
+
+                if ($imageAtIndex) {
+                    // Elimina l'immagine esistente
+                    Storage::delete($imageAtIndex->img_url);
+
+                    // Aggiorna l'URL dell'immagine
+                    $imageAtIndex->img_url = $imagePath;
+                    $imageAtIndex->save(); // Salva le modifiche all'immagine
+                } else {
+                    // Se non esiste un'immagine all'indice $i, crea una nuova immagine
+                    $apartment->images()->create([
+                        'apartment_id' => $apartment->id,
+                        'img_url' => $imagePath
+                    ]);
+                }
+            } else if (!$request->filled('old_image' . $i)) {
+                // Verifica se esiste un'immagine all'indice $i
+                $imageAtIndex = $apartment->images->get($i);
+
+                if ($imageAtIndex) {
+                    // Elimina l'immagine esistente
+                    Storage::delete($imageAtIndex->img_url);
+
+                    // Elimina l'immagine dal database
+                    $imageAtIndex->delete();
+                }
+            }
+        }
 
         $country            = $data['country'];
         $street_endcode     = urlencode($data['street']);
@@ -200,14 +257,21 @@ class ApartmentController extends Controller
     public function destroy($slug)
     {
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
-
-        // if ($apartment->cover) {
-        //     Storage::delete($apartment->cover);
-        // }
+        if (Auth::id() !== $apartment->user_id) abort(403);
 
         $apartment->services()->detach();
         $apartment->sponsors()->detach();
-        // $apartment->messages()->detach();
+        $apartment->messages()->delete();
+        $apartment->views()->delete();
+
+        if ($apartment->cover) {
+            Storage::delete($apartment->cover);
+        }
+
+        foreach ($apartment->images as $image) {
+            Storage::delete($image->img_url);
+        }
+        $apartment->images()->delete();
 
         $apartment->delete();
 

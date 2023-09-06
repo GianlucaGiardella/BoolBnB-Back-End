@@ -304,27 +304,27 @@ return [
     [
         "id" => 61,
         "apartment_id" => 13,
-        "img_url" => 'img/02.webp',
+        "img_url" => 'img/o2.webp',
     ],
     [
         "id" => 62,
         "apartment_id" => 13,
-        "img_url" => 'img/03.webp',
+        "img_url" => 'img/o3.webp',
     ],
     [
         "id" => 63,
         "apartment_id" => 13,
-        "img_url" => 'img/04.webp',
+        "img_url" => 'img/o4.webp',
     ],
     [
         "id" => 64,
         "apartment_id" => 13,
-        "img_url" => 'img/05.webp',
+        "img_url" => 'img/o5.webp',
     ],
     [
         "id" => 65,
         "apartment_id" => 13,
-        "img_url" => 'img/06.webp',
+        "img_url" => 'img/o6.webp',
     ],
     [
         "id" => 66,
