@@ -22,6 +22,7 @@
                 <div class="container">
                     <div class="row row-cols-1 row-cols-md-2">
                         <div class="d-flex flex-column gap-2 mt-0">
+                            {{-- Title --}}
                             <div class="input_container">
                                 <label for="title" class="form-label fs-4 fw-4">Titolo</label>
                                 <input type="text" class="form-control shadow-none" id="title" name="title"
@@ -34,6 +35,7 @@
                                 @enderror
                             </div>
 
+                            {{-- Country --}}
                             <div class="input_container">
                                 <label for="country" class="form-label fs-4 fw-4">Nazione</label>
                                 <select id="country" class="form-select @error('country') is-invalid @enderror"
@@ -51,6 +53,7 @@
                                 @enderror
                             </div>
 
+                            {{-- Street --}}
                             <div class="input_container">
                                 <label for="street" class="form-label fs-4 fw-4">Via</label>
                                 <input type="text"
@@ -59,7 +62,6 @@
                                     autocomplete="off">
                                 <ul id="suggestions-street" class="list-group list-group-flush position-absolute z-3"
                                     style="top: calc(100% - 15px); left: 12px">
-                                    <!-- Suggestions will be dynamically added here -->
                                 </ul>
                                 <div class="error"></div>
                                 @error('street')
@@ -69,12 +71,13 @@
                                 @enderror
                             </div>
 
+                            {{-- Zip --}}
                             <div class="input_container">
-                                <label for="civic" class="form-label fs-4 fw-4">Civico</label>
-                                <input type="number" class="form-control shadow-none @error('civic') is-invalid @enderror"
-                                    id="civic" name="civic" value="{{ old('civic', $apartment->civic) }}">
+                                <label for="zip" class="form-label fs-4 fw-4">Numero civico</label>
+                                <input type="number" class="form-control shadow-none @error('zip') is-invalid @enderror"
+                                    id="zip" name="zip" value="{{ old('zip', $apartment->zip) }}">
                                 <div class="error"></div>
-                                @error('civic')
+                                @error('zip')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -83,6 +86,7 @@
                         </div>
 
                         <div class="d-flex flex-column gap-2 mt-0">
+                            {{-- Size --}}
                             <div class="input_container">
                                 <label for="size" class="form-label fs-4 fw-4">Metri Quadrati</label>
                                 <input type="number" class="form-control shadow-none @error('size') is-invalid @enderror"
@@ -95,6 +99,7 @@
                                 @enderror
                             </div>
 
+                            {{-- Rooms --}}
                             <div class="input_container">
                                 <label for="rooms" class="form-label fs-4 fw-4">Camere</label>
                                 <input type="number" class="form-control shadow-none @error('rooms') is-invalid @enderror"
@@ -107,6 +112,7 @@
                                 @enderror
                             </div>
 
+                            {{-- Beds --}}
                             <div class="input_container">
                                 <label for="beds" class="form-label fs-4 fw-4">Letti</label>
                                 <input type="number" class="form-control shadow-none @error('beds') is-invalid @enderror"
@@ -119,6 +125,7 @@
                                 @enderror
                             </div>
 
+                            {{-- Bathrooms --}}
                             <div class="input_container">
                                 <label for="bathrooms" class="form-label fs-4 fw-4">Bagni</label>
                                 <input type="number"
@@ -135,6 +142,7 @@
                     </div>
                 </div>
 
+                {{-- Description --}}
                 <div class="container">
                     <div class="input_container h-100">
                         <label for="description" class="form-label fs-4 fw-4">Descrizione</label>
@@ -149,42 +157,7 @@
                     </div>
                 </div>
 
-                {{-- <div class="container">
-                    <div class="row row-cols-1 row-cols-md-2 align-items-center g-3">
-                        <div class="">
-                            <h4 class="my-2">Immagine Principale</h4>
-                            <div class="upload-img-container input_container">
-                                <input type="file" class="upload-img @error('cover') is-invalid @enderror"
-                                    id="cover" name="cover" accept="image/png, image/jpg, image/jpeg"
-                                    value="{{ old('cover', $apartment->cover) }}">
-                                <span id="remove-cover" class="remove-image btn">&#128465;</span>
-                                <div class="error"></div>
-                                @error('cover')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="">
-                            <h4 class="my-2">Altre Immagini | max: 5</h4>
-                            <div class="upload-img-container input_container">
-                                <input type="file" class="upload-img @error('images') is-invalid @enderror"
-                                    id="images" name="images[]" accept="image/png, image/jpg, image/jpeg"
-                                    value="{{ old('images') }}" multiple>
-                                <span id="remove-images" class="remove-image btn">&#128465;</span>
-                                <div class="error"></div>
-                                @error('images')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-
+                {{-- Images --}}
                 <div class="container">
                     <h4 class="my-2">Immagini</h4>
                     <div class="container container-img px-0">
@@ -202,7 +175,7 @@
                                     value="{{ $apartment->cover }}">
                             </div>
 
-                            {{-- Images --}}
+                            {{-- Others --}}
                             @for ($i = 0; $i < 5; $i++)
                                 @if ($i < count($apartment->images))
                                     @php
@@ -243,6 +216,7 @@
                     <div class="error"></div>
                 </div>
 
+                {{-- Services --}}
                 <div class="container">
                     <h4 class="my-2">Servizi</h4>
                     <div class="container">
@@ -260,6 +234,7 @@
                     </div>
                 </div>
 
+                {{-- Visibility --}}
                 <div class="container">
                     <div class="d-flex flex-column justify-content-center align-items-center">
                         <h4 class="my-2">Visibilità Appartamento</h4>
@@ -272,6 +247,7 @@
                     </div>
                 </div>
 
+                {{-- Submit --}}
                 <div class="container">
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="styled-btn">Modifica Appartamento</button>

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('country', 3);
             $table->string('street');
+            $table->string('zip', 12);
             $table->string('latitude', 15);
             $table->string('longitude', 15);
             $table->integer('size');

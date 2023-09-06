@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Path
     const urlStorage = "http://localhost:8000/storage";
     const noImgPath = "/img/no-img.png";
 
     // Cover
-
     const cover = document.querySelector('#cover');
     const oldCover = document.querySelector('#old-cover');
     const addCover = document.querySelector('#add-cover');
@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     //Images
-
     const images = document.querySelectorAll('.images');
 
     images.forEach((img, i) => {
@@ -70,19 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
 
-    //Elementi HTML
+    //HTML elements
     const form = document.querySelector('#form');
     const title = document.querySelector('#title');
     const country = document.querySelector('#country');
     const street = document.querySelector('#street');
-    const civic = document.querySelector('#civic');
+    const zip = document.querySelector('#zip');
     const size = document.querySelector('#size');
     const rooms = document.querySelector('#rooms');
     const beds = document.querySelector('#beds');
     const bathrooms = document.querySelector('#bathrooms');
     const description = document.querySelector('#description');
 
-    const inputs = [title, country, street, civic, size, rooms, beds, bathrooms, description];
+    const inputs = [title, country, street, zip, size, rooms, beds, bathrooms, description];
 
     const minText = 3;
     const maxText = 255;
@@ -123,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 break;
 
-            case civic:
+            case zip:
                 if (x.value === '') {
                     setError(x, 'Numero richiesto');
                 } else if (x.value < minNumber) {
@@ -190,19 +189,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     setSuccess(description);
                 }
                 break;
-
-            // case images:
-            // if (x.files.length > maxImages) {
-            //     setError(x, `Numero massimo di Immagini: ${ maxImages }`);
-            // } else {
-            //     setSuccess(x);
-            // }
-            // setSuccess(x);
-            // break;
         }
     }))
 
-    //Al submit attiva le validazioni
+    //Start full controll
     form.addEventListener('submit', e => {
         if (!validateForm()) {
             e.preventDefault();
@@ -214,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    //Stile e messaggio di errore sotto l'imput
+    // Error message & style
     const setError = (element, message) => {
         const inputControl = element.parentElement;
         const errorDisplay = inputControl.querySelector('.error');
@@ -224,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
         inputControl.classList.remove('success');
     }
 
-    //Stile e messaggio di successo sotto l'imput
+    // Success message & style
     const setSuccess = element => {
         const inputControl = element.parentElement;
         const errorDisplay = inputControl.querySelector('.error');
@@ -235,14 +225,14 @@ document.addEventListener('DOMContentLoaded', () => {
         inputControl.classList.remove('error');
     };
 
-    // Validazion
+    // Validazions
     const validateForm = () => {
         let isValid = true;
 
         const titleValue = title.value.trim();
         const countryValue = country.value.trim();
         const streetValue = street.value.trim();
-        const civicValue = civic.value;
+        const zipValue = zip.value;
         const descriptionValue = description.value.trim();
         const sizeValue = size.value;
         const roomsValue = rooms.value;
@@ -282,16 +272,18 @@ document.addEventListener('DOMContentLoaded', () => {
             setSuccess(street);
         }
 
-        if (civicValue === '') {
-            setError(civic, 'Numero richiesto');
+        // Zip
+        if (zipValue === '') {
+            setError(zip, 'Numero richiesto');
             isValid = false;
-        } else if (civicValue < minNumber) {
-            setError(civic, `Numero minimo: ${minNumber}`);
+        } else if (zipValue < minNumber) {
+            setError(zip, `Numero minimo: ${minNumber}`);
             isValid = false;
         } else {
-            setSuccess(civic);
+            setSuccess(zip);
         }
 
+        // Description
         if (descriptionValue === '') {
             setError(description, 'Campo richiesto');
             isValid = false;
@@ -302,6 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setSuccess(description);
         }
 
+        // Size
         if (sizeValue === '') {
             setError(size, 'Numero richiesto');
             isValid = false;
@@ -315,6 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setSuccess(size);
         }
 
+        // Rooms
         if (roomsValue === '') {
             setError(rooms, 'Numero richiesto');
             isValid = false;
@@ -328,6 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setSuccess(rooms);
         }
 
+        // Beds
         if (bedsValue === '') {
             setError(beds, 'Numero richiesto');
             isValid = false;
@@ -341,6 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setSuccess(beds);
         }
 
+        // Bathrooms
         if (bathroomsValue === '') {
             setError(bathrooms, 'Numero richiesto');
             isValid = false;
@@ -353,13 +349,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             setSuccess(bathrooms);
         }
-
-        // if (imagesValue.length > maxImages) {
-        //     setError(images, `Numero massimo: ${ maxImages }`);
-        //     isValid = false;
-        // } else {
-        //     setSuccess(images);
-        // }
 
         return isValid;
     }

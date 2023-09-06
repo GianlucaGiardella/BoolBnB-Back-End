@@ -27,6 +27,7 @@ class ApartmentsTableSeeder extends Seeder
                 'description'   => $config_apartment['description'],
                 'country'       => $config_apartment['country'],
                 'street'        => $config_apartment['street'],
+                'zip'           => $config_apartment['zip'],
                 'longitude'     => $config_apartment['longitude'],
                 'latitude'      => $config_apartment['latitude'],
                 'rooms'         => $config_apartment['rooms'],
