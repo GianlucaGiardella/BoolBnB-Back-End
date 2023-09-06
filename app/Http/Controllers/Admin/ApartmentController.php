@@ -280,7 +280,8 @@ class ApartmentController extends Controller
 
     public function message($id)
     {
+        $apartments = Apartment::where('id', $id)->get();
         $messages = Message::where('apartment_id', $id)->get();
-        return view('admin.apartments.message', compact('messages'));
+        return view('admin.apartments.message', compact('messages', 'apartments'));
     }
 }
