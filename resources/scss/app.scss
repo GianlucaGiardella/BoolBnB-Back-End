@@ -336,34 +336,6 @@ input:checked:focus+.switch-left+.switch-right {
     color: #333;
 }
 
-/* Image */
-
-.upload-img-container {
-    padding: 8px 0px;
-    border-radius: 7px;
-    overflow: hidden;
-}
-
-.upload-img {
-    border: 1px solid #dee2e6;
-    border-radius: 7px;
-}
-
-.upload-img::file-selector-button {
-    margin-right: 8px;
-    border: none;
-    background: #424172;
-    padding: 10px 20px;
-    border-radius: 7px;
-    color: #fff;
-    cursor: pointer;
-    transition: background .2s ease-in-out;
-}
-
-.upload-img::file-selector-button:hover {
-    background: #FF7210;
-}
-
 // Remove Image Button
 
 .remove-image {

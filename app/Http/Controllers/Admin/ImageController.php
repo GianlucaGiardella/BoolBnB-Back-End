@@ -42,24 +42,6 @@ class ImageController extends Controller
 
     public function destroy($apartmentId, $id)
     {
-        $apartment = Apartment::findOrFail($apartmentId);
-        $image = Image::findOrFail($id);
-
-        if ($apartment->images->contains($image)) {
-            $apartment->images()->detach($image->id);
-            Storage::delete($image->path);
-            $image->delete();
-
-            return redirect()->back()->with('success', 'Image removed from apartment successfully');
-        }
-
-        return redirect()->back()->with('error', 'Image is not associated with the apartment');
-
-        // $image->apartments()->detach();
-        // Storage::delete($image->path);
-
-        // $image->delete();
-
-        // return redirect()->back();
+        //
     }
 }

@@ -6,7 +6,6 @@ use App\Models\Message;
 use App\Models\Service;
 use App\Models\Sponsor;
 use App\Models\Apartment;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,11 +13,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
+    // Validation 
     private $validations = [
         'title'                 => 'required|string|min:3|max:255',
         'country'               => 'required|string',
         'street'                => 'required|string|max:255',
-        'civic'                 => 'required|integer',
+        'zip'                   => 'required|integer',
         'size'                  => 'required|integer|min:1|max:9999',
         'rooms'                 => 'required|integer|min:1|max:99',
         'beds'                  => 'required|integer|min:1|max:99',
@@ -42,14 +42,13 @@ class ApartmentController extends Controller
     {
         $apartments = Apartment::with('user')->where('user_id', Auth::id())->paginate(5);
 
-        // return view('admin.apartments.index', compact('apartments'));
-
         $messages = Message::orderBy('created_at', 'desc')->get();
         return view('admin.apartments.index', compact('apartments', 'messages'));
     }
 
     public function create()
     {
+        //Get all tables
         $apartments = Apartment::all();
         $services = Service::all();
         $sponsors = Sponsor::all();
@@ -59,22 +58,20 @@ class ApartmentController extends Controller
 
     public function store(Request $request)
     {
+
+        // Validation
         $request->validate($this->validations, $this->validationMessages);
 
+        // Get all requests
         $data = $request->all();
 
-        if (isset($request->visibility)) {
-            $data['visibility'] = true;
-        } else {
-            $data['visibility'] = false;
-        };
+        // Geocoding 
+        $country                = $data['country'];
+        $street_endcode         = urlencode($data['street']);
+        $zip                    = $data['zip'];
 
-        //geocoding 
-        $country            = $data['country'];
-        $street_endcode     = urlencode($data['street']);
-        $civic              = $data['civic'];
-
-        $url = "https://api.tomtom.com/search/2/structuredGeocode.json?countrySet={$country}&limit=1&streetNumber={$civic}&streetName={$street_endcode}&language=it-IT&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
+        // Structured Search
+        $url = "https://api.tomtom.com/search/2/structuredGeocode.json?countrySet={$country}&limit=1&streetNumber={$zip}&streetName={$street_endcode}&language=it-IT&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
 
         $response_json = file_get_contents($url);
         $responseData = json_decode($response_json, true);
@@ -82,38 +79,62 @@ class ApartmentController extends Controller
 
         if (isset($responseData['results'][0]['position']['lat']) && isset($responseData['results'][0]['position']['lon'])) {
 
+            // Set Lat & Lon
             $latitude = $responseData['results'][0]['position']['lat'];
             $longitude = $responseData['results'][0]['position']['lon'];
 
+            // New Apartment
             $newApartment               = new Apartment();
-
-            if (isset($data['cover'])) {
-                $coverPath = Storage::put('img', $data['cover']);
-                $newApartment->cover = $coverPath;
-            }
 
             $newApartment->user_id      = Auth::id();
             $newApartment->title        = $data['title'];
             $newApartment->slug         = Apartment::slugger($data['title']);
+            $newApartment->country      = $data['country'];
+            $newApartment->street       = $data['street'];
+            $newApartment->zip          = $data['zip'];
             $newApartment->size         = $data['size'];
             $newApartment->rooms        = $data['rooms'];
             $newApartment->beds         = $data['beds'];
             $newApartment->bathrooms    = $data['bathrooms'];
-            $newApartment->country      = $data['country'];
-            $newApartment->street       = $data['street'];
             $newApartment->latitude     = $latitude;
             $newApartment->longitude    = $longitude;
             $newApartment->description  = $data['description'];
             $newApartment->visibility   = $data['visibility'];
 
+            // Visibility
+            if (isset($request->visibility)) {
+                $data['visibility'] = true;
+            } else {
+                $data['visibility'] = false;
+            };
+
+            // Cover
+            if (isset($data['cover'])) {
+                $coverPath = Storage::put('img', $data['cover']);
+                $newApartment->cover = $coverPath;
+            }
+
             $newApartment->save();
+
+            // Images
+            for ($i = 0; $i < 5; $i++) {
+                if ($request->hasFile('image' . $i)) {
+                    $imageFile = $request->file('image' . $i);
+                    $extension = $imageFile->getClientOriginalExtension();
+                    $imageName = uniqid() . ".{$extension}";
+                    $imagePath = $imageFile->storeAs('img', $imageName, 'public');
+
+                    $newImage = [
+                        'apartment_id' => $newApartment->id,
+                        'img_url' => $imagePath
+                    ];
+
+                    $newApartment->images()->create($newImage);
+                }
+            }
         } else {
             return back()->withInput()->withErrors(['api_error' => 'Indirizzo non trovato']);
         }
-
-        // Porta all'index 
-        // $apartments = Apartment::with('user')->where('user_id', Auth::id())->paginate(5);
-        // return view('admin.apartments.index', compact('apartments'));
 
         return view('admin.apartments.show', ['apartment' => $newApartment]);
     }
@@ -127,10 +148,11 @@ class ApartmentController extends Controller
 
     public function edit($slug)
     {
-        //User Control
+        // User control
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         if (Auth::id() !== $apartment->user_id) abort(403);
 
+        // Get all tables
         $services = Service::all();
         $sponsors = Sponsor::all();
         $messages = Message::all();
@@ -142,13 +164,17 @@ class ApartmentController extends Controller
 
     public function update(Request $request, $slug)
     {
+        // User control
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         if (Auth::id() !== $apartment->user_id) abort(403);
 
+        // Validation
         $request->validate($this->validations, $this->validationMessages);
 
+        // Get all requests
         $data = $request->all();
 
+        // Set visibility
         if (isset($request->visibility)) {
             $data['visibility'] = true;
         } else {
@@ -180,47 +206,45 @@ class ApartmentController extends Controller
         // Images
         for ($i = 0; $i < 5; $i++) {
             if ($request->hasFile('image' . $i)) {
+
                 $imageFile = $request->file('image' . $i);
                 $extension = $imageFile->getClientOriginalExtension();
                 $imageName = uniqid() . ".{$extension}";
                 $imagePath = $imageFile->storeAs('img', $imageName, 'public');
 
-                // Verifica se esiste un'immagine all'indice $i
                 $imageAtIndex = $apartment->images->get($i);
 
                 if ($imageAtIndex) {
-                    // Elimina l'immagine esistente
+
                     Storage::delete($imageAtIndex->img_url);
 
-                    // Aggiorna l'URL dell'immagine
                     $imageAtIndex->img_url = $imagePath;
-                    $imageAtIndex->save(); // Salva le modifiche all'immagine
+                    $imageAtIndex->save();
                 } else {
-                    // Se non esiste un'immagine all'indice $i, crea una nuova immagine
+
                     $apartment->images()->create([
                         'apartment_id' => $apartment->id,
                         'img_url' => $imagePath
                     ]);
                 }
             } else if (!$request->filled('old_image' . $i)) {
-                // Verifica se esiste un'immagine all'indice $i
+
                 $imageAtIndex = $apartment->images->get($i);
 
                 if ($imageAtIndex) {
-                    // Elimina l'immagine esistente
                     Storage::delete($imageAtIndex->img_url);
-
-                    // Elimina l'immagine dal database
                     $imageAtIndex->delete();
                 }
             }
         }
 
+        // Geocoding
         $country            = $data['country'];
         $street_endcode     = urlencode($data['street']);
-        $civic              = $data['civic'];
+        $zip                = $data['zip'];
 
-        $url = "https://api.tomtom.com/search/2/structuredGeocode.json?countryCode={$country}&limit=1&streetNumber={$civic}&streetName={$street_endcode}&language=it-IT&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
+        // Structured Search
+        $url = "https://api.tomtom.com/search/2/structuredGeocode.json?countryCode={$country}&limit=1&streetNumber={$zip}&streetName={$street_endcode}&language=it-IT&key=bpAesa0y51fDXlgxGcnRbLEN2X5ghu3R";
 
         $response_json  =   file_get_contents($url);
         $responseData   =   json_decode($response_json, true);
@@ -229,13 +253,16 @@ class ApartmentController extends Controller
 
         if (isset($responseData['results'][0]['position']['lat']) && isset($responseData['results'][0]['position']['lon'])) {
 
+            // Set new lat & lon
             $latitude = $responseData['results'][0]['position']['lat'];
             $longitude = $responseData['results'][0]['position']['lon'];
 
+            // Update 
             $apartment->title        = $data['title'];
             $apartment->description  = $data['description'];
             $apartment->country      = $country;
             $apartment->street       = $data['street'];
+            $apartment->zip          = $data['zip'];
             $apartment->latitude     = $latitude;
             $apartment->longitude    = $longitude;
             $apartment->size         = $data['size'];
