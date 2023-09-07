@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PaymentController;
-use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Guests\PageController as GuestsPageController;
@@ -26,12 +25,22 @@ Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->prefix('admin')
     ->group(function () {
+        // Dashboard
         Route::get('/', [AdminPageController::class, 'dashboard'])->name('dashboard');
+
+        // Apartment resource
         Route::resource('apartments', ApartmentController::class);
-        Route::get('/apartments/{id}/sponsor', [ApartmentController::class, 'sponsor'])->name('apartments.sponsor');
+
+        // All apartment sponsors
+        Route::get('apartments/{apartment}/sponsors', [ApartmentController::class, 'sponsors'])->name('apartments.sponsors');
+
+        // All apartment messages
+        Route::get('apartments/{apartment}/messages/', [ApartmentController::class, 'messages'])->name('apartments.messages');
+
+        // All user messages per apartment
+        Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
 
         Route::post('/processPayment', [PaymentController::class, 'processPayment'])->name('processPayment');
-        // Route::post('payment/processPayment', [PaymentController::class, 'processPayment'])->name('payment.processPayment');
     });
 
 Route::middleware('auth')
@@ -41,11 +50,5 @@ Route::middleware('auth')
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-        Route::get('/messages/{apartment_id?}', [MessageController::class, 'index'])->name('messages.index');
-
-        Route::get('/sponsors', [SponsorController::class, 'index'])->name('sponsors.index');
-
-        // Route::post('payment/processPayment', [PaymentController::class, 'processPayment'])->name('payment.processPayment');
     });
 require __DIR__ . '/auth.php';

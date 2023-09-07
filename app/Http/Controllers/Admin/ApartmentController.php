@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Braintree\Gateway;
 use App\Models\Message;
 use App\Models\Service;
 use App\Models\Sponsor;
@@ -148,7 +149,9 @@ class ApartmentController extends Controller
 
     public function show($slug)
     {
+        // User control
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
+        if (Auth::id() !== $apartment->user_id) abort(403);
 
         return view('admin.apartments.show', compact('apartment'));
     }
@@ -317,10 +320,33 @@ class ApartmentController extends Controller
         return to_route('admin.apartments.index')->with('delete_success', $apartment);
     }
 
-    public function message($id)
+    public function messages($slug)
     {
-        $apartments = Apartment::where('id', $id)->get();
-        $messages = Message::where('apartment_id', $id)->get();
-        return view('admin.apartments.message', compact('messages', 'apartments'));
+        $apartment = Apartment::where('slug', $slug)->firstOrFail();
+        if (Auth::id() !== $apartment->user_id) abort(403);
+
+        $messages = Message::where('apartment_id', $apartment->id)->get();
+        return view('admin.apartments.message', compact('messages', 'apartment'));
+    }
+
+    public function sponsors($slug)
+    {
+        $apartment = Apartment::where('slug', $slug)->firstOrFail();
+        if (Auth::id() !== $apartment->user_id) abort(403);
+
+        $sponsors = Sponsor::all();
+
+        $userApartments = auth()->user()->apartments;
+        $userSponsor = auth()->user()->sponsor;
+
+        $gateway = new Gateway([
+            'environment' => config('services.braintree.environment'),
+            'merchantId' => config('services.braintree.merchant_id'),
+            'publicKey' => config('services.braintree.public_key'),
+            'privateKey' => config('services.braintree.private_key'),
+        ]);
+
+        $token = $gateway->clientToken()->generate();
+        return view('admin.sponsors.index', compact('sponsors', 'apartment', 'userApartments', 'gateway', 'token', 'userSponsor'));
     }
 }
