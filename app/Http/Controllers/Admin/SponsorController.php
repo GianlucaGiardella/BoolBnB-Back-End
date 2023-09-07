@@ -14,6 +14,7 @@ class SponsorController extends Controller
     public function index()
     {
         $sponsors = Sponsor::all();
+        $apartment = Apartment::all(); 
         $userApartments = auth()->user()->apartments;
         $userSponsor = auth()->user()->sponsor;
 
@@ -25,8 +26,7 @@ class SponsorController extends Controller
         ]);
 
         $token = $gateway->clientToken()->generate();
-
-        return view('admin.sponsors.index', compact('sponsors', 'userApartments', 'gateway', 'token', 'userSponsor'));
+        return view('admin.sponsors.index', compact('sponsors', 'apartment', 'userApartments', 'gateway', 'token', 'userSponsor'));
     }
 
     public function create()
