@@ -22,16 +22,6 @@ use Laravel\Sanctum\Http\Controllers\AuthenticatedSessionController;
 |
 */
 
-// Sanctum
-Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-Route::middleware('auth:api')->get('/user', [UserController::class, 'getUser'])->name('user');
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-Route::middleware('auth:sanctum')->post('/logout', [AuthenticatedSessionController::class, 'destroy']);
-Route::middleware('auth:sanctum')->get('/csrf-cookie', [CsrfCookieController::class, 'show']);
-
-
 Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser']);
 
 Route::get('apartments', [ApartmentController::class, 'index'])->name('api.apartments.index');

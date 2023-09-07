@@ -24,7 +24,7 @@
                         <div class="d-flex flex-column gap-2 mt-0">
                             {{-- Title --}}
                             <div class="input_container">
-                                <label for="title" class="form-label fs-4 fw-4">Titolo</label>
+                                <label for="title" class="form-label fs-4 fw-4 text-gradient">Titolo</label>
                                 <input type="text" class="form-control shadow-none" id="title" name="title"
                                     value="{{ old('title', $apartment->title) }}">
                                 @error('title')
@@ -37,7 +37,7 @@
 
                             {{-- Country --}}
                             <div class="input_container">
-                                <label for="country" class="form-label fs-4 fw-4">Nazione</label>
+                                <label for="country" class="form-label fs-4 fw-4 text-gradient">Nazione</label>
                                 <select id="country" class="form-select @error('country') is-invalid @enderror"
                                     name="country">
                                     <option value="">Seleziona Nazione</option>
@@ -55,7 +55,7 @@
 
                             {{-- Street --}}
                             <div class="input_container">
-                                <label for="street" class="form-label fs-4 fw-4">Via</label>
+                                <label for="street" class="form-label fs-4 fw-4 text-gradient">Via</label>
                                 <input type="text"
                                     class="form-control bs-autocomplete @error('street') is-invalid @enderror"
                                     id="street" name="street" value="{{ old('street', $apartment->street) }}"
@@ -73,7 +73,7 @@
 
                             {{-- Zip --}}
                             <div class="input_container">
-                                <label for="zip" class="form-label fs-4 fw-4">Numero civico</label>
+                                <label for="zip" class="form-label fs-4 fw-4 text-gradient">Numero Civico</label>
                                 <input type="number" class="form-control shadow-none @error('zip') is-invalid @enderror"
                                     id="zip" name="zip" value="{{ old('zip', $apartment->zip) }}">
                                 @error('zip')
@@ -88,7 +88,7 @@
                         <div class="d-flex flex-column gap-2 mt-0">
                             {{-- Size --}}
                             <div class="input_container">
-                                <label for="size" class="form-label fs-4 fw-4">Metri Quadrati</label>
+                                <label for="size" class="form-label fs-4 fw-4 text-gradient">Metri Quadrati</label>
                                 <input type="number" class="form-control shadow-none @error('size') is-invalid @enderror"
                                     id="size" name="size" value="{{ old('size', $apartment->size) }}">
                                 @error('size')
@@ -101,7 +101,7 @@
 
                             {{-- Rooms --}}
                             <div class="input_container">
-                                <label for="rooms" class="form-label fs-4 fw-4">Camere</label>
+                                <label for="rooms" class="form-label fs-4 fw-4 text-gradient">Camere</label>
                                 <input type="number" class="form-control shadow-none @error('rooms') is-invalid @enderror"
                                     id="rooms" name="rooms" value="{{ old('rooms', $apartment->rooms) }}">
                                 @error('rooms')
@@ -114,7 +114,7 @@
 
                             {{-- Beds --}}
                             <div class="input_container">
-                                <label for="beds" class="form-label fs-4 fw-4">Letti</label>
+                                <label for="beds" class="form-label fs-4 fw-4 text-gradient">Letti</label>
                                 <input type="number" class="form-control shadow-none @error('beds') is-invalid @enderror"
                                     id="beds" name="beds" value="{{ old('beds', $apartment->beds) }}">
                                 @error('beds')
@@ -127,7 +127,7 @@
 
                             {{-- Bathrooms --}}
                             <div class="input_container">
-                                <label for="bathrooms" class="form-label fs-4 fw-4">Bagni</label>
+                                <label for="bathrooms" class="form-label fs-4 fw-4 text-gradient">Bagni</label>
                                 <input type="number"
                                     class="form-control shadow-none @error('bathrooms') is-invalid @enderror" id="bathrooms"
                                     name="bathrooms" value="{{ old('bathrooms', $apartment->bathrooms) }}">
@@ -145,7 +145,7 @@
                 {{-- Description --}}
                 <div class="container">
                     <div class="input_container h-100">
-                        <label for="description" class="form-label fs-4 fw-4">Descrizione</label>
+                        <label for="description" class="form-label fs-4 fw-4 text-gradient">Descrizione</label>
                         <textarea type="text" class="form-control shadow-none @error('description') is-invalid @enderror" id="description"
                             name="description" rows="5">{{ old('description', $apartment->description) }}</textarea>
                         @error('description')
@@ -159,7 +159,7 @@
 
                 {{-- Images --}}
                 <div class="container">
-                    <h4 class="my-2">Immagini</h4>
+                    <h4 class="my-2 text-gradient">Immagini</h4>
                     <div class="container container-img px-0">
                         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
 
@@ -217,7 +217,7 @@
 
                 {{-- Services --}}
                 <div class="container">
-                    <h4 class="my-2">Servizi</h4>
+                    <h4 class="my-2 text-gradient">Servizi</h4>
                     <div class="container">
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
                             @foreach ($services as $service)
@@ -236,7 +236,7 @@
                 {{-- Visibility --}}
                 <div class="container">
                     <div class="d-flex flex-column justify-content-center align-items-center">
-                        <h4 class="my-2">Visibilità Appartamento</h4>
+                        <h4 class="my-2 text-gradient">Visibilità Appartamento</h4>
                         <label class="rocker rocker-small">
                             <input type="checkbox" name="visibility" value="1"
                                 {{ old('visibility', $apartment->visibility) ? 'checked' : '' }}>
