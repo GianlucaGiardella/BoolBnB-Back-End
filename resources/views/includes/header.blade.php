@@ -28,10 +28,10 @@
                 @auth
                     <ul class="navbar-nav mb-lg-0 log-btn">
                         <li class="nav-item">
-                            <a class="nav-link" :href="">Dashboard</a>
+                            <a class="nav-link" href="/">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" :href="{{ route('admin.messages.index') }}">Messaggi</a>
+                            <a class="nav-link" href="{{ route('admin.messages.index') }}">Messaggi</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
