@@ -14,7 +14,7 @@ class SponsorController extends Controller
     public function index()
     {
         $sponsors = Sponsor::all();
-        $apartment = Apartment::all(); 
+        $apartment = Apartment::all();
         $userApartments = auth()->user()->apartments;
         $userSponsor = auth()->user()->sponsor;
 

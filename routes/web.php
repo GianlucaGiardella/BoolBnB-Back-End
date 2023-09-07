@@ -28,8 +28,10 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/', [AdminPageController::class, 'dashboard'])->name('dashboard');
         Route::resource('apartments', ApartmentController::class);
-        Route::get('/sponsor', [SponsorController::class, 'index'])->name('sponsor.index');
-        Route::get('/apartments/{id}/message', [ApartmentController::class, 'message'])->name('apartments.message');
+        Route::get('/apartments/{id}/sponsor', [ApartmentController::class, 'sponsor'])->name('apartments.sponsor');
+
+        Route::post('/processPayment', [PaymentController::class, 'processPayment'])->name('processPayment');
+        // Route::post('payment/processPayment', [PaymentController::class, 'processPayment'])->name('payment.processPayment');
     });
 
 Route::middleware('auth')
@@ -44,6 +46,6 @@ Route::middleware('auth')
 
         Route::get('/sponsors', [SponsorController::class, 'index'])->name('sponsors.index');
 
-        Route::post('payment/processPayment', [PaymentController::class, 'processPayment'])->name('payment.processPayment');
+        // Route::post('payment/processPayment', [PaymentController::class, 'processPayment'])->name('payment.processPayment');
     });
 require __DIR__ . '/auth.php';
