@@ -23,14 +23,14 @@
                             {{-- Title --}}
                             <div class="input_container">
                                 <label for="title" class="form-label fs-4 fw-4">Titolo</label>
-                                <input type="text" class="form-control shadow-none" id="title" name="title"
-                                    value="{{ old('title') }}">
-                                <div class="error"></div>
+                                <input type="text" class="form-control shadow-none @error('title') is-invalid @enderror"
+                                    id="title" name="title" value="{{ old('title') }}">
                                 @error('title')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                <div class="error"></div>
                             </div>
 
                             {{-- Country --}}
@@ -41,12 +41,12 @@
                                     <option value="">Seleziona Nazione</option>
                                 </select>
                                 <input type="hidden" id="old_country" name="old_country" value="{{ old('country') }}">
-                                <div class="error"></div>
                                 @error('country')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                <div class="error"></div>
                             </div>
 
                             {{-- Street --}}
@@ -58,12 +58,12 @@
                                 <ul id="suggestions-street" class="list-group list-group-flush position-absolute z-3"
                                     style="top: calc(100% - 15px); left: 12px">
                                 </ul>
-                                <div class="error"></div>
                                 @error('street')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                <div class="error"></div>
                             </div>
 
                             {{-- Zip --}}
@@ -71,12 +71,12 @@
                                 <label for="zip" class="form-label fs-4 fw-4">Numero Civico</label>
                                 <input type="number" class="form-control shadow-none @error('zip') is-invalid @enderror"
                                     id="zip" name="zip" value="{{ old('zip') }}" disabled>
-                                <div class="error"></div>
                                 @error('zip')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                <div class="error"></div>
                             </div>
                         </div>
 
@@ -86,12 +86,12 @@
                                 <label for="size" class="form-label fs-4 fw-4">Metri Quadrati</label>
                                 <input type="number" class="form-control shadow-none @error('size') is-invalid @enderror"
                                     id="size" name="size" value="{{ old('size') }}">
-                                <div class="error"></div>
                                 @error('size')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                <div class="error"></div>
                             </div>
 
                             {{-- Rooms --}}
@@ -99,12 +99,12 @@
                                 <label for="rooms" class="form-label fs-4 fw-4">Camere</label>
                                 <input type="number" class="form-control shadow-none @error('rooms') is-invalid @enderror"
                                     id="rooms" name="rooms" value="{{ old('rooms') }}">
-                                <div class="error"></div>
                                 @error('rooms')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                <div class="error"></div>
                             </div>
 
                             {{-- Beds --}}
@@ -112,12 +112,12 @@
                                 <label for="beds" class="form-label fs-4 fw-4">Letti</label>
                                 <input type="number" class="form-control shadow-none @error('beds') is-invalid @enderror"
                                     id="beds" name="beds" value="{{ old('beds') }}">
-                                <div class="error"></div>
                                 @error('beds')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                <div class="error"></div>
                             </div>
 
                             {{-- Bathrooms --}}
@@ -126,12 +126,12 @@
                                 <input type="number"
                                     class="form-control shadow-none @error('bathrooms') is-invalid @enderror" id="bathrooms"
                                     name="bathrooms" value="{{ old('bathrooms') }}">
-                                <div class="error"></div>
                                 @error('bathrooms')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                <div class="error"></div>
                             </div>
                         </div>
                     </div>
@@ -143,12 +143,12 @@
                         <label for="description" class="form-label fs-4 fw-4">Descrizione</label>
                         <textarea type="text" class="form-control shadow-none @error('description') is-invalid @enderror" id="description"
                             name="description" rows="5">{{ old('description') }}</textarea>
-                        <div class="error"></div>
                         @error('description')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
                         @enderror
+                        <div class="error"></div>
                     </div>
                 </div>
 
@@ -188,7 +188,6 @@
 
                         </div>
                     </div>
-                    <div class="error"></div>
                 </div>
 
                 {{-- Services --}}
