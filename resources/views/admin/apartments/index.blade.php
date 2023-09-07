@@ -8,29 +8,32 @@
         </div>
     @endif
 
-    <div class="card mt-3 p-2">
-        <div class="card-body d-flex flex-column gap-3 align-items-start">
+    <div class="card mt-3">
 
-            <div class="w-100 row row-cols-1 row-cols-md-2 justify-content-between align-center">
+        {{-- Header --}}
+        <div class="card-header">
+            <div class="row row-cols-1 row-cols-md-2 align-center g-3">
                 <div class="text-gradient">
-                    <h1 class="">Lista Appartamenti</h1>
-                    <hr class="m-0">
+                    <h1 class="mb-0 p-2">Lista Appartamenti</h1>
                 </div>
 
-                <div class="d-flex justify-content-end">
-                    <a class="nav-link" href="{{ route('admin.apartments.create') }}">
-                        <button class="d-block styled-btn">Aggiungi Appartamento</button>
+                <div class="d-flex add-container">
+                    <a class="nav-link p-2" href="{{ route('admin.apartments.create') }}">
+                        <button class="styled-btn"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
                     </a>
                 </div>
             </div>
+        </div>
+
+        {{-- Body --}}
+        <div class="card-body d-flex flex-column gap-3 align-items-start">
 
             {{-- Table --}}
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col" class="text-gradient">#</th>
+                        {{-- <th scope="col" class="text-gradient">#</th> --}}
                         <th scope="col" class="text-gradient">Titolo</th>
-                        <th scope="col" class="text-gradient">Paese</th>
                         <th scope="col" class="text-gradient">Metri Quadrati</th>
                         <th scope="col" class="text-gradient">Camere</th>
                         <th scope="col" class="text-gradient">Letti</th>
@@ -42,9 +45,8 @@
                 <tbody>
                     @foreach ($apartments as $apartment)
                         <tr>
-                            <td data-label="Id">{{ $loop->index + 1 }}</td>
+                            {{-- <td data-label="Id">{{ $loop->index + 1 }}</td> --}}
                             <td data-label="Titolo">{{ $apartment->title }}</td>
-                            <td data-label="Paese">{{ $apartment->country }}</td>
                             <td data-label="Metri Quadrati">{{ $apartment->size }}</td>
                             <td data-label="Camere">{{ $apartment->rooms }}</td>
                             <td data-label="Letti">{{ $apartment->beds }}</td>
@@ -53,13 +55,13 @@
                             <td>
                                 <a class="btn btn-secondary"
                                     href="{{ route('admin.apartments.show', ['apartment' => $apartment]) }}"><i
-                                        class="fa-solid fa-info" style="color: #ffffff;"></i></a>
+                                        class="fa-solid fa-circle-info" style="color: #fff;"></i></a>
                                 <a class="btn btn-primary"
                                     href="{{ route('admin.apartments.edit', ['apartment' => $apartment]) }}"><i
-                                        class="fa-solid fa-pen" style="color: #ffffff;"></i></a>
+                                        class="fa-solid fa-pen" style="color: #fff;"></i></a>
                                 <button class="btn btn-danger js-delete" data-bs-toggle="modal"
                                     data-bs-target="#deleteModal" data-id="{{ $apartment->slug }}"><i
-                                        class="fa-solid fa-trash" style="color: #ffffff;"></i></button>
+                                        class="fa-solid fa-trash" style="color: #fff;"></i></button>
                             </td>
                         </tr>
                     @endforeach
@@ -98,8 +100,11 @@
 @endsection
 
 <style>
+    .card-header {
+        background-color: #fff !important;
+    }
+
     table {
-        /* border: 1px solid #ccc; */
         border-collapse: collapse;
         margin: 0;
         padding: 0;
@@ -107,21 +112,13 @@
         table-layout: fixed;
     }
 
-    table caption {
-        font-size: 1.5em;
-        margin: .5em 0 .75em;
-    }
-
-    table tr {
-        background-color: #f8f8f8;
-        /* border: 1px solid #ddd; */
-        padding: .35em;
+    .table> :not(caption)>*>* {
+        padding: 0.8rem 0.5rem;
     }
 
     table th,
     table td {
-        padding: .625em;
-        text-align: center;
+        vertical-align: middle;
     }
 
     table th {
@@ -130,7 +127,11 @@
         text-transform: uppercase;
     }
 
-    @media screen and (max-width: 600px) {
+    .add-container {
+        justify-content: flex-end;
+    }
+
+    @media screen and (max-width: 767px) {
         table {
             border: 0;
         }
@@ -181,23 +182,11 @@
         table td:last-child {
             border-bottom: 0;
         }
+
+        .add-container {
+            justify-content: flex-start;
+        }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /* general styling */
-    body {
-        line-height: 1.25;
-    }
+    @media screen and (max-width: 575px) {}
 </style>
