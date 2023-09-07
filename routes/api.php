@@ -2,13 +2,15 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ViewController;
 use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\SponsorController;
 use App\Http\Controllers\Api\ApartmentController;
-
+use Laravel\Sanctum\Http\Controllers\CsrfCookieController;
+use Laravel\Sanctum\Http\Controllers\AuthenticatedSessionController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,9 +22,17 @@ use App\Http\Controllers\Api\ApartmentController;
 |
 */
 
+// Sanctum
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::middleware('auth:api')->get('/user', [UserController::class, 'getUser'])->name('user');
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+Route::middleware('auth:sanctum')->post('/logout', [AuthenticatedSessionController::class, 'destroy']);
+Route::middleware('auth:sanctum')->get('/csrf-cookie', [CsrfCookieController::class, 'show']);
+
+
+Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser']);
 
 Route::get('apartments', [ApartmentController::class, 'index'])->name('api.apartments.index');
 Route::get('apartments/{apartment}', [ApartmentController::class, 'show'])->name('api.apartments.show');

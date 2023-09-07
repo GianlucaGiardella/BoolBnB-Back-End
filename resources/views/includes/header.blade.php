@@ -12,10 +12,15 @@
         </button>
 
         <div class="collapse navbar-collapse bg-white p-2 rounded" id="navbarSupportedContent">
-            <ul class="navbar-nav flex-grow-1 mb-lg-0 log-btn">
+            <ul class="navbar-nav flex-grow-1 mb-lg-0 log-btn gap-3">
                 <li class="nav-item">
                     <button class="home-link">
                         <a href="http://localhost:5174">Home</a>
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="search-link">
+                        <a href="http://localhost:5174/search">Cerca Appartamenti</a>
                     </button>
                 </li>
             </ul>
@@ -23,10 +28,10 @@
                 @auth
                     <ul class="navbar-nav mb-lg-0 log-btn">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                            <a class="nav-link" :href="">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.messages.index') }}">Messaggi</a>
+                            <a class="nav-link" :href="{{ route('admin.messages.index') }}">Messaggi</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -115,6 +120,7 @@
     }
 
     .home-link,
+    .search-link,
     .login-link,
     .register-link {
         padding: 0;
@@ -124,6 +130,7 @@
     }
 
     .home-link,
+    .search-link,
     .login-link,
     .register-link {
         --primary-color: #424172;
@@ -136,6 +143,7 @@
     }
 
     .home-link a,
+    .search-link a,
     .login-link a,
     .register-link a {
         margin: 0;
@@ -144,6 +152,7 @@
     }
 
     .home-link a::before,
+    .search-link a::before,
     .login-link a::before,
     .register-link a::before {
         position: absolute;
@@ -158,6 +167,10 @@
         content: "Home";
     }
 
+    .search-link a::before {
+        content: "Cerca\00a0 Appartamenti";
+    }
+
     .login-link a::before {
         content: "Accedi";
     }
@@ -167,18 +180,21 @@
     }
 
     .home-link a:hover,
+    .search-link a:hover,
     .login-link a:hover,
     .register-link a:hover {
         text-decoration: none;
     }
 
     .home-link:hover::after,
+    .search-link:hover::after,
     .login-link:hover::after,
     .register-link::after {
         width: 100%;
     }
 
     .home-link:hover a::before,
+    .search-link:hover a::before,
     .login-link:hover a::before,
     .register-link:hover a::before {
         width: 100%;
