@@ -6,6 +6,7 @@
         la soluzione ideale per promuovere il vostro appartamento e attirare il massimo numero di potenziali clienti!</p>
     <div class="container d-flex justify-content-between">
         @foreach ($sponsors as $sponsor)
+        @php dd($apartment) @endphp
             <div class="card" style="width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{ $sponsor->name }}</h5>
