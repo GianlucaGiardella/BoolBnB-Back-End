@@ -13,11 +13,11 @@
 
         <div class="collapse navbar-collapse bg-white p-2 rounded" id="navbarSupportedContent">
             <ul class="navbar-nav flex-grow-1 log-btn gap-3">
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <button class="home-link">
                         <a href="http://localhost:5174">Home</a>
                     </button>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <button class="search-link">
                         <a href="http://localhost:5174/search">Cerca Appartamenti</a>
@@ -27,21 +27,6 @@
             @if (Route::has('login'))
                 @auth
                     <ul class="navbar-nav log-btn gap-3">
-                        <li class="nav-item">
-                            <button class="dashboard-link">
-                                <a href="/">Dashboard</a>
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="messages-link">
-                                <a href="{{ route('admin.messages.index') }}">Messaggi</a>
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="sponsors-link">
-                                <a href="{{ route('admin.sponsors.index') }}">Sponsorizza</a>
-                            </button>
-                        </li>
                         <li class="nav-item dropdown">
                             <button class="apartments-link" data-bs-toggle="dropdown" aria-expanded="false">
                                 <a class="dropdown-toggle" href="#">
@@ -70,6 +55,24 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <div>
+                                        <li class="nav-item px-3 py-1">
+                                            <button class="dashboard-link">
+                                                <a href="/">Dashboard</a>
+                                            </button>
+                                        </li>
+                                        <hr class="m-0">
+                                        <li class="nav-item px-3 py-1">
+                                            <button class="messages-link">
+                                                <a href="{{ route('admin.messages.index') }}">Messaggi</a>
+                                            </button>
+                                        </li>
+                                        <hr class="m-0">
+                                        <li class="nav-item px-3 py-1">
+                                            <button class="sponsors-link">
+                                                <a href="{{ route('admin.sponsors.index') }}">Sponsorizza</a>
+                                            </button>
+                                        </li>
+                                        <hr class="m-0">
                                         <form action="{{ route('logout') }}" method="post" class="dropdown-item exit mb-0">
                                             @csrf
                                             <button class="btn p-0 text-danger pe-auto">Esci</button>
