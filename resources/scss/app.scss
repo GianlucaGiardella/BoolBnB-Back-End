@@ -1,10 +1,10 @@
 @import "~bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free/css/all.css";
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Quicksand:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Quicksand:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap");
 
 body {
-    font-family: 'Nunito', sans-serif;
+    font-family: "Nunito", sans-serif;
 }
 
 .link-unstyled {
@@ -14,7 +14,9 @@ body {
 
 .text-gradient {
     background: #424172;
-    background: repeating-radial-gradient(circle farthest-corner at top left, #424172 0%, #FF7210 100%);
+    background: repeating-radial-gradient(circle farthest-corner at top left,
+            #424172 0%,
+            #ff7210 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     width: fit-content;
@@ -39,7 +41,7 @@ body {
 
 .form_background {
     display: flex;
-    justify-content: center
+    justify-content: center;
 }
 
 .form_container {
@@ -75,7 +77,7 @@ body {
     max-width: 80%;
     text-align: center;
     line-height: 1.1rem;
-    color: #8B8E98
+    color: #8b8e98;
 }
 
 .input_container {
@@ -127,7 +129,7 @@ body {
 
 .input_label {
     font-size: 0.75rem;
-    color: #8B8E98;
+    color: #8b8e98;
     font-weight: 600;
 }
 
@@ -229,7 +231,7 @@ body {
     font-size: 1rem;
     color: #fff;
     font-weight: 600;
-    transition: all .2s;
+    transition: all 0.2s;
     position: relative;
     border: none;
     background: #424172;
@@ -240,11 +242,11 @@ body {
     content: "";
     position: absolute;
     top: 50%;
-    background: #FF7210;
+    background: #ff7210;
     height: 108%;
     width: 0;
     z-index: -1;
-    transition: all .7s;
+    transition: all 0.7s;
     transform: translateY(-50%);
 }
 
@@ -258,7 +260,8 @@ body {
 
 .styled-btn:hover {
     color: #fff;
-    box-shadow: #de4c137f 0 30px 60px -12px inset, #5d2991 0 18px 36px -18px inset;
+    box-shadow: #de4c137f 0 30px 60px -12px inset,
+        #5d2991 0 18px 36px -18px inset;
     z-index: 2;
 }
 
@@ -270,147 +273,6 @@ body {
 .styled-btn:hover::after {
     width: 50%;
     right: 50%;
-}
-
-/* Switch starts here */
-.rocker {
-    display: inline-block;
-    position: relative;
-    /*
-SIZE OF SWITCH
-==============
-All sizes are in em - therefore
-changing the font-size here
-will change the size of the switch.
-See .rocker-small below as example.
-*/
-    font-size: 2em;
-    font-weight: bold;
-    text-align: center;
-    text-transform: uppercase;
-    color: #888;
-    width: 7em;
-    height: 4em;
-    overflow: hidden;
-    border-bottom: 0.5em solid #eee;
-}
-
-.rocker-small {
-    font-size: 0.75em;
-}
-
-.rocker::before {
-    content: "";
-    position: absolute;
-    top: 0.5em;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #999;
-    border: 0.5em solid #eee;
-    border-bottom: 0;
-}
-
-.rocker input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.switch-left,
-.switch-right {
-    cursor: pointer;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 2.5em;
-    width: 3em;
-    transition: 0.2s;
-    user-select: none;
-}
-
-.switch-left {
-    height: 2.4em;
-    width: 2.75em;
-    left: 0.85em;
-    bottom: 0.4em;
-    background-color: #ddd;
-    transform: rotate(15deg) skewX(15deg);
-}
-
-.switch-right {
-    right: 0.5em;
-    bottom: 0;
-    background-color: #dc3545;
-    color: #fff;
-}
-
-.switch-left::before,
-.switch-right::before {
-    content: "";
-    position: absolute;
-    width: 0.4em;
-    height: 2.45em;
-    bottom: -0.45em;
-    background-color: #ccc;
-    transform: skewY(-65deg);
-}
-
-.switch-left::before {
-    left: -0.4em;
-}
-
-.switch-right::before {
-    right: -0.375em;
-    background-color: transparent;
-    transform: skewY(65deg);
-}
-
-input:checked+.switch-left {
-    background-color: #198754;
-    color: #fff;
-    bottom: 0px;
-    left: 0.5em;
-    height: 2.5em;
-    width: 3em;
-    transform: rotate(0deg) skewX(0deg);
-}
-
-input:checked+.switch-left::before {
-    background-color: transparent;
-    width: 3.0833em;
-}
-
-input:checked+.switch-left+.switch-right {
-    background-color: #ddd;
-    color: #888;
-    bottom: 0.4em;
-    right: 0.8em;
-    height: 2.4em;
-    width: 2.75em;
-    transform: rotate(-15deg) skewX(-15deg);
-}
-
-input:checked+.switch-left+.switch-right::before {
-    background-color: #ccc;
-}
-
-/* Keyboard Users */
-input:focus+.switch-left {
-    color: #333;
-}
-
-input:checked:focus+.switch-left {
-    color: #fff;
-}
-
-input:focus+.switch-left+.switch-right {
-    color: #fff;
-}
-
-input:checked:focus+.switch-left+.switch-right {
-    color: #333;
 }
 
 // Remove Image Button
@@ -522,7 +384,7 @@ input:checked:focus+.switch-left+.switch-right {
     scale: 0;
     transform-origin: 0 0;
     box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.15);
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .message-card:hover .message-card-btn {
@@ -614,4 +476,51 @@ input:checked:focus+.switch-left+.switch-right {
 .option-card:hover>.card:not(:hover) {
     filter: blur(2px);
     transform: scale(0.9, 0.9);
+}
+
+// qui parte lo slider per la visibilità
+.switch {
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 3.5em;
+    height: 2em;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    border: 2px solid #414141;
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1.4em;
+    width: 1.4em;
+    left: 0.2em;
+    bottom: 0.2em;
+    background-color: rgb(67, 65, 114);
+    border-radius: inherit;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.switch input:checked+.slider {
+    box-shadow: 0 0 20px rgba(255, 147, 94);
+    border: 2px solid rgb(67, 65, 114);
+}
+
+.switch input:checked+.slider:before {
+    transform: translateX(1.5em);
 }

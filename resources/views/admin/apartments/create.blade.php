@@ -214,12 +214,17 @@
                 <div class="container">
                     <div class="d-flex flex-column justify-content-center align-items-center">
                         <h4 class="my-2 text-gradient">Rendi Visibile</h4>
-                        <label class="rocker rocker-small">
+                        <label class="switch">
                             <input type="checkbox" name="visibility" value="1"
                                 {{ old('visibility') ? 'checked' : '' }}>
+                            <span class="slider"></span>
+                        </label>
+                        {{-- <label class="rocker rocker-small">
+                            <input type="checkbox" name="visibility" value="1"
+                                {{ old('visibility', $apartment->visibility) ? 'checked' : '' }}>
                             <span class="switch-left">Si</span>
                             <span class="switch-right">No</span>
-                        </label>
+                        </label> --}}
                     </div>
                 </div>
 
