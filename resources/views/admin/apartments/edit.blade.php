@@ -94,7 +94,9 @@
                                     {{-- Cover --}}
                                     <div class="img-apartment position-relative">
                                         <label for="add-cover" class="d-block">
-                                            <img src="{{ asset('storage/' . $apartment->cover) }}" id="cover" />
+                                            <div class="overflow-hidden">
+                                                <img src="{{ asset('storage/' . $apartment->cover) }}" id="cover" />
+                                            </div>
                                         </label>
                                         <span id="remove-cover" class="btn remove-image">&#128465;</span>
                                         <input type="file" id="add-cover" name="cover"
@@ -111,7 +113,10 @@
                                             @endphp
                                             <div class="img-apartment position-relative images">
                                                 <label for="add-image{{ $i }}" class="d-block">
-                                                    <img src="{{ asset('storage/' . $image->img_url) }}" class="image" />
+                                                    <div class="overflow-hidden">
+                                                        <img src="{{ asset('storage/' . $image->img_url) }}"
+                                                            class="image" />
+                                                    </div>
                                                 </label>
 
                                                 <input type="file" class="d-none" id="add-image{{ $i }}"
@@ -126,7 +131,9 @@
                                         @else
                                             <div class="img-apartment position-relative images">
                                                 <label for="add-image{{ $i }}" class="d-block">
-                                                    <img src="{{ asset('storage/') }}" class="image" />
+                                                    <div class="overflow-hidden">
+                                                        <img src="{{ asset('storage/') }}" class="image" />
+                                                    </div>
                                                 </label>
 
                                                 <input type="file" class="d-none" id="add-image{{ $i }}"

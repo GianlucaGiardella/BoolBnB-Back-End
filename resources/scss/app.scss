@@ -283,11 +283,12 @@ body {
     right: 12px;
     background-color: #fff;
     opacity: 0.5;
-    z-index: 9;
+    z-index: 80;
 }
 
 .remove-image:hover {
     cursor: pointer;
+    opacity: 0.9;
     background-color: #dee2e6 !important;
 }
 
@@ -302,12 +303,16 @@ body {
         height: 250px;
         object-fit: cover;
         object-position: center;
+        transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
     }
 }
 
 .img-apartment {
     cursor: pointer;
-    overflow: hidden;
+
+    &:hover img {
+        transform: scale(1.2);
+    }
 }
 
 // Message Card
