@@ -2,85 +2,76 @@
 
 <nav class="navbar navbar-expand-lg w-100">
     <div class="container">
-        <div class="w-100 d-flex justify-content-between">
-            <a class="navbar-brand p-4" href="http://localhost:5174">
-                <img src="{{ url('/logos/multicolor-horizontal-logo.png') }}" alt="">
+        <div class="w-100 d-flex justify-content-between px-4">
+            <a class="navbar-brand" href="http://localhost:5174">
+                <img class="full-logo" src="{{ url('/logos/multicolor-horizontal-logo.png') }}" alt="">
+                <img class="icon-logo" src="{{ url('/logos/multicolor-logo.ico') }}" alt="">
             </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <div class="w-100 d-flex justify-content-end align-center gap-4">
 
-            <div class="collapse navbar-collapse p-2 rounded" id="navbarSupportedContent">
-                <div class="w-100 d-flex justify-content-end gap-4">
-                    <button class="button">
-                        <a class="link-unstyled text-gradient" href="http://localhost:5174/search"><i
-                                class="fa-solid fa-magnifying-glass"></i> Cerca</a>
+                <a class="link-unstyled d-flex align-center" href="http://localhost:5174/search">
+                    <button class="button text-gradient">
+                        <span><i class="fa-solid fa-magnifying-glass"></i> <span class="disapear">Cerca</span></span>
                     </button>
-                    @if (Route::has('login'))
-                        @auth
-                            <div class="log-btn">
-                                <div class="navbar-nav mb-2 mb-lg-0">
-                                    <div class="nav-item dropdown">
-                                        <button class="button f-4" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <span class="text-gradient"><i class="fa-regular fa-user"></i>
-                                                Profilo</span>
+                </a>
+
+                @if (Route::has('login'))
+                    @auth
+                        <div class="nav-item dropdown h-100">
+                            <button class="button h-100" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="text-gradient"><i class="fa-regular fa-user"></i>
+                                    <span class="disapear">Profilo</span></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end list-unstyled box-shadow mt-2">
+                                <li class="nav-item">
+                                    <a class="w-100 nav-link px-3 py-1" href="/"><i class="fa-solid fa-list"></i>
+                                        Dashboard</a>
+                                </li>
+                                <hr class="m-0">
+                                <li class="nav-item">
+                                    <a class="w-100 nav-link px-3 py-1" href="{{ route('admin.apartments.index') }}">
+                                        <i class="fa-solid fa-house-user" style="color: #666666;"></i>
+                                        Appartamenti</a>
+                                </li>
+                                <hr class="m-0">
+                                <li class="nav-item">
+                                    <a class="w-100 nav-link px-3 py-1" href="{{ route('admin.messages.index') }}"><i
+                                            class="fa-regular fa-message"></i>
+                                        Messaggi</a>
+                                </li>
+                                <hr class="m-0">
+                                <li class="nav-item">
+                                    <a class="w-100 nav-link px-3 py-1" href="{{ route('admin.sponsors.index') }}"><i
+                                            class="fa-regular fa-star"></i>
+                                        Sponsorizza</a>
+                                </li>
+                                <hr class="m-0">
+                                <li class="m-0 p-0">
+                                    <form action="{{ route('logout') }}" method="post" class="dropdown-item exit mb-0">
+                                        @csrf
+                                        <button class="btn p-0 text-danger pe-auto">
+                                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Esci
                                         </button>
-                                        <ul class="dropdown-menu dropdown-menu-end list-unstyled">
-                                            <li class="nav-item">
-                                                <a class="nav-link px-3 py-1" href="/"><i
-                                                        class="fa-solid fa-list"></i>
-                                                    Dashboard</a>
-                                            </li>
-                                            <hr class="m-0">
-                                            <li class="nav-item">
-                                                <a class="nav-link px-3 py-1" href="{{ route('admin.apartments.index') }}">
-                                                    <i class="fa-solid fa-house-user" style="color: #666666;"></i>
-                                                    Appartamenti</a>
-                                            </li>
-                                            <hr class="m-0">
-                                            <li class="nav-item">
-                                                <a class="nav-link px-3 py-1" href="{{ route('admin.messages.index') }}"><i
-                                                        class="fa-regular fa-message"></i> Messaggi</a>
-                                            </li>
-                                            <hr class="m-0">
-                                            <li class="nav-item">
-                                                <a class="nav-link px-3 py-1" href="{{ route('admin.sponsors.index') }}"><i
-                                                        class="fa-regular fa-star"></i>
-                                                    Sponsorizza</a>
-                                            </li>
-                                            <hr class="m-0">
-                                            <li class="m-0 p-0">
-                                                <form action="{{ route('logout') }}" method="post"
-                                                    class="dropdown-item exit mb-0">
-                                                    @csrf
-                                                    <button class="btn p-0 text-danger pe-auto">
-                                                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Esci
-                                                    </button>
-                                                </form>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            @else
-                                <div class="d-flex gap-2">
-                                    <button class="button">
-                                        <a class="link-unstyled text-gradient" href="{{ route('login') }}">Accedi</a>
-                                    </button>
-                                    <div class="border border-1 border-dark"></div>
-                                    @if (Route::has('register'))
-                                        <button class="button">
-                                            <a class="link-unstyled text-gradient"
-                                                href="{{ route('register') }}">Registrati</a>
-                                        </button>
-                                    @endif
-                                </div>
-                            @endauth
+                                    </form>
+                                </li>
+                            </ul>
                         </div>
-                    @endif
-                </div>
+                    @else
+                        <div class="d-flex gap-2">
+                            <button class="button">
+                                <a class="w-100 link-unstyled text-gradient" href="{{ route('login') }}">Accedi</a>
+                            </button>
+                            <div class="border border-1 border-dark"></div>
+                            @if (Route::has('register'))
+                                <button class="button">
+                                    <a class="w-100 link-unstyled text-gradient"
+                                        href="{{ route('register') }}">Registrati</a>
+                                </button>
+                            @endif
+                        </div>
+                    @endauth
+                @endif
             </div>
         </div>
     </div>
@@ -95,153 +86,46 @@
         z-index: 99;
         background-color: #fdfdfd;
         box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.1);
-        /* border-bottom: 1px solid #FF7210; */
     }
 
-    .log-btn a {
-        text-decoration: none;
-    }
-
-    .log-btn a:hover {
-        color: #424172;
-    }
-
-    .log-btn a:hover,
-    .exit:hover button {
-        cursor: pointer;
-        text-decoration: underline;
-    }
-
-    .auth {
-        color: #FF7210;
-    }
-
-    a img {
-        width: 120px;
-    }
-
-    .home-link,
-    .search-link,
-    .dashboard-link,
-    .messages-link,
-    .sponsors-link,
-    .apartments-link,
-    .login-link,
-    .register-link {
-        padding: 0;
-        margin: 0;
+    .dropdown-menu {
         border: none;
-        background: none;
+        border-radius: 6px
     }
 
-    .home-link,
-    .search-link,
-    .dashboard-link,
-    .messages-link,
-    .sponsors-link,
-    .apartments-link,
-    .login-link,
-    .register-link {
-        --primary-color: #424172;
-        --hovered-color: #FF7210;
-        position: relative;
-        display: flex;
-        font-weight: 600;
-        gap: 0.5rem;
-        align-items: center;
+    .full-logo,
+    .icon-logo {
+        height: 30px;
     }
 
-    .home-link a,
-    .search-link a,
-    .dashboard-link a,
-    .messages-link a,
-    .sponsors-link a,
-    .apartments-link a,
-    .login-link a,
-    .register-link a {
-        margin: 0;
-        position: relative;
-        color: var(--primary-color)
+    .full-logo {
+        display: block;
     }
 
-    .home-link a::before,
-    .search-link a::before,
-    .dashboard-link a::before,
-    .messages-link a::before,
-    .sponsors-link a::before,
-    .apartments-link a::before,
-    .login-link a::before,
-    .register-link a::before {
-        position: absolute;
-        width: 0%;
-        inset: 0;
-        color: var(--hovered-color);
-        overflow: hidden;
-        transition: 0.3s ease-out;
+    .icon-logo {
+        display: none;
     }
 
-    .home-link a::before {
-        content: "Home";
-    }
+    @media screen and (max-width: 575px) {
+        .disapear {
+            display: none;
+        }
 
-    .search-link a::before {
-        content: "Cerca\00a0 Appartamenti";
-    }
+        .nav-link {
+            background: #424172;
+            background: repeating-radial-gradient(circle farthest-corner at top left,
+                    #424172 0%,
+                    #ff7210 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .dashboard-link a::before {
-        content: "Dashboard";
-    }
+        .full-logo {
+            display: none;
+        }
 
-    .messages-link a::before {
-        content: "Messaggi";
-    }
-
-    .sponsors-link a::before {
-        content: "Sponsorizza";
-    }
-
-    .apartments-link a::before {
-        content: "I\00a0 Miei\00a0 Appartamenti\00a0\00a0\00a0\00a0\00a0 "
-    }
-
-    .login-link a::before {
-        content: "Accedi";
-    }
-
-    .register-link a::before {
-        content: "Registrati";
-    }
-
-    .home-link a:hover,
-    .search-link a:hover,
-    .dashboard-link a:hover,
-    .messages-link a:hover,
-    .sponsors-link a:hover,
-    .apartments-link a:hover,
-    .login-link a:hover,
-    .register-link a:hover {
-        text-decoration: none;
-    }
-
-    .home-link:hover::after,
-    .search-link:hover::after,
-    .dashboard-link:hover::after,
-    .messages-link:hover::after,
-    .sponsors-link:hover::after,
-    .apartments-link:hover::after,
-    .login-link:hover::after,
-    .register-link::after {
-        width: 100%;
-    }
-
-    .home-link:hover a::before,
-    .search-link:hover a::before,
-    .dashboard-link:hover a::before,
-    .messages-link:hover a::before,
-    .sponsors-link:hover a::before,
-    .apartments-link:hover a::before,
-    .login-link:hover a::before,
-    .register-link:hover a::before {
-        width: 100%;
+        .icon-logo {
+            display: block;
+        }
     }
 </style>
