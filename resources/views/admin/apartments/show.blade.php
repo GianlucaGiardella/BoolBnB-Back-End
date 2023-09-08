@@ -85,7 +85,7 @@
         </div>
 
         <button class="styled-btn w-25">
-            <a class="nav-link" href="{{ route('admin.apartments.message', ['id' => $apartment->id]) }}">Messaggi</a>
+            <a class="nav-link" href="{{ route('admin.apartments.messages', ['apartment' => $apartment]) }}">Messaggi</a>
         </button>
     </div>
     <style>

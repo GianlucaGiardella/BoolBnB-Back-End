@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PaymentController;
+use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Guests\PageController as GuestsPageController;
@@ -43,8 +44,6 @@ Route::middleware(['auth', 'verified'])
 
         // All user messages per apartment
         Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
-
-        Route::post('/processPayment', [PaymentController::class, 'processPayment'])->name('processPayment');
     });
 
 Route::middleware('auth')
