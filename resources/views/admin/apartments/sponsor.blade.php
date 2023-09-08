@@ -3,13 +3,18 @@
     <div class="card mt-0 box-shadow">
         <div class="card-body py-3">
             <h1 class="text-gradient">{{ $apartment->title }}</h1>
-            <h4>Sponsorizzazione</h4>
-            <p>Raggiungete un vasto pubblico per il vostro appartamento con una sponsorizzazione su misura! Offriamo una
-                varietà di
-                opzioni di sponsorizzazione, sia standard che personalizzate, per soddisfare al meglio le vostre esigenze.
-                Scegliete
-                la soluzione ideale per promuovere il vostro appartamento e attirare il massimo numero di potenziali
-                clienti!</p>
+
+            @if ($apartment->sponsors()->where('valid', true)->count() > 0)
+                Hai gia una sponsor
+            @else
+                <h4>Sponsorizzazione</h4>
+                <p>Raggiungete un vasto pubblico per il vostro appartamento con una sponsorizzazione su misura! Offriamo una
+                    varietà di
+                    opzioni di sponsorizzazione, sia standard che personalizzate, per soddisfare al meglio le vostre
+                    esigenze. Scegliete
+                    la soluzione ideale per promuovere il vostro appartamento e attirare il massimo numero di potenziali
+                    clienti!</p>
+            @endif
 
             <div class="row">
                 <form id="payment-form" action="{{ route('admin.process_payment') }}" method="post"
@@ -64,7 +69,6 @@
             </div>
         </div>
     </div>
-
 
 
 
