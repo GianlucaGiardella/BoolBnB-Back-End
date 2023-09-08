@@ -4,7 +4,7 @@
 @extends('layouts.base')
 
 @section('contents')
-    <div class="card mt-0">
+    <div class="card mt-0 box-shadow">
         <div class="card-body py-3">
             <div class="container">
                 <div class="d-inline-block text-gradient">
@@ -18,11 +18,11 @@
                 @csrf
 
                 <div class="container">
-                    <div class="row row-cols-1 row-cols-md-2">
+                    <div class="row row-cols-1">
                         <div class="d-flex flex-column gap-2 mt-0">
                             {{-- Title --}}
                             <div class="input_container">
-                                <label for="title" class="form-label fs-4 fw-4">Titolo</label>
+                                <label for="title" class="form-label fs-4 fw-4 text-gradient">Titolo</label>
                                 <input type="text" class="form-control shadow-none @error('title') is-invalid @enderror"
                                     id="title" name="title" value="{{ old('title') }}">
                                 @error('title')
@@ -35,7 +35,7 @@
 
                             {{-- Country --}}
                             <div class="input_container">
-                                <label for="country" class="form-label fs-4 fw-4">Nazione</label>
+                                <label for="country" class="form-label fs-4 fw-4 text-gradient">Nazione</label>
                                 <select id="country" class="form-select @error('country') is-invalid @enderror"
                                     name="country">
                                     <option value="">Seleziona Nazione</option>
@@ -51,7 +51,7 @@
 
                             {{-- Street --}}
                             <div class="input_container">
-                                <label for="street" class="form-label fs-4 fw-4">Via</label>
+                                <label for="street" class="form-label fs-4 fw-4 text-gradient">Via</label>
                                 <input type="text"
                                     class="form-control bs-autocomplete @error('street') is-invalid @enderror"
                                     id="street" name="street" value="{{ old('street') }}" autocomplete="off" disabled>
@@ -68,7 +68,7 @@
 
                             {{-- Zip --}}
                             <div class="input_container">
-                                <label for="zip" class="form-label fs-4 fw-4">Numero Civico</label>
+                                <label for="zip" class="form-label fs-4 fw-4 text-gradient">Numero Civico</label>
                                 <input type="number" class="form-control shadow-none @error('zip') is-invalid @enderror"
                                     id="zip" name="zip" value="{{ old('zip') }}" disabled>
                                 @error('zip')
@@ -80,58 +80,41 @@
                             </div>
                         </div>
 
-                        <div class="d-flex flex-column gap-2 mt-0">
-                            {{-- Size --}}
-                            <div class="input_container">
-                                <label for="size" class="form-label fs-4 fw-4">Metri Quadrati</label>
-                                <input type="number" class="form-control shadow-none @error('size') is-invalid @enderror"
-                                    id="size" name="size" value="{{ old('size') }}">
-                                @error('size')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                                <div class="error"></div>
-                            </div>
+                        {{-- Images --}}
+                        <div class="container">
+                            <h4 class="my-2 text-gradient">Immagini</h4>
+                            <div class="container container-img px-0">
+                                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
 
-                            {{-- Rooms --}}
-                            <div class="input_container">
-                                <label for="rooms" class="form-label fs-4 fw-4">Camere</label>
-                                <input type="number" class="form-control shadow-none @error('rooms') is-invalid @enderror"
-                                    id="rooms" name="rooms" value="{{ old('rooms') }}">
-                                @error('rooms')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
+                                    {{-- Cover --}}
+                                    <div class="img-apartment position-relative">
+                                        <label for="add-cover" class="d-block">
+                                            <img src="{{ asset('storage/') }}" id="cover" />
+                                        </label>
+                                        <span id="remove-cover" class="btn remove-image">&#128465;</span>
+                                        <input type="file" id="add-cover" name="cover"
+                                            accept="image/png, image/jpg, image/jpeg" class="d-none">
+                                        <input type="hidden" id="old-cover" class="d-none" name="old_cover" value="">
                                     </div>
-                                @enderror
-                                <div class="error"></div>
-                            </div>
 
-                            {{-- Beds --}}
-                            <div class="input_container">
-                                <label for="beds" class="form-label fs-4 fw-4">Letti</label>
-                                <input type="number" class="form-control shadow-none @error('beds') is-invalid @enderror"
-                                    id="beds" name="beds" value="{{ old('beds') }}">
-                                @error('beds')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                                <div class="error"></div>
-                            </div>
+                                    {{-- Others --}}
+                                    @for ($i = 0; $i < 5; $i++)
+                                        <div class="img-apartment position-relative images">
+                                            <label for="add-image{{ $i }}" class="d-block">
+                                                <img src="{{ asset('storage/') }}" class="image" />
+                                            </label>
 
-                            {{-- Bathrooms --}}
-                            <div class="input_container">
-                                <label for="bathrooms" class="form-label fs-4 fw-4">Bagni</label>
-                                <input type="number"
-                                    class="form-control shadow-none @error('bathrooms') is-invalid @enderror" id="bathrooms"
-                                    name="bathrooms" value="{{ old('bathrooms') }}">
-                                @error('bathrooms')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                                <div class="error"></div>
+                                            <input type="file" class="d-none" id="add-image{{ $i }}"
+                                                name="image{{ $i }}" accept="image/png, image/jpg, image/jpeg">
+
+                                            <input type="hidden" class="d-none old-image"
+                                                name="old_image{{ $i }}" value="">
+
+                                            <span id="remove-images" class="btn remove-image">&#128465;</span>
+                                        </div>
+                                    @endfor
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -140,7 +123,7 @@
                 {{-- Description --}}
                 <div class="container">
                     <div class="input_container h-100">
-                        <label for="description" class="form-label fs-4 fw-4">Descrizione</label>
+                        <label for="description" class="form-label fs-4 fw-4 text-gradient">Descrizione</label>
                         <textarea type="text" class="form-control shadow-none @error('description') is-invalid @enderror" id="description"
                             name="description" rows="5">{{ old('description') }}</textarea>
                         @error('description')
@@ -152,47 +135,66 @@
                     </div>
                 </div>
 
-                {{-- Images --}}
                 <div class="container">
-                    <h4 class="my-2">Immagini</h4>
-                    <div class="container container-img px-0">
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
-
-                            {{-- Cover --}}
-                            <div class="img-apartment position-relative">
-                                <label for="add-cover" class="d-block">
-                                    <img src="{{ asset('storage/') }}" id="cover" />
-                                </label>
-                                <span id="remove-cover" class="btn remove-image">&#128465;</span>
-                                <input type="file" id="add-cover" name="cover"
-                                    accept="image/png, image/jpg, image/jpeg" class="d-none">
-                                <input type="hidden" id="old-cover" class="d-none" name="old_cover" value="">
-                            </div>
-
-                            {{-- Others --}}
-                            @for ($i = 0; $i < 5; $i++)
-                                <div class="img-apartment position-relative images">
-                                    <label for="add-image{{ $i }}" class="d-block">
-                                        <img src="{{ asset('storage/') }}" class="image" />
-                                    </label>
-
-                                    <input type="file" class="d-none" id="add-image{{ $i }}"
-                                        name="image{{ $i }}" accept="image/png, image/jpg, image/jpeg">
-
-                                    <input type="hidden" class="d-none old-image" name="old_image{{ $i }}"
-                                        value="">
-
-                                    <span id="remove-images" class="btn remove-image">&#128465;</span>
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2 mt-0">
+                        {{-- Size --}}
+                        <div class="input_container-split">
+                            <label for="size" class="form-label fs-4 fw-4 text-gradient">Metri Quadrati</label>
+                            <input type="number" class="form-control shadow-none @error('size') is-invalid @enderror"
+                                id="size" name="size" value="{{ old('size') }}">
+                            @error('size')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
                                 </div>
-                            @endfor
+                            @enderror
+                            <div class="error"></div>
+                        </div>
 
+                        {{-- Rooms --}}
+                        <div class="input_container-split">
+                            <label for="rooms" class="form-label fs-4 fw-4 text-gradient">Camere</label>
+                            <input type="number" class="form-control shadow-none @error('rooms') is-invalid @enderror"
+                                id="rooms" name="rooms" value="{{ old('rooms') }}">
+                            @error('rooms')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="error"></div>
+                        </div>
+
+                        {{-- Beds --}}
+                        <div class="input_container-split">
+                            <label for="beds" class="form-label fs-4 fw-4 text-gradient">Letti</label>
+                            <input type="number" class="form-control shadow-none @error('beds') is-invalid @enderror"
+                                id="beds" name="beds" value="{{ old('beds') }}">
+                            @error('beds')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="error"></div>
+                        </div>
+
+                        {{-- Bathrooms --}}
+                        <div class="input_container-split">
+                            <label for="bathrooms" class="form-label fs-4 fw-4 text-gradient">Bagni</label>
+                            <input type="number"
+                                class="form-control shadow-none @error('bathrooms') is-invalid @enderror" id="bathrooms"
+                                name="bathrooms" value="{{ old('bathrooms') }}">
+                            @error('bathrooms')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="error"></div>
                         </div>
                     </div>
                 </div>
 
                 {{-- Services --}}
                 <div class="container">
-                    <h4 class="my-2">Servizi</h4>
+                    <h4 class="my-2 text-gradient">Servizi</h4>
                     <div class="container">
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
                             @foreach ($services as $service)
@@ -211,7 +213,7 @@
                 {{-- Visibility --}}
                 <div class="container">
                     <div class="d-flex flex-column justify-content-center align-items-center">
-                        <h4 class="my-2">Visibilità Appartamento</h4>
+                        <h4 class="my-2 text-gradient">Rendi Visibile</h4>
                         <label class="rocker rocker-small">
                             <input type="checkbox" name="visibility" value="1"
                                 {{ old('visibility') ? 'checked' : '' }}>

@@ -1,6 +1,6 @@
 @php $user = Auth::user(); @endphp
 
-<nav class="navbar navbar-expand-lg w-100 bg-white">
+<nav class="navbar navbar-expand-lg w-100">
     <div class="container">
         <a class="navbar-brand" href="http://localhost:5174">
             <img src="{{ url('/logos/multicolor-horizontal-logo.png') }}" alt="">
@@ -11,85 +11,64 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse bg-white p-2 rounded" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse p-2 rounded" id="navbarSupportedContent">
             <ul class="navbar-nav flex-grow-1 log-btn gap-3">
-                {{-- <li class="nav-item">
-                    <button class="home-link">
-                        <a href="http://localhost:5174">Home</a>
-                    </button>
-                </li> --}}
                 <li class="nav-item">
-                    <button class="search-link">
-                        <a href="http://localhost:5174/search">Cerca Appartamenti</a>
-                    </button>
+                    <a class="nav-link" href="http://localhost:5174/search">Cerca Appartamenti</a>
                 </li>
             </ul>
             @if (Route::has('login'))
                 @auth
-                    <ul class="navbar-nav log-btn gap-3">
-                        <li class="nav-item dropdown">
-                            <button class="apartments-link" data-bs-toggle="dropdown" aria-expanded="false">
-                                <a class="dropdown-toggle" href="#">
-                                    I Miei Appartamenti
-                                </a>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('admin.apartments.index') }}">Lista
-                                        Appartamenti</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.apartments.create') }}">Aggiungi
-                                        Appartamento</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                @endauth
-            @endif
-
-            @if (Route::has('login'))
-                <div class="log-btn">
-                    @auth
+                    <div class="log-btn">
                         <div class="navbar-nav mb-2 mb-lg-0">
                             <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle fs-5" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ $user->email }}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <div>
-                                        <li class="nav-item px-3 py-1">
-                                            <button class="dashboard-link">
-                                                <a href="/">Dashboard</a>
-                                            </button>
-                                        </li>
-                                        <hr class="m-0">
-                                        <li class="nav-item px-3 py-1">
-                                            <button class="messages-link">
-                                                <a href="{{ route('admin.messages.index') }}">Messaggi</a>
-                                            </button>
-                                        </li>
-                                        <hr class="m-0">
-                                        <li class="nav-item px-3 py-1">
-                                            <button class="sponsors-link">
-                                                <a href="{{ route('admin.sponsors.index') }}">Sponsorizza</a>
-                                            </button>
-                                        </li>
-                                        <hr class="m-0">
+                                <button class="button f-4" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="text-gradient"><i class="fa-regular fa-user"></i>
+                                        Profilo</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end list-unstyled">
+                                    <li class="nav-item">
+                                        <a class="nav-link px-3 py-1" href="/"><i class="fa-solid fa-list"></i>
+                                            Dashboard</a>
+                                    </li>
+                                    <hr class="m-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link px-3 py-1" href="{{ route('admin.apartments.index') }}">
+                                            <i class="fa-solid fa-house-user" style="color: #666666;"></i>
+                                            Appartamenti</a>
+                                    </li>
+                                    <hr class="m-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link px-3 py-1" href="{{ route('admin.messages.index') }}"><i
+                                                class="fa-regular fa-message"></i> Messaggi</a>
+                                    </li>
+                                    <hr class="m-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link px-3 py-1" href="{{ route('admin.sponsors.index') }}"><i
+                                                class="fa-regular fa-star"></i>
+                                            Sponsorizza</a>
+                                    </li>
+                                    <hr class="m-0">
+                                    <li class="m-0 p-0">
                                         <form action="{{ route('logout') }}" method="post" class="dropdown-item exit mb-0">
                                             @csrf
-                                            <button class="btn p-0 text-danger pe-auto">Esci</button>
+                                            <button class="btn p-0 text-danger pe-auto">
+                                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Esci
+                                            </button>
                                         </form>
-                                    </div>
-                                </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     @else
                         <div class="d-flex gap-2">
-                            <button class="login-link">
-                                <a href="{{ route('login') }}">Accedi</a>
+                            <button class="button">
+                                <a class="link-unstyled text-gradient" href="{{ route('login') }}">Accedi</a>
                             </button>
                             <div class="border border-1 border-dark"></div>
                             @if (Route::has('register'))
-                                <button class="register-link">
-                                    <a href="{{ route('register') }}">Registrati</a>
+                                <button class="button">
+                                    <a class="link-unstyled text-gradient" href="{{ route('register') }}">Registrati</a>
                                 </button>
                             @endif
                         </div>
@@ -107,7 +86,9 @@
         left: 0;
         top: 0;
         z-index: 99;
-        border-bottom: 1px solid #FF7210;
+        background-color: #fdfdfd;
+        box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.1);
+        /* border-bottom: 1px solid #FF7210; */
     }
 
     .log-btn a {

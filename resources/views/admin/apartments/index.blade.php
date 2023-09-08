@@ -8,13 +8,13 @@
         </div>
     @endif
 
-    <div class="card mt-3">
+    <div class="card mt-3 box-shadow">
 
         {{-- Header --}}
         <div class="card-header">
             <div class="row row-cols-1 row-cols-md-2 align-center g-3">
-                <div class="text-gradient">
-                    <h1 class="mb-0 p-2">Lista Appartamenti</h1>
+                <div class="">
+                    <h1 class="text-gradient mb-0 p-2">Lista Appartamenti</h1>
                 </div>
 
                 <div class="d-flex add-container">
@@ -66,6 +66,7 @@
                         </tr>
                     @endforeach
 
+                    {{-- Delete modal --}}
                     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
@@ -165,10 +166,6 @@
         }
 
         table td::before {
-            /*
-    * aria-label has no advantage, it won't be read inside a table
-    content: attr(aria-label);
-    */
             content: attr(data-label);
             float: left;
             font-weight: bold;
@@ -187,6 +184,4 @@
             justify-content: flex-start;
         }
     }
-
-    @media screen and (max-width: 575px) {}
 </style>
