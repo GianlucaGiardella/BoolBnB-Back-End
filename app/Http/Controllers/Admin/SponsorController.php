@@ -8,14 +8,17 @@ use App\Models\Sponsor;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class SponsorController extends Controller
 {
     public function index()
     {
+        $user_id=Auth::user()->id;
         $sponsors = Sponsor::all();
         $userApartments = auth()->user()->apartments;
-        $userSponsor = auth()->user()->sponsor;
+        $userSponsors = auth()->user()->sponsors;
+        $apartments = Apartment::all()->where('user_id', $user_id);
 
         $gateway = new Gateway([
             'environment' => config('services.braintree.environment'),
@@ -26,7 +29,7 @@ class SponsorController extends Controller
 
         $token = $gateway->clientToken()->generate();
 
-        return view('admin.sponsors.index', compact('sponsors', 'userApartments', 'gateway', 'token', 'userSponsor'));
+        return view('admin.sponsors.index', compact('gateway', 'token', 'userSponsors', 'userApartments', 'sponsors', 'user_id', 'apartments'));
     }
 
     public function create()
@@ -41,7 +44,7 @@ class SponsorController extends Controller
 
     public function show(Sponsor $sponsor)
     {
-        //
+        return view('admin.sponsors.show', compact('sponsor'));
     }
 
     public function edit(Sponsor $sponsor)

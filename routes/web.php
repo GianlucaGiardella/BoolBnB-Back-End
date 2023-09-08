@@ -43,7 +43,6 @@ Route::middleware('auth')
         Route::get('/messages/{apartment_id?}', [MessageController::class, 'index'])->name('messages.index');
 
         Route::get('/sponsors', [SponsorController::class, 'index'])->name('sponsors.index');
-
-        Route::post('payment/processPayment', [PaymentController::class, 'processPayment'])->name('payment.processPayment');
+        Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process_payment');
     });
 require __DIR__ . '/auth.php';

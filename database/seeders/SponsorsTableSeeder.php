@@ -11,26 +11,30 @@ class SponsorsTableSeeder extends Seeder
 {
     public function run()
     {
-        foreach (config('bnb.sponsors') as $sponsor) {
-            Sponsor::create($sponsor);
-        }
+        $sponsors = [
+            [
+                'name' => 'Bronzo',
+                'price' => 2.99,
+                'duration' => 24,
+            ],
+            [
+                'name' => 'Argento',
+                'price' => 5.99,
+                'duration' => 72,
+            ],
+            [
+                'name' => 'Oro',
+                'price' => 9.99,
+                'duration' => 144,
+            ],
+        ];
 
-        foreach (config('bnb.apartments_sponsors') as $apartments_sponsors) {
-
-            foreach (Sponsor::all() as $sponsor) {
-
-                foreach (Apartment::all() as $apartment) {
-
-                    if ($apartment['id'] == $apartments_sponsors['apartment_id'] && $sponsor['id'] == $apartments_sponsors['sponsor_id']) {
-
-                        $duration = $sponsor['duration'];
-                        $apartments_sponsors['end_date'] = date('Y-m-d H:i:s', strtotime($apartments_sponsors['start_date'] . ' + ' . $duration . ' hours'));
-                        $sponsor->apartments()->attach($apartment->id, array("start_date" => $apartments_sponsors["start_date"], "end_date" => $apartments_sponsors["end_date"]));
-                    }
-                }
-
-                $sponsor->save();
-            }
+        foreach ($sponsors as $sponsor) {
+            $newSponsor = new Sponsor();
+            $newSponsor->name = $sponsor['name'];
+            $newSponsor->price = $sponsor['price'];
+            $newSponsor->duration = $sponsor['duration'];
+            $newSponsor->save();
         }
     }
 }
