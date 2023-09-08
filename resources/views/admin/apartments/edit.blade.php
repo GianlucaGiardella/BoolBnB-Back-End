@@ -167,8 +167,8 @@
                     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2 mt-0">
                         {{-- Size --}}
                         <div class="input_container_split">
-                            <label for="size" class="form-label fs-4 fw-4 text-gradient">Dimensioni | m<sup
-                                    data-v-921fee28="">2</sup></label>
+                            <label for="size" class="form-label fs-4 fw-4 text-gradient">Dimensioni |
+                                m<sup>2</sup></label>
                             <input type="number" class="form-control shadow-none @error('size') is-invalid @enderror"
                                 id="size" name="size" value="{{ old('size', $apartment->size) }}">
                             @error('size')

@@ -33,13 +33,27 @@
                 <thead>
                     <tr>
                         {{-- <th scope="col" class="text-gradient">#</th> --}}
-                        <th scope="col" class="text-gradient">Titolo</th>
-                        <th scope="col" class="text-gradient">Metri Quadrati</th>
-                        <th scope="col" class="text-gradient">Camere</th>
-                        <th scope="col" class="text-gradient">Letti</th>
-                        <th scope="col" class="text-gradient">Bagni</th>
-                        <th scope="col" class="text-gradient">Visibile</th>
-                        <th scope="col" class="text-gradient"></th>
+                        <th scope="col" class="text-gradient">
+                            <span class="index-table-label mb-0">Titolo</span>
+                        </th>
+                        <th scope="col" class="text-gradient">
+                            <span class="index-table-label mb-0">Dimensioni</span>
+                        </th>
+                        <th scope="col" class="text-gradient">
+                            <span class="index-table-label mb-0">Camere</span>
+                        </th>
+                        <th scope="col" class="text-gradient">
+                            <span class="index-table-label mb-0">Letti</span>
+                        </th>
+                        <th scope="col" class="text-gradient">
+                            <span class="index-table-label mb-0">Bagni</span>
+                        </th>
+                        <th scope="col" class="text-gradient">
+                            <span class="index-table-label mb-0">Visibile</span>
+                        </th>
+                        <th scope="col" class="text-gradient">
+                            <span class="index-table-label mb-0"></span>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,7 +61,7 @@
                         <tr>
                             {{-- <td data-label="Id">{{ $loop->index + 1 }}</td> --}}
                             <td data-label="Titolo">{{ $apartment->title }}</td>
-                            <td data-label="Metri Quadrati">{{ $apartment->size }}</td>
+                            <td data-label="Dimensioni">{{ $apartment->size }}</td>
                             <td data-label="Camere">{{ $apartment->rooms }}</td>
                             <td data-label="Letti">{{ $apartment->beds }}</td>
                             <td data-label="Bagni">{{ $apartment->bathrooms }}</td>
@@ -130,6 +144,13 @@
 
     .add-container {
         justify-content: flex-end;
+    }
+
+    @media screen and (max-width: 991px) {
+        .index-table-label {
+            font-size: 10px;
+            font-weight: 900;
+        }
     }
 
     @media screen and (max-width: 767px) {
