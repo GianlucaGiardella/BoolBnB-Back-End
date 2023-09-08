@@ -37,6 +37,11 @@
                                 <a href="{{ route('admin.messages.index') }}">Messaggi</a>
                             </button>
                         </li>
+                        <li class="nav-item">
+                            <button class="sponsors-link">
+                                <a href="{{ route('admin.sponsors.index') }}">Sponsorizza</a>
+                            </button>
+                        </li>
                         <li class="nav-item dropdown">
                             <button class="apartments-link" data-bs-toggle="dropdown" aria-expanded="false">
                                 <a class="dropdown-toggle" href="#">
@@ -128,6 +133,7 @@
     .search-link,
     .dashboard-link,
     .messages-link,
+    .sponsors-link,
     .apartments-link,
     .login-link,
     .register-link {
@@ -141,6 +147,7 @@
     .search-link,
     .dashboard-link,
     .messages-link,
+    .sponsors-link,
     .apartments-link,
     .login-link,
     .register-link {
@@ -157,6 +164,7 @@
     .search-link a,
     .dashboard-link a,
     .messages-link a,
+    .sponsors-link a,
     .apartments-link a,
     .login-link a,
     .register-link a {
@@ -169,6 +177,7 @@
     .search-link a::before,
     .dashboard-link a::before,
     .messages-link a::before,
+    .sponsors-link a::before,
     .apartments-link a::before,
     .login-link a::before,
     .register-link a::before {
@@ -196,6 +205,10 @@
         content: "Messaggi";
     }
 
+    .sponsors-link a::before {
+        content: "Sponsorizza";
+    }
+
     .apartments-link a::before {
         content: "I\00a0 Miei\00a0 Appartamenti\00a0\00a0\00a0\00a0\00a0 "
     }
@@ -212,6 +225,7 @@
     .search-link a:hover,
     .dashboard-link a:hover,
     .messages-link a:hover,
+    .sponsors-link a:hover,
     .apartments-link a:hover,
     .login-link a:hover,
     .register-link a:hover {
@@ -222,6 +236,7 @@
     .search-link:hover::after,
     .dashboard-link:hover::after,
     .messages-link:hover::after,
+    .sponsors-link:hover::after,
     .apartments-link:hover::after,
     .login-link:hover::after,
     .register-link::after {
@@ -232,6 +247,7 @@
     .search-link:hover a::before,
     .dashboard-link:hover a::before,
     .messages-link:hover a::before,
+    .sponsors-link:hover a::before,
     .apartments-link:hover a::before,
     .login-link:hover a::before,
     .register-link:hover a::before {

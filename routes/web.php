@@ -32,10 +32,6 @@ Route::middleware(['auth', 'verified'])
         // Apartment resource
         Route::resource('apartments', ApartmentController::class);
 
-        // User Sponsors
-        Route::get('/sponsors', [SponsorController::class, 'index'])->name('sponsors.index');
-        Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process_payment');
-
         // All apartment sponsors
         Route::get('apartments/{apartment}/sponsors', [ApartmentController::class, 'sponsors'])->name('apartments.sponsors');
 
@@ -44,6 +40,12 @@ Route::middleware(['auth', 'verified'])
 
         // All user messages per apartment
         Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+
+        // All user sponsor per apartment
+        Route::get('/sponsors', [SponsorController::class, 'index'])->name('sponsors.index');
+
+        // Payment process
+        Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process_payment');
     });
 
 Route::middleware('auth')
