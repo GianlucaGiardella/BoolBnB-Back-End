@@ -347,6 +347,6 @@ class ApartmentController extends Controller
         ]);
 
         $token = $gateway->clientToken()->generate();
-        return view('admin.sponsors.index', compact('sponsors', 'apartment', 'userApartments', 'gateway', 'token', 'userSponsor'));
+        return view('admin.apartments.sponsor', compact('sponsors', 'apartment', 'userApartments', 'gateway', 'token', 'userSponsor'));
     }
 }
