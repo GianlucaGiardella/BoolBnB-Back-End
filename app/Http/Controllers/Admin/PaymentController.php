@@ -63,13 +63,14 @@ class PaymentController extends Controller
             if ($apartment->sponsors()->where('valid', true)->count() > 0) {
 
                 $apartment->sponsors()->where('valid', true)->update([
-                    'end_date' => DB::raw('DATE_ADD(end_date, INTERVAL ' . $sponsor->duration . ' DAY)'),
+                    'end_date' => DB::raw('DATE_ADD(end_date, INTERVAL ' . $sponsor->duration . ' HOUR)'),
                 ]);
                 return view('admin.payment.already');
+    
             } else { //se non esise una sponsorizzazione attiva
                 $apartment->sponsors()->attach($sponsor->id, [
-                    'start_date' => now(), // Imposta la data corrente
-                    'end_date' => (now()->addDays($sponsor->duration)),
+                    'start_date' => now()->addHours(2), // Imposta la data corrente
+                    'end_date' => (now()->addHours(2 + $sponsor->duration)),
                 ]);
             }
 

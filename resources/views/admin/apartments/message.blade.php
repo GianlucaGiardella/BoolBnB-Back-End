@@ -32,7 +32,7 @@
                                 </div>
                                 <div style="padding: 2em;">{{ $message->text_message }}</div>
                                 <div style="font-size: 12px">Ricevuto il {{ $message->created_at->format('d/m/y') }} alle
-                                    {{ $message->created_at->format('H:m') }}</div>
+                                    {{ $message->created_at->format('H:i') }}</div>
                             </div>
                         </div>
                     </div>
