@@ -333,11 +333,9 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         if (Auth::id() !== $apartment->user_id) abort(403);
-
+        $apartments = Apartment::where('id', $apartment->id)->get();
         $sponsors = Sponsor::all();
 
-        $userApartments = auth()->user()->apartments;
-        $userSponsor = auth()->user()->sponsor;
 
         $gateway = new Gateway([
             'environment' => config('services.braintree.environment'),
@@ -347,6 +345,6 @@ class ApartmentController extends Controller
         ]);
 
         $token = $gateway->clientToken()->generate();
-        return view('admin.apartments.sponsor', compact('sponsors', 'apartment', 'userApartments', 'gateway', 'token', 'userSponsor'));
+        return view('admin.apartments.sponsor', compact('sponsors', 'apartment', 'gateway', 'token', 'apartments'));
     }
 }

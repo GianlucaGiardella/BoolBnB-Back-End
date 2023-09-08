@@ -10,8 +10,10 @@ use App\Models\Apartment;
 use Braintree\Transaction;
 use Illuminate\Http\Request;
 use App\Models\ApartmentSponsor;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Console\View\Components\Alert;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -26,8 +28,6 @@ class PaymentController extends Controller
         $paymentMethod = "creditCard";
         $sponsorId = $request->input('sponsor_id');
         $sponsor = Sponsor::find($sponsorId);
-
-        $sponsorId = $request->input('sponsor_id');
         $apartmentId = $request->input('apartment_id');
         $apartment = Apartment::find($apartmentId);
         $nonce = $request->payment_method_nonce;
@@ -60,11 +60,18 @@ class PaymentController extends Controller
         // Gestisci la risposta di Braintree e restituisci una vista appropriata
         if ($result->success) {
 
-            $durationInHours = $sponsor->duration;
-            $endTime = now()->addHours($durationInHours);
+            if ($apartment->sponsors()->where('valid', true)->count() > 0) {
 
-            $apartment->sponsors()->attach($sponsorId, ['end_date' => $endTime, 'start_date' => now()]);
-
+                $apartment->sponsors()->where('valid', true)->update([
+                    'end_date' => DB::raw('DATE_ADD(end_date, INTERVAL ' . $sponsor->duration . ' DAY)'),
+                ]);
+                return view('admin.payment.already');
+            } else { //se non esise una sponsorizzazione attiva
+                $apartment->sponsors()->attach($sponsor->id, [
+                    'start_date' => now(), // Imposta la data corrente
+                    'end_date' => (now()->addDays($sponsor->duration)),
+                ]);
+            }
 
             return view('admin.payment.success');
         } else {
