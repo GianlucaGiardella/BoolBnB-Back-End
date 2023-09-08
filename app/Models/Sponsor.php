@@ -13,7 +13,7 @@ class Sponsor extends Model
         'price',
         'duration',
     ];
-
+    protected $table = 'sponsors';
     public function apartments()
     {
         return $this->belongsToMany(Apartment::class);
