@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('contents')
-    <div class="card mt-3 p-2">
+    {{-- <div class="card mt-3 p-2">
 
         <div class="card-body d-flex flex-column gap-3 align-items-start">
             <div class="text-gradient">
@@ -13,7 +13,6 @@
                     <a class="nav-link" href="{{ route('admin.apartments.edit', ['apartment' => $apartment]) }}">Modifica
                         Appartamento</a>
                 </button>
-
 
                 <div>
                     <button class="styled-btn d-flex align-items-center">
@@ -52,65 +51,96 @@
             <h5>Bagni: {{ $apartment->bathrooms }}</h5>
         </div>
 
+        <div class="option-card">
+            <div class="card red">
+                <h2 class="tip">Modifica</h2>
+            </div>
+            <div class="card blue">
+                <h2 class="tip">Messaggi</h2>
+            </div>
+            <div class="card green">
+                <h2 class="tip">Sponsorizza</h2>
+            </div>
+        </div>
+
         <button class="styled-btn w-25">
             <a class="nav-link" href="{{ route('admin.apartments.messages', ['apartment' => $apartment]) }}">Messaggi</a>
         </button>
-    </div>
-    <style>
-        .Btn {
-            width: 130px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgb(15, 15, 15);
-            border: none;
-            color: white;
-            font-weight: 600;
-            gap: 8px;
-            cursor: pointer;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.103);
-            position: relative;
-            overflow: hidden;
-            transition-duration: .3s;
-        }
+    </div> --}}
 
-        .svgIcon {
-            width: 20px;
-            padding-left: 5px;
-        }
+    <div class="card box-shadow mt-0">
+        <div class="card-body d-flex flex-column py-3 gap-4">
+            <div class="container">
+                <h1>{{ $apartment->title }}</h1>
+            </div>
 
-        .svgIcon path {
-            fill: white;
-        }
+            <div class="container">
+                <h5>
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    {{ $apartment->street }}
+                </h5>
+            </div>
 
-        a {
-            text-decoration: none;
-            color: white;
-        }
+            <div class="container">
+                <div class="container container-img px-0">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
+                        <div class="img-apartment">
+                            <img src="{{ asset('storage/' . $apartment->cover) }}" alt="{{ $apartment->title }}"
+                                class="cover" />
+                        </div>
 
-        .Btn::before {
-            width: 130px;
-            height: 130px;
-            position: absolute;
-            content: "";
-            background-color: white;
-            border-radius: 50%;
-            left: -100%;
-            top: 0;
-            transition-duration: .3s;
-            mix-blend-mode: difference;
-        }
+                        @foreach ($apartment->images as $image)
+                            <div class="img-apartment">
+                                <img src="{{ asset('storage/' . $image->img_url) }}" alt="" />
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
 
-        .Btn:hover::before {
-            transition-duration: .3s;
-            transform: translate(100%, -50%);
-            border-radius: 0;
-        }
+            <div class="container">
+                <h4>Descrizione</h4>
+                <p>{{ $apartment->description }}</p>
+            </div>
 
-        .Btn:active {
-            transform: translate(5px, 5px);
-            transition-duration: .3s;
-        }
-    </style>
-@endsection
+            <div class="container">
+                <div class="row row-cols-1 row-cols-md-2">
+                    <div class="container">
+                        <h3>Informazioni appartamento:</h3>
+                        <h4>Dimensioni: {{ $apartment->size }} m<sup>2</sup></h4>
+                        <h4>Camere: {{ $apartment->rooms }}</h4>
+                        <h4>Letti: {{ $apartment->beds }}</h4>
+                        <h4 class="line me-2">Bagni: {{ $apartment->bathrooms }}</h4>
+                        <h4>Cosa troverai</h4>
+                        <ul class="list-unstyled">
+                            @foreach ($apartment->services as $service)
+                                <li>
+                                    <i class="fa-solid fa-square-check"></i>
+                                    {{ $service->name }}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="container">
+                        <div class="option-card h-100 border rounded">
+                            <div class="card red">
+                                <a class="link-unstyled text-white fs-2 w-100 h-100"
+                                    href="{{ route('admin.apartments.edit', ['apartment' => $apartment]) }}"
+                                    class="tip">Modifica</a>
+                            </div>
+                            <div class="card blue">
+                                <a class="link-unstyled text-white fs-2 w-100 h-100"
+                                    href="{{ route('admin.apartments.messages', ['apartment' => $apartment]) }}"
+                                    class="tip">Messaggi</a>
+                            </div>
+                            <div class="card green">
+                                <a class="link-unstyled text-white fs-2 w-100 h-100"
+                                    href="{{ route('admin.apartments.sponsors', ['apartment' => $apartment]) }}"
+                                    class="tip">Sponsorizza</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endsection
