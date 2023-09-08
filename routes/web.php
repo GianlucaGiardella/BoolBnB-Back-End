@@ -31,6 +31,10 @@ Route::middleware(['auth', 'verified'])
         // Apartment resource
         Route::resource('apartments', ApartmentController::class);
 
+        // User Sponsors
+        Route::get('/sponsors', [SponsorController::class, 'index'])->name('sponsors.index');
+        Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process_payment');
+
         // All apartment sponsors
         Route::get('apartments/{apartment}/sponsors', [ApartmentController::class, 'sponsors'])->name('apartments.sponsors');
 
