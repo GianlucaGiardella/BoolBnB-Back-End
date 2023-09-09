@@ -49,7 +49,7 @@ class ApartmentController extends Controller
 
     public function create()
     {
-        //Get all tables
+        // Get all tables
         $apartments = Apartment::all();
         $services = Service::all();
         $sponsors = Sponsor::all();
@@ -345,7 +345,6 @@ class ApartmentController extends Controller
 
         $apartments = Apartment::where('id', $apartment->id)->get();
         $sponsors = Sponsor::all();
-
 
         $gateway = new Gateway([
             'environment' => config('services.braintree.environment'),

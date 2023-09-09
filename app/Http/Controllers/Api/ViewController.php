@@ -11,6 +11,7 @@ class ViewController extends Controller
     public function index()
     {
         $view = View::all();
+
         return response()->json($view);
     }
 }

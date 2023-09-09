@@ -11,6 +11,7 @@ class SponsorController extends Controller
     public function index()
     {
         $sponsor = Sponsor::all();
+
         return response()->json($sponsor);
     }
 }
