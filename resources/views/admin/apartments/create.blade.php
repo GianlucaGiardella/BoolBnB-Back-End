@@ -6,6 +6,8 @@
 @section('contents')
     <div class="card mt-0 box-shadow">
         <div class="card-body py-3">
+
+            {{-- Header --}}
             <div class="container">
                 <div class="d-inline-block text-gradient">
                     <h1>Aggiungi Appartamento</h1>
