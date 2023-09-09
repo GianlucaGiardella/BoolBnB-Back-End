@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\SponsorController;
 use App\Http\Controllers\Admin\ApartmentController;
+use App\Http\Controllers\Admin\ViewController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Guests\PageController as GuestsPageController;
 
@@ -46,6 +47,9 @@ Route::middleware(['auth', 'verified'])
 
         // Payment process
         Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process_payment');
+
+        //views apartment
+        Route::get('/views/{apartment}', [ViewController::class, 'index'])->name('views.index');
     });
 
 Route::middleware('auth')
