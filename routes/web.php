@@ -21,7 +21,7 @@ use App\Http\Controllers\Guests\PageController as GuestsPageController;
 |
 */
 
-Route::get('/', [GuestsPageController::class, 'home'])->name('guests.home');
+// Route::get('/', [GuestsPageController::class, 'home'])->name('guests.home');
 
 Route::middleware(['auth', 'verified'])
     ->name('admin.')

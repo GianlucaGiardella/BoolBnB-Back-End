@@ -29,7 +29,6 @@ class ApartmentController extends Controller
 
     public function show($slug)
     {
-        // $apartment = Apartment::where('slug', $slug)->firstOrFail();
 
         $apartment = Apartment::where("slug", $slug)->with(["images", "services"])->firstOrFail();
 

@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Validator;
 
 class MessageController extends Controller
 {
-    
+
     private $validations = [
-        'email_sender'         =>'required|email|min:5|max:255',
-        'text_message'       =>'required|string',
+        'email_sender'         => 'required|email|min:5|max:255',
+        'text_message'         => 'required|string',
         'apartment_id'         => 'required',
     ];
 
@@ -25,14 +25,9 @@ class MessageController extends Controller
         return response()->json($message);
     }
 
-    public function create()
-    {
-        //
-    }
-
     public function store(Request $request)
     {
-        
+
         $data = $request->all();
 
         // validare i dati
@@ -58,25 +53,5 @@ class MessageController extends Controller
         return response()->json([
             "success" => true
         ]);
-    }
-
-    public function show(Message $message)
-    {
-        //
-    }
-
-    public function edit(Message $message)
-    {
-        //
-    }
-
-    public function update(Request $request, Message $message)
-    {
-        //
-    }
-
-    public function destroy(Message $message)
-    {
-        //
     }
 }
