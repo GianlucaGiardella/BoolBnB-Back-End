@@ -1,4 +1,5 @@
 @extends('layouts.base')
+
 @section('contents')
     <div class="card mt-0 box-shadow">
         <div class="card-body py-3">
@@ -15,6 +16,10 @@
                 Scegliete
                 la soluzione ideale per promuovere il vostro appartamento e attirare il massimo numero di potenziali
                 clienti!
+            </p>
+
+            <p>
+                Da quì è possibile selezionare l'appartamento a qui attivare la sposorizzazione !
             </p>
 
             <div class="row">

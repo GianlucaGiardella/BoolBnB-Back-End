@@ -142,7 +142,7 @@
                 <div class="container">
                     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2 mt-0">
                         {{-- Size --}}
-                        <div class="input_container-split">
+                        <div class="input_container_split">
                             <label for="size" class="form-label fs-4 fw-4 text-gradient">Metri Quadrati</label>
                             <input type="number" class="form-control shadow-none @error('size') is-invalid @enderror"
                                 id="size" name="size" value="{{ old('size') }}">
@@ -155,7 +155,7 @@
                         </div>
 
                         {{-- Rooms --}}
-                        <div class="input_container-split">
+                        <div class="input_container_split">
                             <label for="rooms" class="form-label fs-4 fw-4 text-gradient">Camere</label>
                             <input type="number" class="form-control shadow-none @error('rooms') is-invalid @enderror"
                                 id="rooms" name="rooms" value="{{ old('rooms') }}">
@@ -168,7 +168,7 @@
                         </div>
 
                         {{-- Beds --}}
-                        <div class="input_container-split">
+                        <div class="input_container_split">
                             <label for="beds" class="form-label fs-4 fw-4 text-gradient">Letti</label>
                             <input type="number" class="form-control shadow-none @error('beds') is-invalid @enderror"
                                 id="beds" name="beds" value="{{ old('beds') }}">
@@ -181,7 +181,7 @@
                         </div>
 
                         {{-- Bathrooms --}}
-                        <div class="input_container-split">
+                        <div class="input_container_split">
                             <label for="bathrooms" class="form-label fs-4 fw-4 text-gradient">Bagni</label>
                             <input type="number"
                                 class="form-control shadow-none @error('bathrooms') is-invalid @enderror" id="bathrooms"

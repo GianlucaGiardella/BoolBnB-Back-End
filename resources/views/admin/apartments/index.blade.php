@@ -86,22 +86,26 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="deleteModalLabel">Conferma eliminazione
+                                    <h1 class="modal-title fs-5" id="deleteModalLabel">
+                                        Conferma eliminazione
                                     </h1>
                                 </div>
                                 <div class="modal-footer">
-                                    <form data-template="{{ route('admin.apartments.destroy', ['apartment' => '*****']) }}"
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Annulla
+                                    </button>
+                                    <form action=""
+                                        data-template="{{ route('admin.apartments.destroy', ['apartment' => '*****']) }}"
                                         method="post" class="d-inline-block" id="confirm-delete">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger">Elimina</button>
                                     </form>
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Annulla</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </tbody>
             </table>
 

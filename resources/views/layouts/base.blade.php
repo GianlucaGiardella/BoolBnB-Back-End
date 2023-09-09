@@ -15,9 +15,9 @@
 
     @include('includes.header')
 
-    <div class="container" style="margin-top: 100px;">
+    <main class="container" style="margin-top: 100px;">
         @yield('contents')
-    </div>
+    </main>
 
     {{-- @include('includes.footer') --}}
 

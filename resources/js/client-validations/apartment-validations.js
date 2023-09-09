@@ -89,6 +89,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxNumber = 99;
     const maxSize = 9999;
 
+
+    inputs.forEach(x => x.addEventListener('keydown', e => {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+        }
+    }));
+
     inputs.forEach(x => x.addEventListener('input', () => {
         switch (x) {
             case title:
@@ -189,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 break;
         }
-    }))
+    }));
 
     //Start full controll
     form.addEventListener('submit', e => {
