@@ -14,7 +14,7 @@ class SponsorController extends Controller
 {
     public function index()
     {
-        $user_id=Auth::user()->id;
+        $user_id = Auth::user()->id;
         $sponsors = Sponsor::all();
         $userApartments = auth()->user()->apartments;
         $userSponsors = auth()->user()->sponsors;
@@ -30,35 +30,5 @@ class SponsorController extends Controller
         $token = $gateway->clientToken()->generate();
 
         return view('admin.sponsors.index', compact('gateway', 'token', 'userSponsors', 'userApartments', 'sponsors', 'user_id', 'apartments'));
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Sponsor $sponsor)
-    {
-        return view('admin.sponsors.show', compact('sponsor'));
-    }
-
-    public function edit(Sponsor $sponsor)
-    {
-        //
-    }
-
-    public function update(Request $request, Sponsor $sponsor)
-    {
-        //
-    }
-
-    public function destroy(Sponsor $sponsor)
-    {
-        //
     }
 }
