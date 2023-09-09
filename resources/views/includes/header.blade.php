@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg w-100">
     <div class="container">
-        <div class="w-100 d-flex justify-content-between px-4">
+        <div class="w-100 d-flex justify-content-between px-0">
             <a class="navbar-brand" href="http://localhost:5174">
                 <img class="full-logo" src="{{ url('/logos/multicolor-horizontal-logo.png') }}" alt="">
                 <img class="icon-logo" src="{{ url('/logos/multicolor-logo.ico') }}" alt="">
@@ -19,7 +19,7 @@
                 @if (Route::has('login'))
                     @auth
                         <div class="nav-item dropdown h-100">
-                            <button class="button h-100" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="h-100 button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="text-gradient"><i class="fa-regular fa-user"></i>
                                     <span class="disapear">Profilo</span></span>
                             </button>
@@ -59,15 +59,18 @@
                         </div>
                     @else
                         <div class="d-flex gap-2">
-                            <button class="button">
-                                <a class="w-100 link-unstyled text-gradient" href="{{ route('login') }}">Accedi</a>
-                            </button>
+                            <a class="link-unstyled d-flex align-center" href="{{ route('login') }}">
+                                <button class="button text-gradient">
+                                    <i class="fa-solid fa-user-lock"></i> <span class="disapear">Accedi</span>
+                                </button>
+                            </a>
                             <div class="border border-1 border-dark"></div>
                             @if (Route::has('register'))
-                                <button class="button">
-                                    <a class="w-100 link-unstyled text-gradient"
-                                        href="{{ route('register') }}">Registrati</a>
-                                </button>
+                                <a class="link-unstyled d-flex align-center" href="{{ route('register') }}">
+                                    <button class="button text-gradient">
+                                        <i class="fa-solid fa-user-plus"></i> <span class="disapear">Registrati</span>
+                                    </button>
+                                </a>
                             @endif
                         </div>
                     @endauth
