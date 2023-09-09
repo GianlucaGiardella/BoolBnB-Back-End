@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const inputs = [email, password];
 
+    inputs.forEach(x => x.addEventListener('keydown', e => {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+        }
+    }));
+
     inputs.forEach(x => x.addEventListener('input', () => {
         switch (x) {
             case email:

@@ -298,23 +298,30 @@ class ApartmentController extends Controller
 
     public function destroy($slug)
     {
+        // User control
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         if (Auth::id() !== $apartment->user_id) abort(403);
 
+        // Delete apartment tables
         $apartment->services()->detach();
         $apartment->sponsors()->detach();
         $apartment->messages()->delete();
         $apartment->views()->delete();
 
+        // Delete cover from storage
         if ($apartment->cover) {
             Storage::delete($apartment->cover);
         }
 
-        foreach ($apartment->images as $image) {
-            Storage::delete($image->img_url);
+        // Delete all apartment images from storage & table
+        if ($apartment->images) {
+            foreach ($apartment->images as $image) {
+                Storage::delete($image->img_url);
+            }
+            $apartment->images()->delete();
         }
-        $apartment->images()->delete();
 
+        // Delete apartment
         $apartment->delete();
 
         return to_route('admin.apartments.index')->with('delete_success', $apartment);
@@ -322,6 +329,7 @@ class ApartmentController extends Controller
 
     public function messages($slug)
     {
+        // User control
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         if (Auth::id() !== $apartment->user_id) abort(403);
 
@@ -331,8 +339,10 @@ class ApartmentController extends Controller
 
     public function sponsors($slug)
     {
+        // User control
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         if (Auth::id() !== $apartment->user_id) abort(403);
+
         $apartments = Apartment::where('id', $apartment->id)->get();
         $sponsors = Sponsor::all();
 

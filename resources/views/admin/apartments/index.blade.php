@@ -33,7 +33,8 @@
                     <img class="img-card" src="{{ asset('storage/' . $apartment->cover) }}" alt="{{ $apartment->title }}">
                     <h5 class="card-title">{{ $apartment->title }}</h5>
                     <div class="container-btn">
-                        <a class="btn btn-secondary" href="{{ route('admin.apartments.show', ['apartment' => $apartment]) }}">
+                        <a class="btn btn-secondary"
+                            href="{{ route('admin.apartments.show', ['apartment' => $apartment]) }}">
                             <i class="fa-solid fa-circle-info" style="color: #fff;"></i>
                         </a>
                         <a class="btn btn-primary" href="{{ route('admin.apartments.edit', ['apartment' => $apartment]) }}">
@@ -42,7 +43,8 @@
                         <a class="btn btn-success" href="{{ route('admin.views.index', ['apartment' => $apartment]) }}">
                             <i class="fa-solid fa-chart-line" style="color: #fff;"></i>
                         </a>
-                        <button class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $apartment->slug }}">
+                        <button class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                            data-id="{{ $apartment->slug }}">
                             <i class="fa-solid fa-trash" style="color: #fff;"></i>
                         </button>
                     </div>
@@ -50,71 +52,72 @@
             @endforeach
 
             {{-- Delete modal --}}
-            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
-                aria-hidden="true">
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="deleteModalLabel">Conferma eliminazione</h1>
+                            <h1 class="modal-title fs-5" id="deleteModalLabel">Conferma eliminazione
+                            </h1>
                         </div>
                         <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla
+                            </button>
                             <form data-template="{{ route('admin.apartments.destroy', ['apartment' => '*****']) }}"
                                 method="post" class="d-inline-block" id="confirm-delete">
                                 @csrf
                                 @method('delete')
                                 <button class="btn btn-danger">Elimina</button>
                             </form>
-                            <button type="button" class="btn btn-secondary"
-                                data-bs-dismiss="modal">Annulla</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            
-        </div>
-        {{-- Pagination --}}
-        <div class="container pb-3">
-            {{ $apartments->links() }}
+            {{-- Pagination --}}
+            <div class="container">
+                {{ $apartments->links() }}
+            </div>
+
         </div>
     </div>
 @endsection
 
 <style>
     @media (max-width: 1200px) {
-  .d-flex.gap-3.p-3 {
-    flex-wrap: wrap;
-    justify-content: center
-  }
-}
-.add-container {
-    justify-content: flex-end;
-}
+        .d-flex.gap-3.p-3 {
+            flex-wrap: wrap;
+            justify-content: center
+        }
+    }
 
-.card-apartments {
-    width: 260px;
-    height: 240px;
-}
+    .add-container {
+        justify-content: flex-end;
+    }
 
-.img-card{
-    width: 100%;
-    height: 80%;
-    object-fit: cover;
-}
-.card-title {
-    display: flex;
-    justify-content: center;
-    padding-top: 1rem;
-    font-size: 1rem;
-    white-space: nowrap;
-}
+    .card-apartments {
+        width: 260px;
+        height: 240px;
+    }
 
-.container-btn {
-    display: flex;
-    justify-content: center;
-    gap: .3rem;
-    margin-top: auto;
-    padding-bottom: .5rem;
-}
+    .img-card {
+        width: 100%;
+        height: 80%;
+        object-fit: cover;
+    }
 
+    .card-title {
+        display: flex;
+        justify-content: center;
+        padding-top: 1rem;
+        font-size: 1rem;
+        white-space: nowrap;
+    }
+
+    .container-btn {
+        display: flex;
+        justify-content: center;
+        gap: .3rem;
+        margin-top: auto;
+        padding-bottom: .5rem;
+    }
 </style>

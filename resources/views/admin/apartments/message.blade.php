@@ -1,4 +1,5 @@
 @extends('layouts.base')
+
 @section('contents')
     <div class="card mt-3 box-shadow">
         <div class="d-flex gap-3 align-items-center m-3 mt-5">
