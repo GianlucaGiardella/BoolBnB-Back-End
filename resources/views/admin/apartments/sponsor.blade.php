@@ -6,7 +6,8 @@
             <h1 class="text-gradient">{{ $apartment->title }}</h1>
 
             @if ($apartment->sponsors()->where('valid', true)->count() > 0)
-                Hai gia una sponsor
+                <h4>Hai gia una sponsor</h4> 
+                <p>Puoi prolungare la tua sponsorizzazione quando vuoi! E puoi anche scegliere quella più adatta a te in questo momento!</p>
             @else
                 <h4>Sponsorizzazione</h4>
                 <p>Raggiungete un vasto pubblico per il vostro appartamento con una sponsorizzazione su misura! Offriamo una
@@ -23,20 +24,23 @@
                     @csrf
                     <div class="card mb-3" style="box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);">
                         <div class="card-body">
-                            <h2 class="card-title">Aquista una sponsorizzazione</h2>
+    
                             <div class="form-group">
-                                <label for="sponsor_id">Scegli un pacchetto:</label><br>
-                                @foreach ($sponsors as $sponsor)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sponsor_id"
-                                            id="sponsor_{{ $sponsor->id }}" value="{{ $sponsor->id }}" required>
-                                        <label class="form-check-label" for="sponsor_{{ $sponsor->id }}">
-                                            {{ $sponsor->name }} (Prezzo: {{ $sponsor->price }}€, Durata:
-                                            {{ $sponsor->duration }}
-                                            ore)
-                                        </label>
-                                    </div>
-                                @endforeach
+                                <label for="sponsor_id" style="font-weight: bold; font-size: 20px; padding-bottom: 1em">Scegli un pacchetto:</label><br>
+                                <div class="d-flex">
+
+                                    @foreach ($sponsors as $sponsor)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="sponsor_id"
+                                                id="sponsor_{{ $sponsor->id }}" value="{{ $sponsor->id }}" required >
+                                            <label class="form-check-label" for="sponsor_{{ $sponsor->id }}" >
+                                                {{ $sponsor->name }} <br> (Prezzo: {{ $sponsor->price }}€, Durata:
+                                                {{ $sponsor->duration }}
+                                                ore)
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
 
                                 {{-- Errore --}}
                                 @error('sponsor_id')

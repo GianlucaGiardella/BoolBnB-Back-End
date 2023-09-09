@@ -57,6 +57,9 @@
                                 </li>
                             @endforeach
                         </ul>
+                        @if ($apartment->sponsors()->where('valid', true)->count() > 0)
+                            Hai gia una sponsor
+                        @endif
                     </div>
                     <div class="container">
                         <div class="option-card h-100 border rounded">

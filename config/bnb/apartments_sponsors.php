@@ -2,28 +2,28 @@
 
 return [
     [
-        "apartment_id" => 1,
+        "apartment_id" => 15,
+        "sponsor_id" => 2,
+        "valid" => 1,
+        "start_date" => "2023-09-09 19:23:12",
+    ],
+    [
+        "apartment_id" => 16,
+        "sponsor_id" => 3,
+        "valid" => 1,
+        "start_date" => "2023-09-09 19:25:35",
+    ],
+    [
+        "apartment_id" => 5,
+        "sponsor_id" => 3,
+        "valid" => 1,
+        "start_date" => "2023-09-09 19:28:00",
+    ],
+    [
+        "apartment_id" => 20,
         "sponsor_id" => 1,
-        "start_date" => "2023-08-25 08:22:55",
+        "valid" => 1,
+        "start_date" => "2023-09-09 19:29:02",
     ],
-    [
-        "apartment_id" => 3,
-        "sponsor_id" => 3,
-        "start_date" => "2023-08-25 15:46:14",
-    ],
-    [
-        "apartment_id" => 4,
-        "sponsor_id" => 3,
-        "start_date" => "2022-08-26 09:40:20",
-    ],
-    [
-        "apartment_id" => 8,
-        "sponsor_id" => 2,
-        "start_date" => "2023-08-27 11:10:30",
-    ],
-    [
-        "apartment_id" => 10,
-        "sponsor_id" => 2,
-        "start_date" => "2023-08-28 07:30:39",
-    ]
+    
 ];

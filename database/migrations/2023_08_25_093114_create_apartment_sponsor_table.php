@@ -11,12 +11,13 @@ return new class extends Migration
         Schema::create('apartment_sponsor', function (Blueprint $table) {
             $table->unsignedBigInteger('apartment_id');
             $table->unsignedBigInteger('sponsor_id');
-
             $table->foreign('apartment_id')->references('id')->on('apartments');
             $table->foreign('sponsor_id')->references('id')->on('sponsors');
-            $table->boolean('valid')->default(true);
+
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
+
+            $table->boolean('valid')->default(true);
         });
     }
 
