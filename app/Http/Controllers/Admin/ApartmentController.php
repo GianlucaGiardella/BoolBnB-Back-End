@@ -333,7 +333,8 @@ class ApartmentController extends Controller
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         if (Auth::id() !== $apartment->user_id) abort(403);
 
-        $messages = Message::where('apartment_id', $apartment->id)->get();
+        $messages = Message::where('apartment_id', $apartment->id)->orderBy('created_at', 'desc')->paginate(8);
+
         return view('admin.apartments.message', compact('messages', 'apartment'));
     }
 
