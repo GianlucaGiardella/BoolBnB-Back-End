@@ -36,5 +36,22 @@ class SponsorsTableSeeder extends Seeder
             $newSponsor->duration = $sponsor['duration'];
             $newSponsor->save();
         }
+        foreach (config('bnb.apartments_sponsors') as $apartment_sponsor) {
+
+            foreach (Sponsor::all() as $sponsor) {
+
+                foreach (Apartment::all() as $apartment) {
+
+                    if ($apartment['id'] == $apartment_sponsor['apartment_id'] && $sponsor['id'] == $apartment_sponsor['sponsor_id']) {
+                        $duration = $sponsor['duration'];
+                        $apartment_sponsor['end_date'] = date('Y-m-d H:i:s', strtotime($apartment_sponsor['start_date']. ' + '.$duration.' hours'));
+                        $sponsor->apartments()->attach($apartment->id, array("start_date"=>$apartment_sponsor["start_date"], "end_date"=>$apartment_sponsor["end_date"]));
+                    
+                    }
+                }
+
+                $sponsor->save();
+            }
+        }
     }
 }

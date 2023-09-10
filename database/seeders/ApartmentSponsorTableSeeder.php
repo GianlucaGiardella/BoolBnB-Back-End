@@ -18,6 +18,7 @@ class ApartmentSponsorTableSeeder extends Seeder
      */
     public function run()
     {
+
         $apartmentsID = Apartment::all(["id"]);
         $sponsorID = Sponsor::all(["id"]);
 

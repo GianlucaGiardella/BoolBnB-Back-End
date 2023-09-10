@@ -1,98 +1,92 @@
 @php $user = Auth::user(); @endphp
 
-<nav class="navbar navbar-expand-lg w-100 bg-white">
+<nav class="navbar navbar-expand-lg w-100">
     <div class="container">
-        <a class="navbar-brand" href="http://localhost:5174">
-            <img src="{{ url('/logos/multicolor-horizontal-logo.png') }}" alt="">
-        </a>
+        <div class="w-100 d-flex justify-content-between px-0">
+            <a class="navbar-brand" href="http://localhost:5174">
+                <img class="full-logo" src="{{ url('/logos/multicolor-horizontal-logo.png') }}" alt="">
+                <img class="icon-logo" src="{{ url('/logos/multicolor-logo.ico') }}" alt="">
+            </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <div class="w-100 d-flex justify-content-end align-center gap-4">
 
-        <div class="collapse navbar-collapse bg-white p-2 rounded" id="navbarSupportedContent">
-            <ul class="navbar-nav flex-grow-1 log-btn gap-3">
-                <li class="nav-item">
-                    <button class="home-link">
-                        <a href="http://localhost:5174">Home</a>
+                <a class="link-unstyled d-flex align-center" href="http://localhost:5174/search">
+                    <button class="button">
+                        <span><i class="fa-solid fa-magnifying-glass"></i> <span
+                                class="disapear text-gradient">Cerca</span></span>
                     </button>
-                </li>
-                <li class="nav-item">
-                    <button class="search-link">
-                        <a href="http://localhost:5174/search">Cerca Appartamenti</a>
-                    </button>
-                </li>
-            </ul>
-            @if (Route::has('login'))
-                @auth
-                    <ul class="navbar-nav log-btn gap-3">
-                        <li class="nav-item">
-                            <button class="dashboard-link">
-                                <a href="/">Dashboard</a>
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="messages-link">
-                                <a href="{{ route('admin.messages.index') }}">Messaggi</a>
-                            </button>
-                        </li>
-                        <li class="nav-item">
-                            <button class="sponsors-link">
-                                <a href="{{ route('admin.sponsors.index') }}">Sponsorizza</a>
-                            </button>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <button class="apartments-link" data-bs-toggle="dropdown" aria-expanded="false">
-                                <a class="dropdown-toggle" href="#">
-                                    I Miei Appartamenti
-                                </a>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('admin.apartments.index') }}">Lista
-                                        Appartamenti</a></li>
-                                <li><a class="dropdown-item" href="{{ route('admin.apartments.create') }}">Aggiungi
-                                        Appartamento</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                @endauth
-            @endif
+                </a>
 
-            @if (Route::has('login'))
-                <div class="log-btn">
+                @if (Route::has('login'))
                     @auth
-                        <div class="navbar-nav mb-2 mb-lg-0">
-                            <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle fs-5" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ $user->email }}
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <div>
-                                        <form action="{{ route('logout') }}" method="post" class="dropdown-item exit mb-0">
-                                            @csrf
-                                            <button class="btn p-0 text-danger pe-auto">Esci</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="nav-item dropdown h-100">
+                            <button class="h-100 button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class=""><i class="fa-regular fa-user"></i>
+                                    <span class="disapear text-gradient">Profilo</span></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end list-unstyled box-shadow mt-3">
+                                <li class="nav-item">
+                                    <a class="w-100 nav-link px-3 py-1" href="{{ route('admin.dashboard') }}"><i
+                                            class="fa-solid fa-list"></i>
+                                        Dashboard</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="nav-item">
+                                    <a class="w-100 nav-link px-3 py-1" href="{{ route('admin.apartments.index') }}">
+                                        <i class="fa-solid fa-house-user" style="color: #666666;"></i>
+                                        Appartamenti</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="nav-item">
+                                    <a class="w-100 nav-link px-3 py-1" href="{{ route('admin.messages.index') }}"><i
+                                            class="fa-regular fa-message"></i>
+                                        Messaggi</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="nav-item">
+                                    <a class="w-100 nav-link px-3 py-1" href="{{ route('admin.sponsors.index') }}"><i
+                                            class="fa-regular fa-star"></i>
+                                        Sponsorizza</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li class="m-0 p-0">
+                                    <form action="{{ route('logout') }}" method="post" class="dropdown-item exit mb-0">
+                                        @csrf
+                                        <button class="btn p-0 text-danger pe-auto">
+                                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Esci
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
                         </div>
                     @else
                         <div class="d-flex gap-2">
-                            <button class="login-link">
-                                <a href="{{ route('login') }}">Accedi</a>
-                            </button>
+                            <a class="link-unstyled d-flex align-center" href="{{ route('login') }}">
+                                <button class="button ">
+                                    <i class="fa-solid fa-user-lock"></i> <span class="disapear text-gradient">Accedi</span>
+                                </button>
+                            </a>
                             <div class="border border-1 border-dark"></div>
                             @if (Route::has('register'))
-                                <button class="register-link">
-                                    <a href="{{ route('register') }}">Registrati</a>
-                                </button>
+                                <a class="link-unstyled d-flex align-center" href="{{ route('register') }}">
+                                    <button class="button ">
+                                        <i class="fa-solid fa-user-plus"></i> <span
+                                            class="disapear text-gradient">Registrati</span>
+                                    </button>
+                                </a>
                             @endif
                         </div>
                     @endauth
-                </div>
-            @endif
+                @endif
+            </div>
         </div>
     </div>
 </nav>
@@ -101,156 +95,51 @@
     .navbar {
         height: 70px;
         position: fixed;
-        left: 0;
         top: 0;
+        left: 0;
         z-index: 99;
-        border-bottom: 1px solid #FF7210;
+        background-color: #fdfdfd;
+        box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.1);
     }
 
-    .log-btn a {
-        text-decoration: none;
-    }
-
-    .log-btn a:hover {
-        color: #424172;
-    }
-
-    .log-btn a:hover,
-    .exit:hover button {
-        cursor: pointer;
-        text-decoration: underline;
-    }
-
-    .auth {
-        color: #FF7210;
-    }
-
-    a img {
-        width: 120px;
-    }
-
-    .home-link,
-    .search-link,
-    .dashboard-link,
-    .messages-link,
-    .sponsors-link,
-    .apartments-link,
-    .login-link,
-    .register-link {
-        padding: 0;
-        margin: 0;
+    .dropdown-menu {
         border: none;
-        background: none;
+        border-radius: 6px
     }
 
-    .home-link,
-    .search-link,
-    .dashboard-link,
-    .messages-link,
-    .sponsors-link,
-    .apartments-link,
-    .login-link,
-    .register-link {
-        --primary-color: #424172;
-        --hovered-color: #FF7210;
-        position: relative;
-        display: flex;
-        font-weight: 600;
-        gap: 0.5rem;
-        align-items: center;
+    .full-logo,
+    .icon-logo {
+        height: 30px;
     }
 
-    .home-link a,
-    .search-link a,
-    .dashboard-link a,
-    .messages-link a,
-    .sponsors-link a,
-    .apartments-link a,
-    .login-link a,
-    .register-link a {
-        margin: 0;
-        position: relative;
-        color: var(--primary-color)
+    .full-logo {
+        display: block;
     }
 
-    .home-link a::before,
-    .search-link a::before,
-    .dashboard-link a::before,
-    .messages-link a::before,
-    .sponsors-link a::before,
-    .apartments-link a::before,
-    .login-link a::before,
-    .register-link a::before {
-        position: absolute;
-        width: 0%;
-        inset: 0;
-        color: var(--hovered-color);
-        overflow: hidden;
-        transition: 0.3s ease-out;
+    .icon-logo {
+        display: none;
     }
 
-    .home-link a::before {
-        content: "Home";
-    }
+    @media screen and (max-width: 575px) {
+        .disapear {
+            display: none;
+        }
 
-    .search-link a::before {
-        content: "Cerca\00a0 Appartamenti";
-    }
+        .nav-link {
+            background: #424172;
+            background: repeating-radial-gradient(circle farthest-corner at top left,
+                    #424172 0%,
+                    #ff7210 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .dashboard-link a::before {
-        content: "Dashboard";
-    }
+        .full-logo {
+            display: none;
+        }
 
-    .messages-link a::before {
-        content: "Messaggi";
-    }
-
-    .sponsors-link a::before {
-        content: "Sponsorizza";
-    }
-
-    .apartments-link a::before {
-        content: "I\00a0 Miei\00a0 Appartamenti\00a0\00a0\00a0\00a0\00a0 "
-    }
-
-    .login-link a::before {
-        content: "Accedi";
-    }
-
-    .register-link a::before {
-        content: "Registrati";
-    }
-
-    .home-link a:hover,
-    .search-link a:hover,
-    .dashboard-link a:hover,
-    .messages-link a:hover,
-    .sponsors-link a:hover,
-    .apartments-link a:hover,
-    .login-link a:hover,
-    .register-link a:hover {
-        text-decoration: none;
-    }
-
-    .home-link:hover::after,
-    .search-link:hover::after,
-    .dashboard-link:hover::after,
-    .messages-link:hover::after,
-    .sponsors-link:hover::after,
-    .apartments-link:hover::after,
-    .login-link:hover::after,
-    .register-link::after {
-        width: 100%;
-    }
-
-    .home-link:hover a::before,
-    .search-link:hover a::before,
-    .dashboard-link:hover a::before,
-    .messages-link:hover a::before,
-    .sponsors-link:hover a::before,
-    .apartments-link:hover a::before,
-    .login-link:hover a::before,
-    .register-link:hover a::before {
-        width: 100%;
+        .icon-logo {
+            display: block;
+        }
     }
 </style>

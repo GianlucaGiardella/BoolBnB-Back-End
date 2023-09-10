@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\Models\View;
 use App\Models\Image;
+use GuzzleHttp\Client;
 use App\Models\Message;
 use App\Models\Service;
 use App\Models\Sponsor;
 use Illuminate\Support\Str;
+use App\Models\ApartmentSponsor;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use GuzzleHttp\Client;
 
 class Apartment extends Model
 {
@@ -65,5 +67,9 @@ class Apartment extends Model
     public function getRouteKey()
     {
         return $this->slug;
+    }
+
+    public function active_sponsors(){
+        return $this->sponsors(ApartmentSponsor::class)->withPivot('start_date','end_date');
     }
 }

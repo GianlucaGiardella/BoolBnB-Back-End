@@ -8,87 +8,90 @@
         </div>
     @endif
 
-    <div class="card mt-3">
+    <div class="card mt-0 box-shadow">
+        <div class="card-body d-flex flex-column gap-3 py-3">
 
-        {{-- Header --}}
-        <div class="card-header">
-            <div class="row row-cols-1 row-cols-md-2 align-center g-3">
-                <div class="text-gradient">
-                    <h1 class="mb-0 p-2">Lista Appartamenti</h1>
-                </div>
+            {{-- Header --}}
+            <div class="container">
+                <div class="row row-cols-1 row-cols-md-2 align-center g-3 pb-3">
+                    <div class="d-inline-block">
+                        <h1 class="text-gradient m-0">Lista Appartamenti</h1>
+                    </div>
 
-                <div class="d-flex add-container">
-                    <a class="nav-link p-2" href="{{ route('admin.apartments.create') }}">
-                        <button class="styled-btn"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
-                    </a>
+                    <div class="d-flex add-container">
+                        <a class="" href="{{ route('admin.apartments.create') }}">
+                            <button class="styled-btn">
+                                <i class="fa-solid fa-house-medical"></i>
+                                Aggiungi
+                            </button>
+                        </a>
+                    </div>
+
                 </div>
+                <hr class="m-0">
             </div>
-        </div>
 
-        {{-- Body --}}
-        <div class="card-body d-flex flex-column gap-3 align-items-start">
+            {{-- Body --}}
+            <div class="container">
+                @if (count($apartments))
+                    <div class="d-flex gap-3 p-3">
 
-            {{-- Table --}}
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        {{-- <th scope="col" class="text-gradient">#</th> --}}
-                        <th scope="col" class="text-gradient">Titolo</th>
-                        <th scope="col" class="text-gradient">Metri Quadrati</th>
-                        <th scope="col" class="text-gradient">Camere</th>
-                        <th scope="col" class="text-gradient">Letti</th>
-                        <th scope="col" class="text-gradient">Bagni</th>
-                        <th scope="col" class="text-gradient">Visibile</th>
-                        <th scope="col" class="text-gradient"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($apartments as $apartment)
-                        <tr>
-                            {{-- <td data-label="Id">{{ $loop->index + 1 }}</td> --}}
-                            <td data-label="Titolo">{{ $apartment->title }}</td>
-                            <td data-label="Metri Quadrati">{{ $apartment->size }}</td>
-                            <td data-label="Camere">{{ $apartment->rooms }}</td>
-                            <td data-label="Letti">{{ $apartment->beds }}</td>
-                            <td data-label="Bagni">{{ $apartment->bathrooms }}</td>
-                            <td data-label="Visibile">{{ $apartment->visibility ? 'Si' : 'No' }}</td>
-                            <td>
-                                <a class="btn btn-secondary"
-                                    href="{{ route('admin.apartments.show', ['apartment' => $apartment]) }}"><i
-                                        class="fa-solid fa-circle-info" style="color: #fff;"></i></a>
-                                <a class="btn btn-primary"
-                                    href="{{ route('admin.apartments.edit', ['apartment' => $apartment]) }}"><i
-                                        class="fa-solid fa-pen" style="color: #fff;"></i></a>
-                                <button class="btn btn-danger js-delete" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal" data-id="{{ $apartment->slug }}"><i
-                                        class="fa-solid fa-trash" style="color: #fff;"></i></button>
-                            </td>
-                        </tr>
-                    @endforeach
-
-                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="deleteModalLabel">Conferma eliminazione
-                                    </h1>
+                        @foreach ($apartments as $apartment)
+                            <div class="card-apartments card">
+                                <img class="img-card" src="{{ asset('storage/' . $apartment->cover) }}"
+                                    alt="{{ $apartment->title }}">
+                                <h5 class="card-title">{{ $apartment->title }}</h5>
+                                <div class="container-btn">
+                                    <a class="btn btn-secondary"
+                                        href="{{ route('admin.apartments.show', ['apartment' => $apartment]) }}">
+                                        <i class="fa-solid fa-circle-info" style="color: #fff;"></i>
+                                    </a>
+                                    <a class="btn btn-primary"
+                                        href="{{ route('admin.apartments.edit', ['apartment' => $apartment]) }}">
+                                        <i class="fa-solid fa-pen" style="color: #fff;"></i>
+                                    </a>
+                                    <a class="btn btn-success"
+                                        href="{{ route('admin.views.index', ['apartment' => $apartment]) }}">
+                                        <i class="fa-solid fa-chart-line" style="color: #fff;"></i>
+                                    </a>
+                                    <button class="btn btn-danger js-delete" data-bs-toggle="modal"
+                                        data-bs-target="#deleteModal" data-id="{{ $apartment->slug }}">
+                                        <i class="fa-solid fa-trash" style="color: #fff;"></i>
+                                    </button>
                                 </div>
-                                <div class="modal-footer">
-                                    <form data-template="{{ route('admin.apartments.destroy', ['apartment' => '*****']) }}"
-                                        method="post" class="d-inline-block" id="confirm-delete">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger">Elimina</button>
-                                    </form>
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Annulla</button>
+                            </div>
+                        @endforeach
+
+                        {{-- Delete modal --}}
+                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="deleteModalLabel">Conferma eliminazione
+                                        </h1>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla
+                                        </button>
+                                        <form
+                                            data-template="{{ route('admin.apartments.destroy', ['apartment' => '*****']) }}"
+                                            method="post" class="d-inline-block" id="confirm-delete">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger">Elimina</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </tbody>
-            </table>
+                @else
+                    <div class="d-flex">
+                        <h3>Attualmente non disponi di appartamenti</h3>
+                    </div>
+                @endif
+            </div>
 
             {{-- Pagination --}}
             <div class="container">
@@ -100,93 +103,47 @@
 @endsection
 
 <style>
-    .card-header {
-        background-color: #fff !important;
-    }
-
-    table {
-        border-collapse: collapse;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        table-layout: fixed;
-    }
-
-    .table> :not(caption)>*>* {
-        padding: 0.8rem 0.5rem;
-    }
-
-    table th,
-    table td {
-        vertical-align: middle;
-    }
-
-    table th {
-        font-size: .85em;
-        letter-spacing: .1em;
-        text-transform: uppercase;
-    }
-
     .add-container {
         justify-content: flex-end;
     }
 
-    @media screen and (max-width: 767px) {
-        table {
-            border: 0;
-        }
+    .card-apartments {
+        width: 260px;
+        height: 240px;
+    }
 
-        table caption {
-            font-size: 1.3em;
-        }
+    .img-card {
+        width: 100%;
+        height: 80%;
+        object-fit: cover;
+    }
 
-        table thead {
-            border: none;
-            clip: rect(0 0 0 0);
-            height: 1px;
-            margin: -1px;
-            overflow: hidden;
-            padding: 0;
-            position: absolute;
-            width: 1px;
-        }
+    .card-title {
+        display: flex;
+        justify-content: center;
+        padding-top: 1rem;
+        font-size: 1rem;
+        white-space: nowrap;
+    }
 
-        table tr {
-            border-bottom: 3px solid #ddd;
-            display: block;
-            margin-bottom: .625em;
-        }
+    .container-btn {
+        display: flex;
+        justify-content: center;
+        gap: .3rem;
+        margin-top: auto;
+        padding-bottom: .5rem;
+    }
 
-        table td {
-            border-bottom: 1px solid #ddd;
-            display: block;
-            font-size: .8em;
-            text-align: right;
-        }
-
-        table td::before {
-            /*
-    * aria-label has no advantage, it won't be read inside a table
-    content: attr(aria-label);
-    */
-            content: attr(data-label);
-            float: left;
-            font-weight: bold;
-            text-transform: uppercase;
-            background: #424172;
-            background: repeating-radial-gradient(circle farthest-corner at top left, #424172 0%, #FF7210 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        table td:last-child {
-            border-bottom: 0;
-        }
-
-        .add-container {
-            justify-content: flex-start;
+    @media (max-width: 1200px) {
+        .d-flex.gap-3.p-3 {
+            flex-wrap: wrap;
+            justify-content: center
         }
     }
 
-    @media screen and (max-width: 575px) {}
+    @media (max-width: 767px) {
+        .add-container {
+            justify-content: start;
+        }
+    }
 </style>

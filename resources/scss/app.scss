@@ -1,22 +1,47 @@
 @import "~bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free/css/all.css";
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Quicksand:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&family=Quicksand:wght@300;400;600;700&family=Roboto:wght@300;400;500;700&display=swap");
 
 body {
-    font-family: 'Nunito', sans-serif;
+    font-family: "Nunito", sans-serif;
+}
+
+.link-unstyled {
+    color: inherit;
+    text-decoration: none;
 }
 
 .text-gradient {
     background: #424172;
+    background: repeating-radial-gradient(circle farthest-corner at top left,
+            #424172 0%,
+            #ff7210 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: fit-content;
+}
+
+.nav-link:hover {
+    background: #424172;
     background: repeating-radial-gradient(circle farthest-corner at top left, #424172 0%, #FF7210 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    width: fit-content;
+    text-decoration: none !important;
+}
+
+.box-shadow {
+    box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
+        0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
+        0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 11px;
+    border: 0px;
 }
 
 .form_background {
     display: flex;
-    justify-content: center
+    justify-content: center;
 }
 
 .form_container {
@@ -27,10 +52,8 @@ body {
     align-items: center;
     justify-content: center;
     padding: 30px 30px 20px 30px;
-    background-color: #ffffff;
-    box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
-        0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
-        0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+    background-color: #fdfdfd;
+    // background-color: #fff;
     border-radius: 11px;
 }
 
@@ -54,7 +77,7 @@ body {
     max-width: 80%;
     text-align: center;
     line-height: 1.1rem;
-    color: #8B8E98
+    color: #8b8e98;
 }
 
 .input_container {
@@ -77,6 +100,7 @@ body {
 .input_container.success input,
 .input_container.success select,
 .input_container_split.success input,
+.input_container_split.success select,
 .input_container.success textarea {
     border-color: #09c372;
 }
@@ -84,6 +108,7 @@ body {
 .input_container.error input,
 .input_container.error select,
 .input_container_split.error input,
+.input_container_split.error select,
 .input_container.error textarea {
     border-color: #ff3860;
 }
@@ -98,16 +123,15 @@ body {
 }
 
 .icon {
-    width: 20px;
     position: absolute;
     z-index: 90;
     left: 12px;
-    top: 30px;
+    top: 33px;
 }
 
 .input_label {
     font-size: 0.75rem;
-    color: #8B8E98;
+    color: #8b8e98;
     font-weight: 600;
 }
 
@@ -120,16 +144,6 @@ body {
     border: 1px solid #e5e5e5;
     filter: drop-shadow(0px 1px 0px #efefef) drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
     transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
-}
-
-.registered {
-    text-decoration: none;
-    color: #424172;
-}
-
-.registered:hover {
-    text-decoration: underline;
-    color: #FF7210;
 }
 
 .list-group {
@@ -145,6 +159,59 @@ body {
     background-color: #f8f9fa;
 }
 
+//button
+
+.button {
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    background-color: #fff;
+    -webkit-box-shadow: 5px 5px 18px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 5px 5px 18px 3px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+
+.button::before {
+    content: '';
+    border-radius: 6px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: repeating-radial-gradient(circle farthest-corner at top left, #424172 0%, #FF7210 100%);
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
+}
+
+.button:hover::before {
+    width: 9em;
+    height: 4rem;
+}
+
+.button:hover {
+    transform: scale(1.1);
+}
+
+.button:hover a,
+.button:hover i,
+.button:hover span {
+    background: #fff;
+    color: #fff;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.button:active {
+    transition: all 0.25s;
+    -webkit-transition: all 0.25s;
+    box-shadow: none;
+    transform: scale(0.98);
+}
+
 //Style Button
 
 .styled-btn {
@@ -152,7 +219,7 @@ body {
     font-size: 1rem;
     color: #fff;
     font-weight: 600;
-    transition: all .2s;
+    transition: all 0.2s;
     position: relative;
     border: none;
     background: #424172;
@@ -163,11 +230,11 @@ body {
     content: "";
     position: absolute;
     top: 50%;
-    background: #FF7210;
+    background: #ff7210;
     height: 108%;
     width: 0;
     z-index: -1;
-    transition: all .7s;
+    transition: all 0.7s;
     transform: translateY(-50%);
 }
 
@@ -181,7 +248,8 @@ body {
 
 .styled-btn:hover {
     color: #fff;
-    box-shadow: #de4c137f 0 30px 60px -12px inset, #5d2991 0 18px 36px -18px inset;
+    box-shadow: #de4c137f 0 30px 60px -12px inset,
+        #5d2991 0 18px 36px -18px inset;
     z-index: 2;
 }
 
@@ -195,148 +263,6 @@ body {
     right: 50%;
 }
 
-/* Switch starts here */
-.rocker {
-    display: inline-block;
-    position: relative;
-    /*
-SIZE OF SWITCH
-==============
-All sizes are in em - therefore
-changing the font-size here
-will change the size of the switch.
-See .rocker-small below as example.
-*/
-    font-size: 2em;
-    font-weight: bold;
-    text-align: center;
-    text-transform: uppercase;
-    color: #888;
-    width: 7em;
-    height: 4em;
-    overflow: hidden;
-    border-bottom: 0.5em solid #eee;
-}
-
-.rocker-small {
-    font-size: 0.75em;
-    /* Sizes the switch */
-}
-
-.rocker::before {
-    content: "";
-    position: absolute;
-    top: 0.5em;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #999;
-    border: 0.5em solid #eee;
-    border-bottom: 0;
-}
-
-.rocker input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.switch-left,
-.switch-right {
-    cursor: pointer;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 2.5em;
-    width: 3em;
-    transition: 0.2s;
-    user-select: none;
-}
-
-.switch-left {
-    height: 2.4em;
-    width: 2.75em;
-    left: 0.85em;
-    bottom: 0.4em;
-    background-color: #ddd;
-    transform: rotate(15deg) skewX(15deg);
-}
-
-.switch-right {
-    right: 0.5em;
-    bottom: 0;
-    background-color: #dc3545;
-    color: #fff;
-}
-
-.switch-left::before,
-.switch-right::before {
-    content: "";
-    position: absolute;
-    width: 0.4em;
-    height: 2.45em;
-    bottom: -0.45em;
-    background-color: #ccc;
-    transform: skewY(-65deg);
-}
-
-.switch-left::before {
-    left: -0.4em;
-}
-
-.switch-right::before {
-    right: -0.375em;
-    background-color: transparent;
-    transform: skewY(65deg);
-}
-
-input:checked+.switch-left {
-    background-color: #198754;
-    color: #fff;
-    bottom: 0px;
-    left: 0.5em;
-    height: 2.5em;
-    width: 3em;
-    transform: rotate(0deg) skewX(0deg);
-}
-
-input:checked+.switch-left::before {
-    background-color: transparent;
-    width: 3.0833em;
-}
-
-input:checked+.switch-left+.switch-right {
-    background-color: #ddd;
-    color: #888;
-    bottom: 0.4em;
-    right: 0.8em;
-    height: 2.4em;
-    width: 2.75em;
-    transform: rotate(-15deg) skewX(-15deg);
-}
-
-input:checked+.switch-left+.switch-right::before {
-    background-color: #ccc;
-}
-
-/* Keyboard Users */
-input:focus+.switch-left {
-    color: #333;
-}
-
-input:checked:focus+.switch-left {
-    color: #fff;
-}
-
-input:focus+.switch-left+.switch-right {
-    color: #fff;
-}
-
-input:checked:focus+.switch-left+.switch-right {
-    color: #333;
-}
-
 // Remove Image Button
 
 .remove-image {
@@ -345,18 +271,19 @@ input:checked:focus+.switch-left+.switch-right {
     right: 12px;
     background-color: #fff;
     opacity: 0.5;
-    z-index: 9;
+    z-index: 80;
 }
 
 .remove-image:hover {
     cursor: pointer;
+    opacity: 0.9;
     background-color: #dee2e6 !important;
 }
 
-//Image Container
+// Image Container
 
 .container-img {
-    border-radius: 20px;
+    border-radius: 11px;
     overflow: hidden;
 
     img {
@@ -364,49 +291,58 @@ input:checked:focus+.switch-left+.switch-right {
         height: 250px;
         object-fit: cover;
         object-position: center;
+        transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
     }
+}
 
-    .img-apartment:hover img {
-        cursor: pointer;
-        opacity: 0.8;
+.img-apartment {
+    cursor: pointer;
+
+    &:hover img {
+        transform: scale(1.2);
     }
+}
+
+// Ellipsis
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    max-width: 70%;
 }
 
 // Message Card
+
 .message-card {
+    width: 100%;
+    padding: 11px;
     position: relative;
-    width: 300px;
-    height: 200px;
-    background-image: linear-gradient(-45deg, #424172 0%, #ff7210 100%);
-    border-radius: 10px;
     display: flex;
-    padding: 10px 30px;
-    flex-direction: column;
-    gap: 10px;
+    justify-content: space-between;
+    gap: 5%;
     align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    border-radius: 11px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+
+    &:hover .message-card-btn {
+        display: block;
+    }
+
+    &:hover .message-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    &:hover .message-overlay::after {
+        transform: translate(-50%, -50%) scale(2);
+    }
+
 }
 
 .message-card-noMessage {
-    background-image: linear-gradient(-45deg, #424172 0%, #ff7210 100%);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    padding: 2em;
-}
-
-.message-heading {
-    font-size: 24px;
-    font-weight: 700;
-    color: #ffffff;
-}
-
-.message-para {
-    text-align: center;
-    color: #ffffff;
-    opacity: 0.7;
-    line-height: 1.4;
+    border-radius: 11px;
 }
 
 .message-overlay {
@@ -419,68 +355,162 @@ input:checked:focus+.switch-left+.switch-right {
     background-color: rgba(0, 0, 0, 0.6);
     transition: opacity 0.3s ease;
     pointer-events: none;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(-45deg, #f89b2980 0%, #ff0f7b80 100%);
+        transition: transform 0.5s ease;
+    }
 }
 
-.message-card:hover .message-overlay {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.message-card .message-card-btn {
+.message-card-btn {
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
-    font-weight: 600;
-    padding: 10px 20px;
-    font-size: 16px;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 999;
-    border: none;
-    opacity: 0;
-    scale: 0;
-    transform-origin: 0 0;
-    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.15);
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-}
-
-.message-card:hover .message-card-btn {
-    opacity: 1;
-    scale: 1;
-}
-
-.message-card .message-card-btn:hover {
-    box-shadow: 0 0 0px 5px rgba(0, 0, 0, 0.3);
-}
-
-.message-card .message-card-btn:active {
-    scale: 0.95;
-}
-
-.message-overlay::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(-45deg, #f89b2980 0%, #ff0f7b80 100%);
-    transition: transform 0.5s ease;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    cursor: pointer;
+    z-index: 70;
+    border: none;
+    background: unset;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+
+    &:hover {
+        box-shadow: 0 0 0px 5px rgba(0, 0, 0, 0.3);
+    }
 }
 
-.message-card:hover .message-overlay::after {
-    transform: translate(-50%, -50%) scale(2);
+@media (max-width: 767px) {
+    .data {
+        display: none;
+    }
+
+    .message-card .ellipsis {
+        max-width: 100%;
+    }
 }
 
-// Paginazione
+@media (max-width: 991px) {
+    .message-card-btn {
+        display: block;
+        color: transparent;
+    }
+}
+
+// Pagination
 
 .pagination,
 .text-muted {
     margin-bottom: 0;
+}
+
+// Apartment options card
+
+.option-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.option-card .red {
+    background-color: #f43f5e;
+}
+
+.option-card .blue {
+    background-color: #3b82f6;
+}
+
+.option-card .green {
+    background-color: #22c55e;
+}
+
+.option-card .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100px;
+    width: 250px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: 400ms;
+}
+
+.option-card a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.option-card .card a.tip {
+    font-size: 1em;
+    font-weight: 700;
+}
+
+.option-card .card:hover {
+    transform: scale(1.1, 1.1);
+}
+
+.option-card:hover>.card:not(:hover) {
+    filter: blur(2px);
+    transform: scale(0.9, 0.9);
+}
+
+// Visibility Slider
+.switch {
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 3.5em;
+    height: 2em;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    border: 2px solid #414141;
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1.4em;
+    width: 1.4em;
+    left: 0.2em;
+    bottom: 0.2em;
+    background-color: rgb(67, 65, 114);
+    border-radius: inherit;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.switch input:checked+.slider {
+    box-shadow: 0 0 20px rgba(255, 147, 94);
+    border: 2px solid rgb(67, 65, 114);
+}
+
+.switch input:checked+.slider:before {
+    transform: translateX(1.5em);
 }

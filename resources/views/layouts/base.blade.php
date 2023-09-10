@@ -11,14 +11,16 @@
     @vite('resources/js/app.js')
 </head>
 
-<body>
+<body style="background-color: #f5f5f5;">
+
     @include('includes.header')
 
-    <div class="container" style="margin-top: 100px;">
+    <main class="container" style="margin-top: 100px;">
         @yield('contents')
-    </div>
+    </main>
 
     {{-- @include('includes.footer') --}}
+
 </body>
 
 </html>

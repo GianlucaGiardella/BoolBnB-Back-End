@@ -1,4 +1,8 @@
 @extends('layouts.base')
 @section('contents')
-    <h1>Home Backend</h1>
+    <div class="card mt-3 box-shadow">
+        <div class="container">
+            <h1>Home Backend</h1>
+        </div>
+    </div>
 @endsection

@@ -9,6 +9,7 @@ use App\Models\Sponsor;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ApartmentSponsor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -49,7 +50,7 @@ class ApartmentController extends Controller
 
     public function create()
     {
-        //Get all tables
+        // Get all tables
         $apartments = Apartment::all();
         $services = Service::all();
         $sponsors = Sponsor::all();
@@ -153,7 +154,9 @@ class ApartmentController extends Controller
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         if (Auth::id() !== $apartment->user_id) abort(403);
 
-        return view('admin.apartments.show', compact('apartment'));
+        $apartmentSponsor = ApartmentSponsor::all();
+
+        return view('admin.apartments.show', compact('apartment', 'apartmentSponsor'));
     }
 
     public function edit($slug)
@@ -298,23 +301,30 @@ class ApartmentController extends Controller
 
     public function destroy($slug)
     {
+        // User control
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         if (Auth::id() !== $apartment->user_id) abort(403);
 
+        // Delete apartment tables
         $apartment->services()->detach();
         $apartment->sponsors()->detach();
         $apartment->messages()->delete();
         $apartment->views()->delete();
 
+        // Delete cover from storage
         if ($apartment->cover) {
             Storage::delete($apartment->cover);
         }
 
-        foreach ($apartment->images as $image) {
-            Storage::delete($image->img_url);
+        // Delete all apartment images from storage & table
+        if ($apartment->images) {
+            foreach ($apartment->images as $image) {
+                Storage::delete($image->img_url);
+            }
+            $apartment->images()->delete();
         }
-        $apartment->images()->delete();
 
+        // Delete apartment
         $apartment->delete();
 
         return to_route('admin.apartments.index')->with('delete_success', $apartment);
@@ -322,22 +332,23 @@ class ApartmentController extends Controller
 
     public function messages($slug)
     {
+        // User control
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         if (Auth::id() !== $apartment->user_id) abort(403);
 
-        $messages = Message::where('apartment_id', $apartment->id)->get();
+        $messages = Message::where('apartment_id', $apartment->id)->orderBy('created_at', 'desc')->paginate(8);
+
         return view('admin.apartments.message', compact('messages', 'apartment'));
     }
 
     public function sponsors($slug)
     {
+        // User control
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         if (Auth::id() !== $apartment->user_id) abort(403);
 
+        $apartments = Apartment::where('id', $apartment->id)->get();
         $sponsors = Sponsor::all();
-
-        $userApartments = auth()->user()->apartments;
-        $userSponsor = auth()->user()->sponsor;
 
         $gateway = new Gateway([
             'environment' => config('services.braintree.environment'),
@@ -347,6 +358,6 @@ class ApartmentController extends Controller
         ]);
 
         $token = $gateway->clientToken()->generate();
-        return view('admin.apartments.sponsor', compact('sponsors', 'apartment', 'userApartments', 'gateway', 'token', 'userSponsor'));
+        return view('admin.apartments.sponsor', compact('sponsors', 'apartment', 'gateway', 'token', 'apartments'));
     }
 }

@@ -4,13 +4,15 @@
 @extends('layouts.base')
 
 @section('contents')
-    <div class="card mt-0">
-        <div class="card-body py-3">
+    <div class="card box-shadow mt-0">
+        <div class="card-body d-flex flex-column gap-3 py-3">
+
+            {{-- Header --}}
             <div class="container">
                 <div class="d-inline-block text-gradient">
                     <h1>Modifica Appartamento</h1>
-                    <hr>
                 </div>
+                <hr class="m-0">
             </div>
 
             <form class="d-flex flex-column gap-3 mb-0" method="post"
@@ -20,7 +22,7 @@
                 @method('put')
 
                 <div class="container">
-                    <div class="row row-cols-1 row-cols-md-2">
+                    <div class="row row-cols-1">
                         <div class="d-flex flex-column gap-2 mt-0">
                             {{-- Title --}}
                             <div class="input_container">
@@ -85,60 +87,73 @@
                             </div>
                         </div>
 
-                        <div class="d-flex flex-column gap-2 mt-0">
-                            {{-- Size --}}
-                            <div class="input_container">
-                                <label for="size" class="form-label fs-4 fw-4 text-gradient">Metri Quadrati</label>
-                                <input type="number" class="form-control shadow-none @error('size') is-invalid @enderror"
-                                    id="size" name="size" value="{{ old('size', $apartment->size) }}">
-                                @error('size')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                                <div class="error"></div>
-                            </div>
+                        {{-- Images --}}
+                        <div class="container">
+                            <h4 class="my-2 text-gradient">Immagini | La prima è la copertina</h4>
+                            <div class="container container-img px-0">
+                                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
 
-                            {{-- Rooms --}}
-                            <div class="input_container">
-                                <label for="rooms" class="form-label fs-4 fw-4 text-gradient">Camere</label>
-                                <input type="number" class="form-control shadow-none @error('rooms') is-invalid @enderror"
-                                    id="rooms" name="rooms" value="{{ old('rooms', $apartment->rooms) }}">
-                                @error('rooms')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
+                                    {{-- Cover --}}
+                                    <div class="img-apartment position-relative">
+                                        <label for="add-cover" class="d-block">
+                                            <div class="overflow-hidden">
+                                                <img src="{{ asset('storage/' . $apartment->cover) }}" id="cover" />
+                                            </div>
+                                        </label>
+                                        <span id="remove-cover" class="btn remove-image">&#128465;</span>
+                                        <input type="file" id="add-cover" name="cover"
+                                            accept="image/png, image/jpg, image/jpeg" class="d-none">
+                                        <input type="hidden" id="old-cover" class="d-none" name="old_cover"
+                                            value="{{ $apartment->cover }}">
                                     </div>
-                                @enderror
-                                <div class="error"></div>
-                            </div>
 
-                            {{-- Beds --}}
-                            <div class="input_container">
-                                <label for="beds" class="form-label fs-4 fw-4 text-gradient">Letti</label>
-                                <input type="number" class="form-control shadow-none @error('beds') is-invalid @enderror"
-                                    id="beds" name="beds" value="{{ old('beds', $apartment->beds) }}">
-                                @error('beds')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                                <div class="error"></div>
-                            </div>
+                                    {{-- Others --}}
+                                    @for ($i = 0; $i < 5; $i++)
+                                        @if ($i < count($apartment->images))
+                                            @php
+                                                $image = $apartment->images[$i];
+                                            @endphp
+                                            <div class="img-apartment position-relative images">
+                                                <label for="add-image{{ $i }}" class="d-block">
+                                                    <div class="overflow-hidden">
+                                                        <img src="{{ asset('storage/' . $image->img_url) }}"
+                                                            class="image" />
+                                                    </div>
+                                                </label>
 
-                            {{-- Bathrooms --}}
-                            <div class="input_container">
-                                <label for="bathrooms" class="form-label fs-4 fw-4 text-gradient">Bagni</label>
-                                <input type="number"
-                                    class="form-control shadow-none @error('bathrooms') is-invalid @enderror" id="bathrooms"
-                                    name="bathrooms" value="{{ old('bathrooms', $apartment->bathrooms) }}">
-                                @error('bathrooms')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                                <div class="error"></div>
+                                                <input type="file" class="d-none" id="add-image{{ $i }}"
+                                                    name="image{{ $i }}"
+                                                    accept="image/png, image/jpg, image/jpeg">
+
+                                                <input type="hidden" class="d-none old-image"
+                                                    name="old_image{{ $i }}" value="{{ $image->img_url }}">
+
+                                                <span id="remove-images" class="btn remove-image">&#128465;</span>
+                                            </div>
+                                        @else
+                                            <div class="img-apartment position-relative images">
+                                                <label for="add-image{{ $i }}" class="d-block">
+                                                    <div class="overflow-hidden">
+                                                        <img src="{{ asset('storage/') }}" class="image" />
+                                                    </div>
+                                                </label>
+
+                                                <input type="file" class="d-none" id="add-image{{ $i }}"
+                                                    name="image{{ $i }}"
+                                                    accept="image/png, image/jpg, image/jpeg">
+
+                                                <input type="hidden" class="d-none old-image"
+                                                    name="old_image{{ $i }}" value="">
+
+                                                <span id="remove-images" class="btn remove-image">&#128465;</span>
+                                            </div>
+                                        @endif
+                                    @endfor
+
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -157,60 +172,60 @@
                     </div>
                 </div>
 
-                {{-- Images --}}
                 <div class="container">
-                    <h4 class="my-2 text-gradient">Immagini</h4>
-                    <div class="container container-img px-0">
-                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2 mt-0">
+                        {{-- Size --}}
+                        <div class="input_container_split">
+                            <label for="size" class="form-label fs-4 fw-4 text-gradient">Dimensioni |
+                                m<sup>2</sup></label>
+                            <input type="number" class="form-control shadow-none @error('size') is-invalid @enderror"
+                                id="size" name="size" value="{{ old('size', $apartment->size) }}">
+                            @error('size')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="error"></div>
+                        </div>
 
-                            {{-- Cover --}}
-                            <div class="img-apartment position-relative">
-                                <label for="add-cover" class="d-block">
-                                    <img src="{{ asset('storage/' . $apartment->cover) }}" id="cover" />
-                                </label>
-                                <span id="remove-cover" class="btn remove-image">&#128465;</span>
-                                <input type="file" id="add-cover" name="cover"
-                                    accept="image/png, image/jpg, image/jpeg" class="d-none">
-                                <input type="hidden" id="old-cover" class="d-none" name="old_cover"
-                                    value="{{ $apartment->cover }}">
-                            </div>
+                        {{-- Rooms --}}
+                        <div class="input_container_split">
+                            <label for="rooms" class="form-label fs-4 fw-4 text-gradient">Camere</label>
+                            <input type="number" class="form-control shadow-none @error('rooms') is-invalid @enderror"
+                                id="rooms" name="rooms" value="{{ old('rooms', $apartment->rooms) }}">
+                            @error('rooms')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="error"></div>
+                        </div>
 
-                            {{-- Others --}}
-                            @for ($i = 0; $i < 5; $i++)
-                                @if ($i < count($apartment->images))
-                                    @php
-                                        $image = $apartment->images[$i];
-                                    @endphp
-                                    <div class="img-apartment position-relative images">
-                                        <label for="add-image{{ $i }}" class="d-block">
-                                            <img src="{{ asset('storage/' . $image->img_url) }}" class="image" />
-                                        </label>
+                        {{-- Beds --}}
+                        <div class="input_container_split">
+                            <label for="beds" class="form-label fs-4 fw-4 text-gradient">Letti</label>
+                            <input type="number" class="form-control shadow-none @error('beds') is-invalid @enderror"
+                                id="beds" name="beds" value="{{ old('beds', $apartment->beds) }}">
+                            @error('beds')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="error"></div>
+                        </div>
 
-                                        <input type="file" class="d-none" id="add-image{{ $i }}"
-                                            name="image{{ $i }}" accept="image/png, image/jpg, image/jpeg">
-
-                                        <input type="hidden" class="d-none old-image"
-                                            name="old_image{{ $i }}" value="{{ $image->img_url }}">
-
-                                        <span id="remove-images" class="btn remove-image">&#128465;</span>
-                                    </div>
-                                @else
-                                    <div class="img-apartment position-relative images">
-                                        <label for="add-image{{ $i }}" class="d-block">
-                                            <img src="{{ asset('storage/') }}" class="image" />
-                                        </label>
-
-                                        <input type="file" class="d-none" id="add-image{{ $i }}"
-                                            name="image{{ $i }}" accept="image/png, image/jpg, image/jpeg">
-
-                                        <input type="hidden" class="d-none old-image"
-                                            name="old_image{{ $i }}" value="">
-
-                                        <span id="remove-images" class="btn remove-image">&#128465;</span>
-                                    </div>
-                                @endif
-                            @endfor
-
+                        {{-- Bathrooms --}}
+                        <div class="input_container_split">
+                            <label for="bathrooms" class="form-label fs-4 fw-4 text-gradient">Bagni</label>
+                            <input type="number"
+                                class="form-control shadow-none @error('bathrooms') is-invalid @enderror" id="bathrooms"
+                                name="bathrooms" value="{{ old('bathrooms', $apartment->bathrooms) }}">
+                            @error('bathrooms')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                            <div class="error"></div>
                         </div>
                     </div>
                 </div>
@@ -237,12 +252,17 @@
                 <div class="container">
                     <div class="d-flex flex-column justify-content-center align-items-center">
                         <h4 class="my-2 text-gradient">Visibilità Appartamento</h4>
-                        <label class="rocker rocker-small">
+                        <label class="switch">
+                            <input type="checkbox" name="visibility" value="1"
+                                {{ old('visibility', $apartment->visibility) ? 'checked' : '' }}>
+                            <span class="slider"></span>
+                        </label>
+                        {{-- <label class="rocker rocker-small">
                             <input type="checkbox" name="visibility" value="1"
                                 {{ old('visibility', $apartment->visibility) ? 'checked' : '' }}>
                             <span class="switch-left">Si</span>
                             <span class="switch-right">No</span>
-                        </label>
+                        </label> --}}
                     </div>
                 </div>
 

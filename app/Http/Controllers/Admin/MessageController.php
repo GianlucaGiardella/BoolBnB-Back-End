@@ -12,52 +12,12 @@ class MessageController extends Controller
 {
     public function index(Request $request)
     {
-        $user_id=Auth::user()->id;
- 
-        $messages = [];
-        
+        $user_id = Auth::user()->id;
+
         $apartments = Apartment::all()->where('user_id', $user_id);
 
-        $messagesList = Message::all();
+        $messages = Message::orderBy('created_at', 'desc')->paginate(8);
 
-        foreach ($apartments as $apartment) {
-            foreach ($messagesList as $message) {
-                if($message['apartment_id'] == $apartment['id']){
-                    array_push($messages, $message);
-                }
-            }
-        }
-        $messages = collect($messages)->sortBy('date')->reverse();
-        return view('admin.messages.index', compact('messages', 'apartments'));
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Apartment $apartment)
-    {
-        // 
-    }
-
-    public function edit(Message $message)
-    {
-        //
-    }
-
-    public function update(Request $request, Message $message)
-    {
-        //
-    }
-
-    public function destroy(Message $message)
-    {
-        //
+        return view('admin.messages.index', compact('apartments', 'messages'));
     }
 }

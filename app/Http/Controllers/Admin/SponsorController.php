@@ -31,34 +31,4 @@ class SponsorController extends Controller
 
         return view('admin.sponsors.index', compact('gateway', 'token', 'userSponsors', 'userApartments', 'sponsors', 'user_id', 'apartments'));
     }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(Sponsor $sponsor)
-    {
-        return view('admin.sponsors.show', compact('sponsor'));
-    }
-
-    public function edit(Sponsor $sponsor)
-    {
-        //
-    }
-
-    public function update(Request $request, Sponsor $sponsor)
-    {
-        //
-    }
-
-    public function destroy(Sponsor $sponsor)
-    {
-        //
-    }
 }

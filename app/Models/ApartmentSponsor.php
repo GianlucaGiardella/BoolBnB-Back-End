@@ -18,5 +18,5 @@ class ApartmentSponsor extends Model
     ];
 
     // serve per far funzionare il metodo attach() in SponsorshipController
-    protected $table = 'apartment_sponsorship';
+    protected $table = 'apartment_sponsor';
 }
