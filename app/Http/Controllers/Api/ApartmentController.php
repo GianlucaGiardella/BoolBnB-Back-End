@@ -116,4 +116,12 @@ class ApartmentController extends Controller
 
         return $apartments->get();
     }
+
+    // public function getCity(Request $request){
+    //     $city = $request->query('city');
+
+    //     $apartments = Apartment::where('street', 'like', '%' . $city . '%')->get();
+        
+    //     return response()->json(['apartments' => $apartments]);
+    // }
 }

@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getUser
 Route::get('apartments', [ApartmentController::class, 'index'])->name('api.apartments.index');
 Route::get('apartments/{apartment}', [ApartmentController::class, 'show'])->name('api.apartments.show');
 Route::get('/search', [ApartmentController::class, 'search']);
+// Route::get('/search', [ApartmentController::class, 'getCity']); FIXME:
 
 Route::get('images', [ImageController::class, 'index'])->name('api.images.index');
 
