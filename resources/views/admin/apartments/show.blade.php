@@ -3,8 +3,21 @@
 @section('contents')
     <div class="card box-shadow mt-0">
         <div class="card-body d-flex flex-column py-3 gap-4">
-            <div class="container">
+            <div class="container d-flex justify-content-between">
                 <h1>{{ $apartment->title }}</h1>
+                @if ($apartment->sponsors()->where('valid', true)->count() > 0)
+                
+              <div>
+                La tua sponsorizzazione scade il:
+                <div>
+                  {{ $apartmentSponsor->end_date->format('d/m/y') }}  
+                </div>
+                  Alle ore: <span>{{ $apartmentSponsor->end_date->format('H:i') }}</span>
+              </div>
+         
+            @else
+                <div>Sponsorizzazione NON ATTIVA</div>
+            @endif
             </div>
 
             <div class="container">

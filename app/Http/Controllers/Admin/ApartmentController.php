@@ -9,6 +9,7 @@ use App\Models\Sponsor;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ApartmentSponsor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -152,8 +153,9 @@ class ApartmentController extends Controller
         // User control
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         if (Auth::id() !== $apartment->user_id) abort(403);
+        $apartmentSponsor = ApartmentSponsor::all()->firstOrFail();
 
-        return view('admin.apartments.show', compact('apartment'));
+        return view('admin.apartments.show', compact('apartment', 'apartmentSponsor'));
     }
 
     public function edit($slug)
@@ -345,16 +347,16 @@ class ApartmentController extends Controller
 
         $apartments = Apartment::where('id', $apartment->id)->get();
         $sponsors = Sponsor::all();
-
-
+        
         $gateway = new Gateway([
             'environment' => config('services.braintree.environment'),
             'merchantId' => config('services.braintree.merchant_id'),
             'publicKey' => config('services.braintree.public_key'),
             'privateKey' => config('services.braintree.private_key'),
         ]);
-
+        
         $token = $gateway->clientToken()->generate();
-        return view('admin.apartments.sponsor', compact('sponsors', 'apartment', 'gateway', 'token', 'apartments'));
+        $apartmentSponsor = ApartmentSponsor::all()->firstOrFail();
+        return view('admin.apartments.sponsor', compact('sponsors', 'apartment', 'gateway', 'token', 'apartments', 'apartmentSponsor'));
     }
 }

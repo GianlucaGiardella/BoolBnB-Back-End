@@ -6,7 +6,14 @@
             <h1 class="text-gradient">{{ $apartment->title }}</h1>
 
             @if ($apartment->sponsors()->where('valid', true)->count() > 0)
-                Hai gia una sponsor
+                Hai gia una sponsorizzazione attiva con scadenza: 
+              <div>
+                <span>
+                  {{ $apartmentSponsor->end_date->format('d/m/y') }}  
+                </span>
+                  Alle ore: <span>{{ $apartmentSponsor->end_date->format('H:i') }}</span>
+              </div>
+         
             @else
                 <h4>Sponsorizzazione</h4>
                 <p>Raggiungete un vasto pubblico per il vostro appartamento con una sponsorizzazione su misura! Offriamo una
