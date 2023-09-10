@@ -13,23 +13,28 @@
 
             {{-- Header --}}
             <div class="container">
-                <div class="row row-cols-1 row-cols-md-2 align-center g-3">
-                    <div class="">
-                        <h1 class="text-gradient mb-0">Lista Appartamenti</h1>
+                <div class="row row-cols-1 row-cols-md-2 align-center g-3 pb-3">
+                    <div class="d-inline-block">
+                        <h1 class="text-gradient m-0">Lista Appartamenti</h1>
                     </div>
 
                     <div class="d-flex add-container">
                         <a class="" href="{{ route('admin.apartments.create') }}">
-                            <button class="styled-btn"><i class="fa-solid fa-plus" style="color: #ffffff;"></i></button>
+                            <button class="styled-btn">
+                                <i class="fa-solid fa-house-medical"></i>
+                                Aggiungi
+                            </button>
                         </a>
                     </div>
+
                 </div>
+                <hr class="m-0">
             </div>
 
             {{-- Body --}}
             <div class="container">
                 @if (count($apartments))
-                    <div class="d-flex gap-3">
+                    <div class="d-flex gap-3 p-3">
 
                         @foreach ($apartments as $apartment)
                             <div class="card-apartments card">
@@ -82,15 +87,8 @@
                         </div>
                     </div>
                 @else
-                    <div class="d-flex flex-column gap-3">
+                    <div class="d-flex">
                         <h3>Attualmente non disponi di appartamenti</h3>
-                        <div class="d-flex">
-                            <a class="" href="{{ route('admin.apartments.create') }}">
-                                <button class="styled-btn">
-                                    Aggiungi un nuovo Appartamento
-                                </button>
-                            </a>
-                        </div>
                     </div>
                 @endif
             </div>
@@ -105,13 +103,6 @@
 @endsection
 
 <style>
-    @media (max-width: 1200px) {
-        .d-flex.gap-3.p-3 {
-            flex-wrap: wrap;
-            justify-content: center
-        }
-    }
-
     .add-container {
         justify-content: flex-end;
     }
@@ -141,5 +132,18 @@
         gap: .3rem;
         margin-top: auto;
         padding-bottom: .5rem;
+    }
+
+    @media (max-width: 1200px) {
+        .d-flex.gap-3.p-3 {
+            flex-wrap: wrap;
+            justify-content: center
+        }
+    }
+
+    @media (max-width: 767px) {
+        .add-container {
+            justify-content: start;
+        }
     }
 </style>

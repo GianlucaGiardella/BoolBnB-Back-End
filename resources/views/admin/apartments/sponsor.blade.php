@@ -1,23 +1,33 @@
 @extends('layouts.base')
 
 @section('contents')
-    <div class="card mt-0 box-shadow">
-        <div class="card-body py-3">
-            <h1 class="text-gradient">{{ $apartment->title }}</h1>
+    <div class="card box-shadow mt-0">
+        <div class="card-body d-flex flex-column gap-3 py-3">
 
-            @if ($apartment->sponsors()->where('valid', true)->count() > 0)
-                Hai gia una sponsor
-            @else
-                <h4>Sponsorizzazione</h4>
-                <p>Raggiungete un vasto pubblico per il vostro appartamento con una sponsorizzazione su misura! Offriamo una
-                    varietà di
-                    opzioni di sponsorizzazione, sia standard che personalizzate, per soddisfare al meglio le vostre
-                    esigenze. Scegliete
-                    la soluzione ideale per promuovere il vostro appartamento e attirare il massimo numero di potenziali
-                    clienti!</p>
-            @endif
+            {{-- Header --}}
+            <div class="container">
+                <div class="d-inline-block text-gradient">
+                    <h1><span class="ellipsis">Sponsorizzazione</span> {{ $apartment->title }}</h1>
+                </div>
+                <hr class="m-0">
+            </div>
 
-            <div class="row">
+            <div class="container">
+                @if ($apartment->sponsors()->where('valid', true)->count() > 0)
+                    <h4 class="text-gradient">Hai gia una sponsororizzazione attiva</h4>
+                @else
+                    <h4 class="text-gradient">Sponsorizzazione</h4>
+                    <p>Raggiungete un vasto pubblico per il vostro appartamento con una sponsorizzazione su misura! Offriamo
+                        una
+                        varietà di
+                        opzioni di sponsorizzazione, sia standard che personalizzate, per soddisfare al meglio le vostre
+                        esigenze. Scegliete
+                        la soluzione ideale per promuovere il vostro appartamento e attirare il massimo numero di potenziali
+                        clienti!</p>
+                @endif
+            </div>
+
+            <div class="container">
                 <form id="payment-form" action="{{ route('admin.process_payment') }}" method="post"
                     class="col-12 col-lg-6 mx-auto">
                     @csrf
@@ -68,10 +78,9 @@
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
-
-
 
     <script src="https://js.braintreegateway.com/web/dropin/1.13.0/js/dropin.min.js"></script>
     <script>

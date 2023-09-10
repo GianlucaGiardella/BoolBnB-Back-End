@@ -14,22 +14,10 @@ class MessageController extends Controller
     {
         $user_id = Auth::user()->id;
 
-        $messages = [];
-
         $apartments = Apartment::all()->where('user_id', $user_id);
 
-        $messagesList = Message::all();
+        $messages = Message::orderBy('created_at', 'desc')->paginate(8);
 
-        foreach ($apartments as $apartment) {
-            foreach ($messagesList as $message) {
-                if ($message['apartment_id'] == $apartment['id']) {
-                    array_push($messages, $message);
-                }
-            }
-        }
-
-        $messages = collect($messages)->sortBy('date')->reverse();
-
-        return view('admin.messages.index', compact('messages', 'apartments'));
+        return view('admin.messages.index', compact('apartments', 'messages'));
     }
 }

@@ -5,14 +5,14 @@
 
 @section('contents')
     <div class="card mt-0 box-shadow">
-        <div class="card-body py-3">
+        <div class="card-body d-flex flex-column gap-3 py-3">
 
             {{-- Header --}}
             <div class="container">
                 <div class="d-inline-block text-gradient">
                     <h1>Aggiungi Appartamento</h1>
-                    <hr>
                 </div>
+                <hr class="m-0">
             </div>
 
             <form method="post" action="{{ route('admin.apartments.store') }}" id="form"
@@ -84,7 +84,7 @@
 
                         {{-- Images --}}
                         <div class="container">
-                            <h4 class="my-2 text-gradient">Immagini</h4>
+                            <h4 class="my-2 text-gradient">Immagini | La prima è la copertina</h4>
                             <div class="container container-img px-0">
                                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
 

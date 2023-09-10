@@ -2,14 +2,15 @@
 
 @section('contents')
     <div class="card mt-0 box-shadow">
-        <div class="card-body py-3">
-            <div class="row">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <h1>Si è verificato un errore ritenta e sarai più fortunato</h1>
-                    </div>
+        <div class="card-body d-flex flex-column gap-3 py-3">
+
+            <div class="container">
+                <div class="d-flex flex-column align-items-center gap-3">
+                    <h1 class="text-gradient m-0">Si è verificato un errore</h1>
+                    <a href="{{ route('admin.dashboard') }}"><button class="styled-btn">Torna alla Dashboard</button></a>
                 </div>
             </div>
+
         </div>
     </div>
 @endsection

@@ -23,30 +23,39 @@
                                 <span class="text-gradient"><i class="fa-regular fa-user"></i>
                                     <span class="disapear">Profilo</span></span>
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-end list-unstyled box-shadow mt-2">
+                            <ul class="dropdown-menu dropdown-menu-end list-unstyled box-shadow mt-3">
                                 <li class="nav-item">
-                                    <a class="w-100 nav-link px-3 py-1" href="/"><i class="fa-solid fa-list"></i>
+                                    <a class="w-100 nav-link px-3 py-1" href="{{ route('admin.dashboard') }}"><i
+                                            class="fa-solid fa-list"></i>
                                         Dashboard</a>
                                 </li>
-                                <hr class="m-0">
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li class="nav-item">
                                     <a class="w-100 nav-link px-3 py-1" href="{{ route('admin.apartments.index') }}">
                                         <i class="fa-solid fa-house-user" style="color: #666666;"></i>
                                         Appartamenti</a>
                                 </li>
-                                <hr class="m-0">
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li class="nav-item">
                                     <a class="w-100 nav-link px-3 py-1" href="{{ route('admin.messages.index') }}"><i
                                             class="fa-regular fa-message"></i>
                                         Messaggi</a>
                                 </li>
-                                <hr class="m-0">
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li class="nav-item">
                                     <a class="w-100 nav-link px-3 py-1" href="{{ route('admin.sponsors.index') }}"><i
                                             class="fa-regular fa-star"></i>
                                         Sponsorizza</a>
                                 </li>
-                                <hr class="m-0">
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li class="m-0 p-0">
                                     <form action="{{ route('logout') }}" method="post" class="dropdown-item exit mb-0">
                                         @csrf

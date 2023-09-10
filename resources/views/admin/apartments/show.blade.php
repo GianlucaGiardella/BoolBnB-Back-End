@@ -3,6 +3,7 @@
 @section('contents')
     <div class="card box-shadow mt-0">
         <div class="card-body d-flex flex-column py-3 gap-4">
+
             <div class="container">
                 <h1>{{ $apartment->title }}</h1>
             </div>
@@ -58,23 +59,29 @@
                             @endforeach
                         </ul>
                     </div>
+
                     <div class="container">
-                        <div class="option-card h-100 border rounded">
-                            <div class="card red">
-                                <a class="link-unstyled text-white fs-2 w-100 h-100"
-                                    href="{{ route('admin.apartments.edit', ['apartment' => $apartment]) }}"
-                                    class="tip">Modifica</a>
-                            </div>
-                            <div class="card blue">
-                                <a class="link-unstyled text-white fs-2 w-100 h-100"
-                                    href="{{ route('admin.apartments.messages', ['apartment' => $apartment]) }}"
-                                    class="tip">Messaggi</a>
-                            </div>
-                            <div class="card green">
-                                <a class="link-unstyled text-white fs-2 w-100 h-100"
-                                    href="{{ route('admin.apartments.sponsors', ['apartment' => $apartment]) }}"
-                                    class="tip">Sponsorizza</a>
-                            </div>
+                        <div class="d-flex flex-column h-100 gap-3">
+                            <a class="d-flex align-items-center justify-content-center link-unstyled text-white fs-2 w-100 h-100"
+                                href="{{ route('admin.apartments.edit', ['apartment' => $apartment]) }}" class="tip">
+                                <button class="w-100 styled-btn">
+                                    Modifica
+                                </button>
+                            </a>
+                            <a class="d-flex align-items-center justify-content-center link-unstyled text-white fs-2 w-100 h-100"
+                                href="{{ route('admin.apartments.messages', ['apartment' => $apartment]) }}"
+                                class="tip">
+                                <button class="w-100 styled-btn">
+                                    Messaggi
+                                </button>
+                            </a>
+                            <a class="d-flex align-items-center justify-content-center link-unstyled text-white fs-2 w-100 h-100"
+                                href="{{ route('admin.apartments.sponsors', ['apartment' => $apartment]) }}"
+                                class="tip">
+                                <button class="w-100 styled-btn">
+                                    Sponsorizza
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
