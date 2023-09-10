@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
             case email:
                 if (x.value.trim() === '') {
                     setError(x, 'Email richiesta');
-                } else if (x.value.trim().length < 3) {
-                    setError(x, 'Minino 8 caratteri');
+                } else if (x.value.trim().length < 5) {
+                    setError(x, 'Minino 5 caratteri');
                 } else if (x.value.trim().length > 255) {
                     setError(x, 'Massimo 255 caratteri');
                 } else if (!validateEmail(x.value.trim())) {
