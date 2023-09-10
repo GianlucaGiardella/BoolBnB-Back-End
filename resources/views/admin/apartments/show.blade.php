@@ -61,24 +61,24 @@
                     </div>
 
                     <div class="container">
-                        <div class="d-flex flex-column h-100">
+                        <div class="d-flex flex-column h-100 gap-3">
                             <a class="d-flex align-items-center justify-content-center link-unstyled text-white fs-2 w-100 h-100"
                                 href="{{ route('admin.apartments.edit', ['apartment' => $apartment]) }}" class="tip">
-                                <button class="w-100 h-50 styled-btn">
+                                <button class="w-100 styled-btn">
                                     Modifica
                                 </button>
                             </a>
                             <a class="d-flex align-items-center justify-content-center link-unstyled text-white fs-2 w-100 h-100"
                                 href="{{ route('admin.apartments.messages', ['apartment' => $apartment]) }}"
                                 class="tip">
-                                <button class="w-100 h-50 styled-btn">
+                                <button class="w-100 styled-btn">
                                     Messaggi
                                 </button>
                             </a>
                             <a class="d-flex align-items-center justify-content-center link-unstyled text-white fs-2 w-100 h-100"
                                 href="{{ route('admin.apartments.sponsors', ['apartment' => $apartment]) }}"
                                 class="tip">
-                                <button class="w-100 h-50 styled-btn">
+                                <button class="w-100 styled-btn">
                                     Sponsorizza
                                 </button>
                             </a>
