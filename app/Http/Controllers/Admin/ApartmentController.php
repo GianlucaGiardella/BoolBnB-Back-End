@@ -81,8 +81,8 @@ class ApartmentController extends Controller
         if (isset($responseData['results'][0]['position']['lat']) && isset($responseData['results'][0]['position']['lon'])) {
 
             // Set Lat & Lon
-            $latitude = $responseData['results'][0]['position']['lat'];
             $longitude = $responseData['results'][0]['position']['lon'];
+            $latitude = $responseData['results'][0]['position']['lat'];
 
             // New Apartment
             $newApartment               = new Apartment();
@@ -97,8 +97,8 @@ class ApartmentController extends Controller
             $newApartment->rooms        = $data['rooms'];
             $newApartment->beds         = $data['beds'];
             $newApartment->bathrooms    = $data['bathrooms'];
-            $newApartment->latitude     = $latitude;
-            $newApartment->longitude    = $longitude;
+            $newApartment->latitude     = $longitude;
+            $newApartment->longitude    = $latitude;
             $newApartment->description  = $data['description'];
             $newApartment->visibility   = $data['visibility'];
 
@@ -269,8 +269,8 @@ class ApartmentController extends Controller
         if (isset($responseData['results'][0]['position']['lat']) && isset($responseData['results'][0]['position']['lon'])) {
 
             // Set new lat & lon
-            $latitude = $responseData['results'][0]['position']['lat'];
             $longitude = $responseData['results'][0]['position']['lon'];
+            $latitude = $responseData['results'][0]['position']['lat'];
 
             // Update 
             $apartment->title        = $data['title'];
@@ -278,8 +278,8 @@ class ApartmentController extends Controller
             $apartment->country      = $country;
             $apartment->street       = $data['street'];
             $apartment->zip          = $data['zip'];
-            $apartment->latitude     = $latitude;
-            $apartment->longitude    = $longitude;
+            $apartment->latitude     = $longitude;
+            $apartment->longitude    = $latitude;
             $apartment->size         = $data['size'];
             $apartment->rooms        = $data['rooms'];
             $apartment->beds         = $data['beds'];
