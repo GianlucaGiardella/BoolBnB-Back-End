@@ -11,8 +11,9 @@
             <div class="w-100 d-flex justify-content-end align-center gap-4">
 
                 <a class="link-unstyled d-flex align-center" href="http://localhost:5174/search">
-                    <button class="button text-gradient">
-                        <span><i class="fa-solid fa-magnifying-glass"></i> <span class="disapear">Cerca</span></span>
+                    <button class="button">
+                        <span><i class="fa-solid fa-magnifying-glass"></i> <span
+                                class="disapear text-gradient">Cerca</span></span>
                     </button>
                 </a>
 
@@ -20,8 +21,8 @@
                     @auth
                         <div class="nav-item dropdown h-100">
                             <button class="h-100 button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="text-gradient"><i class="fa-regular fa-user"></i>
-                                    <span class="disapear">Profilo</span></span>
+                                <span class=""><i class="fa-regular fa-user"></i>
+                                    <span class="disapear text-gradient">Profilo</span></span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end list-unstyled box-shadow mt-3">
                                 <li class="nav-item">
@@ -69,15 +70,16 @@
                     @else
                         <div class="d-flex gap-2">
                             <a class="link-unstyled d-flex align-center" href="{{ route('login') }}">
-                                <button class="button text-gradient">
-                                    <i class="fa-solid fa-user-lock"></i> <span class="disapear">Accedi</span>
+                                <button class="button ">
+                                    <i class="fa-solid fa-user-lock"></i> <span class="disapear text-gradient">Accedi</span>
                                 </button>
                             </a>
                             <div class="border border-1 border-dark"></div>
                             @if (Route::has('register'))
                                 <a class="link-unstyled d-flex align-center" href="{{ route('register') }}">
-                                    <button class="button text-gradient">
-                                        <i class="fa-solid fa-user-plus"></i> <span class="disapear">Registrati</span>
+                                    <button class="button ">
+                                        <i class="fa-solid fa-user-plus"></i> <span
+                                            class="disapear text-gradient">Registrati</span>
                                     </button>
                                 </a>
                             @endif
@@ -93,8 +95,8 @@
     .navbar {
         height: 70px;
         position: fixed;
-        left: 0;
         top: 0;
+        left: 0;
         z-index: 99;
         background-color: #fdfdfd;
         box-shadow: 0px 2px 10px 2px rgba(0, 0, 0, 0.1);
