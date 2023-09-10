@@ -9,6 +9,7 @@ use App\Models\Sponsor;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ApartmentSponsor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -153,7 +154,9 @@ class ApartmentController extends Controller
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         if (Auth::id() !== $apartment->user_id) abort(403);
 
-        return view('admin.apartments.show', compact('apartment'));
+        $apartmentSponsor = ApartmentSponsor::all();
+
+        return view('admin.apartments.show', compact('apartment', 'apartmentSponsor'));
     }
 
     public function edit($slug)

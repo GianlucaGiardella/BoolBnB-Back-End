@@ -18,7 +18,7 @@ class ApartmentController extends Controller
                 $query->whereIn('id', $services);
             })->get();
         } else {
-            $apartments = Apartment::with(['user', 'services', 'images', 'messages', 'sponsors', 'views'])->get();
+            $apartments = Apartment::with(['user', 'services', 'images', 'messages', 'sponsors', 'views', 'active_sponsors'])->get();
         }
 
         return response()->json([
