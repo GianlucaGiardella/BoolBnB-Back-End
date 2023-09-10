@@ -4,6 +4,14 @@
     <div class="card box-shadow mt-0">
         <div class="card-body d-flex flex-column py-3 gap-4">
 
+            {{-- Header --}}
+            <div class="container">
+                <div class="d-inline-block text-gradient">
+                    <h1>Vista dell'appartamento: {{ $apartment->title }}</h1>
+                </div>
+                <hr class="m-0">
+            </div>
+
             <div class="container">
                 <h1>{{ $apartment->title }}</h1>
             </div>
@@ -65,6 +73,12 @@
 
                     <div class="container">
                         <div class="d-flex flex-column h-100 gap-3">
+                            <a class="d-flex align-items-center justify-content-center link-unstyled text-white fs-2 w-100 h-100"
+                                href="http://localhost:5174/apartments/{{ $apartment->slug }}" class="tip">
+                                <button class="w-100 styled-btn">
+                                    Mostra sul sito
+                                </button>
+                            </a>
                             <a class="d-flex align-items-center justify-content-center link-unstyled text-white fs-2 w-100 h-100"
                                 href="{{ route('admin.apartments.edit', ['apartment' => $apartment]) }}" class="tip">
                                 <button class="w-100 styled-btn">
