@@ -8,10 +8,35 @@ use Illuminate\Http\Request;
 
 class ViewController extends Controller
 {
-    public function index()
+    public function store(Request $request)
     {
-        $view = View::all();
+        // -----------
+        $ip_address = $request->ip_address;
+        $apartment_id = $request->apartment_id;
 
-        return response()->json($view);
+        $view = view::where('ip_address', $ip_address)
+            ->where('apartment_id', $apartment_id)
+            ->first();
+
+        if ($view) {
+            return response()->json([
+                'success' => false,
+                'message' => 'view already exists',
+                'data' => null
+            ]);
+        }
+
+        $view = new view();
+
+        $view->ip_address = $ip_address;
+        $view->apartment_id = $apartment_id;
+
+        $view->save();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'view created',
+            'data' => $view
+        ]);
     }
 }

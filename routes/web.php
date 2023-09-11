@@ -49,7 +49,7 @@ Route::middleware(['auth', 'verified'])
         Route::post('/process-payment', [PaymentController::class, 'processPayment'])->name('process_payment');
 
         //views apartment
-        Route::get('/views/{apartment}', [ViewController::class, 'index'])->name('views.index');
+        Route::get('/stats', [ViewController::class, 'index'])->name('stats.index');
     });
 
 Route::middleware('auth')
