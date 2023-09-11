@@ -26,7 +26,7 @@
 
         <div class="col-12">
             <div class="col-12 col-lg-8 col-xxl-5 mx-auto text-center my-5">
-                <div class="card p-2 my-3 shadow my_bg_chart">
+                <div class="card p-2 my-3 shadow my_bg_chart d-none">
                     <div>
                         <h2>Statistiche Generali</h2>
                         <p class="text-white">Statistiche per anno di tutti i tuoi appartamenti</p>
