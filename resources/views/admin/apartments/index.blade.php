@@ -38,9 +38,13 @@
 
                         @foreach ($apartments as $apartment)
                             <div class="card-apartments card">
-                                <img class="img-card" src="{{ asset('storage/' . $apartment->cover) }}"
+                                <a class="img-apa-index" style="height: 80%"
+                                        href="{{ route('admin.apartments.show', ['apartment' => $apartment]) }}">
+                                        <img class="img-card" src="{{ asset('storage/' . $apartment->cover) }}"
                                     alt="{{ $apartment->title }}">
-                                <h5 class="card-title">{{ $apartment->title }}</h5>
+                                    </a>
+                                
+                                <h5 class="card-title" style="color: #424172">{{ $apartment->title }}</h5>
                                 <div class="container-btn">
                                     <a class="btn btn-secondary"
                                         href="{{ route('admin.apartments.show', ['apartment' => $apartment]) }}">
@@ -112,10 +116,18 @@
         height: 240px;
     }
 
+    .img-apa-index{
+        overflow: hidden;
+        border-radius: 5px; 
+    }
     .img-card {
         width: 100%;
-        height: 80%;
+        height: 100%;
         object-fit: cover;
+        transition: all 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    }
+    .img-apa-index:hover .img-card{
+        transform: scale(1.2);
     }
 
     .card-title {
