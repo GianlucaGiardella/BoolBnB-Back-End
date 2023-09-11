@@ -10,9 +10,10 @@ class ApartmentSponsor extends Model
     use HasFactory;
 
     // serve per far funzionare il metodo attach() in SponsorshipController
-    protected $fillable = [
+    protected $dates = [
         'apartment_id',
         'sponsor_id',
+        'valid',
         'start_date',
         'end_date',
     ];

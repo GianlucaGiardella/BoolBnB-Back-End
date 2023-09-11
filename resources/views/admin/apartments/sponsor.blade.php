@@ -12,22 +12,23 @@
                 <hr class="m-0">
             </div>
 
-            <div class="container">
-                @if ($apartment->sponsors()->where('valid', true)->count() > 0)
-                    <h4 class="text-gradient">Hai gia una sponsororizzazione attiva</h4>
-                    <p>Puoi prolungare la tua sponsorizzazione quando vuoi! E puoi anche scegliere quella più adatta a te in
-                        questo momento!</p>
-                @else
-                    <h4 class="text-gradient">Sponsorizzazione</h4>
-                    <p>Raggiungete un vasto pubblico per il vostro appartamento con una sponsorizzazione su misura! Offriamo
-                        una
-                        varietà di
-                        opzioni di sponsorizzazione, sia standard che personalizzate, per soddisfare al meglio le vostre
-                        esigenze. Scegliete
-                        la soluzione ideale per promuovere il vostro appartamento e attirare il massimo numero di potenziali
-                        clienti!</p>
-                @endif
-            </div>
+            @if ($apartment->sponsors()->where('valid', true)->count() > 0)
+                Hai gia una sponsorizzazione attiva con scadenza:
+                <div>
+                    <span>
+                        {{ $apartmentSponsor->end_date->format('d/m/y') }}
+                    </span>
+                    Alle ore: <span>{{ $apartmentSponsor->end_date->format('H:i') }}</span>
+                </div>
+            @else
+                <h4>Sponsorizzazione</h4>
+                <p>Raggiungete un vasto pubblico per il vostro appartamento con una sponsorizzazione su misura! Offriamo una
+                    varietà di
+                    opzioni di sponsorizzazione, sia standard che personalizzate, per soddisfare al meglio le vostre
+                    esigenze. Scegliete
+                    la soluzione ideale per promuovere il vostro appartamento e attirare il massimo numero di potenziali
+                    clienti!</p>
+            @endif
 
             <div class="container">
                 <form id="payment-form" action="{{ route('admin.process_payment') }}" method="post"

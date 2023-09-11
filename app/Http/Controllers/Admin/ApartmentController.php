@@ -8,9 +8,9 @@ use App\Models\Service;
 use App\Models\Sponsor;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\ApartmentSponsor;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
@@ -153,8 +153,7 @@ class ApartmentController extends Controller
         // User control
         $apartment = Apartment::where('slug', $slug)->firstOrFail();
         if (Auth::id() !== $apartment->user_id) abort(403);
-
-        $apartmentSponsor = ApartmentSponsor::all();
+        $apartmentSponsor = ApartmentSponsor::all()->firstOrFail();
 
         return view('admin.apartments.show', compact('apartment', 'apartmentSponsor'));
     }
@@ -358,6 +357,7 @@ class ApartmentController extends Controller
         ]);
 
         $token = $gateway->clientToken()->generate();
-        return view('admin.apartments.sponsor', compact('sponsors', 'apartment', 'gateway', 'token', 'apartments'));
+        $apartmentSponsor = ApartmentSponsor::all()->firstOrFail();
+        return view('admin.apartments.sponsor', compact('sponsors', 'apartment', 'gateway', 'token', 'apartments', 'apartmentSponsor'));
     }
 }
