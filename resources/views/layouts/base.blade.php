@@ -15,11 +15,11 @@
 
     @include('includes.header')
 
-    <main class="container" style="margin-top: 100px;">
+    <main class="container" style="margin-top: 100px; margin-bottom: 50px; min-height: 63vh;">
         @yield('contents')
     </main>
 
-    {{-- @include('includes.footer') --}}
+    @include('includes.footer')
 
 </body>
 
