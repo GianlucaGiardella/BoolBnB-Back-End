@@ -56,33 +56,39 @@
 
             <div class="container">
                 <h4>Descrizione</h4>
-                <p>{{ $apartment->description }}</p>
+                <p class="pb-3 border-bottom m-0">{{ $apartment->description }}</p>
             </div>
 
             <div class="container">
-                <div class="row row-cols-1 row-cols-md-2">
+                <div class="row row-cols-1 row-cols-md-2 border-bottom">
                     <div class="container">
-                        <h3>Informazioni appartamento:</h3>
-                        <h4>Dimensioni: {{ $apartment->size }} m<sup>2</sup></h4>
-                        <h4>Camere: {{ $apartment->rooms }}</h4>
-                        <h4>Letti: {{ $apartment->beds }}</h4>
-                        <h4 class="line me-2">Bagni: {{ $apartment->bathrooms }}</h4>
-                        <h4>Cosa troverai</h4>
-                        <ul class="list-unstyled">
-                            @foreach ($apartment->services as $service)
-                                <li>
-                                    <i class="fa-solid fa-square-check"></i>
-                                    {{ $service->name }}
-                                </li>
-                            @endforeach
-                        </ul>
+                        <div class="d-flex flex-column gap-3 pb-3">
+                            <div class="pb-3 border-bottom d-flex flex-column gap-2">
+                                <h3>Informazioni appartamento:</h3>
+                                <h4>Dimensioni: {{ $apartment->size }} m<sup>2</sup></h4>
+                                <h4>Camere: {{ $apartment->rooms }}</h4>
+                                <h4>Letti: {{ $apartment->beds }}</h4>
+                                <h4 class="m-0 me-2">Bagni: {{ $apartment->bathrooms }}</h4>
+                            </div>
+                            <div class="">
+                                <h4>Cosa troverai</h4>
+                                <ul class="list-unstyled m-0 row row-cols-1 row-cols-md-2 g-3">
+                                    @foreach ($apartment->services as $service)
+                                        <li>
+                                            <i class="{{ $service->icon }}"></i>
+                                            {{ $service->name }}
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
                         @if ($apartment->sponsors()->where('valid', true)->count() > 0)
                             Hai gia una sponsor
                         @endif
                     </div>
 
                     <div class="container">
-                        <div class="d-flex flex-column h-100 gap-3">
+                        <div class="d-flex flex-column h-100 gap-3 pb-3">
                             <a class="d-flex align-items-center justify-content-center link-unstyled text-white fs-2 w-100 h-100"
                                 href="http://localhost:5174/apartments/{{ $apartment->slug }}" class="tip">
                                 <button class="w-100 styled-btn">
