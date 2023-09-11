@@ -13,12 +13,10 @@ class MessageController extends Controller
     public function index(Request $request)
     {
         $user_id = Auth::user()->id;
-
+        $messages = [];
         $apartments = Apartment::all()->where('user_id', $user_id);
 
-        $messages = [];
-
-        $messagesList = Message::all();
+        $messagesList = Message::orderBy('created_at', 'desc')->paginate(8);
 
         foreach ($apartments as $apartment) {
             foreach ($messagesList as $message) {
@@ -27,8 +25,6 @@ class MessageController extends Controller
                 }
             }
         }
-
-        $messages = collect($messages)->sortBy('date')->reverse();
 
         return view('admin.messages.index', compact('messages', 'apartments'));
     }
