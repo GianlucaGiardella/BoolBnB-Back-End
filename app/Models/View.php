@@ -2,12 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\Apartment;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class View extends Model
+class view extends Model
 {
+    protected $fillable = [
+        'apartment_id',
+        'ip_address',
+        'viewed_at',
+    ];
+
+
     use HasFactory;
 
     public function apartment()

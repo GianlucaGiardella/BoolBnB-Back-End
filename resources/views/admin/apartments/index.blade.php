@@ -51,7 +51,7 @@
                                         <i class="fa-solid fa-pen" style="color: #fff;"></i>
                                     </a>
                                     <a class="btn btn-success"
-                                        href="{{ route('admin.views.index', ['apartment' => $apartment]) }}">
+                                        href="{{ route('admin.stats.index', ['apartment' => $apartment]) }}">
                                         <i class="fa-solid fa-chart-line" style="color: #fff;"></i>
                                     </a>
                                     <button class="btn btn-danger js-delete" data-bs-toggle="modal"
