@@ -5,30 +5,33 @@
         <div class="card-body d-flex flex-column gap-3 py-3">
 
             {{-- Header --}}
-            <div class="container">
+            <div class="container overflow-hidden">
                 <div class="d-inline-block text-gradient">
-                    <h1><span class="ellipsis">Sponsorizzazione</span> {{ $apartment->title }}</h1>
+                    <h1>Sponsorizzazione</h1>
+                    <h2 class="ellipsis mw-100">{{ $apartment->title }}</h2>
                 </div>
                 <hr class="m-0">
             </div>
 
-            @if ($apartment->sponsors()->where('valid', true)->count() > 0)
-                Hai gia una sponsorizzazione attiva con scadenza:
-                <div>
-                    <span>
-                        {{ $apartmentSponsor->end_date->format('d/m/y') }}
-                    </span>
-                    Alle ore: <span>{{ $apartmentSponsor->end_date->format('H:i') }}</span>
-                </div>
-            @else
-                <h4>Sponsorizzazione</h4>
-                <p>Raggiungete un vasto pubblico per il vostro appartamento con una sponsorizzazione su misura! Offriamo una
-                    varietà di
-                    opzioni di sponsorizzazione, sia standard che personalizzate, per soddisfare al meglio le vostre
-                    esigenze. Scegliete
-                    la soluzione ideale per promuovere il vostro appartamento e attirare il massimo numero di potenziali
-                    clienti!</p>
-            @endif
+            <div class="container">
+                @if ($apartment->sponsors()->where('valid', true)->count() > 0)
+                    Hai gia una sponsorizzazione attiva con scadenza:
+                    <div>
+                        <span>
+                            {{ $apartmentSponsor->end_date->format('d/m/y') }}
+                        </span>
+                        Alle ore: <span>{{ $apartmentSponsor->end_date->format('H:i') }}</span>
+                    </div>
+                @else
+                    <p>Raggiungete un vasto pubblico per il vostro appartamento con una sponsorizzazione su misura! Offriamo
+                        una
+                        varietà di
+                        opzioni di sponsorizzazione, sia standard che personalizzate, per soddisfare al meglio le vostre
+                        esigenze. Scegliete
+                        la soluzione ideale per promuovere il vostro appartamento e attirare il massimo numero di potenziali
+                        clienti!</p>
+                @endif
+            </div>
 
             <div class="container">
                 <form id="payment-form" action="{{ route('admin.process_payment') }}" method="post"
@@ -41,17 +44,20 @@
                                 <label for="sponsor_id"
                                     style="font-weight: bold; font-size: 20px; padding-bottom: 1em">Scegli un
                                     pacchetto:</label><br>
-                                <div class="d-flex">
-
+                                <div class="row row-cols-1 row-cols-sm-3">
                                     @foreach ($sponsors as $sponsor)
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="sponsor_id"
-                                                id="sponsor_{{ $sponsor->id }}" value="{{ $sponsor->id }}" required>
-                                            <label class="form-check-label" for="sponsor_{{ $sponsor->id }}">
-                                                {{ $sponsor->name }} <br> (Prezzo: {{ $sponsor->price }}€, Durata:
-                                                {{ $sponsor->duration }}
-                                                ore)
-                                            </label>
+                                        <div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="sponsor_id"
+                                                    id="sponsor_{{ $sponsor->id }}" value="{{ $sponsor->id }}" required>
+                                                <label class="form-check-label" for="sponsor_{{ $sponsor->id }}">
+                                                    <h3>{{ $sponsor->name }}</h3>
+                                                    <h6>Prezzo: {{ $sponsor->price }}€</h6>
+                                                    <h6>Durata:
+                                                        {{ $sponsor->duration }}
+                                                        ore</h6>
+                                                </label>
+                                            </div>
                                         </div>
                                     @endforeach
                                 </div>
@@ -80,7 +86,7 @@
                                 <div id="checkout-message"></div>
                                 <div id="dropin-container"></div>
                                 <input id="nonce" name="payment_method_nonce" type="hidden" required />
-                                <button id="submit-button" class="btn btn-primary btn-block">Paga</button>
+                                <button id="submit-button" class="styled-btn">Paga</button>
                             </div>
                         </div>
                     </div>

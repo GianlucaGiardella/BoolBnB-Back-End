@@ -89,7 +89,7 @@ class ApartmentController extends Controller
             $newApartment               = new Apartment();
 
             $newApartment->user_id      = Auth::id();
-            $newApartment->title        = $data['title'];
+            $newApartment->title        = ucwords($data['title']);
             $newApartment->slug         = Apartment::slugger($data['title']);
             $newApartment->country      = $data['country'];
             $newApartment->street       = $data['street'];

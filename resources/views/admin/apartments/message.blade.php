@@ -5,9 +5,10 @@
         <div class="card-body d-flex flex-column gap-3 py-3">
 
             {{-- Header --}}
-            <div class="container">
+            <div class="container overflow-hidden">
                 <div class="d-inline-block text-gradient">
-                    <h1><span class="ellipsis">{{ $apartment->title }}</span> | Messaggi Ricevuti</h1>
+                    <h1>Messaggi Ricevuti</h1>
+                    <h2 class="ellipsis mw-100">{{ $apartment->title }}</h2>
                 </div>
                 <hr class="m-0">
             </div>

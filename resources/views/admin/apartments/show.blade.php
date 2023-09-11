@@ -3,27 +3,36 @@
 @section('contents')
     <div class="card box-shadow mt-0">
         <div class="card-body d-flex flex-column py-3 gap-4">
+
             {{-- Header --}}
-            <div class="container">
+            <div class="container overflow-hidden">
                 <div class="d-inline-block text-gradient">
-                    <h1>Vista dell'appartamento: {{ $apartment->title }}</h1>
+                    <h1>Vista Appartamento</h1>
+                    <h2 class="ellipsis mw-100">{{ $apartment->title }}</h2>
                 </div>
                 <hr class="m-0">
             </div>
 
-            <div class="container d-flex justify-content-between">
-                <h1>{{ $apartment->title }}</h1>
-                @if ($apartment->sponsors()->where('valid', true)->count() > 0)
-                    <div>
-                        La tua sponsorizzazione scade il:
-                        <div>
-                            {{ $apartmentSponsor->end_date->format('d/m/y') }}
-                        </div>
-                        Alle ore: <span>{{ $apartmentSponsor->end_date->format('H:i') }}</span>
+            <div class="container">
+                <div class="row row-cols-1 row-cols-md-2 g-3">
+                    <h1 class="mb-0">{{ $apartment->title }}</h1>
+                    <div class="sponsor d-flex">
+                        @if ($apartment->sponsors()->where('valid', true)->count() > 0)
+                            <div>
+                                <h5 class="sponsor-title d-flex align-items-center m-0 gap-2">
+                                    <i class="fa-regular fa-star fs-3"></i>
+                                    Sponsorizzato
+                                </h5>
+                                <p class="m-0">Scadenza:
+                                    {{ $apartmentSponsor->end_date->format('H:i') }} del
+                                    {{ $apartmentSponsor->end_date->format('d/m/y') }}
+                                </p>
+                            </div>
+                        @else
+                            <h5 class="m-0">Sponsorizzazione NON ATTIVA</h5>
+                        @endif
                     </div>
-                @else
-                    <div>Sponsorizzazione NON ATTIVA</div>
-                @endif
+                </div>
             </div>
 
             <div class="container">
@@ -82,9 +91,6 @@
                                 </ul>
                             </div>
                         </div>
-                        @if ($apartment->sponsors()->where('valid', true)->count() > 0)
-                            Hai gia una sponsor
-                        @endif
                     </div>
 
                     <div class="container">
@@ -121,3 +127,19 @@
             </div>
         </div>
     @endsection
+
+    <style>
+        .sponsor,
+        .sponsor-title {
+            justify-content: flex-end !important;
+        }
+
+        @media (max-width: 767px) {
+
+            .sponsor,
+            .sponsor-title {
+                justify-content: flex-start !important;
+            }
+
+        }
+    </style>
