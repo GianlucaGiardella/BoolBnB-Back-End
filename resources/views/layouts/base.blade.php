@@ -11,7 +11,7 @@
     @vite('resources/js/app.js')
 </head>
 
-<body style="background-color: #f5f5f5;">
+<body style="background-color: #f5f5f5; margin-bottom: 0;" >
 
     @include('includes.header')
 
