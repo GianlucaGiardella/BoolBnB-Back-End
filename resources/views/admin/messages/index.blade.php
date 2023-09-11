@@ -67,9 +67,9 @@
             </div>
 
             {{-- Pagination --}}
-            <div class="container">
+            {{-- <div class="container">
                 {{ $messages->links() }}
-            </div>
+            </div> --}}
 
         </div>
     </div>
