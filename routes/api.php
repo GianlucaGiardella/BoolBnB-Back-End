@@ -37,4 +37,4 @@ Route::post("/messages/store", [MessageController::class, "store"])->name('api.m
 
 Route::get('services', [ServiceController::class, 'index'])->name('api.services.index');
 Route::get('sponsors', [SponsorController::class, 'index'])->name('api.sponsors.index');
-Route::post("/view/store", [ApiViewController::class, "store"]);
+// Route::post("/view/store", [ApiViewController::class, "store"]);

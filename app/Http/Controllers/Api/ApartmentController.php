@@ -18,7 +18,7 @@ class ApartmentController extends Controller
                 $query->whereIn('id', $services);
             })->get();
         } else {
-            $apartments = Apartment::with(['user', 'services', 'images', 'messages', 'sponsors', 'views', 'active_sponsors'])->get();
+            $apartments = Apartment::with(['user', 'services', 'images', 'active_sponsors'])->get();
         }
 
         return response()->json([
@@ -121,7 +121,7 @@ class ApartmentController extends Controller
     //     $city = $request->query('city');
 
     //     $apartments = Apartment::where('street', 'like', '%' . $city . '%')->get();
-        
+
     //     return response()->json(['apartments' => $apartments]);
     // }
 }
