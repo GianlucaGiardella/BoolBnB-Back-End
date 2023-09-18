@@ -1,28 +1,28 @@
 <footer>
-    <p class="m-0 d-flex justify-content-center align-items-center gap-1 py-3">
+    <p class="socials m-0 d-flex justify-content-center align-items-center gap-2 py-3">
         <!-- Facebook -->
-        <a class="btn text-white m-1" style="background-color: #3b5998;" href="#" role="button"><i
-                class="fa-brands fa-facebook"></i></a>
+        <a class="social link-unstyled text-white rounded-circle" style="background-color: #3b5998;" href="#"
+            role="button"><i class="fa-brands fa-facebook"></i></a>
 
         <!-- Twitter -->
-        <a class="btn text-white m-1" style="background-color: #55acee;" href="#" role="button"><i
-                class="fa-brands fa-twitter"></i></a>
+        <a class="social link-unstyled text-white rounded-circle" style="background-color: #55acee;" href="#"
+            role="button"><i class="fa-brands fa-twitter"></i></a>
 
         <!-- Google -->
-        <a class="btn text-white m-1" style="background-color: #dd4b39;" href="#" role="button"><i
-                class="fa-brands fa-google"></i></a>
+        <a class="social link-unstyled text-white rounded-circle" style="background-color: #dd4b39;" href="#"
+            role="button"><i class="fa-brands fa-google"></i></a>
 
         <!-- Instagram -->
-        <a class="btn text-white m-1" style="background-color: #ac2bac;" href="#" role="button"><i
-                class="fa-brands fa-instagram"></i></a>
+        <a class="social link-unstyled text-white rounded-circle" style="background-color: #ac2bac;" href="#"
+            role="button"><i class="fa-brands fa-instagram"></i></a>
 
         <!-- Linkedin -->
-        <a class="btn text-white m-1" style="background-color: #0082ca;" href="#" role="button"><i
-                class="fa-brands fa-linkedin"></i></a>
+        <a class="social link-unstyled text-white rounded-circle" style="background-color: #0082ca;" href="#"
+            role="button"><i class="fa-brands fa-linkedin"></i></a>
 
         <!-- Github -->
-        <a class="btn text-white m-1" style="background-color: #333333;" href="#" role="button"><i
-                class="fa-brands fa-github"></i></a>
+        <a class="social link-unstyled text-white rounded-circle" style="background-color: #333333;" href="#"
+            role="button"><i class="fa-brands fa-github"></i></a>
     </p>
 
     <div class="container">
@@ -56,8 +56,23 @@
     footer {
         background-color: #fdfdfd;
         box-shadow: 0px -2px 10px -2px rgba(0, 0, 0, 0.3);
-        
+
     }
+
+    .socials>a {
+        width: 32px;
+        aspect-ratio: 1 / 1;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .social>* {
+        width: 16px;
+        height: 16px;
+    }
+
 
     .full-logo,
     .icon-logo {
